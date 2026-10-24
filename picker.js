@@ -6,7 +6,7 @@ const modeLabels={
   'adaptive_frequency_v1':'Research',
   'random_baseline_v1':'Random control'
 };
-let frozen=[],target='';
+let frozen=[],target='',expanded=false;
 function fmt(n){return String(n).padStart(2,'0')}
 function formatDate(d){return new Date(d+'T12:00:00Z').toLocaleDateString('en-NZ',{timeZone:'UTC',weekday:'long',day:'numeric',month:'long',year:'numeric'})}
 function formatLine(p){return p.numbers.map(fmt).join(' - ')+' | PB '+fmt(p.powerball)}
@@ -16,8 +16,9 @@ async function copy(value,button){try{await navigator.clipboard.writeText(value)
 function render(){
   const selected=el('pickerMode').value;
   const shown=selected==='all'?frozen:frozen.filter(p=>p.model===selected);
+  const display=expanded?shown:shown.slice(0,4);
   const list=el('pickerLines');list.replaceChildren();
-  for(const [index,p] of shown.entries()){
+  for(const [index,p] of display.entries()){
     const row=document.createElement('div');row.className='fixed-pick-line';
     const name=document.createElement('div');name.className='fixed-pick-name';
     const number=document.createElement('strong');number.textContent='Line '+String(frozen.indexOf(p)+1).padStart(2,'0');
@@ -44,7 +45,10 @@ function render(){
     button.addEventListener('click',()=>copy(formatLine(p),button));
     row.append(name,nums,extras,button);list.appendChild(row);
   }
-  el('pickerStatus').textContent='Showing '+shown.length+' of 20 frozen lines · 10 research + 10 random comparison. These do not change when you reload or change the analysis filters. Gold Bonus is research-only and cannot be selected on a Lotto ticket.';
+  el('pickerStatus').textContent='Showing '+display.length+' of '+shown.length+' locked lines · same numbers for every visitor.';
+  const expand=el('pickerExpand');expand.hidden=shown.length<=4;expand.disabled=false;
+  expand.textContent=expanded?'Show fewer lines ↑':'Show all '+shown.length+' lines ↓';
+  expand.setAttribute('aria-expanded',String(expanded));
 }
 async function init(){
   try{
@@ -66,7 +70,8 @@ async function init(){
     render();
   }catch(e){el('pickerCount').textContent='Selections not ready';el('pickerDate').textContent='Awaiting verified publication';el('pickerStatus').textContent=e.message;el('pickerLines').textContent='Published suggestions are temporarily unavailable. We do not generate extra picks to replace missing data.';}
 }
-el('pickerMode').addEventListener('change',()=>{if(frozen.length===20)render()});
+el('pickerMode').addEventListener('change',()=>{expanded=false;if(frozen.length===20)render()});
+el('pickerExpand').addEventListener('click',()=>{expanded=!expanded;if(frozen.length===20)render()});
 el('pickerCopyAll').addEventListener('click',()=>{if(frozen.length!==20)return;copy(frozen.map((p,i)=>String(i+1).padStart(2,'0')+' '+formatLine(p)).join('\n'),el('pickerCopyAll'))});
 const share=el('pickerShare');
 if(share)share.addEventListener('click',async()=>{
