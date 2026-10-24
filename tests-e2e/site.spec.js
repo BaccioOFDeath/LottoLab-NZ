@@ -85,3 +85,52 @@ test('like-for-like rule-era analysis changes main statistics and Powerball pool
  await page.locator('.context-history summary').click();
  await expect(page.locator('#contextTimeline')).toContainText('Powerball number pool expanded');
 });
+
+
+test('civil NZ draw dates stay correct after midnight UTC conversions',async({page})=>{
+ await page.goto('/');
+ // The stored result is Saturday 24 Oct, NOT Sunday 25 Oct in New Zealand.
+ const latest=entries[0];
+ const label=new Date(latest.date+'T12:00:00Z').toLocaleDateString('en-NZ',{timeZone:'UTC',weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ await expect(page.locator('#latestDate')).toHaveText(label);
+ await expect(page.locator('#lastUpdated')).toContainText(label);
+});
+test('Evidence Lab responds to every rule-era filter and reports audit coverage',async({page})=>{
+ await page.goto('/');
+ await expect(page.locator('#evidenceDraws')).toHaveText(String(entries.length));
+ await expect(page.locator('#evidenceExpected')).toHaveText((entries.length*6/40).toFixed(2));
+ await expect(page.locator('#evidenceVerified')).toHaveText(verified+'/'+entries.length);
+ await expect(page.locator('#evidenceDeviations .deviation-row')).toHaveCount(8);
+ await expect(page.locator('#coverageRange')).toHaveText('#'+entries[entries.length-1].draw+'–#'+entries[0].draw);
+ await expect(page.locator('#coverageInside')).toContainText(' / ');
+ await expect(page.locator('#coverageEquipment')).toHaveText('0 / '+entries.length);
+ await expect(page.locator('#coverageNote')).toContainText('1987–present');
+ await page.locator('#ruleFilter').selectOption('pb14');
+ const n14=entries.filter(x=>x.date>='2026-09-16').length;
+ await expect(page.locator('#evidenceDraws')).toHaveText(String(n14));
+ await expect(page.locator('#evidenceExpected')).toHaveText((n14*.15).toFixed(2));
+ await page.locator('#ruleFilter').selectOption('pb10');
+ const n10=entries.filter(x=>x.date<'2026-09-13').length;
+ await expect(page.locator('#evidenceDraws')).toHaveText(String(n10));
+ await page.locator('#ruleFilter').selectOption('all');
+ await expect(page.locator('#evidenceDraws')).toHaveText(String(entries.length));
+});
+test('fixed 20-line portfolio is transparent, complete and stable',async({page})=>{
+ await page.goto('/');
+ const picks=require('../data/model-picks.json');
+ const target=require('../data/model-performance.json').upcoming_date;
+ const future=picks.filter(p=>p.target_date===target);
+ const distinct=new Set(future.flatMap(p=>p.numbers)).size;
+ await expect(page.locator('#portfolioStatus')).toHaveText('20 lines verified');
+ await expect(page.locator('#portfolioUnique')).toHaveText('20 / 20');
+ await expect(page.locator('#portfolioCoverage')).toHaveText(distinct+' / 40');
+ await expect(page.locator('#portfolioNumberGrid')).toHaveCount(0);
+ await expect(page.locator('#portfolioBars .portfolio-number')).toHaveCount(40);
+ await expect(page.locator('#portfolioLocked')).toHaveText('20 / 20');
+ const original=await page.locator('#portfolioCoverage').innerText();
+ await page.locator('#windowFilter').selectOption('10');
+ await expect(page.locator('#evidenceDraws')).toHaveText('10');
+ await expect(page.locator('#portfolioCoverage')).toHaveText(original);
+ await page.reload();
+ await expect(page.locator('#portfolioCoverage')).toHaveText(original);
+});
