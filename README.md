@@ -98,3 +98,17 @@ LottoLab now publishes **exactly 20 research lines per future Wednesday/Saturday
 - Historical walk-forward model comparisons remain separate from genuine, timestamped prospective selections. Ten guesses from one model do **not** establish an improved chance over random selection.
 
 New constraints have Python unit tests for exactly 20, 10/10 split, uniqueness, preservation and repeat-run idempotence, plus browser regression tests for no generation button and stable reload.
+
+
+## October 2026 — visual experience and research-only Bonus forecasts
+
+The website now presents purple **six main numbers**, a **gold Bonus ball** and a **pink Powerball** on every fixed research line, latest result and scorecard. The gold Bonus is **not playable** on a Lotto ticket. Lotto NZ's Rules 2025 define it as the seventh ball randomly drawn (https://www.legislation.govt.nz/regulation/public/2025/0174/latest/whole.html).
+
+- The original 20 six-plus-Powerball selections and their timestamps remain unchanged.
+- Research-only `bonus_prediction` is separately recorded in each entry, with `bonus_prediction_created_at`, `bonus_prediction_method`, and `bonus_is_ticket_selection=false`.
+- Bonus forecast numbers are selected from outside that individual line's six-number set; they are *not* a seventh ticket selection.
+- Copy and Share ticket lines include **only the playable six main numbers plus Powerball**, never Bonus.
+- After a confirmed draw, separately published Bonus forecasts are scored and logged using `bonus_prediction_match`. They have no proven predictive edge.
+- Contemporary UI patterns implemented: on-screen Ctrl/Cmd+K search, keyboard shortcuts, accessible focus rings, skip link, toast feedback, scroll progress, back-to-top, subtle hero animation with reduced-motion override, improved mobile spacing and three color-coded ball styles.
+- See `DESIGN_RESEARCH.md` for a curated ten-site UX benchmark and decisions. These are not claims about an objective top-ten ranking.
+- Nine or more browser integration tests (depending on revision) validate line integrity and mobile layout. Use GitHub Actions logs for actual deployment results, not configuration alone.
