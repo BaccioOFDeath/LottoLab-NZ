@@ -1,0 +1,45 @@
+# LottoLab Geo — winner locations, not location prediction
+
+**Live section:** https://baccioofdeath.github.io/LottoLab-NZ/#geo
+
+## Implemented
+
+- Local, source-attributed New Zealand outline (small Natural Earth-derived GeoJSON) with no paid map or third-party tracking SDK.
+- Weather-style winning ticket **density heatmap**, exact-source-marker mode, and region grouping mode.
+- Source-linked cards with approximate location precision, date, game, prize tier, outlet or MyLotto channel and number of publicly reported winning tickets.
+- Filters for Lotto/Powerball/Strike, First/Second/Strike Four/Powerball roll-down, retailer versus online winner area, and NZ region.
+- Interactive zoom and timeline playback of the **dates represented in this sampled dataset**. Non-contiguous dates are not interpolated into fake historical records.
+- An accessible ranked list providing keyboard/touch selection even when the map is unavailable. Full mobile responsive layout.
+- Clear summary metrics that count `tickets` rather than database rows; MyLotto rows may be grouped by public release.
+- Sales-adjusted rates intentionally unavailable because a matching ticket-sales denominator is not publicly available at the required place/time granularity. No 'lucky town' or next-location probabilities are invented.
+
+## Dataset
+
+- `data/geo-winners.json`: curated, **partial** seed of publicly reported winners from selected Lotto NZ releases (2024, 2025, 2026). The initial seed contained 48 separately identified source rows representing **51 tickets**, across **29 cities/areas, 11 regions and 10 draw dates**.
+- `data/nz-outline.geojson`: simplified NZ coastline; original geometry from [glynnbird/countriesgeojson, NZ](https://github.com/glynnbird/countriesgeojson/blob/master/new%20zealand.geojson), derived from public Natural Earth country data. Cartographic reference only.
+- `data/geo-places.json`: approved approximate town/region centroids, **never precise outlet coordinates**; no automatic geocoding of unknown places.
+
+Each record includes id, date, optional draw ID, game, division/prize tier, sales channel, ticket count, named outlet or MyLotto, locality, larger region, approximate centroid, geo precision, a declared `location_role`, prize amount if explicitly stated, source URL and publisher.
+
+**Retail:** a pin shows the approximate town/city for a published winning outlet, **not its physical address**.
+
+**MyLotto:** the reported locality is a *winner-reported location*, not the ticket purchase location; it must not be treated as an outlet or mapped to a precise address. Visitors can exclude online records (the default filter is physical retailers only).
+
+**Division overlap:** Powerball First winners also match Lotto First; we represent a combined First-Division jackpot as a single Powerball record to avoid double-counting a ticket. The 8 June 2024 jackpot was a Powerball **roll-down**, not an ordinary Powerball First Division win, and is classified separately.
+
+**Sample bias:** the seed intentionally includes only events that could be grounded to a published store/city/region. News releases disproportionately cover high-prize winners and recent years. This map must never be read as a complete census or a source of location-adjusted odds.
+
+## Automated updates
+
+- `scripts/geo_ingest.py` searches for public Lotto NZ result articles following recent Wednesday and Saturday draws. It **only accepts clearly headed Lotto First Division tables**, exact date/draw statements, approved location centroids and official Lotto NZ article URLs.
+- `.github/workflows/geo-ingest.yml` checks daily and commits only genuinely new records, running data tests both before and after. A source format change or inaccessible article causes a safe skip, **not a guessed report**.
+- Source extraction for Powerball, Strike and all historical winners remains **curated** pending verifiable source structure. Fully automatic import of all Lotto NZ winners and pre-1987 years is not claimed.
+
+## Operation & audit
+
+- `geo-lab.js` validates schema, HTTPS source allowlist, latitude/longitude bounds, game, tier and counted tickets; invalid rows cannot become map pins.
+- `tests/test_geo_data.py` checks provenance, map outline, offline parser fixtures, correct online/outlet identity, and 2024 roll-down integrity.
+- `tests-e2e/site.spec.js` checks the Geo UI filters, map and marker render, source links, timeline, zoom, region heatmap, iPhone-width UI, error recovery and unavailability of false normalised rankings.
+- Both source code and data are openly inspectable in the [GitHub repository](https://github.com/BaccioOFDeath/LottoLab-NZ).
+
+**Research interpretation:** A shop's historical win count is strongly confounded by tickets sold, opening hours, promotion, online purchases and publicity. Even perfectly normalised past rates would not establish future prediction power in a fair independent draw. LottoLab Geo is a location intelligence visualisation, **not** a location betting recommendation.
