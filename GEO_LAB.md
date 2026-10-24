@@ -43,3 +43,18 @@ Each record includes id, date, optional draw ID, game, division/prize tier, sale
 - Both source code and data are openly inspectable in the [GitHub repository](https://github.com/BaccioOFDeath/LottoLab-NZ).
 
 **Research interpretation:** A shop's historical win count is strongly confounded by tickets sold, opening hours, promotion, online purchases and publicity. Even perfectly normalised past rates would not establish future prediction power in a fair independent draw. LottoLab Geo is a location intelligence visualisation, **not** a location betting recommendation.
+
+
+## Pinch-to-zoom and map navigation (iPhone Safari + other browsers)
+
+- **Two fingers:** pinch in/out to zoom from **1.0× to 4.0×**. Zoom remains under the midpoint of the fingers (not the map centre).
+- **Two-finger drag:** move the zoomed map without jumping; map bounds keep New Zealand in the viewport.
+- **One finger by default:** scroll the website normally, even when the finger passes over the map. This is intentional; Geo Lab must not trap users on a tall mobile page.
+- **Move button:** opt in to one-finger map dragging; if the map is still at 1×, Geo Lab zooms slightly so the drag is useful. Tap Move again to return to ordinary page scrolling.
+- **Plus / minus:** zoom around the centre of the map by 0.5×; the level display updates. **Reset** restores the whole NZ view and disables Move mode.
+- **Desktop:** drag with the mouse after zooming, and pinch on supported trackpads (Ctrl/Meta+wheel). Ordinary wheel scrolling still scrolls the page.
+- **Double tap:** on the map background, zoom towards the tap point (or return to full view when already highly zoomed). Named location pins still open their source-linked inspector.
+- **Safari safety:** only the map intercepts two-finger custom gestures; the rest of the page stays browser-zoomable. Never use `user-scalable=no`, never disable touch or pinch globally.
+- **Tests:** `tests-e2e/geo-gestures.spec.js` covers two simultaneous fingers, panning, zoom limits, one-finger scroll behaviour, Move mode and source-record integrity in **Chromium and WebKit Mobile Safari emulation**. Live testing on a physical iPhone is still a separate desirable final check.
+
+Browser touch-gesture standards: [MDN touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/touch-action), [Apple Safari handling events](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html).
