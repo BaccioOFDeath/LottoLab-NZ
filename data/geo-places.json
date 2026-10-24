@@ -174,6 +174,168 @@
       "lon": 169.32,
       "region": "Otago",
       "precision": "city"
+    },
+    "Manawatū-Whanganui": {
+      "lat": -39.7676,
+      "lon": 175.5218,
+      "region": "Manawatū-Whanganui",
+      "precision": "region"
+    },
+    "Otago": {
+      "lat": -45.25,
+      "lon": 170.47,
+      "region": "Otago",
+      "precision": "region"
+    },
+    "Masterton": {
+      "lat": -40.951,
+      "lon": 175.658,
+      "region": "Wellington",
+      "precision": "city"
+    },
+    "Greymouth": {
+      "lat": -42.451,
+      "lon": 171.212,
+      "region": "West Coast",
+      "precision": "city"
+    },
+    "New Plymouth": {
+      "lat": -39.067,
+      "lon": 174.083,
+      "region": "Taranaki",
+      "precision": "city"
+    },
+    "Ashburton": {
+      "lat": -43.898,
+      "lon": 171.75,
+      "region": "Canterbury",
+      "precision": "city"
+    },
+    "Gisborne": {
+      "lat": -38.6533,
+      "lon": 178.0042,
+      "region": "Gisborne",
+      "precision": "city"
+    },
+    "Richmond": {
+      "lat": -41.3333,
+      "lon": 173.1833,
+      "region": "Tasman",
+      "precision": "city"
+    },
+    "Te Kauwhata": {
+      "lat": -37.405,
+      "lon": 175.144,
+      "region": "Waikato",
+      "precision": "city"
+    },
+    "Matamata": {
+      "lat": -37.811,
+      "lon": 175.762,
+      "region": "Waikato",
+      "precision": "city"
+    },
+    "Blenheim": {
+      "lat": -41.516,
+      "lon": 173.953,
+      "region": "Marlborough",
+      "precision": "city"
+    },
+    "Porirua": {
+      "lat": -41.1333,
+      "lon": 174.85,
+      "region": "Wellington",
+      "precision": "city"
+    },
+    "Wellsford": {
+      "lat": -36.293,
+      "lon": 174.525,
+      "region": "Auckland",
+      "precision": "city"
+    },
+    "Wairoa": {
+      "lat": -39.036,
+      "lon": 177.367,
+      "region": "Hawke's Bay",
+      "precision": "city"
+    },
+    "North Shore": {
+      "lat": -36.8,
+      "lon": 174.75,
+      "region": "Auckland",
+      "precision": "region"
+    },
+    "Palmerston North": {
+      "lat": -40.3564,
+      "lon": 175.6111,
+      "region": "Manawatū-Whanganui",
+      "precision": "city"
+    },
+    "Dannevirke": {
+      "lat": -40.207,
+      "lon": 176.099,
+      "region": "Manawatū-Whanganui",
+      "precision": "city"
+    },
+    "Martinborough": {
+      "lat": -41.218,
+      "lon": 175.459,
+      "region": "Wellington",
+      "precision": "city"
+    },
+    "Lower Hutt": {
+      "lat": -41.2167,
+      "lon": 174.9167,
+      "region": "Wellington",
+      "precision": "city"
+    },
+    "Bay of Plenty": {
+      "lat": -38.1,
+      "lon": 176.5,
+      "region": "Bay of Plenty",
+      "precision": "region"
+    },
+    "Hawke's Bay": {
+      "lat": -39.48,
+      "lon": 176.83,
+      "region": "Hawke's Bay",
+      "precision": "region"
+    },
+    "West Coast": {
+      "lat": -42.35,
+      "lon": 171.3,
+      "region": "West Coast",
+      "precision": "region"
+    },
+    "Selwyn": {
+      "lat": -43.67,
+      "lon": 172.4,
+      "region": "Canterbury",
+      "precision": "region"
+    },
+    "Lincoln": {
+      "lat": -43.641,
+      "lon": 172.484,
+      "region": "Canterbury",
+      "precision": "city"
+    },
+    "Mosgiel": {
+      "lat": -45.874,
+      "lon": 170.349,
+      "region": "Otago",
+      "precision": "city"
+    },
+    "Taupō": {
+      "lat": -38.687,
+      "lon": 176.071,
+      "region": "Waikato",
+      "precision": "city"
     }
-  }
+  },
+  "coordinate_quality": "All coordinates are approximate city centres or region reference points. Never physical retailer street addresses.",
+  "coordinate_sources": [
+    "https://geodatakit.com/datasets/new-zealand-cities",
+    "https://www.geonames.org/advanced-search.html?country=NZ",
+    "https://archivescentral.org.nz/place/manawatu-whanganui-region"
+  ]
 }
