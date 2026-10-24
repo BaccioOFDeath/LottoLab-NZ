@@ -58,3 +58,15 @@ Each record includes id, date, optional draw ID, game, division/prize tier, sale
 - **Tests:** `tests-e2e/geo-gestures.spec.js` covers two simultaneous fingers, panning, zoom limits, one-finger scroll behaviour, Move mode and source-record integrity in **Chromium and WebKit Mobile Safari emulation**. Live testing on a physical iPhone is still a separate desirable final check.
 
 Browser touch-gesture standards: [MDN touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/touch-action), [Apple Safari handling events](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html).
+
+## 25 October 2026 — Deeper archival research and readable zoom
+
+The initial 48-row seed was expanded to **121 source-linked report entries covering 143 reported tickets, 55 unique places and 25 selected draw dates**. New source-backed rows include the official [3 October 2026 Powerball winner recap](https://mylotto.co.nz/news-and-press-releases/lotto-draw-results-031026) and [19 September](https://mylotto.co.nz/news-and-press-releases/lotto-draw-results-190926), [23 September](https://mylotto.co.nz/news-and-press-releases/lotto-draw-results-230926), [7 October](https://mylotto.co.nz/news-and-press-releases/lotto-draw-results-071026) and [10 October](https://mylotto.co.nz/news-and-press-releases/lotto-draw-results-101026) Lotto NZ releases.
+
+- The 2026 Powerball First Division recap identifies **18 jackpot-winning tickets through 3 October 2026**, counted once even where those same tickets qualified for Lotto First Division.
+- The 10 October Lotto NZ release identifies **26 Second Division tickets** (including a group of 13 MyLotto winners in Wellington); 21 October has **7 Lotto Second Division tickets**. These aggregated counts are stored as ticket weights, not 13 duplicate rows.
+- New map references are approved city/region centroids, supported by [New Zealand city coordinates](https://geodatakit.com/datasets/new-zealand-cities), [GeoNames](https://www.geonames.org/advanced-search.html?country=NZ) and [Manawatū-Whanganui region centre](https://archivescentral.org.nz/place/manawatu-whanganui-region). They are not precise retailer addresses.
+- At zoom level 4×, each visible marker's full circle diameter is about **66% of its normal apparent size** rather than 400%. The child marker compensates for scene zoom by `zoom^-1.30`; label type is additionally adjusted by `zoom^0.19`, and heatmap radii are redrawn with `zoom^-0.72` compensation.
+- The optional source-quality panel breaks down source articles, location precision, retail/online mix and monthly record counts, all recomputed from selected publicly reported records. Empty months mean **no reported observation in the stored sample**, not no winner.
+
+**Never infer more from the dataset than it supports:** 143 reported tickets is a selective press-release sample, **not** the number of all NZ winning tickets in this period. There is no ticket-sales denominator. A popular outlet may appear frequently simply because it sells more tickets.
