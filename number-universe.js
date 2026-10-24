@@ -165,7 +165,17 @@ canvas.addEventListener('pointerup',e=>{
  if(e.pointerType!=='mouse')pointer=null;
 },{passive:true});
 canvas.addEventListener('pointercancel',()=>{pointerDown=null;pointer=null;},{passive:true});
-canvas.addEventListener('pointerleave',()=>{pointer=null;pointerDown=null;},{passive:true});
+canvas.addEventListener('click',e=>{
+ // Safari and touch browsers can synthesize click without a reliable pointerup
+ // on a touch-action: pan-y surface. Treat this as an accessibility fallback.
+ if(e.detail===0)return; // synthetic keyboard clicks use the accessible selector
+ const box=canvas.getBoundingClientRect(),x=e.clientX-box.left,y=e.clientY-box.top;
+ if(x<0||x>w||y<0||y>h)return;
+ const match=nearest(x,y,true);
+ if(match&&selected!==match.n)inspect(match.n);
+},{passive:true});
+
+canvas.addEventListener('pointerleave',e=>{pointer=null;if(e.pointerType==='mouse')pointerDown=null;},{passive:true});
 function draw(now=performance.now()){
  if(!w||!h)return;
  const ctx=context;
