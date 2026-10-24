@@ -1768,6 +1768,101 @@
     ]
   },
   {
+    "draw": 2539,
+    "date": "2025-12-03",
+    "numbers": [
+      3,
+      9,
+      24,
+      30,
+      38,
+      40
+    ],
+    "bonus": 34,
+    "powerball": 2,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2539",
+      "https://www.lottodraw.co.nz/lotto/results-december-3-2025"
+    ]
+  },
+  {
+    "draw": 2538,
+    "date": "2025-11-29",
+    "numbers": [
+      8,
+      11,
+      19,
+      29,
+      33,
+      37
+    ],
+    "bonus": 3,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2538",
+      "https://www.lottodraw.co.nz/lotto/results-november-29-2025"
+    ]
+  },
+  {
+    "draw": 2537,
+    "date": "2025-11-26",
+    "numbers": [
+      4,
+      5,
+      9,
+      21,
+      32,
+      34
+    ],
+    "bonus": 3,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2537",
+      "https://www.lottodraw.co.nz/lotto/results-november-26-2025"
+    ]
+  },
+  {
+    "draw": 2536,
+    "date": "2025-11-22",
+    "numbers": [
+      2,
+      6,
+      10,
+      12,
+      28,
+      30
+    ],
+    "bonus": 22,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2536",
+      "https://www.lottodraw.co.nz/lotto/results-november-22-2025"
+    ]
+  },
+  {
+    "draw": 2535,
+    "date": "2025-11-19",
+    "numbers": [
+      2,
+      10,
+      18,
+      25,
+      29,
+      31
+    ],
+    "bonus": 21,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2535",
+      "https://www.lottodraw.co.nz/lotto/results-november-19-2025"
+    ]
+  },
+  {
     "draw": 2534,
     "date": "2025-11-15",
     "numbers": [
@@ -1784,6 +1879,63 @@
     "sources": [
       "https://www.lottodraw.co.nz/lotto/results-november-15-2025",
       "https://app.nz-lotto.com/loto-statistics/results/mylotto-2534"
+    ]
+  },
+  {
+    "draw": 2533,
+    "date": "2025-11-12",
+    "numbers": [
+      4,
+      10,
+      18,
+      19,
+      27,
+      30
+    ],
+    "bonus": 32,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2533",
+      "https://www.lottodraw.co.nz/lotto/results-november-12-2025"
+    ]
+  },
+  {
+    "draw": 2532,
+    "date": "2025-11-08",
+    "numbers": [
+      2,
+      4,
+      13,
+      22,
+      24,
+      28
+    ],
+    "bonus": 35,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2532",
+      "https://www.lottodraw.co.nz/lotto/results-november-8-2025"
+    ]
+  },
+  {
+    "draw": 2531,
+    "date": "2025-11-05",
+    "numbers": [
+      3,
+      4,
+      9,
+      25,
+      29,
+      40
+    ],
+    "bonus": 20,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2531",
+      "https://www.lottodraw.co.nz/lotto/results-november-5-2025"
     ]
   },
   {
