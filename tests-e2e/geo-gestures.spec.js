@@ -96,3 +96,32 @@ test('pinching never alters source data, location pins, page width or the 20 loc
  await expect(page.locator('#geoZoomValue')).toHaveText('1.0×');
  expect(firstPlace).toContain('Auckland');
 });
+
+
+test('hotspot numbers, badges and glow shrink instead of exploding at high zoom',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await ready(page);
+ const pin=page.locator('#geoPins .geo-pin').first();
+ await expect(pin).toBeVisible();
+ const before=await pin.evaluate(el=>({
+  width:el.getBoundingClientRect().width,
+  font:getComputedStyle(el.querySelector('.geo-pin-dot')).fontSize,
+  opacity:getComputedStyle(el).opacity
+ }));
+ for(let i=0;i<6;i++)await page.locator('#geoZoomIn').click();
+ await expect(page.locator('#geoZoomValue')).toHaveText('4.0×');
+ const after=await pin.evaluate(el=>({
+  width:el.getBoundingClientRect().width,
+  compensation:getComputedStyle(document.getElementById('geoPins')).getPropertyValue('--geo-pin-compensation'),
+  label:getComputedStyle(document.getElementById('geoPins')).getPropertyValue('--geo-label-compensation'),
+  font:getComputedStyle(el.querySelector('.geo-pin-dot')).fontSize
+ }));
+ expect(after.width).toBeLessThan(before.width*.78);
+ expect(after.width).toBeGreaterThan(before.width*.5);
+ expect(Number(after.compensation)).toBeLessThan(.25);
+ expect(Number(after.label)).toBeGreaterThan(1);
+ await expect.poll(()=>page.evaluate(()=>Math.max(document.body.scrollWidth,document.documentElement.scrollWidth))).toBeLessThanOrEqual(391);
+ await page.locator('#geoZoomReset').click();
+ const reset=await pin.evaluate(el=>el.getBoundingClientRect().width);
+ expect(reset).toBeCloseTo(before.width,0);
+});
