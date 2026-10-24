@@ -7,7 +7,7 @@ const fmt=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-NZ',{timeZone:'UTC'
 function renderPick(id,p){const el=byId(id);if(!el)return;if(!p){el.textContent='No pre-draw selection recorded yet.';return}
 if(!Array.isArray(p.numbers)||p.numbers.length!==6||p.numbers.some(n=>!Number.isInteger(n)||n<1||n>40)||!Number.isInteger(p.powerball)||p.powerball<1||p.powerball>14){el.textContent='Invalid stored model selection — not displayed.';return}
 const line=p.numbers.map(n=>ball(n)).join('');
-el.innerHTML='<div class="model-pick-date">For '+fmt(p.target_date)+' · <strong>'+p.status+'</strong></div><div class="model-balls">'+line+'</div><div class="model-power">Powerball '+ball(p.powerball,'power')+'</div><div class="model-pick-foot"><span>Recorded '+new Date(p.created_at).toLocaleString('en-NZ',{timeZone:'Pacific/Auckland',dateStyle:'medium',timeStyle:'short'})+'</span><button type="button" class="btn btn-export model-copy">Copy line</button></div>';
+el.innerHTML='<div class="model-pick-date">For '+fmt(p.target_date)+' · <strong>'+p.status+'</strong></div><div class="model-balls">'+line+'</div><div class="model-power"><span class="model-special"><span>Bonus · research only</span>'+(Number.isInteger(p.bonus_prediction)?ball(p.bonus_prediction,'bonus'):'<span class="ball bonus">—</span>')+'</span><span class="model-special"><span>Powerball</span>'+ball(p.powerball,'power')+'</span></div><div class="model-pick-foot"><span>Recorded '+new Date(p.created_at).toLocaleString('en-NZ',{timeZone:'Pacific/Auckland',dateStyle:'medium',timeStyle:'short'})+'</span><button type="button" class="btn btn-export model-copy">Copy line</button></div>';
 const copy=el.querySelector('button.model-copy');
 copy.addEventListener('click',async()=>{const value=p.numbers.map(n=>String(n).padStart(2,'0')).join(' - ')+' | PB '+String(p.powerball).padStart(2,'0');try{await navigator.clipboard.writeText(value);copy.textContent='Copied ✓'}catch(e){copy.textContent='Select numbers above to copy'}});
 }
@@ -29,7 +29,7 @@ function ledger(picks,history){
     const label=(friendly[p.model]||'Research model')+' · #'+(p.line_number||1);
     const date=/^\d{4}-\d\d-\d\d$/.test(p.target_date)?p.target_date:'Unknown date';
     return '<tr><td>'+date+'</td><td>'+label+'</td><td>'+p.numbers.map(n=>String(n).padStart(2,'0')).join(' · ')+'</td><td><span class="ball bonus ledger-ball">'+(Number.isInteger(p.bonus_prediction)?String(p.bonus_prediction).padStart(2,'0'):'—')+'</span></td><td><span class="ball power ledger-ball">'+String(p.powerball).padStart(2,'0')+'</span></td><td>'+outcome+(confirmed&&p.bonus_prediction!=null?' · bonus '+(p.bonus_prediction===actual.bonus?'✓':'✕'):'')+'</td></tr>';
-  }).join('')||'<tr><td colspan="5">No recorded selections yet.</td></tr>';
+  }).join('')||'<tr><td colspan="6">No recorded selections yet.</td></tr>';
   text('modelLedgerSummary',completed+' selections scored · '+awaiting+' awaiting future draws. All results displayed, including zero matches. Check original dated commits for audit history.');
 }
 async function init(){try{
@@ -44,10 +44,10 @@ const row=picks.filter(p=>p.model===key).sort((x,y)=>y.target_date.localeCompare
 renderPick(id,row);const bt=report.backtest[key],real=prospective[key];
 if(bt&&real){
 const historical=bt.average_matches===null?'Not yet measured':Number(bt.average_matches).toFixed(2);
-text(statsid,'Held-out historical tests: '+bt.tested+' · Average main-ball matches: '+historical+' / 6 · Prospective selections scored: '+real.draws_scored);
+text(statsid,'Historical tests: '+bt.tested+' · Average matches: '+historical+' / 6 · Future draws scored: '+real.draws_scored);
 }}
 const next=report.upcoming_date?fmt(report.upcoming_date):'not yet available';
-text('modelMethodStatus','Target date: '+next+' · 20 frozen lines (10 experimental + 10 random control), published before the draw. '+report.verified_draw_count+' verified results · '+report.backtest_draws+' historical held-out tests. Original published lines never change. No statistically reliable edge over random picks has been demonstrated.');
+text('modelMethodStatus','Next draw: '+next+' · 20 fixed lines (10 experimental, 10 random control). No demonstrated predictive edge.');
 }catch(e){text('modelError','Unable to load model scorecard: '+e.message);for(const id of ['modelAdaptive','modelRandom'])text(id,'Model data unavailable.');}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
