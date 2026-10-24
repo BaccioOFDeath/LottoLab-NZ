@@ -50,3 +50,43 @@
 .picker-panel .picker-actions{margin-top:20px}
 @media(max-width:570px){.fixed-pick-line{gap:7px;padding:11px}.fixed-pick-name{width:100%;display:flex;justify-content:space-between;gap:8px;align-items:center}.fixed-pick-numbers{flex:1 1 100%}.fixed-pick-numbers .ball{width:35px;height:35px;font-size:13px}.fixed-pick-pb{font-size:11px}.fixed-copy{margin-left:auto}.picker-top .picker-controls{width:100%}.picker-top .picker-controls select{width:100%}}
 @media(max-width:385px){.fixed-pick-numbers .ball{width:32px;height:32px;font-size:12px}}
+
+/* Evidence Lab — meaningful statistical context, not a prediction promise */
+.evidence-section{margin:44px 0 16px}
+.evidence-section .section-title{margin-bottom:20px}
+.evidence-method-pill{font-size:11px;font-weight:800;color:#6840ae;border:1px solid #ddcdf4;padding:10px 12px;border-radius:999px;background:#f5edff;white-space:nowrap}
+.evidence-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:17px}
+.evidence-kpi{display:flex;flex-direction:column;align-items:flex-start;border-radius:17px;padding:17px 18px;border:1px solid #eee5f6;background:white;box-shadow:0 6px 20px #321b5a07}
+.evidence-kpi span{font-size:11px;color:#897b97}
+.evidence-kpi strong{font:900 28px Outfit,sans-serif;margin:7px 0 3px}
+.evidence-kpi small{font-size:10px;color:#a293b0}
+.evidence-panels{display:grid;grid-template-columns:1.16fr 1fr;gap:17px}
+.evidence-panels .analysis-panel h3{margin-top:6px}
+.evidence-panel{min-width:0}
+.deviation-list{display:flex;flex-direction:column;gap:12px}
+.deviation-row{display:grid;grid-template-columns:31px minmax(45px,1fr) 112px 74px;gap:9px;align-items:center}
+.deviation-number{font:900 13px Outfit;color:#60349a}
+.deviation-track{width:100%;height:12px;border-radius:12px;background:#f2eafb;position:relative;overflow:hidden}
+.deviation-fill{height:100%;background:linear-gradient(90deg,#a37cf2,#dd55a7);border-radius:12px}
+.deviation-info strong{display:block;font-size:11px;color:#574164}
+.deviation-info small{display:block;font-size:10px;color:#9888a7;margin-top:2px}
+.deviation-significance{color:#9382a1;font-size:10px;text-align:right}
+.deviation-significance.flagged{color:#b43c67;font-weight:900}
+.evidence-verdict{border-radius:10px;background:#f4ecff;color:#674491;font-size:12px;line-height:1.7;padding:12px 14px;margin:20px 0 13px}
+.evidence-note{color:#9587a3;font-size:11px;line-height:1.75}
+.evidence-quality{display:flex;flex-direction:column;gap:12px}
+.evidence-quality>div{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid #eee8f5;font-size:12px}
+.evidence-quality span{color:#84738f}.evidence-quality strong{color:#513070;font-weight:900;text-align:right}
+.portfolio-evidence{margin-top:17px}
+.portfolio-status{white-space:nowrap;flex:none;border-radius:99px;background:#f1e5ff;color:#7144a8;padding:8px 10px;font-size:11px;font-weight:900}
+.portfolio-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:16px 0 23px}
+.portfolio-grid>div{border-radius:12px;background:#f9f5ff;padding:13px 12px;min-width:0}
+.portfolio-grid span{display:block;color:#8a7b9a;font-size:11px}
+.portfolio-grid strong{display:block;font:900 26px Outfit;margin:7px 0;color:#572d93}
+.portfolio-grid small{display:block;font-size:10px;color:#a99ab6}
+.portfolio-number-grid{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:5px}
+.portfolio-number{display:grid;place-items:center;border-radius:6px;aspect-ratio:1;font:800 11px Outfit}
+.portfolio-legend{color:#998aa7;font-size:11px;text-align:right;margin-top:11px}
+@media(max-width:1000px){.evidence-grid,.portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.portfolio-number-grid{grid-template-columns:repeat(10,minmax(0,1fr))}}
+@media(max-width:750px){.evidence-panels{grid-template-columns:1fr}.evidence-method-pill{white-space:normal}.evidence-section .section-title{gap:9px}}
+@media(max-width:430px){.deviation-row{grid-template-columns:27px 1fr 95px 57px;gap:6px}.deviation-significance{font-size:9px}.evidence-kpi strong,.portfolio-grid strong{font-size:23px}.portfolio-number-grid{gap:4px}.portfolio-number{font-size:10px}}
