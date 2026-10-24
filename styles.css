@@ -285,3 +285,8 @@ kbd{border:1px solid #e5d9f1;background:#f8f4fc;border-radius:5px;padding:2px 5p
 .result-touch-hint{color:#8a68ba;font-size:10px;font-weight:700;letter-spacing:0;text-transform:none}
 @media(max-width:750px){.result-touch-hint{width:100%;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.result-number-button,.hero-universe-link{transition:none!important}}
+
+/* Respect the visitor's motion preference everywhere */
+.motion-off .hero-art .float-ball,.motion-off .hero-art .spark{animation:none!important}
+.motion-off .reveal-ready{opacity:1!important;transform:none!important;transition:none!important}
+.motion-off .btn,.motion-off .fixed-copy,.motion-off .result-number-button,.motion-off .universe-tool{transition:none!important}
