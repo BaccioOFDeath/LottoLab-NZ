@@ -411,3 +411,90 @@ test('data provider failure is explained instead of leaving an infinite loading 
  await expect(page.locator('#evidenceVerdict')).toContainText('temporarily unavailable');
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked'); // public picks are independent of archived results
 });
+
+
+test('Geo Lab loads authentic NZ outline and source-backed retail winning places',async({page})=>{
+ const geo=require('../data/geo-winners.json');
+ const retail=geo.records.filter(r=>r.channel==='retail');
+ const expected=retail.reduce((n,r)=>n+r.tickets,0);
+ await page.goto('/#geo');
+ await expect(page.locator('#geoTitle')).toContainText('Where the wins happened');
+ await expect(page.locator('#geoTotal')).toHaveText(String(expected));
+ await expect(page.locator('#geoRetail')).toHaveText(String(expected));
+ await expect(page.locator('#geoCoast path')).toHaveCount(2);
+ await expect(page.locator('#geoWeather')).toBeVisible();
+ await expect.poll(()=>page.evaluate(()=>document.getElementById('geoWeather').width)).toBeGreaterThan(10);
+ await expect(page.locator('#geoPins .geo-pin')).not.toHaveCount(0);
+ await expect(page.locator('#geoMapStatus')).toContainText('not adjusted for tickets sold');
+ await expect(page.locator('#geoNormalized')).toBeDisabled();
+ await expect(page.locator('#geoRanking .geo-rank-item').first()).toContainText('Auckland');
+ await page.locator('#geoRanking .geo-rank-item').first().click();
+ await expect(page.locator('#geoSelectedTitle')).toHaveText('Auckland');
+ await expect(page.locator('#geoSelectedList .geo-report')).not.toHaveCount(0);
+ await expect(page.locator('#geoSelectedList .geo-report').first().locator('a')).toHaveAttribute('target','_blank');
+ await expect(page.locator('#geoSelectedDescription')).toContainText('approximate');
+});
+test('Geo filters distinguish actual stores from MyLotto winner areas and prize types',async({page})=>{
+ const geo=require('../data/geo-winners.json');
+ await page.goto('/#geo');
+ const channel=page.locator('#geoChannel');
+ await channel.selectOption('online');
+ const online=geo.records.filter(x=>x.channel==='online').reduce((n,r)=>n+r.tickets,0);
+ await expect(page.locator('#geoTotal')).toHaveText(String(online));
+ await expect(page.locator('#geoRetail')).toHaveText('0');
+ await page.locator('#geoGame').selectOption('Powerball');
+ const power=geo.records.filter(x=>x.channel==='online'&&x.game==='Powerball').reduce((n,r)=>n+r.tickets,0);
+ await expect(page.locator('#geoTotal')).toHaveText(String(power));
+ await page.locator('#geoChannel').selectOption('all');
+ await page.locator('#geoTier').selectOption('roll_down');
+ const rollover=geo.records.filter(x=>x.game==='Powerball'&&x.tier==='roll_down').reduce((n,r)=>n+r.tickets,0);
+ await expect(page.locator('#geoTotal')).toHaveText(String(rollover));
+ await expect(page.locator('#geoMapStatus')).toContainText(String(rollover)+' tickets');
+ await page.locator('#geoRegion').selectOption('Waikato');
+ await expect(page.locator('#geoTotal')).toHaveText('1');
+ await page.locator('#geoTier').selectOption('first');
+ await expect(page.locator('#geoTotal')).toHaveText('0');
+ await expect(page.locator('#geoRanking')).toContainText('No published winners match');
+});
+test('Geo weather layers, map zoom and historical time replay are real interactions',async({page})=>{
+ const geo=require('../data/geo-winners.json');
+ await page.goto('/#geo');
+ await page.locator('#geoMarkers').click();
+ await expect(page.locator('#geoMarkers')).toHaveAttribute('aria-pressed','true');
+ await expect(page.locator('#geoHeat')).toHaveAttribute('aria-pressed','false');
+ await page.locator('#geoRegions').click();
+ await expect(page.locator('#geoRegions')).toHaveAttribute('aria-pressed','true');
+ await page.locator('#geoZoomIn').click();
+ await expect(page.locator('#geoScene')).toHaveAttribute('style',/scale\(1.25\)/);
+ await page.locator('#geoZoomReset').click();
+ await expect(page.locator('#geoScene')).toHaveAttribute('style',/scale\(1\)/);
+ const slider=page.locator('#geoDateSlider');
+ await expect(slider).toBeEnabled();
+ await slider.fill('0');
+ await expect(page.locator('#geoTotal')).toHaveText(String(geo.records.filter(x=>x.draw_date==='2024-06-08'&&x.channel==='retail').reduce((n,r)=>n+r.tickets,0)));
+ await page.locator('#geoPlay').click();
+ await expect(page.locator('#geoPlay')).toHaveAttribute('aria-pressed','true');
+ await expect.poll(()=>Number(page.locator('#geoDateSlider').getAttribute('value'))).toBeGreaterThanOrEqual(0);
+ await page.locator('#geoPlay').click();
+ await expect(page.locator('#geoPlay')).toHaveAttribute('aria-pressed','false');
+});
+test('Geo Lab works at iPhone width without page overflow or hidden reports',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/#geo');
+ await expect(page.locator('#geoMapStage')).toBeVisible();
+ await expect(page.locator('#geoPins button').first()).toBeVisible();
+ await page.locator('#geoGame').selectOption('Strike');
+ await expect(page.locator('#geoSelectedTitle')).toHaveText('Explore a hotspot');
+ await page.locator('#geoPins button').first().click();
+ await expect(page.locator('#geoSelectedList a').first()).toBeVisible();
+ await expect.poll(()=>page.evaluate(()=>Math.max(document.documentElement.scrollWidth,document.body.scrollWidth))).toBeLessThanOrEqual(391);
+ await expect(page.locator('#geoNormalized')).toBeDisabled();
+});
+test('Geo Lab data outage gives a clear message and does not affect main Lotto results',async({page})=>{
+ await page.route('**/data/geo-winners.json',r=>r.fulfill({status:503,body:'temporarily unavailable'}));
+ await page.goto('/#geo');
+ await expect(page.locator('#geoMapStatus')).toContainText('currently unavailable');
+ await expect(page.locator('#geoSelectedTitle')).toHaveText('Reports unavailable');
+ await expect(page.locator('#latestDraw')).toContainText(String(entries[0].draw));
+ await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
+});
