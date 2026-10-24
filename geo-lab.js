@@ -34,7 +34,7 @@ function createSVGPath(shape){
  coast.replaceChildren();
  if(!shape?.geometry?.coordinates){$('geoMapStatus').textContent='The map outline is unavailable, but reported locations are still listed below.';return;}
  for(const poly of shape.geometry.coordinates){
-  const rings=Array.isArray(poly[0]?.[0]?.[0])?poly: [poly];
+  const rings=poly; // MultiPolygon: each polygon contains one or more coordinate rings.
   for(const ring of rings){
    if(!Array.isArray(ring)||ring.length<3)continue;
    let path='',good=0;
