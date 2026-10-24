@@ -1,0 +1,179 @@
+{
+  "description": "Approved place-level map reference points, NOT retailer addresses.",
+  "places": {
+    "Auckland": {
+      "lat": -36.8485,
+      "lon": 174.7633,
+      "region": "Auckland",
+      "precision": "city"
+    },
+    "Tauranga": {
+      "lat": -37.6878,
+      "lon": 176.1651,
+      "region": "Bay of Plenty",
+      "precision": "city"
+    },
+    "Paraparaumu": {
+      "lat": -40.9135,
+      "lon": 175.0076,
+      "region": "Wellington",
+      "precision": "city"
+    },
+    "Timaru": {
+      "lat": -44.3967,
+      "lon": 171.2539,
+      "region": "Canterbury",
+      "precision": "city"
+    },
+    "Far North": {
+      "lat": -35.2,
+      "lon": 173.95,
+      "region": "Northland",
+      "precision": "region"
+    },
+    "Silverdale": {
+      "lat": -36.616,
+      "lon": 174.68,
+      "region": "Auckland",
+      "precision": "city"
+    },
+    "Hastings": {
+      "lat": -39.6381,
+      "lon": 176.8402,
+      "region": "Hawke's Bay",
+      "precision": "city"
+    },
+    "Dunedin": {
+      "lat": -45.8788,
+      "lon": 170.5028,
+      "region": "Otago",
+      "precision": "city"
+    },
+    "Wellington": {
+      "lat": -41.2865,
+      "lon": 174.7762,
+      "region": "Wellington",
+      "precision": "city"
+    },
+    "Kerikeri": {
+      "lat": -35.2266,
+      "lon": 173.9476,
+      "region": "Northland",
+      "precision": "city"
+    },
+    "Waimate": {
+      "lat": -44.7333,
+      "lon": 171.05,
+      "region": "Canterbury",
+      "precision": "city"
+    },
+    "Christchurch": {
+      "lat": -43.5321,
+      "lon": 172.6362,
+      "region": "Canterbury",
+      "precision": "city"
+    },
+    "Rangiora": {
+      "lat": -43.3038,
+      "lon": 172.5957,
+      "region": "Canterbury",
+      "precision": "city"
+    },
+    "Marlborough": {
+      "lat": -41.5134,
+      "lon": 173.9612,
+      "region": "Marlborough",
+      "precision": "region"
+    },
+    "Invercargill": {
+      "lat": -46.4132,
+      "lon": 168.3538,
+      "region": "Southland",
+      "precision": "city"
+    },
+    "Hamilton": {
+      "lat": -37.787,
+      "lon": 175.2793,
+      "region": "Waikato",
+      "precision": "city"
+    },
+    "Mount Maunganui": {
+      "lat": -37.64,
+      "lon": 176.188,
+      "region": "Bay of Plenty",
+      "precision": "city"
+    },
+    "Papamoa": {
+      "lat": -37.715,
+      "lon": 176.306,
+      "region": "Bay of Plenty",
+      "precision": "city"
+    },
+    "Nelson": {
+      "lat": -41.2706,
+      "lon": 173.284,
+      "region": "Nelson",
+      "precision": "city"
+    },
+    "Queenstown": {
+      "lat": -45.0312,
+      "lon": 168.6626,
+      "region": "Otago",
+      "precision": "city"
+    },
+    "Te Awamutu": {
+      "lat": -38.009,
+      "lon": 175.325,
+      "region": "Waikato",
+      "precision": "city"
+    },
+    "Rotorua": {
+      "lat": -38.1368,
+      "lon": 176.2497,
+      "region": "Bay of Plenty",
+      "precision": "city"
+    },
+    "Kawerau": {
+      "lat": -38.088,
+      "lon": 176.697,
+      "region": "Bay of Plenty",
+      "precision": "city"
+    },
+    "Coopers Beach": {
+      "lat": -34.996,
+      "lon": 173.468,
+      "region": "Northland",
+      "precision": "city"
+    },
+    "Thames": {
+      "lat": -37.1385,
+      "lon": 175.5404,
+      "region": "Waikato",
+      "precision": "city"
+    },
+    "Ngāruawāhia": {
+      "lat": -37.666,
+      "lon": 175.145,
+      "region": "Waikato",
+      "precision": "city"
+    },
+    "Napier": {
+      "lat": -39.49,
+      "lon": 176.915,
+      "region": "Hawke's Bay",
+      "precision": "city"
+    },
+    "Geraldine": {
+      "lat": -44.09,
+      "lon": 171.245,
+      "region": "Canterbury",
+      "precision": "city"
+    },
+    "Roxburgh": {
+      "lat": -45.543,
+      "lon": 169.32,
+      "region": "Otago",
+      "precision": "city"
+    }
+  }
+}
