@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-10-24T11:48:07.547Z",
+  "stored_draw_count": 53,
+  "verified_draw_count": 53,
+  "backtest": {
+    "adaptive_frequency_v1": {
+      "tested": 23,
+      "total_hits": 22,
+      "match_distribution": {
+        "0": 6,
+        "1": 12,
+        "2": 5,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "powerball_hits": 3,
+      "average_matches": 0.957
+    },
+    "random_baseline_v1": {
+      "tested": 23,
+      "total_hits": 17,
+      "match_distribution": {
+        "0": 9,
+        "1": 11,
+        "2": 3,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "powerball_hits": 1,
+      "average_matches": 0.739
+    }
+  },
+  "backtest_draws": 23,
+  "prospective": {
+    "adaptive_frequency_v1": {
+      "predictions_recorded": 1,
+      "draws_scored": 0,
+      "total_matches": 0,
+      "average_matches": null,
+      "powerball_matches": 0
+    },
+    "random_baseline_v1": {
+      "predictions_recorded": 1,
+      "draws_scored": 0,
+      "total_matches": 0,
+      "average_matches": null,
+      "powerball_matches": 0
+    }
+  },
+  "upcoming_date": "2026-10-28",
+  "upcoming_picks": [
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T11:48:07.547Z",
+      "model": "adaptive_frequency_v1",
+      "model_version": 1,
+      "numbers": [
+        1,
+        3,
+        4,
+        19,
+        22,
+        37
+      ],
+      "powerball": 7,
+      "training_draws": 53,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T11:48:07.547Z",
+      "model": "random_baseline_v1",
+      "model_version": 1,
+      "numbers": [
+        11,
+        12,
+        21,
+        29,
+        36,
+        39
+      ],
+      "powerball": 4,
+      "training_draws": 53,
+      "status": "pending"
+    }
+  ],
+  "expected_random_main_matches": 0.9,
+  "statistical_claim": "No credible evidence of future-draw prediction advantage has been established.",
+  "methodology": "Chronological walk-forward, minimum 30 earlier verified draws, fixed model versions. All historical test draws are held out."
+}
