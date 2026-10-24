@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "description": "Documented historical events and optional per-draw drawing-equipment metadata; unknown values are never inferred.",
+  "events": [
+    {
+      "id": "lotto-start",
+      "date": "1987-08-01",
+      "precision": "day",
+      "category": "game-format",
+      "title": "Lotto begins with six numbers from 1–40",
+      "affects_main_odds": false,
+      "affects_powerball_odds": false,
+      "source": "https://nzhistory.govt.nz/lotto-goes-on-sale-for-the-first-time",
+      "note": "The core six-from-40 format is the baseline; historical results may have a different draw schedule."
+    },
+    {
+      "id": "midweek-lotto",
+      "date": "2015-10-07",
+      "precision": "day",
+      "category": "draw-schedule",
+      "title": "Wednesday Lotto draws added",
+      "affects_main_odds": false,
+      "affects_powerball_odds": false,
+      "source": "https://www.legislation.govt.nz/regulation/public/2015/0204/latest/whole.html",
+      "note": "More draws per year, not different six-from-40 selection odds. Date based on the October 2015 midweek introduction."
+    },
+    {
+      "id": "powerball-14",
+      "date": "2026-09-16",
+      "precision": "day",
+      "category": "game-format",
+      "title": "Powerball number pool expanded from 10 to 14",
+      "affects_main_odds": false,
+      "affects_powerball_odds": true,
+      "source": "https://www.legislation.govt.nz/secondary-legislation/pco-drafted/2026/51/en/latest/",
+      "note": "Legislation took effect 13 September 2026; first Wednesday draw under the new rules was 16 September 2026."
+    }
+  ],
+  "operations": {
+    "machine_rotation": {
+      "status": "documented_process",
+      "source": "https://www.procurement.govt.nz/about-us/news/procuring-lucky-numbers-and-the-machine-that-runs-them/",
+      "note": "Four active machines from a pool of six and four rotating ball sets. Actual machine/ball-set assignment for individual draws has not been obtained."
+    },
+    "individual_machine_ids": {
+      "status": "unavailable",
+      "note": "Do not infer machine identity from weekday, draw number, date, presenter, or result."
+    },
+    "individual_ball_set_ids": {
+      "status": "unavailable",
+      "note": "Do not infer ball set identity."
+    },
+    "operator_ids": {
+      "status": "unavailable",
+      "note": "Only record operator identity with reliable draw-level records; no evidence of an effect on outcomes."
+    }
+  },
+  "by_draw": {}
+}
