@@ -647,6 +647,329 @@
     ]
   },
   {
+    "draw": 2598,
+    "date": "2026-06-27",
+    "numbers": [
+      2,
+      7,
+      21,
+      24,
+      29,
+      37
+    ],
+    "bonus": 17,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-27-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2598"
+    ]
+  },
+  {
+    "draw": 2597,
+    "date": "2026-06-24",
+    "numbers": [
+      5,
+      7,
+      12,
+      30,
+      32,
+      36
+    ],
+    "bonus": 40,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-24-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2597"
+    ]
+  },
+  {
+    "draw": 2596,
+    "date": "2026-06-20",
+    "numbers": [
+      6,
+      9,
+      27,
+      28,
+      30,
+      32
+    ],
+    "bonus": 36,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-20-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2596"
+    ]
+  },
+  {
+    "draw": 2595,
+    "date": "2026-06-17",
+    "numbers": [
+      3,
+      7,
+      10,
+      31,
+      35,
+      37
+    ],
+    "bonus": 16,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-17-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2595"
+    ]
+  },
+  {
+    "draw": 2594,
+    "date": "2026-06-13",
+    "numbers": [
+      7,
+      8,
+      13,
+      32,
+      33,
+      37
+    ],
+    "bonus": 22,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-13-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2594"
+    ]
+  },
+  {
+    "draw": 2593,
+    "date": "2026-06-10",
+    "numbers": [
+      2,
+      7,
+      12,
+      17,
+      21,
+      37
+    ],
+    "bonus": 35,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-10-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2593"
+    ]
+  },
+  {
+    "draw": 2592,
+    "date": "2026-06-06",
+    "numbers": [
+      3,
+      22,
+      29,
+      37,
+      39,
+      40
+    ],
+    "bonus": 13,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-6-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2592"
+    ]
+  },
+  {
+    "draw": 2591,
+    "date": "2026-06-03",
+    "numbers": [
+      1,
+      4,
+      9,
+      11,
+      13,
+      36
+    ],
+    "bonus": 24,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-3-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2591"
+    ]
+  },
+  {
+    "draw": 2590,
+    "date": "2026-05-30",
+    "numbers": [
+      8,
+      10,
+      29,
+      35,
+      36,
+      39
+    ],
+    "bonus": 3,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-30-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2590"
+    ]
+  },
+  {
+    "draw": 2589,
+    "date": "2026-05-27",
+    "numbers": [
+      6,
+      17,
+      19,
+      21,
+      27,
+      32
+    ],
+    "bonus": 28,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-27-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2589"
+    ]
+  },
+  {
+    "draw": 2588,
+    "date": "2026-05-23",
+    "numbers": [
+      5,
+      11,
+      22,
+      24,
+      34,
+      36
+    ],
+    "bonus": 10,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-23-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2588"
+    ]
+  },
+  {
+    "draw": 2587,
+    "date": "2026-05-20",
+    "numbers": [
+      8,
+      10,
+      12,
+      14,
+      20,
+      23
+    ],
+    "bonus": 40,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-20-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2587"
+    ]
+  },
+  {
+    "draw": 2586,
+    "date": "2026-05-16",
+    "numbers": [
+      6,
+      8,
+      13,
+      17,
+      34,
+      36
+    ],
+    "bonus": 28,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-16-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2586"
+    ]
+  },
+  {
+    "draw": 2585,
+    "date": "2026-05-13",
+    "numbers": [
+      2,
+      5,
+      6,
+      12,
+      14,
+      28
+    ],
+    "bonus": 34,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-13-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2585"
+    ]
+  },
+  {
+    "draw": 2584,
+    "date": "2026-05-09",
+    "numbers": [
+      3,
+      10,
+      12,
+      18,
+      26,
+      32
+    ],
+    "bonus": 36,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-9-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2584"
+    ]
+  },
+  {
+    "draw": 2583,
+    "date": "2026-05-06",
+    "numbers": [
+      3,
+      4,
+      16,
+      22,
+      24,
+      34
+    ],
+    "bonus": 38,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-6-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2583"
+    ]
+  },
+  {
+    "draw": 2582,
+    "date": "2026-05-02",
+    "numbers": [
+      14,
+      15,
+      17,
+      25,
+      29,
+      30
+    ],
+    "bonus": 13,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-2-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2582"
+    ]
+  },
+  {
     "draw": 2534,
     "date": "2025-11-15",
     "numbers": [
