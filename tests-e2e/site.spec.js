@@ -353,3 +353,57 @@ test('Powerball and Strike guides work by keyboard in narrow viewport',async({pa
  await expect(page.locator('#strikeGuide')).toHaveAttribute('open','');
  await expect.poll(()=>page.evaluate(()=>Math.max(document.documentElement.scrollWidth,document.body.scrollWidth))).toBeLessThanOrEqual(391);
 });
+
+
+test('copy all, individual copy and share use the immutable ticket numbers without Bonus',async({page})=>{
+ await page.addInitScript(()=>{
+   Object.defineProperty(navigator,'clipboard',{configurable:true,value:{
+     writeText:async text=>{window.__copiedText=text;}
+   }});
+   Object.defineProperty(navigator,'share',{configurable:true,value:
+     async data=>{window.__sharedData=data;}
+   });
+ });
+ await page.goto('/#picker');
+ await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
+ await page.locator('#pickerCopyAll').click();
+ const all=await page.evaluate(()=>window.__copiedText);
+ expect(all.split('\n')).toHaveLength(20);
+ expect(all).toContain('| PB ');
+ expect(all).not.toContain('BONUS');
+ expect(all).not.toContain('research_only');
+ await page.locator('#pickerLines .fixed-pick-line').first().locator('button.fixed-copy').click();
+ const one=await page.evaluate(()=>window.__copiedText);
+ expect(one).toContain('| PB ');
+ expect(one.split('\n')).toHaveLength(1);
+ await page.locator('#pickerShare').click();
+ const share=await page.evaluate(()=>window.__sharedData);
+ expect(share.text).toContain('20 pre-recorded Lotto NZ selections');
+ expect(share.text).toContain('Bonus forecasts are not ticket selections');
+ expect(share.url).toContain('#picker');
+ await page.locator('.model-compare summary').click();
+ await page.locator('#modelAdaptive button.model-copy').click();
+ expect(await page.evaluate(()=>window.__copiedText)).toContain('| PB ');
+});
+test('archived results export contains exactly the filtered rows, not only first page',async({page})=>{
+ const fs=require('node:fs');
+ await page.goto('/');
+ await expect(page.locator('#archiveCount')).toContainText('matching records');
+ await page.locator('#weekdayFilter').selectOption('3');
+ const expected=entries.filter(row=>new Date(row.date+'T12:00:00Z').getUTCDay()===3);
+ const downloadPromise=page.waitForEvent('download');
+ await page.locator('#exportCsv').click();
+ const download=await downloadPromise;
+ const body=fs.readFileSync(await download.path(),'utf8').trim();
+ const lines=body.split(/\r?\n/);
+ expect(lines[0]).toBe('draw,date,n1,n2,n3,n4,n5,n6,bonus,powerball');
+ expect(lines).toHaveLength(expected.length+1);
+ expect(body).toContain(String(expected[0].draw));
+});
+test('data provider failure is explained instead of leaving an infinite loading screen',async({page})=>{
+ await page.route('**/data/draws.json',route=>route.fulfill({status:503,contentType:'text/plain',body:'Temporary upstream error'}));
+ await page.goto('/');
+ await expect(page.locator('#dataState')).toHaveText('Archive unavailable');
+ await expect(page.locator('#archiveList')).toContainText('Unable to load archived draw data');
+ await expect(page.locator('#pickerCount')).toHaveText('Selections not ready');
+});
