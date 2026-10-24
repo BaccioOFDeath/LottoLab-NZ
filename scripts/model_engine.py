@@ -110,6 +110,17 @@ def select_extra(history,date,model,line_number,salt=0):
             break
     return sorted(chosen),pb
 
+def bonus_forecast(numbers, date, model, line_number):
+    """Research-only guess of the *seventh drawn ball*. Not a ticket choice.
+
+    Choose deterministically from the 34 numbers outside this line's main six.
+    Store it separately with its own publication time.
+    """
+    if len(numbers)!=6 or len(set(numbers))!=6:
+        raise ValueError('Expected six unique main numbers')
+    choices, _ = shuffled('lottolab|bonus-v1|'+date+'|'+model+'|'+str(line_number))
+    return next(n for n in choices if n not in numbers)
+
 def line_id(p):
     """Migration: original 2026-10-28 records without line_number are slot 1."""
     return int(p.get('line_number',1))
@@ -129,6 +140,11 @@ def validate_set(picks,day):
         if len(ns)!=6 or len(set(ns))!=6 or not all(1<=n<=40 for n in ns):
             raise ValueError('Invalid main balls')
         if not 1<=p['powerball']<=cap:raise ValueError('Invalid Powerball')
+        if p.get('bonus_prediction') is not None:
+            if not isinstance(p['bonus_prediction'],int) or not 1<=p['bonus_prediction']<=40 or p['bonus_prediction'] in ns:
+                raise ValueError('Invalid research-only bonus forecast')
+            if not p.get('bonus_prediction_created_at') or not p.get('bonus_prediction_method'):
+                raise ValueError('Undated research-only bonus forecast')
     return group
 
 def backtest(draws):
@@ -160,7 +176,9 @@ def prospective_summary(picks):
             'draws_scored':len({p['target_date'] for p in scored}),
             'total_matches':sum(p['main_matches'] for p in scored),
             'average_matches':round(sum(p['main_matches'] for p in scored)/len(scored),3) if scored else None,
-            'powerball_matches':sum(int(p.get('powerball_match',False)) for p in scored)
+            'powerball_matches':sum(int(p.get('powerball_match',False)) for p in scored),
+            'bonus_forecasts_scored':sum('bonus_prediction_match' in p for p in scored),
+            'bonus_forecasts_matched':sum(int(p.get('bonus_prediction_match',False)) for p in scored)
         }
     return result
 
@@ -177,6 +195,8 @@ def run(now=None):
             p['result_draw']=result['draw']
             p['main_matches']=len(set(p['numbers'])&set(result['numbers']))
             p['powerball_match']=p['powerball']==result['powerball']
+            if (p.get('bonus_prediction') is not None and p.get('bonus_prediction_created_at','')[:10]<p['target_date']):
+                p['bonus_prediction_match']=p['bonus_prediction']==result['bonus']
             p['scored_at']=now.astimezone(dt.timezone.utc).isoformat()
     target=next_draw(now.astimezone(NZ).date())
     history=[r for r in draws if r['date']<target]
@@ -207,6 +227,16 @@ def run(now=None):
                 current.append(entry)
                 used.add(combo)
         assert len(validate_set(picks,target))==LINES_PER_DRAW
+    # Bonus is NOT a playable ticket number. Add a distinctly timestamped,
+    # research-only forecast without touching any original line or created_at.
+    # Never add a new bonus guess to completed/past draws.
+    if now.astimezone(NZ).date().isoformat()<target:
+        for p in current:
+            if p.get('bonus_prediction') is None:
+                p['bonus_prediction']=bonus_forecast(p['numbers'],target,p['model'],line_id(p))
+                p['bonus_prediction_created_at']=now.astimezone(dt.timezone.utc).isoformat()
+                p['bonus_prediction_method']='research_only_deterministic_v1'
+                p['bonus_is_ticket_selection']=False
     # Validate all existing days, with partial historical 2-line pilot allowed.
     for day in {p['target_date'] for p in picks}:validate_set(picks,day)
     PICK_FILE.write_text(json.dumps(picks,indent=2)+'\n')
@@ -219,6 +249,7 @@ def run(now=None):
         'backtest':comparison,'backtest_draws':n_tested,
         'prospective':prospective_summary(picks),
         'lines_per_draw':LINES_PER_DRAW,
+        'bonus_forecast_notice':'Gold Bonus is a separately timestamped research-only prediction of the drawn seventh ball, NOT a ticket selection.',
         'upcoming_date':target,
         'upcoming_picks':today_lines,
         'expected_random_main_matches':0.9,
