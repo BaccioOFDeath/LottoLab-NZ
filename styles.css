@@ -30,3 +30,7 @@
 .context-unknown{font-size:11px;color:#958aa3;line-height:1.6;margin:9px 0 0}
 @media(max-width:850px){.context-controls{grid-template-columns:1fr 1fr}.context-controls label:first-child{grid-column:1/-1}}
 @media(max-width:540px){.context-controls{grid-template-columns:1fr}.context-controls label:first-child{grid-column:auto}.context-top{flex-wrap:wrap}.context-count{white-space:normal}}
+
+/* Four research filters: rules, machine, ball set, responsible operator */
+@media(min-width:851px){.context-controls{grid-template-columns:1.35fr 1fr 1fr 1fr}}
+@media(min-width:541px) and (max-width:850px){.context-controls label:first-child{grid-column:auto}}
