@@ -267,6 +267,10 @@ if('ResizeObserver'in window)new ResizeObserver(resize).observe(canvas);
 else window.addEventListener('resize',resize,{passive:true});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&visible)requestNextFrame();});
 window.addEventListener('lottolab:analysis-changed',refreshData);
+window.addEventListener('lottolab:data-error',()=>{
+ $('universeDataStatus').textContent='Draw history temporarily unavailable; exploration will resume when records load.';
+ $('universeSelectedDescription').textContent='Source-backed number history is currently unavailable.';
+});
 if(Array.isArray(window.lottoLabAnalysisDraws))refreshData();
 resize();
 })();
