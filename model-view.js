@@ -11,11 +11,32 @@ el.innerHTML='<div class="model-pick-date">For '+fmt(p.target_date)+' · <strong
 const copy=el.querySelector('button.model-copy');
 copy.addEventListener('click',async()=>{const value=p.numbers.map(n=>String(n).padStart(2,'0')).join(' - ')+' | PB '+String(p.powerball).padStart(2,'0');try{await navigator.clipboard.writeText(value);copy.textContent='Copied ✓'}catch(e){copy.textContent='Select numbers above to copy'}});
 }
+
+function ledger(picks,history){
+  const host=byId('modelLedgerRows');if(!host)return;
+  const verified=new Map(history.filter(d=>d.verification==='two-source').map(d=>[d.date,d]));
+  const list=[...picks].sort((a,b)=>b.target_date.localeCompare(a.target_date)||a.model.localeCompare(b.model));
+  let completed=0, awaiting=0;
+  host.innerHTML=list.map(p=>{
+    const actual=verified.get(p.target_date);
+    const legitimate=Array.isArray(p.numbers)&&p.numbers.length===6&&p.numbers.every(n=>Number.isInteger(n)&&n>=1&&n<=40);
+    if(!legitimate)return '';
+    const confirmed=actual&&p.status==='scored';
+    if(confirmed)completed++;else awaiting++;
+    const count=confirmed?p.numbers.filter(n=>actual.numbers.includes(n)).length:0;
+    const powerMatch=confirmed&&actual.powerball===p.powerball;
+    const outcome=confirmed?'<span class="ledger-result">'+count+'/6 main'+(powerMatch?' · PB ✓':' · PB ✕')+'</span>':'<span class="ledger-pending">Awaiting result</span>';
+    const label=friendly[p.model]||'Research model';
+    const date=/^\d{4}-\d\d-\d\d$/.test(p.target_date)?p.target_date:'Unknown date';
+    return '<tr><td>'+date+'</td><td>'+label+'</td><td>'+p.numbers.map(n=>String(n).padStart(2,'0')).join(' · ')+'</td><td>'+String(p.powerball).padStart(2,'0')+'</td><td>'+outcome+'</td></tr>';
+  }).join('')||'<tr><td colspan="5">No recorded selections yet.</td></tr>';
+  text('modelLedgerSummary',completed+' selections scored · '+awaiting+' awaiting future draws. All results displayed, including zero matches. Check original dated commits for audit history.');
+}
 async function init(){try{
-const [a,b]=await Promise.all([fetch('./data/model-performance.json',{cache:'no-store'}),fetch('./data/model-picks.json',{cache:'no-store'})]);if(!a.ok||!b.ok)throw Error('Performance files unavailable');
-const report=await a.json(),picks=await b.json();
+const [a,b,c]=await Promise.all([fetch('./data/model-performance.json',{cache:'no-store'}),fetch('./data/model-picks.json',{cache:'no-store'}),fetch('./data/draws.json',{cache:'no-store'})]);if(!a.ok||!b.ok||!c.ok)throw Error('Performance files unavailable');
+const report=await a.json(),picks=await b.json(),draws=await c.json();
 if(!Array.isArray(picks)||!report||!report.backtest)throw Error('Invalid scorecard data');
-text('modelVerified',report.verified_draw_count);text('modelBacktests',report.backtest_draws);
+ledger(picks,draws);text('modelVerified',report.verified_draw_count);text('modelBacktests',report.backtest_draws);
 const prospective=report.prospective||{};
 text('modelLiveDraws',Math.max(0,...Object.values(prospective).map(x=>Number(x.draws_scored)||0)));
 for(const [key,id,statsid] of [['adaptive_frequency_v1','modelAdaptive','modelAdaptiveStats'],['random_baseline_v1','modelRandom','modelRandomStats']]){
