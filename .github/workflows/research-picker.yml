@@ -7,6 +7,8 @@ on:
     paths:
       - 'data/draws.json'
       - 'scripts/model_engine.py'
+      - 'tests/test_model_engine.py'
+      - '.github/workflows/research-picker.yml'
 permissions:
   contents: write
 concurrency:
