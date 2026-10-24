@@ -1,40 +1,40 @@
 {
-  "generated_at": "2026-10-24T11:50:09.326691+00:00",
-  "stored_draw_count": 53,
-  "verified_draw_count": 53,
+  "generated_at": "2026-10-24T11:57:10.553587+00:00",
+  "stored_draw_count": 87,
+  "verified_draw_count": 87,
   "backtest": {
     "adaptive_frequency_v1": {
-      "tested": 23,
-      "total_hits": 22,
+      "tested": 57,
+      "total_hits": 49,
       "match_distribution": {
-        "0": 6,
-        "1": 12,
-        "2": 5,
-        "3": 0,
+        "0": 23,
+        "1": 20,
+        "2": 13,
+        "3": 1,
         "4": 0,
         "5": 0,
         "6": 0
       },
-      "powerball_hits": 3,
-      "average_matches": 0.957
+      "powerball_hits": 4,
+      "average_matches": 0.86
     },
     "random_baseline_v1": {
-      "tested": 23,
-      "total_hits": 17,
+      "tested": 57,
+      "total_hits": 48,
       "match_distribution": {
-        "0": 9,
-        "1": 11,
-        "2": 3,
-        "3": 0,
+        "0": 21,
+        "1": 25,
+        "2": 10,
+        "3": 1,
         "4": 0,
         "5": 0,
         "6": 0
       },
-      "powerball_hits": 1,
-      "average_matches": 0.739
+      "powerball_hits": 4,
+      "average_matches": 0.842
     }
   },
-  "backtest_draws": 23,
+  "backtest_draws": 57,
   "prospective": {
     "adaptive_frequency_v1": {
       "predictions_recorded": 1,
