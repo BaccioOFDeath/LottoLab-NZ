@@ -83,3 +83,18 @@ Relevant sources:
 - https://www.procurement.govt.nz/about-us/news/procuring-lucky-numbers-and-the-machine-that-runs-them/
 
 To add validated mechanical metadata later, add an object in `by_draw` keyed by draw number with fields such as `machine_id`, `ball_set_id`, `operator_id`, and a public supporting `source` URL. `tests/test_draw_context.py` checks for missing provenance. These fields should support retrospective testing only; actual equipment assignments cannot be forecast before the independent draw.
+
+
+## Exactly 20 pre-draw suggestions (October 2026)
+
+LottoLab now publishes **exactly 20 research lines per future Wednesday/Saturday draw**, fixed and identical for every visitor. The previous unlimited Quick Pick UI is retired; there is **no in-browser generation or unlimited reroll**.
+
+- 10 lines from the experimental recency/frequency-weighted approach and 10 lines from a deterministic random control, all uniquely recorded with six main numbers and one Powerball.
+- `scripts/model_engine.py` is the **only** publisher. It checks for duplicate combinations, duplicate model slots, invalid numbers and any attempt to publish over 20 lines. Repeated runs cannot change a previously recorded selection.
+- The first adaptive and random lines originally committed for **28 October 2026** have their original timestamps and values intact; the remaining 18 were subsequently timestamped and appended.
+- The website displays all 20, with filters to view 10 per method, individual Copy buttons, and Copy All 20.
+- Draw-condition analysis filters affect statistics but **never change these locked selections**.
+- Every line is scored after a two-source-confirmed result. Scored and unsuccessful lines remain in `data/model-picks.json` and in the public prediction ledger.
+- Historical walk-forward model comparisons remain separate from genuine, timestamped prospective selections. Ten guesses from one model do **not** establish an improved chance over random selection.
+
+New constraints have Python unit tests for exactly 20, 10/10 split, uniqueness, preservation and repeat-run idempotence, plus browser regression tests for no generation button and stable reload.
