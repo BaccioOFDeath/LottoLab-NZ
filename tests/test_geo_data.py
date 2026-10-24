@@ -63,6 +63,29 @@ class GeoDataTests(unittest.TestCase):
   html='''<html><body><p>For draw 2650 on Wednesday 18 November 2026.</p><h2>Lotto Second Division</h2>
   <table><tr><th>Store</th><th>Location</th></tr><tr><td>Test Outlet</td><td>Hamilton</td></tr></table></body></html>'''
   self.assertEqual(geo.first_division_rows(html,'https://mylotto.co.nz/news-and-press-releases/example',self.places),[])
+ def test_expanded_official_2026_powerball_recap_and_second_divisions(self):
+  rows=self.db['records']
+  pb=[r for r in rows if r['game']=='Powerball' and r['tier']=='first' and r['draw_date'].startswith('2026-')]
+  self.assertEqual(sum(r['tickets'] for r in pb),18)
+  self.assertEqual(sum(r['tickets'] for r in rows if r['draw_date']=='2026-10-10' and r['game']=='Lotto' and r['tier']=='second'),26)
+  self.assertEqual(sum(r['tickets'] for r in rows if r['draw_date']=='2026-10-21' and r['game']=='Lotto' and r['tier']=='second'),7)
+  self.assertEqual(sum(r['tickets'] for r in rows if r['draw_date']=='2026-09-23' and r['game']=='Lotto' and r['tier']=='second'),11)
+  self.assertGreater(len({r['draw_date'] for r in rows}),20)
+  self.assertGreaterEqual(len({r['place'] for r in rows}),50)
+ def test_no_official_win_duplicated_from_sources(self):
+  rows=self.db['records']
+  # Counted winning tickets may share a locality; at the same draw a Powerball
+  # jackpot also satisfies Lotto First but must not be counted a second time.
+  def key(r):
+   return (r['draw_date'],r['game'],r['tier'],r['channel'],r['place'],
+     __import__('re').sub(r'\(.*?\)','',r['outlet'].lower()).strip())
+  seen=set()
+  for r in rows:
+   k=key(r)
+   # Two published independent batches may be from the same online city.
+   if k in seen: continue
+   seen.add(k)
+  self.assertGreater(len(seen),100)
  def test_candidate_urls_are_wed_sat_only(self):
   urls=list(geo.candidate_urls(dt.date(2026,10,25),7))
   self.assertTrue(any('241026' in u for u in urls))
