@@ -125,6 +125,7 @@ Promise.all([
   fetch('./data/draw-context.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
 ]).then(([rows,records,context])=>{
   allRows=Array.isArray(rows)?rows.filter(x=>Number.isInteger(x.draw)&&Array.isArray(x.numbers)&&x.numbers.length===6):[];
+  if(!allRows.length){set('evidenceVerdict','Historical draws temporarily unavailable. Try reloading the site.');set('coverageNote','Source records unavailable.');set('evidenceVerified','—');}
   picks=Array.isArray(records)?records:[];
   drawContext=context||{};
   quality();portfolio();render();
