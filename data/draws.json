@@ -229,6 +229,114 @@
     "powerball": 3
   },
   {
+    "draw": 2616,
+    "date": "2026-08-29",
+    "numbers": [
+      2,
+      5,
+      20,
+      24,
+      25,
+      31
+    ],
+    "bonus": 18,
+    "powerball": 5,
+    "verification": "one-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-29-2026"
+    ]
+  },
+  {
+    "draw": 2615,
+    "date": "2026-08-26",
+    "numbers": [
+      11,
+      13,
+      14,
+      21,
+      27,
+      39
+    ],
+    "bonus": 32,
+    "powerball": 8,
+    "verification": "one-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-26-2026"
+    ]
+  },
+  {
+    "draw": 2614,
+    "date": "2026-08-22",
+    "numbers": [
+      3,
+      14,
+      20,
+      22,
+      37,
+      40
+    ],
+    "bonus": 12,
+    "powerball": 5,
+    "verification": "one-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-22-2026"
+    ]
+  },
+  {
+    "draw": 2613,
+    "date": "2026-08-19",
+    "numbers": [
+      13,
+      16,
+      19,
+      20,
+      25,
+      37
+    ],
+    "bonus": 12,
+    "powerball": 10,
+    "verification": "one-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-19-2026"
+    ]
+  },
+  {
+    "draw": 2612,
+    "date": "2026-08-15",
+    "numbers": [
+      14,
+      15,
+      17,
+      22,
+      32,
+      40
+    ],
+    "bonus": 3,
+    "powerball": 9,
+    "verification": "one-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-15-2026"
+    ]
+  },
+  {
+    "draw": 2611,
+    "date": "2026-08-12",
+    "numbers": [
+      2,
+      8,
+      13,
+      19,
+      28,
+      39
+    ],
+    "bonus": 24,
+    "powerball": 9,
+    "verification": "one-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-12-2026"
+    ]
+  },
+  {
     "draw": 2534,
     "date": "2025-11-15",
     "numbers": [
