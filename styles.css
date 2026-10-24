@@ -90,3 +90,9 @@
 @media(max-width:1000px){.evidence-grid,.portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.portfolio-number-grid{grid-template-columns:repeat(10,minmax(0,1fr))}}
 @media(max-width:750px){.evidence-panels{grid-template-columns:1fr}.evidence-method-pill{white-space:normal}.evidence-section .section-title{gap:9px}}
 @media(max-width:430px){.deviation-row{grid-template-columns:27px 1fr 95px 57px;gap:6px}.deviation-significance{font-size:9px}.evidence-kpi strong,.portfolio-grid strong{font-size:23px}.portfolio-number-grid{gap:4px}.portfolio-number{font-size:10px}}
+
+/* Mobile overflow repair: long prediction ledger scrolls INSIDE its card, not the whole page. */
+.model-ledger{min-width:0;max-width:100%}
+.tablewrap{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.ledger-table{width:100%;min-width:700px}
+@media(max-width:700px){.model-section,.portfolio-evidence,.evidence-section,.analysis-panel{min-width:0;max-width:100%}.model-ledger .panel-head{min-width:0;flex-wrap:wrap}}
