@@ -45,8 +45,8 @@ def parse_a(doc):
         nums=[int(i.get_text(strip=True)) for i in ol.find_all('li',recursive=False)]
         if len(nums)!=6:continue
         def lookup(label):
-            for strong in article.select('strong'):
-                if strong.get_text(' ',strip=True).lower()==label:
+            for strong in article.find_all(['strong','dt']):
+                if strong.get_text(' ',strip=True).lower().strip(': ') == label:
                     dd=strong.find_next('dd')
                     if dd:return int(re.search(r'\d+',dd.get_text(' ',strip=True))[0])
             raise ValueError('Missing '+label)
