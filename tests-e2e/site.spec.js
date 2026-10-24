@@ -150,3 +150,45 @@ test('Evidence Lab remains usable at iPhone-width 390px without page overflow',a
  expect(size.viewport).toBe(390);
  expect(Math.max(size.doc,size.body)).toBeLessThanOrEqual(391);
 });
+
+test('bonus and Powerball are real color-coded balls, not unplayable ticket choices',async({page})=>{
+ await page.goto('/#picker');
+ await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
+ await expect(page.locator('#pickerLines .ball.bonus')).toHaveCount(20);
+ await expect(page.locator('#pickerLines .ball.power')).toHaveCount(20);
+ await expect(page.locator('#pickerLines .pick-extra-label').first()).toContainText('RESEARCH ONLY');
+ const picks=require('../data/model-picks.json');
+ const first=picks.find(p=>p.model==='adaptive_frequency_v1'&&(p.line_number||1)===1);
+ const line=page.locator('#pickerLines .fixed-pick-line').first();
+ await expect(line.locator('.ball.bonus')).toHaveText(String(first.bonus_prediction).padStart(2,'0'));
+ await expect(line.locator('.ball.power')).toHaveText(String(first.powerball).padStart(2,'0'));
+ expect(first.numbers).not.toContain(first.bonus_prediction);
+ expect(first.bonus_is_ticket_selection).toBe(false);
+ expect(first.bonus_prediction_created_at).toBeTruthy();
+ await expect(page.locator('.picker-disclaimer')).toContainText('cannot be selected');
+ await expect(page.locator('#pickerShare')).toBeVisible();
+ await expect(page.locator('#pickerGenerate')).toHaveCount(0);
+});
+test('premium quick search and navigation work on mobile and keyboard',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ await page.locator('#openQuickNav').click();
+ await expect(page.locator('#quickNav')).toBeVisible();
+ await page.locator('#quickSearch').fill('evidence');
+ await expect(page.locator('#quickCommands button[data-jump="evidence"]')).toBeVisible();
+ await expect(page.locator('#quickCommands button[data-jump="archive"]')).toBeHidden();
+ await page.locator('#quickCommands button[data-jump="evidence"]').click();
+ await expect(page.locator('#quickNav')).not.toBeVisible();
+ await expect(page).toHaveURL(/#evidence/);
+ await page.keyboard.press('Control+k');
+ await expect(page.locator('#quickNav')).toBeVisible();
+ await page.keyboard.press('Escape');
+ await expect(page.locator('#quickNav')).not.toBeVisible();
+ const sizes=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,viewport:innerWidth}));
+ expect(sizes.doc).toBeLessThanOrEqual(sizes.viewport+1);
+ await page.evaluate(()=>scrollTo(0,650));
+ await expect(page.locator('#backToTop')).toHaveClass(/visible/);
+ await page.locator('#backToTop').click();
+ await expect.poll(()=>page.evaluate(()=>scrollY)).toBeLessThan(15);
+});
