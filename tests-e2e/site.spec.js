@@ -1,0 +1,52 @@
+const {test,expect}=require('@playwright/test');
+test('latest results and scorecard load from validated data',async({page})=>{
+ await page.goto('/');
+ await expect(page.locator('#latestDraw')).toContainText('2632');
+ await expect(page.locator('#drawCount')).toHaveText('53');
+ await expect(page.locator('#modelVerified')).toHaveText('53');
+ await expect(page.locator('#modelBacktests')).toHaveText('23');
+ await expect(page.locator('#modelLiveDraws')).toHaveText('0');
+ await expect(page.locator('#frequencyGrid button')).toHaveCount(40);
+ await expect(page.locator('#modelAdaptive .model-balls .ball')).toHaveCount(6);
+ await expect(page.locator('#modelRandom .model-balls .ball')).toHaveCount(6);
+ await expect(page.locator('#modelLedgerRows tr')).toHaveCount(2);
+ await expect(page.locator('#modelLedgerRows')).toContainText('Awaiting result');
+});
+test('number picker changes modes and copies selections',async({page})=>{
+ await page.goto('/');
+ await expect(page.locator('#pickerBalls .ball')).toHaveCount(6);
+ await page.locator('#pickerMode').selectOption('balance');
+ await page.locator('#pickerGenerate').click();
+ const vals=await page.locator('#pickerBalls .ball').allTextContents();
+ const nums=vals.map(Number);
+ expect(new Set(nums).size).toBe(6);
+ expect(nums.filter(n=>n%2===1).length).toBe(3);
+ await page.locator('#pickerMode').selectOption('frequency');
+ await expect(page.locator('#pickerStatus')).toContainText('53 stored draws');
+});
+test('archive search filters and inspect number frequencies',async({page})=>{
+ await page.goto('/');
+ await page.locator('#searchDraws').fill('2620');
+ await expect(page.locator('#archiveCount')).toContainText('1 of 1');
+ await page.locator('#searchDraws').fill('');
+ await page.locator('#weekdayFilter').selectOption('3');
+ await expect(page.locator('#archiveCount')).toContainText('matching records');
+ await page.locator('#weekdayFilter').selectOption('all');
+ await page.locator('#orderFilter').selectOption('oldest');
+ await page.locator('#showMore').click();
+ await expect(page.locator('#archiveCount')).toContainText('37 of 53');
+ await page.locator('#frequencyGrid button[data-number="7"]').click();
+ await expect(page.locator('#numberDetail')).toContainText('Number 7 appeared');
+});
+test('mobile navigation and touch targets at 390 pixels',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ const menu=page.locator('#menuToggle');
+ await expect(menu).toBeVisible();
+ await expect(page.locator('#mobileNav')).toBeHidden();
+ await menu.click();
+ await expect(page.locator('#mobileNav')).toBeVisible();
+ await page.locator('#mobileNav a[href="#predictions"]').click();
+ await expect(page.locator('#mobileNav')).toBeHidden();
+ await expect(page.locator('#modelVerified')).toHaveText('53');
+});
