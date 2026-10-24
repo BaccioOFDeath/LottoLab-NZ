@@ -6,6 +6,7 @@ on:
       - 'index.html'
       - 'app.js'
       - 'model-view.js'
+      - 'research-lab.js'
       - 'picker.js'
       - 'styles.css'
       - 'data/**'
