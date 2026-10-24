@@ -36,3 +36,18 @@ To test: GitHub → Actions → Verify Lotto results → Run workflow, inspect t
 
 ## Disclaimer
 This website is independent of Lotto NZ and not a ticket checker or gambling service. Check winning numbers and claims directly with Lotto NZ. Historical results do not change independent future-draw probabilities.
+
+
+## Lotto-style UI redesign (October 2026)
+Redesigned the responsive public homepage using `index.html`, `styles.css`, `app.js` and `favicon.svg`. It now separates a familiar Lotto-style latest-results experience from the optional number-analysis and historical archive sections. The UI explicitly shows that data coverage is partial and distinguishes two-source cross-checked records from older seed entries. The redesign is committed, but the separate CSS/JS files need successful GitHub Pages deployment and browser verification before this release is considered fully operational.
+
+## Research findings and limitations
+- Lotto first drew on 1 August 1987; the independently cited first draw is 4, 8, 16, 29, 32, 40 (bonus 30). **Historical first-draw record not added to the analysis archive**, because mixed-era data would require rules-aware filters and verified contiguous coverage.
+- Strike launched in 1993, Powerball in 2001. Powerball expanded from 10 to 14 numbers for the 16 September 2026 draw; analyses must partition rules eras.
+- lottodraw.co.nz archive explicitly begins in December 2018, not in 1987.
+- An independently operated archive lists years dating to 1987, but completeness, rights and accuracy are not yet established.
+- A public GitHub project `ricmagno/Lotto_NZ` documents an Excel-based past results import script; it is research material, **not** confirmed complete or legally reusable historical data.
+- We must not infer missing draw results, invent records, or describe this sample as a complete 1987–present dataset.
+
+## Data intake milestone
+Obtain permission for reliable historical results, audit all current seed data, import back history with provenance, compare against multiple independently published sources, then add versioned game rules, completeness checks and regression tests. Only after this milestone should the redesign be called production-ready.
