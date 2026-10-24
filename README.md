@@ -7,7 +7,7 @@ Independent New Zealand Lotto historical results, number selection experiments a
 ## What is working
 
 - Mobile-friendly Lotto-style latest results, archive search, day/period filters, 40-ball heat map, number pairs and CSV export
-- Random number picker, balanced selection and experimental frequency-weighted picker
+- Exactly 20 locked pre-draw Lotto selections per draw (10 experimental + 10 random control); no unlimited client-side number generation
 - Separate Powerball rule eras (10-number pool before September 2026, 14-number pool beginning 16 September 2026)
 - A public **Prediction & Performance** centre with adaptive-frequency and random-baseline models
 - Prospective six-number + Powerball selections written and timestamped **before** a future draw, followed by scoring against verified results
@@ -112,3 +112,21 @@ The website now presents purple **six main numbers**, a **gold Bonus ball** and 
 - Contemporary UI patterns implemented: on-screen Ctrl/Cmd+K search, keyboard shortcuts, accessible focus rings, skip link, toast feedback, scroll progress, back-to-top, subtle hero animation with reduced-motion override, improved mobile spacing and three color-coded ball styles.
 - See `DESIGN_RESEARCH.md` for a curated ten-site UX benchmark and decisions. These are not claims about an objective top-ten ranking.
 - Nine or more browser integration tests (depending on revision) validate line integrity and mobile layout. Use GitHub Actions logs for actual deployment results, not configuration alone.
+
+
+## Number Universe: touch-responsive interactive research experience
+
+The **Number Universe** is a source-backed, touch-responsive 40-ball Canvas 2D visualisation at [`#universe`](https://baccioofdeath.github.io/LottoLab-NZ/#universe). Users can touch or click a number to inspect real appearance counts, the observed rate, difference from the six-in-forty expected frequency, and its most common co-appearance with another number.
+
+- **Finger feedback across the site:** one short lavender/pink/gold ripple and three fading motes per touch. Native scrolling is never prevented; overlays have `pointer-events: none`.
+- **Lightweight number motion:** the visible 40-ball field responds to nearby finger movement and settles back to its positions. Drawing runs at approximately 30fps only while the section is visible, with device pixel ratio capped at 2. No WebGL, autoplay media or heavy animation dependencies.
+- **Historical connection view:** optionally display only actual co-occurrence links calculated from the currently filtered archive. This is *not* a prediction or draw-machine network.
+- **Deep links from results:** tapping a latest-result main Lotto ball opens its corresponding history in the Number Universe.
+- **Accessible fallback:** an ordinary number selector (1–40), labeled inspector and keyboard navigation work without touch or animation.
+- **Motion toggle:** visitors can disable motion. Reduced-motion and data-saving preferences automatically default to still visuals.
+- **Independent data:** uses the same shared `window.lottoLabAnalysisDraws` as the verified Number Lab; analysis filters recompute all 40 counts without changing locked predictions.
+- **Responsive:** supports an iPhone-width 390px viewport without horizontal overflow. Tested in GitHub Actions using a touch-enabled mobile Chromium context and normal desktop tests. Tests cover history counts, touch reactions, original locked lines, scroll safety, motion-off and accessibility.
+
+Research benchmark: [2026 Webby Best UX winners](https://winners.webbyawards.com/winners/websites-and-mobile-sites/features-design/best-user-experience), [2026 Webby Best UI winners](https://winners.webbyawards.com/winners/websites-and-mobile-sites/features-design/best-user-interface), [Awwwards/FWA interaction teardowns](https://rickcreates.com/), and [web.dev accessible motion](https://web.dev/learn/design/accessibility). The design applies general interaction principles and does not copy third-party identities.
+
+**Important:** Historical results and ball-pair frequencies cannot reliably predict a fair draw. LottoLab still lacks a complete 1987–present archive, and pre-draw scoring must be observed through a real future draw.
