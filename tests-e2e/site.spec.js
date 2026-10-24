@@ -405,5 +405,9 @@ test('data provider failure is explained instead of leaving an infinite loading 
  await page.goto('/');
  await expect(page.locator('#dataState')).toHaveText('Archive unavailable');
  await expect(page.locator('#archiveList')).toContainText('Unable to load archived draw data');
- await expect(page.locator('#pickerCount')).toHaveText('Selections not ready');
+ await expect(page.locator('#latestDate')).toContainText('temporarily unavailable');
+ await expect(page.locator('#frequencyGrid')).toContainText('Number analysis is unavailable');
+ await expect(page.locator('#universeDataStatus')).toContainText('temporarily unavailable');
+ await expect(page.locator('#evidenceVerdict')).toContainText('temporarily unavailable');
+ await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked'); // public picks are independent of archived results
 });
