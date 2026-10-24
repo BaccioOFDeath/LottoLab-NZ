@@ -1,12 +1,13 @@
 const entries=require('../data/draws.json');
 const verified=entries.filter(r=>r.verification==='two-source'&&new Set(r.sources||[]).size>=2).length;
+const report=require('../data/model-performance.json');
 const {test,expect}=require('@playwright/test');
 test('latest results and scorecard load from validated data',async({page})=>{
  await page.goto('/');
  await expect(page.locator('#latestDraw')).toContainText(String(entries[0].draw));
  await expect(page.locator('#drawCount')).toHaveText(String(entries.length));
- await expect(page.locator('#modelVerified')).toHaveText(String(verified));
- await expect(page.locator('#modelBacktests')).toHaveText(String(Math.max(0,verified-30)));
+ await expect(page.locator('#modelVerified')).toHaveText(String(report.verified_draw_count));
+ await expect(page.locator('#modelBacktests')).toHaveText(String(report.backtest_draws));
  await expect(page.locator('#modelLiveDraws')).toHaveText(/^\d+$/);
  await expect(page.locator('#frequencyGrid button')).toHaveCount(40);
  await expect(page.locator('#modelAdaptive .model-balls .ball')).toHaveCount(6);
