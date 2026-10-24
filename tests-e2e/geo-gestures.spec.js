@@ -11,9 +11,13 @@ test('two-finger pinch zooms around fingers, allows two-finger pan and respects 
  const data=await page.evaluate(()=>{
   const stage=document.getElementById('geoMapStage');
   const rect=stage.getBoundingClientRect(),startX=rect.left+rect.width*.36,startY=rect.top+rect.height*.36;
-  function touch(id,x,y){return new Touch({identifier:id,target:stage,clientX:x,clientY:y,pageX:x+scrollX,pageY:y+scrollY});}
+  function touch(id,x,y){return {identifier:id,target:stage,clientX:x,clientY:y,pageX:x+scrollX,pageY:y+scrollY};}
   function send(type,pts){const ts=pts.map(p=>touch(...p));
-   const ev=new TouchEvent(type,{touches:ts,targetTouches:ts,changedTouches:ts,bubbles:true,cancelable:true});
+   // WebKit intentionally restricts synthetic Touch/TouchEvent constructors.
+   // Dispatch equivalent touches on a standard event to validate map handlers
+   // while real iPhone hardware testing remains a separate QA step.
+   const ev=new Event(type,{bubbles:true,cancelable:true});
+   Object.defineProperties(ev,{touches:{value:ts},targetTouches:{value:ts},changedTouches:{value:ts}});
    stage.dispatchEvent(ev);return ev.defaultPrevented;
   }
   const normalComputed=getComputedStyle(stage).touchAction;
@@ -52,8 +56,9 @@ test('Move mode supports one-finger dragging only when opted in, and reset resto
  const state=await page.evaluate(()=>{
   const stage=document.getElementById('geoMapStage'),rect=stage.getBoundingClientRect();
   const x=rect.left+rect.width/2,y=rect.top+rect.height/2;
-  const t=(xx,yy)=>new Touch({identifier:9,target:stage,clientX:xx,clientY:yy});
-  const event=(type,touches)=>{let ev=new TouchEvent(type,{touches,targetTouches:touches,changedTouches:touches,cancelable:true,bubbles:true});
+  const t=(xx,yy)=>({identifier:9,target:stage,clientX:xx,clientY:yy});
+  const event=(type,touches)=>{let ev=new Event(type,{cancelable:true,bubbles:true});
+   Object.defineProperties(ev,{touches:{value:touches},targetTouches:{value:touches},changedTouches:{value:touches}});
    stage.dispatchEvent(ev);return ev.defaultPrevented;};
   const a=event('touchstart',[t(x,y)]);
   const b=event('touchmove',[t(x+40,y+22)]);
