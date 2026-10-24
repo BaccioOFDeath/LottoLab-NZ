@@ -9,7 +9,7 @@ const $=id=>document.getElementById(id);
 const svgNS='http://www.w3.org/2000/svg';
 const stage=$('geoMapStage'),svg=$('geoOutline'),coast=$('geoCoast'),pins=$('geoPins'),canvas=$('geoWeather'),ctx=canvas?.getContext('2d');
 if(!stage||!svg||!ctx)return;
-let all=[],filtered=[],countries=null,dates=[],index=0,selected='',layer='heat',scale=1,playTimer=0,scene=null;
+let all=[],filtered=[],countries=null,dates=[],index=0,selected='',layer='heat',scale=1,panX=0,panY=0,moveMode=false,pinch=null,touchDrag=null,mouseDrag=null,playTimer=0,scene=null;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const state={game:'all',tier:'all',channel:'retail',region:'all'};
 const bounds={west:165.4,east:179.7,north:-33.6,south:-48.1};
@@ -216,7 +216,149 @@ function play(){
  },950);
  update();
 }
-function resize(){if(all.length)drawHeat(grouped());}
+function resize(){if(all.length){drawHeat(grouped());applyView();}}
+/* Pinch-and-zoom engine: translate + scale anchored at the gesture centroid.
+ * Default single-finger vertical gestures still scroll the webpage.
+ * Two-finger gestures stay inside the map only; no global gesture interception.
+ */
+const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
+const dims=()=>({w:stage.clientWidth,h:stage.clientHeight});
+function updateHint(){
+ const hint=$('geoGestureHint');
+ if(!hint)return;
+ hint.textContent=moveMode?'Move mode · drag with one finger · tap Move again to scroll page':
+  scale>1.01?'Pinch or drag with two fingers · single finger scrolls page':
+  'Pinch with two fingers · drag with two fingers to move';
+}
+function applyView(nextScale=scale,nextX=panX,nextY=panY){
+ if(!scene)return;
+ const {w,h}=dims();
+ scale=clamp(nextScale,1,4);
+ if(scale<=1.0001){scale=1;panX=0;panY=0;}
+ else{
+  panX=clamp(nextX,-w*(scale-1)/2,w*(scale-1)/2);
+  panY=clamp(nextY,-h*(scale-1)/2,h*(scale-1)/2);
+ }
+ // No origin ambiguity: translate is applied AFTER scaling around the centre.
+ scene.style.transform='translate3d('+panX.toFixed(2)+'px,'+panY.toFixed(2)+'px,0) scale('+Number(scale.toFixed(3))+')';
+ stage.dataset.zoom=String(Number(scale.toFixed(3)));
+ $('geoZoomValue').textContent=scale.toFixed(1)+'×';
+ $('geoZoomIn').disabled=scale>=3.999;
+ $('geoZoomOut').disabled=scale<=1.001;
+ $('geoZoomReset').disabled=scale===1&&Math.abs(panX)<.1&&Math.abs(panY)<.1&&!moveMode;
+ stage.classList.toggle('geo-is-zoomed',scale>1.01);
+ updateHint();
+}
+function zoomAt(nextScale,x,y){
+ const {w,h}=dims();
+ const next=clamp(nextScale,1,4),ratio=next/scale;
+ const focalX=Number.isFinite(x)?x:w/2,focalY=Number.isFinite(y)?y:h/2;
+ const nx=(focalX-w/2)-(focalX-w/2-panX)*ratio;
+ const ny=(focalY-h/2)-(focalY-h/2-panY)*ratio;
+ applyView(next,nx,ny);
+}
+const inStage=(touch)=>{
+ const rect=stage.getBoundingClientRect();
+ return {x:touch.clientX-rect.left,y:touch.clientY-rect.top};
+};
+function twoFinger(touches){
+ const a=inStage(touches[0]),b=inStage(touches[1]);
+ return {x:(a.x+b.x)/2,y:(a.y+b.y)/2,dist:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y))};
+}
+function setMoveMode(on){
+ moveMode=!!on;
+ stage.classList.toggle('geo-move-on',moveMode);
+ $('geoMove').setAttribute('aria-pressed',String(moveMode));
+ $('geoMove').setAttribute('aria-label',moveMode?'Disable one-finger map dragging':'Enable one-finger map dragging');
+ $('geoMove').textContent=moveMode?'✓ Moving':'✋ Move';
+ touchDrag=null;
+ applyView();
+}
+function gestures(){
+ // Touch listeners are deliberately local. Never set body touch-action:none
+ // or disable the user's browser pinch/zoom outside the actual map.
+ stage.addEventListener('touchstart',e=>{
+  if(e.touches.length>=2){
+   if(e.cancelable)e.preventDefault();
+   const p=twoFinger(e.touches);
+   pinch={scale,panX,panY,midX:p.x,midY:p.y,dist:p.dist};
+   touchDrag=null;
+   stage.classList.add('geo-gesture-active');
+  }else if(e.touches.length===1&&moveMode){
+   const p=inStage(e.touches[0]);
+   touchDrag={id:e.touches[0].identifier,x:p.x,y:p.y,panX,panY};
+  }
+ },{passive:false});
+ stage.addEventListener('touchmove',e=>{
+  if(e.touches.length>=2){
+   if(e.cancelable)e.preventDefault();
+   if(!pinch){const p=twoFinger(e.touches);pinch={scale,panX,panY,midX:p.x,midY:p.y,dist:p.dist};}
+   const p=twoFinger(e.touches);
+   const next=clamp(pinch.scale*(p.dist/pinch.dist),1,4),ratio=next/pinch.scale;
+   const {w,h}=dims();
+   const nx=(p.x-w/2)-(pinch.midX-w/2-pinch.panX)*ratio;
+   const ny=(p.y-h/2)-(pinch.midY-h/2-pinch.panY)*ratio;
+   applyView(next,nx,ny);
+  }else if(e.touches.length===1&&moveMode&&touchDrag&&!pinch){
+   const touch=e.touches[0];
+   if(touch.identifier!==touchDrag.id)return;
+   if(e.cancelable)e.preventDefault();
+   const p=inStage(touch);
+   applyView(scale,touchDrag.panX+p.x-touchDrag.x,touchDrag.panY+p.y-touchDrag.y);
+  }
+ },{passive:false});
+ const finish=e=>{
+  if(e.touches.length<2){pinch=null;stage.classList.remove('geo-gesture-active');}
+  if(e.touches.length===0)touchDrag=null;
+  // If one finger remains after a pinch, require a fresh touch for move mode:
+  // this prevents the ugly jump between pinch and one-finger dragging.
+ };
+ stage.addEventListener('touchend',finish,{passive:true});
+ stage.addEventListener('touchcancel',()=>{pinch=null;touchDrag=null;stage.classList.remove('geo-gesture-active');},{passive:true});
+ // iOS Safari may fire proprietary gesture events. Suppress *only inside map*,
+ // letting the touch handlers implement the real focal-point transform.
+ stage.addEventListener('gesturestart',e=>{if(e.cancelable)e.preventDefault();},{passive:false});
+ stage.addEventListener('gesturechange',e=>{if(e.cancelable)e.preventDefault();},{passive:false});
+ // Trackpad pinch sends ctrl+wheel on many browsers. Normal wheel still scrolls page.
+ stage.addEventListener('wheel',e=>{
+  if(!e.ctrlKey&&!e.metaKey)return;
+  if(e.cancelable)e.preventDefault();
+  const p=inStage(e);
+  zoomAt(scale*Math.exp(-e.deltaY*.01),p.x,p.y);
+ },{passive:false});
+ // Desktop click+drag (only when zoomed). Do not steal clicks from hotspot pins.
+ stage.addEventListener('pointerdown',e=>{
+  if(e.pointerType!=='mouse'||e.button!==0||scale<=1||e.target.closest('button'))return;
+  mouseDrag={id:e.pointerId,x:e.clientX,y:e.clientY,panX,panY};
+  stage.setPointerCapture(e.pointerId);
+  stage.classList.add('geo-gesture-active');
+ });
+ stage.addEventListener('pointermove',e=>{
+  if(!mouseDrag||e.pointerId!==mouseDrag.id)return;
+  applyView(scale,mouseDrag.panX+e.clientX-mouseDrag.x,mouseDrag.panY+e.clientY-mouseDrag.y);
+ });
+ const endMouse=e=>{if(mouseDrag&&e.pointerId===mouseDrag.id){mouseDrag=null;stage.classList.remove('geo-gesture-active');if(stage.hasPointerCapture(e.pointerId))stage.releasePointerCapture(e.pointerId);}};
+ stage.addEventListener('pointerup',endMouse);
+ stage.addEventListener('pointercancel',endMouse);
+ $('geoMove').addEventListener('click',()=>setMoveMode(!moveMode));
+ $('geoZoomIn').addEventListener('click',()=>zoomAt(scale+.5));
+ $('geoZoomOut').addEventListener('click',()=>zoomAt(scale-.5));
+ $('geoZoomReset').addEventListener('click',()=>{setMoveMode(false);applyView(1,0,0);});
+ // One-finger double-tap on the background zooms without stealing hotspot taps.
+ let lastTap=null;
+ stage.addEventListener('touchend',e=>{
+  if(e.touches.length||e.changedTouches.length!==1||pinch||moveMode)return;
+  if(e.target.closest('button'))return;
+  const p=inStage(e.changedTouches[0]),now=performance.now();
+  if(lastTap&&now-lastTap.time<320&&Math.hypot(p.x-lastTap.x,p.y-lastTap.y)<40){
+   zoomAt(scale>=3?1:scale*1.65,p.x,p.y);
+   lastTap=null;
+   if(e.cancelable)e.preventDefault();
+  }else lastTap={...p,time:now};
+ },{passive:false});
+ applyView(1,0,0);
+}
+
 function initialise(){
  $('geoGame').addEventListener('change',e=>{state.game=e.target.value;selected='';update();});
  $('geoTier').addEventListener('change',e=>{state.tier=e.target.value;selected='';update();});
@@ -227,11 +369,7 @@ function initialise(){
  $('geoRegions').addEventListener('click',()=>setLayer('regions'));
  $('geoDateSlider').addEventListener('input',e=>{stop();index=Number(e.target.value);selected='';update();});
  $('geoPlay').addEventListener('click',play);
- let zoom=1;
- const setZoom=v=>{zoom=Math.max(1,Math.min(2,v));scene.style.transform='scale('+zoom+')';$('geoZoomIn').disabled=zoom>=2;$('geoZoomOut').disabled=zoom<=1;};
- $('geoZoomIn').addEventListener('click',()=>setZoom(+(zoom+.25).toFixed(2)));
- $('geoZoomOut').addEventListener('click',()=>setZoom(+(zoom-.25).toFixed(2)));
- $('geoZoomReset').addEventListener('click',()=>setZoom(1));
+ gestures();
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
  if(reduce){$('geoPlay').title='Timeline playback available on request; animation is not automatic.';}
  if('ResizeObserver'in window)new ResizeObserver(resize).observe(stage);
