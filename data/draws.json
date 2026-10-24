@@ -15,7 +15,8 @@
     "verification": "two-source",
     "sources": [
       "https://www.lottodraw.co.nz/lotto/results",
-      "https://dashtickets.nz/lotto-results/"
+      "https://dashtickets.nz/lotto-results/",
+      "https://www.lottodraw.co.nz/lotto/results-october-24-2026"
     ]
   },
   {
@@ -33,7 +34,8 @@
     "powerball": 1,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2631"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2631",
+      "https://www.lottodraw.co.nz/lotto/results-october-21-2026"
     ]
   },
   {
@@ -51,7 +53,8 @@
     "powerball": 3,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2630"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2630",
+      "https://www.lottodraw.co.nz/lotto/results-october-17-2026"
     ]
   },
   {
@@ -69,7 +72,8 @@
     "powerball": 4,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2629"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2629",
+      "https://www.lottodraw.co.nz/lotto/results-october-14-2026"
     ]
   },
   {
@@ -87,7 +91,8 @@
     "powerball": 7,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2628"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2628",
+      "https://www.lottodraw.co.nz/lotto/results-october-10-2026"
     ]
   },
   {
@@ -105,7 +110,8 @@
     "powerball": 13,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2627"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2627",
+      "https://www.lottodraw.co.nz/lotto/results-october-7-2026"
     ]
   },
   {
@@ -123,7 +129,8 @@
     "powerball": 1,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2626"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2626",
+      "https://www.lottodraw.co.nz/lotto/results-october-3-2026"
     ]
   },
   {
@@ -141,7 +148,8 @@
     "powerball": 7,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2625"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2625",
+      "https://www.lottodraw.co.nz/lotto/results-september-30-2026"
     ]
   },
   {
@@ -159,7 +167,8 @@
     "powerball": 7,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2624"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2624",
+      "https://www.lottodraw.co.nz/lotto/results-september-26-2026"
     ]
   },
   {
@@ -177,7 +186,8 @@
     "powerball": 12,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2623"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2623",
+      "https://www.lottodraw.co.nz/lotto/results-september-23-2026"
     ]
   },
   {
@@ -195,7 +205,8 @@
     "powerball": 14,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2622"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2622",
+      "https://www.lottodraw.co.nz/lotto/results-september-19-2026"
     ]
   },
   {
@@ -213,7 +224,8 @@
     "powerball": 11,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2621"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2621",
+      "https://www.lottodraw.co.nz/lotto/results-september-16-2026"
     ]
   },
   {
@@ -231,7 +243,8 @@
     "powerball": 7,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2620"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2620",
+      "https://www.lottodraw.co.nz/lotto/results-september-12-2026"
     ]
   },
   {
@@ -249,7 +262,8 @@
     "powerball": 3,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2619"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2619",
+      "https://www.lottodraw.co.nz/lotto/results-september-9-2026"
     ]
   },
   {
@@ -267,7 +281,8 @@
     "powerball": 7,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2618"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2618",
+      "https://www.lottodraw.co.nz/lotto/results-september-5-2026"
     ]
   },
   {
@@ -285,7 +300,8 @@
     "powerball": 3,
     "verification": "two-source",
     "sources": [
-      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2617"
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2617",
+      "https://www.lottodraw.co.nz/lotto/results-september-2-2026"
     ]
   },
   {
