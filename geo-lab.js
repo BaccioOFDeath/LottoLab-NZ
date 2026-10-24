@@ -267,6 +267,9 @@ function twoFinger(touches){
 }
 function setMoveMode(on){
  moveMode=!!on;
+ // Moving an unzoomed map has no effect. Entering Move mode from 1x
+ // immediately zooms slightly so dragging does something useful.
+ if(moveMode&&scale<=1.001)zoomAt(1.7);
  stage.classList.toggle('geo-move-on',moveMode);
  $('geoMove').setAttribute('aria-pressed',String(moveMode));
  $('geoMove').setAttribute('aria-label',moveMode?'Disable one-finger map dragging':'Enable one-finger map dragging');
