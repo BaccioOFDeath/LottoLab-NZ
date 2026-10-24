@@ -576,3 +576,8 @@ body{background:var(--bg)}
 .geo-month-col small{font-size:9px;font-weight:800}
 @media(max-width:700px){.geo-quality-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.geo-research-body{padding:0 13px 15px}.geo-monthly-bars{gap:3px}.geo-month-col small{font-size:8px}}
 @media(prefers-reduced-motion:reduce){#geoRetailBar,#geoOnlineBar,.geo-month-fill{transition:none!important}}
+
+/* Safari QC: map transformations must follow fingers immediately.
+   A lingering .25s transform transition made Reset report 1× while the
+   visible map was still enlarged, producing misleading giant markers. */
+.geo-map-stage .geo-scene{transition:none!important}
