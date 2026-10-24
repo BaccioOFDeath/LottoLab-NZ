@@ -16,16 +16,18 @@
 | Statistical analysis | Multiple repetitive data-heavy sections | Advanced number pairs, Powerball chart, Evidence Lab detail, model methods and full prediction history use expandable disclosure |
 | Prediction display | Twenty almost identical cards consumed excessive mobile scrolling | Four-line preview with accessible Show all 20 / Show fewer lines, preserving 10 research and 10 random-control selections |
 | Research copy | Repeated long disclaimers | Shorter section subtitles and clear distinction between playable Powerball and non-playable Bonus research guess |
+| Data outages | Parts of the interface could remain stuck on “Loading…” after a failed historical-results request | Explicit unavailable states in the results, statistics, archive and Universe; separately published predictions remain accessible |
 | Model preview | Gold Bonus missing in model comparison | Added color-coded Bonus and Powerball balls |
 | Design | Inconsistent accents and box styling | One colour language: purple Lotto, pink Powerball, amber Bonus, teal Strike, blue insights and teal evidence; consistent cards and focus styling |
 | Cross-device caching | Older iPhone/iPad assets possible | Bumped version of every JS/CSS asset in `index.html` |
 
 ## Validation
 
-- **GitHub Actions:** 20 Playwright browser integration tests passed on `main` after the compact-layout changes; see [Browser regression suite](https://github.com/BaccioOFDeath/LottoLab-NZ/actions/workflows/e2e.yml).
+- **GitHub Actions:** 23 Playwright browser integration tests passed on `main` after the compact-layout changes; see [Browser regression suite](https://github.com/BaccioOFDeath/LottoLab-NZ/actions/workflows/e2e.yml).
 - **Independent live-browser QC:** verified actual expansion and destinations of Powerball and Strike cards, source-backed Number Universe, optional advanced research controls, 4-to-20 prediction expansion, CSV/export controls, responsive layout and navigation.
 - **Static code audit:** 123 unique DOM IDs; no duplicate IDs; all 24 local anchor destinations valid; 7 properly paired `details` / `summary`; six JavaScript files parse without errors; no anchors missing an `href`.
 - **Mobile checks:** a 390px mobile viewport without horizontal overflow, touch and keyboard interaction checks, reduced-motion support and native disclosure controls.
+- **Deeper actions:** mocked clipboard + native share confirm six Lotto numbers plus Powerball only (never research Bonus); downloaded CSV contains the complete selected result set rather than just the first page; simulated HTTP 503 validates an informative fallback while the independently stored 20 selections remain accessible.
 - **Integrity:** the underlying twenty published Lotto lines and their timestamps were **not** changed. Display filters and visual touches do not generate new predictions.
 
 ### Behavioural QA checklist
