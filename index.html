@@ -9,13 +9,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=20261025-geo3-pinch-safari">
+<link rel="stylesheet" href="./styles.css?v=20261025-geo4-research">
 <script defer src="./app.js?v=20261025-geo1"></script><script defer src="./picker.js?v=20261025-geo1"></script>
 <script defer src="./model-view.js?v=20261025-geo1"></script>
 <script defer src="./research-lab.js?v=20261025-geo1"></script>
 <script defer src="./experience.js?v=20261025-geo1"></script>
 <script defer src="./number-universe.js?v=20261025-geo1"></script>
-<script defer src="./geo-lab.js?v=20261025-geo3-pinch-safari"></script>
+<script defer src="./geo-lab.js?v=20261025-geo4-research"></script>
 </head><body><a href="#results" class="skip-link">Skip to latest results</a><div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 <div class="topline"><div class="shell topline-inner"><span><span class="tiny-led"></span>Independent NZ Lotto research</span><span>Not affiliated with Lotto NZ · <a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official results ↗</a></span></div></div>
 <header class="header"><div class="shell header-inner">
@@ -133,6 +133,17 @@
 </aside>
 </div>
 <div class="geo-footer"><p><strong>Location quality matters.</strong> Retail points represent towns, not shop doors. MyLotto locations show reported winner areas, not points of sale. Sources cover only selected results.</p><a href="https://mylotto.co.nz/media-releases" target="_blank" rel="noopener noreferrer">Lotto NZ winning-location reports ↗</a></div>
+<details class="geo-research" id="geoResearch"><summary><span><strong>Location research & source quality</strong><small>Monthly reports, location precision and online/retail exposure</small></span><span class="geo-research-chevron" aria-hidden="true">⌄</span></summary>
+<div class="geo-research-body">
+<div class="geo-quality-grid">
+<div><span>Independent publication links</span><strong id="geoSources">—</strong><small>Source articles for this selection</small></div>
+<div><span>Town-level ticket references</span><strong id="geoCityPrecision">—</strong><small>Not shop-level coordinates</small></div>
+<div><span>Region-only tickets</span><strong id="geoRegionPrecision">—</strong><small>Broad geography; avoid exact conclusions</small></div>
+<div><span>Sample report dates</span><strong id="geoReportDates">—</strong><small>No complete winner census available</small></div>
+</div>
+<div class="geo-mix-card"><div><h3>Retail vs MyLotto winner areas</h3><p>Shares of published ticket records in your selected sample, not ticket-sales market share.</p></div><div class="geo-mix-track" aria-label="Share of reported retail and online winning tickets"><span id="geoRetailBar"></span><span id="geoOnlineBar"></span></div><div class="geo-mix-labels"><span id="geoRetailShare">Retail —</span><span id="geoOnlineShare">MyLotto —</span></div></div>
+<div class="geo-monthly"><h3>Monthly reported tickets · last 12 months</h3><p>Dates without sourced entries show no observations in this <strong>partial sample</strong> — not that no one won.</p><div id="geoMonthlyBars" class="geo-monthly-bars" aria-label="Monthly counts of sourced winning tickets"></div></div>
+</div></details>
 </section>
 <div class="section-title insights-heading" id="insights"><div><p class="eyebrow violet">THE NUMBER LAB</p><h2>Explore the numbers <span class="shine purple">✦</span></h2><p>Choose a period and uncover what actually happened.</p></div><div class="controls"><label for="windowFilter">Compare draws</label><select id="windowFilter"><option value="all">All stored draws</option><option value="10">Last 10</option><option value="25">Last 25</option><option value="50">Last 50</option><option value="100">Last 100</option></select></div></div>
 <section class="analysis-context context-compact" aria-label="Comparable draw conditions">
