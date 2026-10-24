@@ -465,7 +465,7 @@ test('Geo weather layers, map zoom and historical time replay are real interacti
  await page.locator('#geoRegions').click();
  await expect(page.locator('#geoRegions')).toHaveAttribute('aria-pressed','true');
  await page.locator('#geoZoomIn').click();
- await expect(page.locator('#geoScene')).toHaveAttribute('style',/scale\(1.25\)/);
+ await expect(page.locator('#geoScene')).toHaveAttribute('style',/scale\(1.5\)/);
  await page.locator('#geoZoomReset').click();
  await expect(page.locator('#geoScene')).toHaveAttribute('style',/scale\(1\)/);
  const slider=page.locator('#geoDateSlider');
