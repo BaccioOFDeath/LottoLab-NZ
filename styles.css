@@ -510,3 +510,21 @@ body{background:var(--bg)}
 @media(max-width:750px){.geo-main{grid-template-columns:1fr}.geo-side{display:grid;grid-template-columns:1fr 1fr}.geo-detail-card{grid-column:1/-1}.geo-map-card{max-width:600px;width:100%;margin:0 auto}.geo-footer{flex-wrap:wrap}.geo-heading{flex-wrap:wrap}}
 @media(max-width:540px){.geo-heading h2{font-size:30px}.geo-live-pill{font-size:9px}.geo-summary{gap:8px}.geo-summary>div{padding:13px 12px}.geo-summary strong{font-size:25px}.geo-summary span,.geo-summary small{font-size:10px}.geo-filterbar{gap:10px;padding:13px}.geo-filterbar label{font-size:10px}.geo-filterbar select{font-size:11px}.geo-map-card{border-radius:17px;padding:9px}.geo-map-toolbar{align-items:start;gap:7px}.geo-mode-button{padding:8px 7px;font-size:10px}.geo-map-tools button{min-width:29px}.geo-side{grid-template-columns:1fr}.geo-detail-card{grid-column:auto}.geo-footer{padding:13px}.geo-map-key{font-size:9px}.geo-report-top{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.geo-scene,.geo-pin{transition:none!important}}
+
+/* Geo Lab gesture controls: preserve normal vertical Safari scrolling by default.
+   Two fingers pinch/translate inside the map; "Move" opts into single-finger drag.
+   Never disable document zoom or touch gestures outside the Geo map itself. */
+.geo-map-stage{touch-action:pan-y;overscroll-behavior:contain}
+.geo-map-stage.geo-move-on{touch-action:none;cursor:grab}
+.geo-map-stage.geo-gesture-active{cursor:grabbing}
+.geo-map-stage.geo-gesture-active .geo-scene,.geo-map-stage.geo-move-on .geo-scene{transition:none!important}
+.geo-map-stage:not(.geo-move-on).geo-is-zoomed{cursor:grab}
+.geo-map-stage .geo-scene{will-change:transform;transform-origin:center center}
+.geo-gesture-hint{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 20px);z-index:5;pointer-events:none;background:#11122fae;border:1px solid #fff3;border-radius:12px;color:#f4ebff;font-size:10px;font-weight:700;line-height:1.45;text-align:center;padding:8px 11px;backdrop-filter:blur(5px)}
+.geo-map-tools{align-items:center}
+.geo-map-tools #geoMove{min-width:69px;font-size:11px;white-space:nowrap;font-weight:900;padding:0 8px;transition:background .18s,color .18s}
+.geo-map-tools #geoMove[aria-pressed="true"]{background:#5ce5d3;color:#16203b;border-color:#5ce5d3}
+.geo-zoom-value{flex:none;min-width:44px;padding:0 3px;color:#e5d9fb;text-align:center;font-size:11px;font-weight:900;font-variant-numeric:tabular-nums}
+@media(max-width:810px){.geo-map-toolbar{flex-wrap:wrap;gap:10px}.geo-map-tools{width:100%;justify-content:space-between;border-top:1px solid #ffffff22;padding-top:10px}.geo-map-tools button{min-width:37px}.geo-map-tools #geoMove{flex:1;max-width:110px}}
+@media(max-width:390px){.geo-map-tools button{min-width:33px}.geo-gesture-hint{font-size:9px;padding:7px 8px}}
+@media(prefers-reduced-motion:reduce){.geo-map-stage .geo-scene{transition:none!important}}
