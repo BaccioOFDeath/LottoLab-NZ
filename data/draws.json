@@ -419,6 +419,234 @@
     ]
   },
   {
+    "draw": 2610,
+    "date": "2026-08-08",
+    "numbers": [
+      9,
+      13,
+      21,
+      24,
+      25,
+      35
+    ],
+    "bonus": 5,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-8-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2610"
+    ]
+  },
+  {
+    "draw": 2609,
+    "date": "2026-08-05",
+    "numbers": [
+      4,
+      13,
+      16,
+      24,
+      32,
+      37
+    ],
+    "bonus": 38,
+    "powerball": 2,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-5-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2609"
+    ]
+  },
+  {
+    "draw": 2608,
+    "date": "2026-08-01",
+    "numbers": [
+      8,
+      14,
+      15,
+      24,
+      26,
+      30
+    ],
+    "bonus": 7,
+    "powerball": 4,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-1-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2608"
+    ]
+  },
+  {
+    "draw": 2607,
+    "date": "2026-07-29",
+    "numbers": [
+      8,
+      19,
+      21,
+      32,
+      33,
+      35
+    ],
+    "bonus": 17,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-29-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2607"
+    ]
+  },
+  {
+    "draw": 2606,
+    "date": "2026-07-25",
+    "numbers": [
+      1,
+      12,
+      14,
+      18,
+      22,
+      29
+    ],
+    "bonus": 32,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-25-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2606"
+    ]
+  },
+  {
+    "draw": 2605,
+    "date": "2026-07-22",
+    "numbers": [
+      3,
+      18,
+      25,
+      26,
+      30,
+      34
+    ],
+    "bonus": 37,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-22-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2605"
+    ]
+  },
+  {
+    "draw": 2604,
+    "date": "2026-07-18",
+    "numbers": [
+      13,
+      28,
+      30,
+      31,
+      34,
+      35
+    ],
+    "bonus": 10,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-18-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2604"
+    ]
+  },
+  {
+    "draw": 2603,
+    "date": "2026-07-15",
+    "numbers": [
+      6,
+      10,
+      14,
+      19,
+      20,
+      27
+    ],
+    "bonus": 39,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-15-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2603"
+    ]
+  },
+  {
+    "draw": 2602,
+    "date": "2026-07-11",
+    "numbers": [
+      10,
+      21,
+      22,
+      26,
+      37,
+      40
+    ],
+    "bonus": 15,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-11-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2602"
+    ]
+  },
+  {
+    "draw": 2601,
+    "date": "2026-07-08",
+    "numbers": [
+      12,
+      15,
+      27,
+      28,
+      35,
+      40
+    ],
+    "bonus": 9,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-8-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2601"
+    ]
+  },
+  {
+    "draw": 2600,
+    "date": "2026-07-04",
+    "numbers": [
+      2,
+      15,
+      17,
+      18,
+      26,
+      30
+    ],
+    "bonus": 28,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-4-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2600"
+    ]
+  },
+  {
+    "draw": 2599,
+    "date": "2026-07-01",
+    "numbers": [
+      1,
+      7,
+      11,
+      32,
+      35,
+      40
+    ],
+    "bonus": 39,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-1-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2599"
+    ]
+  },
+  {
     "draw": 2534,
     "date": "2025-11-15",
     "numbers": [
