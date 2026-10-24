@@ -149,3 +149,12 @@ The seed covers **48 curated public report rows representing 51 winning tickets*
 **Tests:** `tests/test_geo_data.py` checks public source provenance, point validity, online-versus-retail distinction and historic roll-down classification; Playwright covers weather map, Geo filters, marker details, regional grouping, timeline, 390px mobile layout and source-outage fallback. See [GitHub Actions](https://github.com/BaccioOFDeath/LottoLab-NZ/actions).
 
 This is a geographic visualization of reported winners. Past outcomes do not change the odds of a fair independent draw.
+
+
+### Geo Lab — mobile navigation
+
+The map supports **two-finger pinch-to-zoom (1–4×)** centered on your fingers, plus two-finger dragging. **One finger still scrolls the webpage** by default. Use the **✋ Move** toggle for one-finger map dragging, then tap it again to resume natural scrolling. The **+ / −** buttons and **↺ Reset** provide a precise fallback, and a zoom indicator shows the current level.
+
+The mobile gesture handlers are scoped to the map; they do not globally disable Safari browser pinch/page zoom. New map-gesture regression tests use WebKit Mobile Safari emulation as well as Chromium. Physical iPhone/iPad testing remains a final hardware check.
+
+See [Geo Lab gesture documentation](GEO_LAB.md#pinch-to-zoom-and-map-navigation-iphone-safari--other-browsers) and [browser test runs](https://github.com/BaccioOFDeath/LottoLab-NZ/actions/workflows/e2e.yml).
