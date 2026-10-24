@@ -63,3 +63,23 @@ Playwright tests include a 390-pixel mobile viewport, navigation, number picker,
 ## Responsible use
 
 Results and model selections are for historical research and entertainment. Verify claims with the official Lotto NZ service: https://mylotto.co.nz/. Playing more tickets or following historical patterns does not create a prediction advantage. Play within your means.
+
+
+## Comparable draw conditions / rule-era analysis
+
+The Number Lab has a **Draw conditions & rule changes** section with a rule-era filter for:
+- All known Lotto six-from-forty draws (main-ball probabilities remain comparable).
+- Powerball 1–10 draws before the September 2026 matrix change.
+- Powerball 1–14 draws beginning 16 September 2026.
+
+The frequency-weighted **user number picker** now uses the same selected, like-for-like analysis sample; its Powerball output always uses the currently applicable 1–14 range. Historical frequencies have **no established predictive value**.
+
+`data/draw-context.json` records documented, sourced operational events and optional per-draw machine, ball-set and operator IDs. It **does not** contain guesses: the equipment/operator filters remain disabled until actual assignments with source URLs are supplied. Lotto NZ rotates equipment by documented procedures, so attributing an entire era to one machine would be an error. Avoid personal speculation about draw staff.
+
+Relevant sources:
+- https://nzhistory.govt.nz/lotto-goes-on-sale-for-the-first-time
+- https://www.legislation.govt.nz/regulation/public/2015/0204/latest/whole.html
+- https://www.legislation.govt.nz/secondary-legislation/pco-drafted/2026/51/en/latest/
+- https://www.procurement.govt.nz/about-us/news/procuring-lucky-numbers-and-the-machine-that-runs-them/
+
+To add validated mechanical metadata later, add an object in `by_draw` keyed by draw number with fields such as `machine_id`, `ball_set_id`, `operator_id`, and a public supporting `source` URL. `tests/test_draw_context.py` checks for missing provenance. These fields should support retrospective testing only; actual equipment assignments cannot be forecast before the independent draw.
