@@ -5,6 +5,9 @@ module.exports=defineConfig({
  expect:{timeout:10000},
  retries:1,
  use:{baseURL:'http://127.0.0.1:4173',trace:'retain-on-failure'},
- projects:[{name:'chromium',use:{...devices['Desktop Chrome']}}],
+ projects:[
+ {name:'chromium',use:{...devices['Desktop Chrome']}},
+ {name:'mobile-safari',testMatch:'**/geo-gestures.spec.js',use:{...devices['iPhone 13']}}
+],
  webServer:{command:'python -m http.server 4173 --bind 127.0.0.1',url:'http://127.0.0.1:4173',reuseExistingServer:!process.env.CI,timeout:30000}
 });
