@@ -1,12 +1,16 @@
 name: Verify Lotto results
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/update-results.yml'
+      - 'scripts/update_results.py'
   schedule:
     - cron: '15 12,18 * * 3,6'
 permissions:
   contents: write
 concurrency:
-  group: lotto-results
+  group: lottolab-data-writes
   cancel-in-progress: false
 jobs:
   update:
