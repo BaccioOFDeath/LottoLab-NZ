@@ -25,7 +25,7 @@ test('number picker changes modes and copies selections',async({page})=>{
  expect(new Set(nums).size).toBe(6);
  expect(nums.filter(n=>n%2===1).length).toBe(3);
  await page.locator('#pickerMode').selectOption('frequency');
- await expect(page.locator('#pickerStatus')).toContainText(entries.length+' stored draws');
+ await expect(page.locator('#pickerStatus')).toContainText(entries.length+' comparable stored draws');
 });
 test('archive search filters and inspect number frequencies',async({page})=>{
  await page.goto('/');
@@ -52,4 +52,28 @@ test('mobile navigation and touch targets at 390 pixels',async({page})=>{
  await page.locator('#mobileNav a[href="#predictions"]').click();
  await expect(page.locator('#mobileNav')).toBeHidden();
  await expect(page.locator('#modelVerified')).toHaveText(String(verified));
+});
+test('like-for-like rule-era analysis changes main statistics and Powerball pools',async({page})=>{
+ await page.goto('/');
+ const recent=entries.filter(d=>d.date>='2026-09-16').length;
+ const older=entries.filter(d=>d.date<'2026-09-13').length;
+ await expect(page.locator('#ruleFilter')).toBeVisible();
+ await expect(page.locator('#equipmentFilter')).toBeDisabled();
+ await expect(page.locator('#ballSetFilter')).toBeDisabled();
+ await expect(page.locator('#equipmentCoverage')).toContainText('0 of ');
+ await page.locator('#ruleFilter').selectOption('pb14');
+ await expect(page.locator('#drawCount')).toHaveText(String(recent));
+ await expect(page.locator('#powerPeriod')).toHaveValue('current');
+ await expect(page.locator('#powerRule')).toContainText('PB 1–14');
+ await page.locator('#ruleFilter').selectOption('pb10');
+ await expect(page.locator('#drawCount')).toHaveText(String(older));
+ await expect(page.locator('#powerPeriod')).toHaveValue('previous');
+ await expect(page.locator('#powerRule')).toContainText('PB 1–10');
+ await page.locator('#pickerMode').selectOption('frequency');
+ await expect(page.locator('#pickerStatus')).toContainText(older+' comparable stored draws');
+ await page.locator('#ruleFilter').selectOption('all');
+ await expect(page.locator('#drawCount')).toHaveText(String(entries.length));
+ await expect(page.locator('#pickerStatus')).toContainText(entries.length+' comparable stored draws');
+ await page.locator('.context-history summary').click();
+ await expect(page.locator('#contextTimeline')).toContainText('Powerball number pool expanded');
 });
