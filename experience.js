@@ -156,4 +156,17 @@ $('mainBalls')?.addEventListener('click',event=>{
  announce('Exploring the history of Lotto number '+n);
 });
 
+
+// Open the optional Powerball chart before navigating to it.
+document.addEventListener('click',event=>{
+ const a=event.target.closest('a[data-open-details]');
+ if(!a)return;
+ const detail=document.getElementById(a.dataset.openDetails),destination=document.getElementById(a.hash.slice(1));
+ if(!detail||!destination)return;
+ event.preventDefault();
+ detail.open=true;
+ history.replaceState(null,'',a.hash);
+ requestAnimationFrame(()=>destination.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'}));
+});
+
 })();
