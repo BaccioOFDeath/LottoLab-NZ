@@ -134,3 +134,19 @@ test('fixed 20-line portfolio is transparent, complete and stable',async({page})
  await page.reload();
  await expect(page.locator('#portfolioCoverage')).toHaveText(original);
 });
+
+
+test('Evidence Lab remains usable at iPhone-width 390px without page overflow',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/#evidence');
+ await expect(page.locator('#evidenceTitle')).toBeVisible();
+ await expect(page.locator('#evidenceDraws')).toHaveText(String(entries.length));
+ await expect(page.locator('#evidenceDeviations .deviation-row')).toHaveCount(8);
+ await expect(page.locator('#portfolioBars .portfolio-number')).toHaveCount(40);
+ await expect(page.locator('#portfolioUnique')).toHaveText('20 / 20');
+ await page.locator('#menuToggle').click();
+ await expect(page.locator('#mobileNav a[href="#evidence"]')).toBeVisible();
+ const size=await page.evaluate(()=>({viewport:window.innerWidth,doc:document.documentElement.scrollWidth,body:document.body.scrollWidth}));
+ expect(size.viewport).toBe(390);
+ expect(Math.max(size.doc,size.body)).toBeLessThanOrEqual(391);
+});
