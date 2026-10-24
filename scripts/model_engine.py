@@ -7,7 +7,6 @@ against verified outcomes. Old picks are never regenerated or overwritten.
 import argparse
 import datetime as dt
 import json
-import math
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
