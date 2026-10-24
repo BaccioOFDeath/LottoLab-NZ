@@ -192,3 +192,74 @@ test('premium quick search and navigation work on mobile and keyboard',async({pa
  await page.locator('#backToTop').click();
  await expect.poll(()=>page.evaluate(()=>scrollY)).toBeLessThan(15);
 });
+
+
+test('Number Universe inspects actual frequency and follows rule-era filters',async({page})=>{
+ await page.goto('/#universe');
+ await expect(page.locator('#universeTitle')).toContainText('The Number Universe');
+ await expect(page.locator('#universeNumberPicker option')).toHaveCount(41);
+ await expect(page.locator('#universeCanvas')).toBeVisible();
+ await expect.poll(()=>page.evaluate(()=>document.getElementById('universeCanvas').width)).toBeGreaterThan(0);
+ await expect(page.locator('#universeDataStatus')).toContainText(entries.length+' draws');
+ await page.locator('#universeNumberPicker').selectOption('17');
+ const count17=entries.filter(d=>d.numbers.includes(17)).length;
+ await expect(page.locator('#universeSelectedTitle')).toHaveText('Number 17');
+ await expect(page.locator('#universeHits')).toHaveText(String(count17));
+ await expect(page.locator('#universeSample')).toHaveText(String(entries.length));
+ await expect(page.locator('#universeRate')).toHaveText((count17/entries.length*100).toFixed(1)+'%');
+ await page.locator('#universeConnections').click();
+ await expect(page.locator('#universeConnections')).toHaveAttribute('aria-pressed','true');
+ await page.locator('#universeMotion').click();
+ await expect(page.locator('#universeMotion')).toHaveAttribute('aria-pressed','false');
+ await expect(page.locator('html')).toHaveClass(/motion-off/);
+ await page.locator('#universeMotion').click();
+ await expect(page.locator('#universeMotion')).toHaveAttribute('aria-pressed','true');
+ await page.locator('#ruleFilter').selectOption('pb14');
+ const narrowed=entries.filter(d=>d.date>='2026-09-16');
+ await expect(page.locator('#universeSample')).toHaveText(String(narrowed.length));
+ await expect(page.locator('#universeHits')).toHaveText(String(narrowed.filter(d=>d.numbers.includes(17)).length));
+ await page.locator('#universeReset').click();
+ await expect(page.locator('#universeSelectedTitle')).toHaveText('Your universe awaits');
+ await expect(page.locator('#universeConnections')).toHaveAttribute('aria-pressed','false');
+});
+test('winning result ball taps open the matching historical number inspector',async({page})=>{
+ await page.goto('/');
+ const first=entries[0].numbers[0];
+ const winning=page.locator('#mainBalls .result-number-button').first();
+ await expect(winning).toHaveAttribute('data-inspect',String(first));
+ await winning.click();
+ await expect(page.locator('#universeSelectedTitle')).toHaveText('Number '+first);
+ await expect(page.locator('#universeNumberPicker')).toHaveValue(String(first));
+});
+test('real mobile touch makes a transient ripple, no blocked scrolling, and never rerolls predictions',async({browser})=>{
+ const context=await browser.newContext({baseURL:'http://127.0.0.1:4173',hasTouch:true,isMobile:true,deviceScaleFactor:2,viewport:{width:390,height:844}});
+ try{
+  const page=await context.newPage();
+  await page.goto('/#universe');
+  await expect(page.locator('#universeCanvas')).toBeVisible();
+  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
+  const original=await page.locator('#pickerLines').innerText();
+  const before=await page.evaluate(()=>window.lottoLabTouchEffects());
+  const bounds=await page.locator('#universeCanvas').boundingBox();
+  await page.touchscreen.tap(bounds.x+22,bounds.y+33);
+  await expect.poll(()=>page.evaluate(()=>window.lottoLabTouchEffects())).toBeGreaterThan(before);
+  await expect(page.locator('#universeSelectedTitle')).toContainText('Number ');
+  await expect.poll(()=>page.evaluate(()=>Math.max(document.documentElement.scrollWidth,document.body.scrollWidth))).toBeLessThanOrEqual(391);
+  await page.locator('#universeMotion').click();
+  await expect(page.locator('#universeMotion')).toHaveAttribute('aria-pressed','false');
+  const disabledCount=await page.evaluate(()=>window.lottoLabTouchEffects());
+  const newBounds=await page.locator('#universeCanvas').boundingBox();
+  await page.touchscreen.tap(newBounds.x+40,newBounds.y+35);
+  expect(await page.evaluate(()=>window.lottoLabTouchEffects())).toBe(disabledCount);
+  expect(await page.locator('#pickerLines').innerText()).toBe(original);
+ }finally{await context.close()}
+});
+test('reduced-motion mode keeps the Number Universe readable without forced animation',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.goto('/#universe');
+ await expect(page.locator('#universeTitle')).toBeVisible();
+ await expect(page.locator('#universeMotion')).toHaveAttribute('aria-pressed','false');
+ await page.locator('#universeNumberPicker').selectOption('28');
+ await expect(page.locator('#universeSelectedTitle')).toHaveText('Number 28');
+ await expect(page.locator('#universeHits')).toHaveText(String(entries.filter(d=>d.numbers.includes(28)).length));
+});
