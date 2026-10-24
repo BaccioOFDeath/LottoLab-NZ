@@ -470,11 +470,11 @@ test('Geo weather layers, map zoom and historical time replay are real interacti
  await expect(page.locator('#geoScene')).toHaveAttribute('style',/scale\(1\)/);
  const slider=page.locator('#geoDateSlider');
  await expect(slider).toBeEnabled();
- await slider.fill('0');
+ await slider.evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}));});
  await expect(page.locator('#geoTotal')).toHaveText(String(geo.records.filter(x=>x.draw_date==='2024-06-08'&&x.channel==='retail').reduce((n,r)=>n+r.tickets,0)));
  await page.locator('#geoPlay').click();
  await expect(page.locator('#geoPlay')).toHaveAttribute('aria-pressed','true');
- await expect.poll(()=>Number(page.locator('#geoDateSlider').getAttribute('value'))).toBeGreaterThanOrEqual(0);
+ await expect.poll(async()=>Number(await page.locator('#geoDateSlider').inputValue())).toBeGreaterThan(0);
  await page.locator('#geoPlay').click();
  await expect(page.locator('#geoPlay')).toHaveAttribute('aria-pressed','false');
 });
