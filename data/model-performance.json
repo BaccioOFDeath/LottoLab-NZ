@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T18:29:16.498900+00:00",
+  "generated_at": "2026-10-24T21:05:22.355230+00:00",
   "stored_draw_count": 103,
   "verified_draw_count": 103,
   "backtest": {
@@ -37,20 +37,23 @@
   "backtest_draws": 73,
   "prospective": {
     "adaptive_frequency_v1": {
-      "predictions_recorded": 1,
+      "predictions_recorded": 10,
+      "lines_scored": 0,
       "draws_scored": 0,
       "total_matches": 0,
       "average_matches": null,
       "powerball_matches": 0
     },
     "random_baseline_v1": {
-      "predictions_recorded": 1,
+      "predictions_recorded": 10,
+      "lines_scored": 0,
       "draws_scored": 0,
       "total_matches": 0,
       "average_matches": null,
       "powerball_matches": 0
     }
   },
+  "lines_per_draw": 20,
   "upcoming_date": "2026-10-28",
   "upcoming_picks": [
     {
@@ -86,9 +89,333 @@
       "powerball": 4,
       "training_draws": 53,
       "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 2,
+      "numbers": [
+        7,
+        8,
+        12,
+        17,
+        25,
+        26
+      ],
+      "powerball": 7,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 3,
+      "numbers": [
+        14,
+        20,
+        25,
+        26,
+        32,
+        36
+      ],
+      "powerball": 11,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 4,
+      "numbers": [
+        1,
+        7,
+        17,
+        22,
+        30,
+        38
+      ],
+      "powerball": 14,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 5,
+      "numbers": [
+        4,
+        7,
+        9,
+        16,
+        21,
+        22
+      ],
+      "powerball": 1,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 6,
+      "numbers": [
+        1,
+        6,
+        24,
+        30,
+        36,
+        39
+      ],
+      "powerball": 5,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 7,
+      "numbers": [
+        5,
+        13,
+        14,
+        19,
+        37,
+        40
+      ],
+      "powerball": 5,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 8,
+      "numbers": [
+        15,
+        19,
+        20,
+        34,
+        36,
+        40
+      ],
+      "powerball": 3,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 9,
+      "numbers": [
+        13,
+        16,
+        23,
+        27,
+        32,
+        37
+      ],
+      "powerball": 6,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "adaptive_frequency_v1",
+      "model_version": 2,
+      "line_number": 10,
+      "numbers": [
+        7,
+        13,
+        18,
+        24,
+        26,
+        32
+      ],
+      "powerball": 13,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 2,
+      "numbers": [
+        6,
+        7,
+        10,
+        17,
+        26,
+        37
+      ],
+      "powerball": 2,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 3,
+      "numbers": [
+        5,
+        7,
+        12,
+        20,
+        22,
+        33
+      ],
+      "powerball": 7,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 4,
+      "numbers": [
+        11,
+        12,
+        13,
+        20,
+        30,
+        36
+      ],
+      "powerball": 7,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 5,
+      "numbers": [
+        1,
+        2,
+        6,
+        11,
+        31,
+        40
+      ],
+      "powerball": 8,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 6,
+      "numbers": [
+        8,
+        13,
+        24,
+        27,
+        37,
+        40
+      ],
+      "powerball": 13,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 7,
+      "numbers": [
+        8,
+        15,
+        18,
+        19,
+        30,
+        37
+      ],
+      "powerball": 2,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 8,
+      "numbers": [
+        1,
+        2,
+        3,
+        26,
+        32,
+        38
+      ],
+      "powerball": 3,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 9,
+      "numbers": [
+        15,
+        22,
+        25,
+        29,
+        35,
+        38
+      ],
+      "powerball": 14,
+      "training_draws": 103,
+      "status": "pending"
+    },
+    {
+      "target_date": "2026-10-28",
+      "created_at": "2026-10-24T21:05:22.355230+00:00",
+      "model": "random_baseline_v1",
+      "model_version": 2,
+      "line_number": 10,
+      "numbers": [
+        4,
+        7,
+        12,
+        14,
+        31,
+        36
+      ],
+      "powerball": 9,
+      "training_draws": 103,
+      "status": "pending"
     }
   ],
   "expected_random_main_matches": 0.9,
-  "statistical_claim": "No credible evidence of future-draw prediction advantage has been established.",
-  "methodology": "Chronological walk-forward, minimum 30 earlier verified draws, fixed model versions. All historical test draws are held out."
+  "statistical_claim": "No credible prediction advantage for a fair lottery has been demonstrated.",
+  "methodology": "Exactly 20 prospective, precommitted selections per draw (10 experimental adaptive, 10 random baseline). Historical backtest uses one line per model on held-out draws, separate from prospective record."
 }
