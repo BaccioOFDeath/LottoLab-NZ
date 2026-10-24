@@ -10,7 +10,7 @@ let frozen=[],target='';
 function fmt(n){return String(n).padStart(2,'0')}
 function formatDate(d){return new Date(d+'T12:00:00Z').toLocaleDateString('en-NZ',{timeZone:'UTC',weekday:'long',day:'numeric',month:'long',year:'numeric'})}
 function formatLine(p){return p.numbers.map(fmt).join(' - ')+' | PB '+fmt(p.powerball)}
-function valid(p){return p&&Array.isArray(p.numbers)&&p.numbers.length===6&&new Set(p.numbers).size===6&&p.numbers.every(n=>Number.isInteger(n)&&n>=1&&n<=40)&&Number.isInteger(p.powerball)&&p.powerball>=1&&p.powerball<=14}
+function valid(p){return p&&Array.isArray(p.numbers)&&p.numbers.length===6&&new Set(p.numbers).size===6&&p.numbers.every(n=>Number.isInteger(n)&&n>=1&&n<=40)&&Number.isInteger(p.powerball)&&p.powerball>=1&&p.powerball<=14&& (p.bonus_prediction==null||(Number.isInteger(p.bonus_prediction)&&p.bonus_prediction>=1&&p.bonus_prediction<=40&&!p.numbers.includes(p.bonus_prediction)&&p.bonus_prediction_created_at))}
 function slot(p){return Number.isInteger(p.line_number)?p.line_number:1}
 async function copy(value,button){try{await navigator.clipboard.writeText(value);const old=button.textContent;button.textContent='Copied ✓';el('pickerStatus').textContent='Copied the already recorded lines — no new numbers were generated.';setTimeout(()=>{button.textContent=old},1600)}catch(e){el('pickerStatus').textContent='Clipboard permission unavailable. Select the numbers to copy.'}}
 function render(){
@@ -25,13 +25,26 @@ function render(){
     name.append(number,method);
     const nums=document.createElement('div');nums.className='fixed-pick-numbers';
     for(const n of p.numbers){const b=document.createElement('span');b.className='ball';b.textContent=fmt(n);nums.append(b)}
-    const pb=document.createElement('span');pb.className='fixed-pick-pb';
-    pb.textContent='PB '+fmt(p.powerball);
+    const extras=document.createElement('div');extras.className='fixed-pick-extras';
+    const bonus=document.createElement('div');bonus.className='pick-extra';
+    const bonusLabel=document.createElement('span');bonusLabel.className='pick-extra-label';
+    bonusLabel.textContent='BONUS · RESEARCH ONLY';
+    const bonusCircle=document.createElement('span');bonusCircle.className='ball bonus';
+    bonusCircle.textContent=p.bonus_prediction==null?'—':fmt(p.bonus_prediction);
+    bonusCircle.title='Bonus is a seventh drawn ball, not a ticket selection. Research-only forecast added '+(p.bonus_prediction_created_at||'when available');
+    bonus.append(bonusLabel,bonusCircle);
+    const power=document.createElement('div');power.className='pick-extra';
+    const powerLabel=document.createElement('span');powerLabel.className='pick-extra-label';
+    powerLabel.textContent='POWERBALL';
+    const powerCircle=document.createElement('span');powerCircle.className='ball power';
+    powerCircle.textContent=fmt(p.powerball);
+    power.append(powerLabel,powerCircle);
+    extras.append(bonus,power);
     const button=document.createElement('button');button.type='button';button.className='fixed-copy btn btn-export';button.textContent='Copy';button.setAttribute('aria-label','Copy line '+(frozen.indexOf(p)+1));
     button.addEventListener('click',()=>copy(formatLine(p),button));
-    row.append(name,nums,pb,button);list.appendChild(row);
+    row.append(name,nums,extras,button);list.appendChild(row);
   }
-  el('pickerStatus').textContent='Showing '+shown.length+' of 20 frozen lines · 10 research + 10 random comparison. These do not change when you reload or change the analysis filters.';
+  el('pickerStatus').textContent='Showing '+shown.length+' of 20 frozen lines · 10 research + 10 random comparison. These do not change when you reload or change the analysis filters. Gold Bonus is research-only and cannot be selected on a Lotto ticket.';
 }
 async function init(){
   try{
@@ -55,5 +68,12 @@ async function init(){
 }
 el('pickerMode').addEventListener('change',()=>{if(frozen.length===20)render()});
 el('pickerCopyAll').addEventListener('click',()=>{if(frozen.length!==20)return;copy(frozen.map((p,i)=>String(i+1).padStart(2,'0')+' '+formatLine(p)).join('\n'),el('pickerCopyAll'))});
+const share=el('pickerShare');
+if(share)share.addEventListener('click',async()=>{
+ if(frozen.length!==20)return;
+ const lines=frozen.map((p,i)=>String(i+1).padStart(2,'0')+' '+formatLine(p)).join('\n');
+ try{if(navigator.share){await navigator.share({title:'LottoLab NZ · 20 locked lines',text:'20 pre-recorded Lotto NZ selections for '+formatDate(target)+'\n'+lines+'\nResearch only. Bonus forecasts are not ticket selections.',url:location.origin+location.pathname+'#picker'});}
+ else await copy(lines,share);}catch(e){if(e.name!=='AbortError')el('pickerStatus').textContent='Sharing unavailable. Use Copy all 20 instead.'}
+});
 init();
 })();
