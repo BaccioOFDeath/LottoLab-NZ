@@ -290,3 +290,142 @@ kbd{border:1px solid #e5d9f1;background:#f8f4fc;border-radius:5px;padding:2px 5p
 .motion-off .hero-art .float-ball,.motion-off .hero-art .spark{animation:none!important}
 .motion-off .reveal-ready{opacity:1!important;transform:none!important;transition:none!important}
 .motion-off .btn,.motion-off .fixed-copy,.motion-off .result-number-button,.motion-off .universe-tool{transition:none!important}
+
+/* LottoLab cohesive experience refresh — October 2026 QC
+   Lotto purple, Powerball pink, Bonus amber, Strike teal, evidence blue.
+   Advanced research is disclosed intentionally instead of duplicated by default. */
+:root{
+ --lotto:#7135d8;--powerball:#ed398d;--strike:#05a98d;--bonus:#efad32;
+ --insight:#436de9;--evidence:#138c8d;--surface:#fff;
+ --radius-card:20px;--shadow-card:0 9px 25px rgba(52,23,95,.055);
+ --bg:#f9f7fd;
+}
+body{background:var(--bg)}
+.status-strip.concise-status{padding:11px 15px;background:#f5edff;border-color:#e7d7fb;font-size:11px}
+.concise-status strong{display:inline}
+.concise-status .status-tag{margin-left:auto;flex:none}
+.hero-copy>p{max-width:460px}
+.hero-chips span:first-child{background:#6652d643;border-color:#cfbafa77}
+.hero-chips span:nth-child(2){background:#fa6fb326;border-color:#fcb3e077}
+.hero-chips span:nth-child(3){background:#59d9b826;border-color:#b4f3de66}
+/* Game guides are REAL disclosure controls. Don't display decorative dead arrows. */
+.mini-games{align-items:start}
+.mini-game{display:block;padding:0;min-width:0;overflow:hidden;border-radius:16px;box-shadow:var(--shadow-card)}
+.mini-game summary{list-style:none;display:flex;align-items:center;gap:9px;padding:15px 12px;cursor:pointer;min-height:78px;outline-offset:-3px}
+.mini-game summary::-webkit-details-marker{display:none}
+.mini-game summary::marker{content:''}
+.mini-game summary:hover{background:#faf6ff}
+.mini-game .mini-game-copy{flex:1;min-width:0}
+.mini-game .mini-game-copy strong{font:900 14px Outfit;color:#27153b}
+.mini-game .mini-game-copy>span{color:#81738c;font-size:10px;line-height:1.4}
+.mini-game summary .chev{color:#7254a0;display:grid;place-items:center;font-size:18px;font-weight:900;transition:transform .18s ease}
+.mini-game[open] summary .chev{transform:rotate(180deg)}
+.mini-game-power{border-color:#fbd4e5}
+.mini-game-power[open],.mini-game-power summary:hover{background:#fff7fb}
+.mini-game-strike{border-color:#c6efe6}
+.mini-game-strike[open],.mini-game-strike summary:hover{background:#f4fffc}
+.mini-circle.strike{background:linear-gradient(150deg,#39dbb6,#04987c);color:#fff}
+.mini-circle.power{background:linear-gradient(150deg,#ff72b4,#dc287c);color:#fff}
+.mini-game .game-explain{padding:0 13px 14px;display:block}
+.game-explain p{font-size:11px;color:#665571;line-height:1.65;margin:2px 0 12px}
+.game-explain-actions{display:flex;flex-direction:column;gap:7px}
+.game-explain-actions a{font-size:11px;font-weight:900;color:#7e38b5;text-decoration:underline;text-underline-offset:3px}
+.mini-game-strike .game-explain-actions a{color:#07836f}
+.game-explain-actions a:hover{text-decoration-thickness:2px}
+/* Simplify the default filter, keep documented machine metadata accessible. */
+.context-compact{padding:19px 21px;box-shadow:var(--shadow-card);border-top:3px solid #9670df}
+.context-compact .context-top{align-items:center}
+.context-compact .context-top h3{font-size:20px;margin:3px 0 0}
+.context-compact .context-count{background:#ecedff;color:#5943a9;font-size:10px}
+.context-compact .context-controls{grid-template-columns:1fr;margin:14px 0 7px}
+.context-compact .context-controls>label{max-width:520px}
+.context-compact .context-controls select{height:48px}
+.context-compact .context-hint{background:#f4f5ff;color:#675b8a;margin:10px 0 13px;padding:9px 12px}
+.context-advanced{background:#faf9ff}
+.context-advanced summary{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px}
+.context-advanced summary span{font-size:10px;color:#9989a7;font-weight:500;text-align:right}
+.context-advanced .context-controls.context-conditional{grid-template-columns:repeat(3,minmax(0,1fr));margin:11px 0 13px}
+.context-advanced-note{font-size:11px;color:#7e6f8c;line-height:1.6;margin:11px 0 3px}
+/* One family of disclosure cards, with meaningful coloured edges. */
+.lab-more,.evidence-deep,.model-compare,.model-ledger-disclosure{
+ border:1px solid #e9def5;background:#fff;border-radius:17px;
+ box-shadow:var(--shadow-card);margin:17px 0;min-width:0;overflow:hidden;
+}
+.lab-more>summary,.evidence-deep>summary,.model-compare>summary,.model-ledger-disclosure>summary{
+ list-style:none;cursor:pointer;padding:17px 20px;color:#3d255d;
+ display:flex;align-items:center;gap:12px;font-weight:900;font-size:13px;
+}
+.lab-more>summary::-webkit-details-marker,.evidence-deep>summary::-webkit-details-marker,.model-compare>summary::-webkit-details-marker,.model-ledger-disclosure>summary::-webkit-details-marker{display:none}
+.lab-more>summary::marker,.evidence-deep>summary::marker,.model-compare>summary::marker,.model-ledger-disclosure>summary::marker{content:''}
+.lab-more>summary:hover,.evidence-deep>summary:hover,.model-compare>summary:hover,.model-ledger-disclosure>summary:hover{background:#f9f4ff}
+.lab-more>summary{display:flex;justify-content:space-between;flex-wrap:wrap}
+.lab-more-title{font-weight:900;color:#3b2a64}
+.lab-more-title strong{font-size:17px;color:#7641ca;margin-left:6px}
+.lab-more summary small{font-size:11px;font-weight:500;color:#8c7b9e}
+.lab-more-body,.evidence-deep-body{padding:0 17px 18px}
+.lab-more .analysis-grid{margin-top:4px}
+.lab-more[open]{border-color:#c6b4ed}
+#powerChartPanel{scroll-margin-top:95px;border-top:3px solid var(--powerball)}
+.evidence-deep{border-top:3px solid #20b29f}
+.evidence-deep summary{justify-content:space-between;color:#246c72}
+.evidence-deep summary span{color:#0d9d91;font-size:18px}
+.evidence-deep .analysis-panel{border-color:#e0f0ef}
+.evidence-section .eyebrow{color:#13877f}
+.evidence-section .evidence-kpi{border-top:3px solid transparent}
+.evidence-section .evidence-kpi:nth-child(1){border-top-color:#8b59ed}
+.evidence-section .evidence-kpi:nth-child(2){border-top-color:#f4af42}
+.evidence-section .evidence-kpi:nth-child(3){border-top-color:#15b09e}
+.evidence-section .evidence-kpi:nth-child(4){border-top-color:#418de5}
+.model-compare{border-top:3px solid #8750e4}
+.model-compare summary{color:#604494;justify-content:space-between}
+.model-compare summary span{font-size:18px}
+.model-compare .model-cards{padding:0 16px 17px}
+.model-compare .model-cards article{box-shadow:none;border-color:#e8d9fa}
+.model-ledger-disclosure{border-top:3px solid #1aa8bc}
+.model-ledger-disclosure summary{color:#1a6978;justify-content:space-between}
+.model-ledger-disclosure summary span{font-size:18px}
+.model-ledger-disclosure .model-ledger{margin:0;box-shadow:none;border:0;padding:18px}
+.model-section .model-caution-text{color:#615574;font-size:12px;line-height:1.65;padding:10px 13px;border-radius:10px;background:#f2f5ff}
+.model-section .model-caution-text strong{color:#6035a3}
+.picker-section .section-title .eyebrow{color:#df3788}
+.picker-section .picker-panel{border-top:3px solid #ed489d}
+.btn-show-lines{width:100%;display:block;margin:9px 0 18px;padding:14px;color:#6c39ac;border:1px solid #e2cef6;background:linear-gradient(110deg,#faf5ff,#fff);border-radius:13px;font-weight:900}
+.btn-show-lines:hover{background:linear-gradient(110deg,#f2e6ff,#fff5fb)}
+.btn-show-lines[hidden]{display:none!important}
+.picker-panel #pickerStatus{color:#8a799a;font-size:11px}
+.picker-section .picker-disclaimer{font-size:11px;padding:13px 15px;line-height:1.55}
+/* Same colour logic from hero to archive, without making every card purple. */
+.insights-heading .eyebrow{color:#486edf}
+.kpi{box-shadow:var(--shadow-card);border-radius:var(--radius-card)}
+.kpi-icon.lilac{background:#ede7ff;color:#6535ca}
+.kpi-icon.pinky{background:#ffe0ed;color:#d73780}
+.kpi-icon.peach{background:#fff0d9;color:#b97613}
+.kpi-icon.aqua{background:#d9fbf2;color:#098f72}
+.analysis-panel,.result-card{border-radius:var(--radius-card);box-shadow:var(--shadow-card)}
+.freq-panel{border-top:3px solid #7550df}
+.patterns-panel{border-top:3px solid #29b6b5}
+.history-heading .eyebrow{color:#e24089}
+.research-banner{background:linear-gradient(115deg,#32155e 0%,#49218b 55%,#29488b 100%)}
+.research-banner .research-icon{background:#7e51e8}
+.footer{margin-top:48px}
+@media(max-width:800px){
+ .context-advanced .context-controls.context-conditional{grid-template-columns:1fr}
+ .lab-more-body,.evidence-deep-body{padding:0 12px 14px}
+ .context-compact .context-top{align-items:start;flex-wrap:wrap}
+}
+@media(max-width:540px){
+ .mini-game summary{padding:13px 10px;gap:8px;min-height:70px}
+ .mini-game .mini-game-copy strong{font-size:12px}
+ .mini-game .mini-game-copy>span{font-size:9px}
+ .mini-game summary .chev{font-size:15px}
+ .mini-circle{width:32px;height:32px}
+ .context-compact{padding:16px}
+ .context-compact .context-top h3{font-size:19px}
+ .context-advanced summary{display:block}
+ .context-advanced summary span{display:block;text-align:left;margin-top:5px}
+ .lab-more>summary,.evidence-deep>summary,.model-compare>summary,.model-ledger-disclosure>summary{padding:15px 13px}
+ .model-compare .model-cards{grid-template-columns:1fr;padding:0 12px 12px}
+ .model-ledger-disclosure .model-ledger{padding:13px}
+ .lab-more .analysis-grid.smaller{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.mini-game summary .chev{transition:none!important}}
