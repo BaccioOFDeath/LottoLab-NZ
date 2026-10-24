@@ -25,6 +25,10 @@ class ModelResearchTests(unittest.TestCase):
             self.assertTrue(all(1<=n<=40 for n in balls))
             self.assertTrue(1<=pb<=14)
             self.assertEqual(model.select(rows,'2026-10-28',method),(balls,pb))
+            bonus=model.bonus_forecast(balls,'2026-10-28',method,1)
+            self.assertTrue(1<=bonus<=40)
+            self.assertNotIn(bonus,balls)
+            self.assertEqual(bonus,model.bonus_forecast(balls,'2026-10-28',method,1))
 
     def test_walk_forward_is_out_of_sample(self):
         rows=model.get_draws()
@@ -70,6 +74,7 @@ class ModelResearchTests(unittest.TestCase):
                 self.assertEqual(scored['main_matches'],6)
                 self.assertTrue(scored['powerball_match'])
                 self.assertEqual(scored['numbers'],target['numbers'])
+                self.assertNotIn('bonus_prediction_match',scored)  # no bonus guess existed before this draw
             finally:
                 model.DRAW_FILE,model.PICK_FILE,model.REPORT_FILE=original
 
@@ -97,7 +102,12 @@ class ModelResearchTests(unittest.TestCase):
                 model.run(when)
                 first=json.loads(picks.read_text())
                 self.assertEqual(len(first),20)
-                self.assertEqual(first[:2],previous) # immutable original 2
+                for original,new in zip(previous,first[:2]):
+                    for key,value in original.items():self.assertEqual(new[key],value) # original preserved
+                    self.assertIn('bonus_prediction',new)
+                    self.assertNotIn(new['bonus_prediction'],new['numbers'])
+                    self.assertTrue(new['bonus_prediction_created_at'].startswith('2026-10-24'))  # UTC clock
+                    self.assertFalse(new['bonus_is_ticket_selection'])
                 self.assertEqual(len(set((tuple(p['numbers']),p['powerball']) for p in first)),20)
                 for m in model.MODELS:
                     group=[p for p in first if p['model']==m]
