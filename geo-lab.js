@@ -112,7 +112,7 @@ function drawHeat(groups){
  for(const group of [...groups].sort((a,b)=>a.tickets-b.tickets)){
   const p=project(group.lat,group.lon),x=p.x*factor,y=p.y*height/760;
   const weight=Math.sqrt(group.tickets/maximum);
-  const radius=(layer==='regions'?97:68)*factor*(.65+.45*weight);
+  const radius=(layer==='regions'?97:68)*factor*(.65+.45*weight)/Math.pow(scale,.72); // prevent giant heat blobs at 4× zoom
   const g=ctx.createRadialGradient(x,y,0,x,y,Math.max(7,radius));
   const opacity=Math.min(.85,.23+.58*weight);
   g.addColorStop(0,'rgba(255,214,94,'+opacity+')');
@@ -132,7 +132,7 @@ function renderPins(groups){
   const p=project(g.lat,g.lon);
   const button=make('button',{type:'button',class:'geo-pin'+(selected===g.key?' selected':'')+(g.online&&!g.retail?' online':''),
    'aria-label':g.place+': '+g.tickets+' publicly reported winning tickets','aria-pressed':String(selected===g.key),
-   style:'left:'+(p.x/580*100).toFixed(4)+'%;top:'+(p.y/760*100).toFixed(4)+'%;--pin-size:'+(19+Math.sqrt(g.tickets/max)*19).toFixed(1)+'px'});
+   style:'left:'+(p.x/580*100).toFixed(4)+'%;top:'+(p.y/760*100).toFixed(4)+'%;--pin-size:'+(19+Math.sqrt(g.tickets/max)*19).toFixed(1)+'px;--geo-pin-opacity:'+(g.tickets===1?'.87':'1')});
   button.append(make('span',{class:'geo-pin-dot'},String(g.tickets)));
   button.title=g.place+' · '+g.tickets+' reported tickets'+(g.online?' · '+g.online+' online winner-area records':'');
   button.addEventListener('click',()=>selectGroup(g.key));
@@ -216,7 +216,12 @@ function play(){
  },950);
  update();
 }
-function resize(){if(all.length){drawHeat(grouped());applyView();}}
+let heatFrame=0;
+function requestHeatRedraw(){
+ if(heatFrame)return;
+ heatFrame=requestAnimationFrame(()=>{heatFrame=0;if(all.length)drawHeat(grouped());});
+}
+function resize(){if(all.length){requestHeatRedraw();applyView();}}
 /* Pinch-and-zoom engine: translate + scale anchored at the gesture centroid.
  * Default single-finger vertical gestures still scroll the webpage.
  * Two-finger gestures stay inside the map only; no global gesture interception.
@@ -247,6 +252,12 @@ function applyView(nextScale=scale,nextX=panX,nextY=panY){
  $('geoZoomOut').disabled=scale<=1.001;
  $('geoZoomReset').disabled=scale===1&&Math.abs(panX)<.1&&Math.abs(panY)<.1&&!moveMode;
  stage.classList.toggle('geo-is-zoomed',scale>1.01);
+ // Compensate each marker for the parent's 1–4× zoom. At 4× its *visible*
+ // diameter is ~66% of its original diameter, instead of ballooning to 400%.
+ // Keep labels readable via a separate type-size countercompensation.
+ pins.style.setProperty('--geo-pin-compensation',(1/Math.pow(scale,1.3)).toFixed(5));
+ pins.style.setProperty('--geo-label-compensation',Math.pow(scale,.19).toFixed(4));
+ if(all.length)requestHeatRedraw();
  updateHint();
 }
 function zoomAt(nextScale,x,y){
