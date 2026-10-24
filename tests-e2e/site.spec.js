@@ -453,8 +453,9 @@ test('Geo filters distinguish actual stores from MyLotto winner areas and prize 
  await page.locator('#geoRegion').selectOption('Waikato');
  await expect(page.locator('#geoTotal')).toHaveText('1');
  await page.locator('#geoTier').selectOption('first');
- await expect(page.locator('#geoTotal')).toHaveText('0');
- await expect(page.locator('#geoRanking')).toContainText('No published winners match');
+ const firstWaikato=geo.records.filter(r=>r.game==='Powerball'&&r.tier==='first'&&r.region==='Waikato').reduce((n,r)=>n+r.tickets,0);
+ await expect(page.locator('#geoTotal')).toHaveText(String(firstWaikato));
+ await expect(page.locator('#geoRanking')).toContainText(firstWaikato?'Thames':'No published winners match');
 });
 test('Geo weather layers, map zoom and historical time replay are real interactions',async({page})=>{
  const geo=require('../data/geo-winners.json');
