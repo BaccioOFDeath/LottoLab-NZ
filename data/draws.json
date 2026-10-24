@@ -30,7 +30,11 @@
       37
     ],
     "bonus": 16,
-    "powerball": 1
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2631"
+    ]
   },
   {
     "draw": 2630,
@@ -44,7 +48,11 @@
       34
     ],
     "bonus": 26,
-    "powerball": 3
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2630"
+    ]
   },
   {
     "draw": 2629,
@@ -58,7 +66,11 @@
       37
     ],
     "bonus": 21,
-    "powerball": 4
+    "powerball": 4,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2629"
+    ]
   },
   {
     "draw": 2628,
@@ -72,7 +84,11 @@
       38
     ],
     "bonus": 21,
-    "powerball": 7
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2628"
+    ]
   },
   {
     "draw": 2627,
@@ -86,7 +102,11 @@
       39
     ],
     "bonus": 19,
-    "powerball": 13
+    "powerball": 13,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2627"
+    ]
   },
   {
     "draw": 2626,
@@ -100,7 +120,11 @@
       36
     ],
     "bonus": 7,
-    "powerball": 1
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2626"
+    ]
   },
   {
     "draw": 2625,
@@ -114,7 +138,11 @@
       30
     ],
     "bonus": 7,
-    "powerball": 7
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2625"
+    ]
   },
   {
     "draw": 2624,
@@ -128,7 +156,11 @@
       38
     ],
     "bonus": 17,
-    "powerball": 7
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2624"
+    ]
   },
   {
     "draw": 2623,
@@ -142,7 +174,11 @@
       27
     ],
     "bonus": 35,
-    "powerball": 12
+    "powerball": 12,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2623"
+    ]
   },
   {
     "draw": 2622,
@@ -156,7 +192,11 @@
       37
     ],
     "bonus": 12,
-    "powerball": 14
+    "powerball": 14,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2622"
+    ]
   },
   {
     "draw": 2621,
@@ -170,7 +210,11 @@
       30
     ],
     "bonus": 35,
-    "powerball": 11
+    "powerball": 11,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2621"
+    ]
   },
   {
     "draw": 2620,
@@ -184,7 +228,11 @@
       40
     ],
     "bonus": 27,
-    "powerball": 7
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2620"
+    ]
   },
   {
     "draw": 2619,
@@ -198,7 +246,11 @@
       34
     ],
     "bonus": 29,
-    "powerball": 3
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2619"
+    ]
   },
   {
     "draw": 2618,
@@ -212,7 +264,11 @@
       34
     ],
     "bonus": 33,
-    "powerball": 7
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2618"
+    ]
   },
   {
     "draw": 2617,
@@ -226,7 +282,11 @@
       38
     ],
     "bonus": 34,
-    "powerball": 3
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2617"
+    ]
   },
   {
     "draw": 2616,
@@ -241,9 +301,10 @@
     ],
     "bonus": 18,
     "powerball": 5,
-    "verification": "one-source",
+    "verification": "two-source",
     "sources": [
-      "https://www.lottodraw.co.nz/lotto/results-august-29-2026"
+      "https://www.lottodraw.co.nz/lotto/results-august-29-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2616"
     ]
   },
   {
@@ -259,9 +320,10 @@
     ],
     "bonus": 32,
     "powerball": 8,
-    "verification": "one-source",
+    "verification": "two-source",
     "sources": [
-      "https://www.lottodraw.co.nz/lotto/results-august-26-2026"
+      "https://www.lottodraw.co.nz/lotto/results-august-26-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2615"
     ]
   },
   {
@@ -277,9 +339,10 @@
     ],
     "bonus": 12,
     "powerball": 5,
-    "verification": "one-source",
+    "verification": "two-source",
     "sources": [
-      "https://www.lottodraw.co.nz/lotto/results-august-22-2026"
+      "https://www.lottodraw.co.nz/lotto/results-august-22-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2614"
     ]
   },
   {
@@ -295,9 +358,10 @@
     ],
     "bonus": 12,
     "powerball": 10,
-    "verification": "one-source",
+    "verification": "two-source",
     "sources": [
-      "https://www.lottodraw.co.nz/lotto/results-august-19-2026"
+      "https://www.lottodraw.co.nz/lotto/results-august-19-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2613"
     ]
   },
   {
@@ -313,9 +377,10 @@
     ],
     "bonus": 3,
     "powerball": 9,
-    "verification": "one-source",
+    "verification": "two-source",
     "sources": [
-      "https://www.lottodraw.co.nz/lotto/results-august-15-2026"
+      "https://www.lottodraw.co.nz/lotto/results-august-15-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2612"
     ]
   },
   {
@@ -331,9 +396,10 @@
     ],
     "bonus": 24,
     "powerball": 9,
-    "verification": "one-source",
+    "verification": "two-source",
     "sources": [
-      "https://www.lottodraw.co.nz/lotto/results-august-12-2026"
+      "https://www.lottodraw.co.nz/lotto/results-august-12-2026",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2611"
     ]
   },
   {
@@ -349,9 +415,10 @@
     ],
     "bonus": 29,
     "powerball": 6,
-    "verification": "one-source",
+    "verification": "two-source",
     "sources": [
-      "https://www.lottodraw.co.nz/lotto/results-november-15-2025"
+      "https://www.lottodraw.co.nz/lotto/results-november-15-2025",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2534"
     ]
   },
   {
@@ -367,9 +434,10 @@
     ],
     "bonus": 13,
     "powerball": 10,
-    "verification": "one-source",
+    "verification": "two-source",
     "sources": [
-      "https://www.lottodraw.co.nz/lotto/results-november-1-2025"
+      "https://www.lottodraw.co.nz/lotto/results-november-1-2025",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2530"
     ]
   }
 ]
