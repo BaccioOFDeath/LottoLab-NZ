@@ -227,5 +227,41 @@
     ],
     "bonus": 34,
     "powerball": 3
+  },
+  {
+    "draw": 2534,
+    "date": "2025-11-15",
+    "numbers": [
+      2,
+      5,
+      14,
+      19,
+      28,
+      38
+    ],
+    "bonus": 29,
+    "powerball": 6,
+    "verification": "one-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-15-2025"
+    ]
+  },
+  {
+    "draw": 2530,
+    "date": "2025-11-01",
+    "numbers": [
+      4,
+      5,
+      7,
+      9,
+      26,
+      35
+    ],
+    "bonus": 13,
+    "powerball": 10,
+    "verification": "one-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-1-2025"
+    ]
   }
 ]
