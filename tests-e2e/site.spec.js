@@ -138,6 +138,7 @@ test('fixed 20-line portfolio is transparent, complete and stable',async({page})
  await expect(page.locator('#portfolioNumberGrid')).toHaveCount(0);
  await expect(page.locator('#portfolioBars .portfolio-number')).toHaveCount(40);
  await expect(page.locator('#portfolioLocked')).toHaveText('20 / 20');
+ await page.locator('#evidenceDeep summary').click();
  const original=await page.locator('#portfolioCoverage').innerText();
  await page.locator('#windowFilter').selectOption('10');
  await expect(page.locator('#evidenceDraws')).toHaveText('10');
