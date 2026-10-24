@@ -9,20 +9,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=20261025-qc-layout2">
-<script defer src="./app.js?v=20261025-qc-layout2"></script><script defer src="./picker.js?v=20261025-qc-layout2"></script>
-<script defer src="./model-view.js?v=20261025-qc-layout2"></script>
-<script defer src="./research-lab.js?v=20261025-qc-layout2"></script>
-<script defer src="./experience.js?v=20261025-qc-layout2"></script>
-<script defer src="./number-universe.js?v=20261025-qc-layout2"></script>
+<link rel="stylesheet" href="./styles.css?v=20261025-geo1">
+<script defer src="./app.js?v=20261025-geo1"></script><script defer src="./picker.js?v=20261025-geo1"></script>
+<script defer src="./model-view.js?v=20261025-geo1"></script>
+<script defer src="./research-lab.js?v=20261025-geo1"></script>
+<script defer src="./experience.js?v=20261025-geo1"></script>
+<script defer src="./number-universe.js?v=20261025-geo1"></script>
+<script defer src="./geo-lab.js?v=20261025-geo1"></script>
 </head><body><a href="#results" class="skip-link">Skip to latest results</a><div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 <div class="topline"><div class="shell topline-inner"><span><span class="tiny-led"></span>Independent NZ Lotto research</span><span>Not affiliated with Lotto NZ · <a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official results ↗</a></span></div></div>
 <header class="header"><div class="shell header-inner">
 <a class="brand" href="#home" aria-label="LottoLab NZ Home"><span class="brand-mark">L<span>●</span></span><span class="brand-type">Lotto<span>Lab</span><small>NEW ZEALAND</small></span></a>
-<nav class="desktop-nav" aria-label="Main navigation"><a href="#home" data-nav="home" class="active">Latest draw</a><a href="#universe" data-nav="universe">Universe</a><a href="#insights" data-nav="insights">Number insights</a><a href="#picker">20 draw lines</a><a href="#archive" data-nav="archive">Draw archive</a><a href="#predictions">Scorecard</a></nav>
+<nav class="desktop-nav" aria-label="Main navigation"><a href="#home" data-nav="home" class="active">Latest draw</a><a href="#universe" data-nav="universe">Universe</a><a href="#geo" data-nav="geo">Geo Lab</a><a href="#insights" data-nav="insights">Number insights</a><a href="#picker">20 draw lines</a><a href="#archive" data-nav="archive">Draw archive</a><a href="#predictions">Scorecard</a></nav>
 <a class="official-btn" href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official Lotto NZ <span aria-hidden="true">↗</span></a>
 <button type="button" class="command-trigger" id="openQuickNav" aria-label="Open quick navigation search" title="Find pages and features (Command K)"><span aria-hidden="true">⌕</span><kbd>⌘ K</kbd></button><button id="menuToggle" class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
-</div><nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden><a href="#home">Latest draw</a><a href="#results">Results</a><a href="#insights">Number insights</a><a href="#universe">Number Universe</a><a href="#evidence">Evidence lab</a><a href="#archive">Draw archive</a><a href="#picker">20 locked lines</a><a href="#predictions">Model scorecard</a></nav></header>
+</div><nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden><a href="#home">Latest draw</a><a href="#results">Results</a><a href="#insights">Number insights</a><a href="#universe">Number Universe</a><a href="#geo">Geo Lab · Winner map</a><a href="#evidence">Evidence lab</a><a href="#archive">Draw archive</a><a href="#picker">20 locked lines</a><a href="#predictions">Model scorecard</a></nav></header>
 <main id="home">
 <section class="hero"><div class="shell hero-grid"><div class="hero-copy"><div class="hero-kicker"><span class="pulse-dot"></span> NEW ZEALAND LOTTO RESULTS & INSIGHTS</div><h1>Every number<br>has a <em>story.</em></h1><p>Latest results, immersive number exploration and 20 independently recorded research lines.</p><div class="hero-chips" aria-label="LottoLab features"><span>✦ Interactive Universe</span><span>◆ 20 locked lines</span><span>◉ Source-checked history</span></div><div class="hero-actions"><a class="btn btn-white" href="#results">See latest results <span>→</span></a><a class="btn btn-outline" href="#picker">See all 20 locked lines <span>↗</span></a></div><a class="hero-universe-link" href="#universe"><span aria-hidden="true">✧</span> Explore the touch-responsive Number Universe <span aria-hidden="true">↗</span></a></div>
 <div class="hero-art" aria-hidden="true"><span class="float-ball art-a">7</span><span class="float-ball art-b">21</span><span class="float-ball art-c">4</span><span class="float-ball art-d">33</span><div class="art-halo"></div><span class="spark sp1">✦</span><span class="spark sp2">✧</span><span class="spark sp3">✦</span></div></div></section>
@@ -102,6 +103,37 @@
     <p class="universe-disclaimer">This is an interactive visualisation of the stored draw history. Brighter balls represent more appearances in the currently selected sample. Connections show historical co-occurrences. All six-number combinations have the same odds in a fair draw.</p>
   </div>
 </section>
+<section id="geo" class="geo-section" aria-labelledby="geoTitle">
+<div class="geo-heading"><div><p class="eyebrow">LOTTOLAB GEO · WINNING LOCATIONS</p><h2 id="geoTitle">Where the wins happened <span aria-hidden="true">✧</span></h2><p>A weather-inspired map of publicly reported NZ winning ticket locations.</p></div><span class="geo-live-pill">● SOURCE-BACKED RESEARCH</span></div>
+<div class="geo-summary">
+<div><span>Winning tickets reported</span><strong id="geoTotal">—</strong><small>Selected press reports</small></div><div><span>Places represented</span><strong id="geoPlaces">—</strong><small>City/region accuracy</small></div><div><span>Physical retailer wins</span><strong id="geoRetail">—</strong><small>Separately from online</small></div><div><span>Report dates</span><strong id="geoCoverage">—</strong><small>Incomplete coverage</small></div>
+</div>
+<div class="geo-filterbar">
+<label>Game<select id="geoGame"><option value="all">All games</option><option value="Lotto">Lotto</option><option value="Powerball">Powerball</option><option value="Strike">Strike</option></select></label>
+<label>Prize<select id="geoTier"><option value="all">All prize categories</option><option value="first">First Division</option><option value="second">Second Division</option><option value="four">Strike Four</option><option value="roll_down">Powerball roll-down</option></select></label>
+<label>Location type<select id="geoChannel"><option value="retail">Retail shops only</option><option value="all">Shops + online winner areas</option><option value="online">MyLotto winner areas</option></select></label>
+<label>Region<select id="geoRegion"><option value="all">All New Zealand</option></select></label>
+</div>
+<div class="geo-main">
+<div class="geo-map-card">
+<div class="geo-map-toolbar"><div class="geo-mode" role="group" aria-label="Map layers"><button type="button" id="geoHeat" aria-pressed="true" class="geo-mode-button active">◉ Heatmap</button><button type="button" id="geoMarkers" aria-pressed="false" class="geo-mode-button">◎ Markers</button><button type="button" id="geoRegions" aria-pressed="false" class="geo-mode-button">▦ Regions</button></div>
+<div class="geo-map-tools"><button type="button" id="geoZoomIn" aria-label="Zoom in">+</button><button type="button" id="geoZoomOut" aria-label="Zoom out">−</button><button type="button" id="geoZoomReset" aria-label="Reset zoom">↺</button></div></div>
+<div class="geo-map-stage" id="geoMapStage" role="region" aria-label="Interactive New Zealand winning location map">
+<svg id="geoOutline" viewBox="0 0 580 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Simplified outline map of New Zealand"><title>New Zealand map</title><g id="geoCoast"></g></svg>
+<canvas id="geoWeather" aria-hidden="true"></canvas><div id="geoPins" class="geo-pins" aria-label="Winning location markers"></div>
+<div class="geo-map-key"><span><i class="geo-key-retail"></i> Retail town</span><span><i class="geo-key-online"></i> MyLotto area</span></div>
+</div>
+<div class="geo-timeline"><div class="geo-timeline-top"><div><strong>Replay reported wins</strong><span id="geoDateText">Loading reports…</span></div><button type="button" id="geoPlay" aria-pressed="false" disabled>▶ Play</button></div><input type="range" id="geoDateSlider" aria-label="Show reports through this date" min="0" max="0" value="0" disabled><div class="geo-timeline-caption"><span id="geoFrom">First report</span><span id="geoUntil">Latest report</span></div></div>
+<p id="geoMapStatus" role="status" class="geo-map-status">Loading verified publication references…</p>
+</div>
+<aside class="geo-side">
+<div class="geo-detail-card"><div class="geo-card-kicker">LOCATION INSPECTOR ✳</div><h3 id="geoSelectedTitle">Explore a hotspot</h3><p id="geoSelectedDescription">Tap a location or choose one from the ranking to view its published winning-ticket reports.</p><div id="geoSelectedList" class="geo-selected-list"><p class="geo-empty">Map coordinates are town-level approximations, not actual shop addresses.</p></div></div>
+<div class="geo-leaders"><div class="geo-card-kicker">REPORTED WIN LOCATIONS</div><h3>Top places in this sample</h3><div id="geoRanking" class="geo-ranking"><p class="geo-empty">Loading…</p></div></div>
+<div class="geo-outlook"><div class="geo-card-kicker">SALES-ADJUSTED ANALYSIS</div><h3>Is somewhere luckier?</h3><div class="geo-outlook-badge">Not established</div><p>More winning tickets can simply mean more tickets sold. We don't have verified sales volumes by place.</p><button id="geoNormalized" type="button" disabled title="Requires verified ticket sales volume by location">Normalised rates unavailable</button></div>
+</aside>
+</div>
+<div class="geo-footer"><p><strong>Location quality matters.</strong> Retail points represent towns, not shop doors. MyLotto locations show reported winner areas, not points of sale. Sources cover only selected results.</p><a href="https://mylotto.co.nz/media-releases" target="_blank" rel="noopener noreferrer">Lotto NZ winning-location reports ↗</a></div>
+</section>
 <div class="section-title insights-heading" id="insights"><div><p class="eyebrow violet">THE NUMBER LAB</p><h2>Explore the numbers <span class="shine purple">✦</span></h2><p>Choose a period and uncover what actually happened.</p></div><div class="controls"><label for="windowFilter">Compare draws</label><select id="windowFilter"><option value="all">All stored draws</option><option value="10">Last 10</option><option value="25">Last 25</option><option value="50">Last 50</option><option value="100">Last 100</option></select></div></div>
 <section class="analysis-context context-compact" aria-label="Comparable draw conditions">
 <div class="context-top"><div><p class="eyebrow violet">COMPARE LIKE WITH LIKE</p><h3>Choose your draw era</h3></div><span class="context-count" id="contextCount">Loading…</span></div>
@@ -171,7 +203,7 @@
 <div class="archive-panel"><div class="archive-filters"><label class="search-box"><span aria-hidden="true">⌕</span><input id="searchDraws" type="search" placeholder="Search a date, number or draw ID…" aria-label="Search archived draws"></label><select id="weekdayFilter" aria-label="Filter draw day"><option value="all">All draw days</option><option value="3">Wednesdays</option><option value="6">Saturdays</option></select><select id="orderFilter" aria-label="Sort results"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div><div id="archiveList" class="archive-list"><p class="muted">Loading historical results…</p></div><div class="archive-bottom"><span id="archiveCount">—</span><button id="showMore" class="btn btn-more" type="button" hidden>Show more results ↓</button></div></div>
 <div class="research-banner"><div class="research-icon">✦</div><div><p class="eyebrow">OUR DATA PROMISE</p><h3>More history, no guesswork.</h3><p>The complete 1987–present record is still being built. Missing draws are never invented.</p></div><a href="https://github.com/BaccioOFDeath/LottoLab-NZ" target="_blank" rel="noopener noreferrer">See progress ↗</a></div>
 </section></main>
-<footer class="footer"><div class="shell footer-inner"><div><div class="footer-logo">Lotto<span>Lab</span> NZ</div><p>Independent Lotto results & statistics research. Not operated, supported or endorsed by Lotto NZ. Not a ticket checker or gambling service.</p></div><div class="footer-links"><a href="#results">Latest draw</a><a href="#insights">Statistics</a><a href="#archive">Archive</a><a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official Lotto NZ ↗</a></div></div><div class="shell legal">© <span id="year"></span> LottoLab NZ · For information only. Confirm any result and ticket with Lotto NZ. Past draws do not predict future outcomes. <span>Made for curious minds ✦</span></div></footer>
+<footer class="footer"><div class="shell footer-inner"><div><div class="footer-logo">Lotto<span>Lab</span> NZ</div><p>Independent Lotto results & statistics research. Not operated, supported or endorsed by Lotto NZ. Not a ticket checker or gambling service.</p></div><div class="footer-links"><a href="#results">Latest draw</a><a href="#insights">Statistics</a><a href="#archive">Archive</a><a href="#geo">Geo Lab</a><a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official Lotto NZ ↗</a></div></div><div class="shell legal">© <span id="year"></span> LottoLab NZ · For information only. Confirm any result and ticket with Lotto NZ. Past draws do not predict future outcomes. <span>Made for curious minds ✦</span></div></footer>
 <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
 <div id="siteToast" class="site-toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <dialog id="quickNav" class="quick-nav" aria-label="Quick navigation">
@@ -180,7 +212,7 @@
   <div id="quickCommands" class="quick-commands">
     <button type="button" data-jump="results"><span>◉</span><strong>Latest draw</strong><small>Actual winning numbers</small></button>
     <button type="button" data-jump="picker"><span>✦</span><strong>20 locked lines</strong><small>Copy or share your lines</small></button>
-    <button type="button" data-jump="universe"><span>✳</span><strong>Number Universe</strong><small>Touch-responsive 40-ball data field</small></button>
+    <button type="button" data-jump="universe"><span>✳</span><strong>Number Universe</strong><small>Touch-responsive 40-ball data field</small></button><button type="button" data-jump="geo"><span>◎</span><strong>Geo Lab</strong><small>Winning locations, hotspot heatmap and timeline</small></button>
     <button type="button" data-jump="evidence"><span>◈</span><strong>Evidence Lab</strong><small>Test patterns against chance</small></button>
     <button type="button" data-jump="insights"><span>▦</span><strong>Number insights</strong><small>Filters, frequency, pairs</small></button>
     <button type="button" data-jump="predictions"><span>◆</span><strong>Prediction history</strong><small>Publicly audited results</small></button>
