@@ -15,9 +15,11 @@ const power=randomInt(14)+1;
 $('pickerBalls').innerHTML=line.map(n=>'<span class="ball">'+String(n).padStart(2,'0')+'</span>').join('');
 $('pickerPower').innerHTML='<span class="ball power">'+String(power).padStart(2,'0')+'</span>';
 $('pickerCopy').dataset.value=line.map(n=>String(n).padStart(2,'0')).join(' - ')+' | Powerball '+String(power).padStart(2,'0');
-$('pickerStatus').textContent='Generated using '+$('pickerMode').selectedOptions[0].text+'. All valid combinations have equal odds in an independent draw.';
+$('pickerStatus').textContent='Generated using '+$('pickerMode').selectedOptions[0].text+(mode==='frequency'?' from '+(window.lottoLabDraws||[]).length+' stored draws.':'')+'. All valid combinations have equal odds in an independent draw.';
 }
 $('pickerGenerate').addEventListener('click',choose);
+$('pickerMode').addEventListener('change',choose);
 $('pickerCopy').addEventListener('click',async()=>{const text=$('pickerCopy').dataset.value||'';if(!text)return;try{await navigator.clipboard.writeText(text);$('pickerStatus').textContent='Numbers copied.'}catch(e){$('pickerStatus').textContent='Copy unavailable in this browser. Select the numbers above manually.'}});
 choose();
+window.addEventListener('lottolab:data-ready',()=>{if($('pickerMode').value==='frequency')choose()});
 })();
