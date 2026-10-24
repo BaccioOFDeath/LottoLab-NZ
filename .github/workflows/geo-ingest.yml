@@ -1,0 +1,41 @@
+name: Import public winner locations
+on:
+  workflow_dispatch:
+  schedule:
+    # 01:15 UTC is NZ afternoon following the usual next-morning release window
+    - cron: '15 1 * * *'
+  push:
+    paths:
+      - 'scripts/geo_ingest.py'
+      - 'tests/test_geo_data.py'
+      - '.github/workflows/geo-ingest.yml'
+permissions:
+  contents: write
+concurrency:
+  group: lottolab-data-writes
+  cancel-in-progress: false
+jobs:
+  geo-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Check importer and geographic provenance invariants
+        run: python -m unittest discover -s tests -v
+      - name: Discover recent official first-division retailer tables
+        run: python scripts/geo_ingest.py --days 10
+      - name: Verify imported records
+        run: python -m unittest discover -s tests -v
+      - name: Commit source-matched public winner locations
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/geo-winners.json
+          if git diff --cached --quiet; then echo 'No new reliably parsed winner locations'; exit 0; fi
+          git commit -m 'data: import source-checked public NZ winning locations'
+          git pull --rebase origin main
+          git push
