@@ -22,3 +22,26 @@ Research references: https://www.framer.com/awards/ ; https://uitop.design/blog/
 - Responsive mobile design, skip link, keyboard search, scroll progress, live copy feedback, accessible motion controls.
 - Transparency about the incomplete 1987+ archive, model limitations, verified sources and every miss as well as hit.
 - Measure mobile overflow, new-draw scoring and performance after changes.
+
+
+## October 2026 — Touch-first immersive interaction research
+
+The goal is not to copy the visual identity of award-winning sites or introduce misleading game mechanics; it is to give people a memorable, explanatory and accessible way to explore data.
+
+2026 primary reference points reviewed:
+- [Webby Awards 2026, Best User Experience](https://winners.webbyawards.com/winners/websites-and-mobile-sites/features-design/best-user-experience): Pentagram Archive, The Wildlife Society, Google Gemini Marketing Site and other nominees show an emphasis on meaningful, intuitive storytelling.
+- [Webby Awards 2026, Best User Interface](https://winners.webbyawards.com/winners/websites-and-mobile-sites/features-design/best-user-interface): DICH Fashion and Google Store winners; evidence that useful, approachable product surfaces matter as much as advanced interaction.
+- [Awwwards and FWA Site of the Year teardowns](https://rickcreates.com/year): interactive exploration as the experience itself (including Bruno Simon's explorable portfolio); LottoLab adapts the exploration principle to a data-driven universe, not a copied 3D game.
+- [Awwwards/FWA award-site teardowns](https://rickcreates.com/): experiments in cursor-led visuals and interaction feedback.
+- [web.dev accessible motion](https://web.dev/learn/design/accessibility): use `prefers-reduced-motion`, protect legibility and avoid intense or dizzying movement.
+
+Implemented decisions:
+1. **Finger-responsive feedback site-wide:** each touch displays one short luminous ripple with a few fading micro-particles. Nothing blocks native scrolling or intercepts buttons.
+2. **Number Universe:** one performant 2D Canvas containing 40 real Lotto numbers. A touch stirs nearby balls; a tap opens actual historical frequency and co-occurrence statistics. A verified analysis filter drives every count.
+3. **Data-backed connections:** optional pair lines correspond to co-occurrences in the archived sample, never invented drawing-machine connections or odds of winning.
+4. **Meaningful touch targets:** the latest actual winning balls are buttons that open the Number Universe inspector for that number.
+5. **Accessibility and performance:** an ordinary 1–40 selector provides full keyboard access; animation is capped at ~30fps, pauses when offscreen, uses a capped device pixel ratio, and defaults off for reduced-motion or data-saver preferences. Touch gestures never call `preventDefault()`.
+6. **Explicit motion control:** visitors can disable animation, with the numbers and counts still accessible and accurate.
+7. **Truth in research:** the 20 pre-draw research lines remain immutable, untouched by Universe interactions, and past frequencies have no known predictive advantage.
+
+This is an interpretation of interaction principles from contemporary projects and awards; it is not a claim that LottoLab is already on a global award ranking.
