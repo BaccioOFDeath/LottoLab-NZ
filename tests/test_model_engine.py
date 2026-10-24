@@ -29,7 +29,7 @@ class ModelResearchTests(unittest.TestCase):
     def test_walk_forward_is_out_of_sample(self):
         rows=model.get_draws()
         stats,history=model.backtest(rows)
-        self.assertEqual(len(history),len(rows)-model.MIN_TRAIN)
+        self.assertEqual(history,len(rows)-model.MIN_TRAIN)
         self.assertEqual(stats['adaptive_frequency_v1']['tested'],len(rows)-model.MIN_TRAIN)
         for item in history:
             self.assertGreaterEqual(item['draw'],rows[model.MIN_TRAIN]['draw'])
@@ -72,6 +72,45 @@ class ModelResearchTests(unittest.TestCase):
                 self.assertEqual(scored['numbers'],target['numbers'])
             finally:
                 model.DRAW_FILE,model.PICK_FILE,model.REPORT_FILE=original
+
+
+    def test_twenty_unique_slots_and_preserved_picks(self):
+        import datetime as dt,json,tempfile
+        from pathlib import Path
+        rows=model.get_draws()
+        previous=[
+            {'target_date':'2026-10-28','created_at':'2026-10-24T11:48:07.547Z',
+             'model':m,'model_version':1,'numbers':nums,'powerball':pb,
+             'training_draws':53,'status':'pending'}
+            for m,nums,pb in [
+                ('adaptive_frequency_v1',[1,3,4,19,22,37],7),
+                ('random_baseline_v1',[11,12,21,29,36,39],4)]]
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp)
+            data=folder/'draws.json';picks=folder/'picks.json';report=folder/'report.json'
+            data.write_text(json.dumps(rows))
+            picks.write_text(json.dumps(previous))
+            originals=(model.DRAW_FILE,model.PICK_FILE,model.REPORT_FILE)
+            try:
+                model.DRAW_FILE=data;model.PICK_FILE=picks;model.REPORT_FILE=report
+                when=dt.datetime(2026,10,25,9,10,tzinfo=model.NZ)
+                model.run(when)
+                first=json.loads(picks.read_text())
+                self.assertEqual(len(first),20)
+                self.assertEqual(first[:2],previous) # immutable original 2
+                self.assertEqual(len(set((tuple(p['numbers']),p['powerball']) for p in first)),20)
+                for m in model.MODELS:
+                    group=[p for p in first if p['model']==m]
+                    self.assertEqual(len(group),10)
+                    self.assertEqual({model.line_id(p) for p in group},set(range(1,11)))
+                model.run(when+dt.timedelta(minutes=4))
+                after=json.loads(picks.read_text())
+                self.assertEqual(after,first)
+                out=json.loads(report.read_text())
+                self.assertEqual(out['lines_per_draw'],20)
+                self.assertEqual(len(out['upcoming_picks']),20)
+            finally:
+                model.DRAW_FILE,model.PICK_FILE,model.REPORT_FILE=originals
 
     def test_random_expected_is_point_nine(self):
         self.assertAlmostEqual(6*6/40,0.9)
