@@ -498,3 +498,25 @@ test('Geo Lab data outage gives a clear message and does not affect main Lotto r
  await expect(page.locator('#latestDraw')).toContainText(String(entries[0].draw));
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
 });
+
+
+test('Geo research panel shows sourced monthly sample, location precision and online mix',async({page})=>{
+ const geo=require('../data/geo-winners.json');
+ const retail=geo.records.filter(r=>r.channel==='retail');
+ await page.goto('/#geo');
+ await page.locator('#geoResearch summary').click();
+ await expect(page.locator('#geoResearch')).toHaveAttribute('open','');
+ await expect(page.locator('#geoSources')).toHaveText(String(new Set(retail.map(r=>r.source_url)).size));
+ await expect(page.locator('#geoCityPrecision')).toHaveText(String(retail.filter(r=>r.precision==='city').reduce((n,r)=>n+r.tickets,0)));
+ await expect(page.locator('#geoRegionPrecision')).toHaveText(String(retail.filter(r=>r.precision==='region').reduce((n,r)=>n+r.tickets,0)));
+ await expect(page.locator('#geoReportDates')).toHaveText(String(new Set(retail.map(r=>r.draw_date)).size));
+ await expect(page.locator('#geoMonthlyBars .geo-month-col')).toHaveCount(12);
+ await expect(page.locator('#geoRetailShare')).toContainText('100.0%');
+ await page.locator('#geoChannel').selectOption('all');
+ const total=geo.records.reduce((n,r)=>n+r.tickets,0);
+ const online=geo.records.filter(r=>r.channel==='online').reduce((n,r)=>n+r.tickets,0);
+ await expect(page.locator('#geoTotal')).toHaveText(String(total));
+ await expect(page.locator('#geoOnlineShare')).toContainText('MyLotto: '+online);
+ await expect(page.locator('#geoSources')).toHaveText(String(new Set(geo.records.map(r=>r.source_url)).size));
+ await expect(page.locator('#geoResearch')).toContainText('partial sample');
+});
