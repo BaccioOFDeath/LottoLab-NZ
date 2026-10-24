@@ -1,69 +1,65 @@
-# LottoLab NZ — independent NZ Lotto research
+# LottoLab NZ
 
-Site: https://baccioofdeath.github.io/LottoLab-NZ/
+**Live website:** https://baccioofdeath.github.io/LottoLab-NZ/
 
-## Current status (24 October 2026)
-- Public interactive research dashboard: **deployed via GitHub Pages**
-- Data: **16 rows** from 2 September to 24 October 2026. Draw 2632 (24 October 2026) was cross-checked against two independently hosted public result pages. **The older seed records have not all been independently reverified.**
-- Scheduled updater: **configured**, runs Wednesday and Saturday after NZ evening draw; **not yet confirmed in a real scheduled run.**
-- Full Lotto history since 1987: **not yet imported**.
-- Full Lotto-style UI redesign: deferred until historical ingestion and updater are validated.
+Independent New Zealand Lotto historical results, number selection experiments and a public, pre-draw prediction audit ledger. **Not affiliated with Lotto NZ. Not a ticket checker or ticket seller.**
 
-## Website features
-Main-ball heatmap, frequency charts, leading numbers, last-seen gaps, common number pairs, basic composition, Powerball distribution (up to 14 with rules changed from 10 in September 2026), weekday/sample filters, search, CSV export.
+## What is working
 
-## Automated refresh
-Workflow: `.github/workflows/update-results.yml`
-Source comparison script: `scripts/update_results.py`
+- Mobile-friendly Lotto-style latest results, archive search, day/period filters, 40-ball heat map, number pairs and CSV export
+- Random number picker, balanced selection and experimental frequency-weighted picker
+- Separate Powerball rule eras (10-number pool before September 2026, 14-number pool beginning 16 September 2026)
+- A public **Prediction & Performance** centre with adaptive-frequency and random-baseline models
+- Prospective six-number + Powerball selections written and timestamped **before** a future draw, followed by scoring against verified results
+- Every hit and miss retained in the public prediction ledger; original GitHub commits expose previous snapshots
+- Chronological backtesting with no information from the target draw in training
+- GitHub Actions archive validation, desktop/mobile browser tests and evaluation workflow
+- Two-source validation for imported recent records; source URLs stored with each result
 
-The script requests two separate public result pages:
-- https://www.lottodraw.co.nz/lotto/results
-- https://dashtickets.nz/lotto-results/
+## Current data quality / historic coverage
 
-It parses both, validates game/date rules, requires an exact match (draw number, date, six balls, bonus ball, Powerball), prevents conflicts, and adds a new draw only if both sources agree. It fails without updating if a source is unavailable, the layout changes, or the numbers differ. It makes no calls to private MyLotto endpoints.
+See `data/draws.json` for the current number of records and `data/model-performance.json` for the latest evaluation snapshot. The backfill is **not complete**. The verified recent records span parts of 2025–2026, with a contiguous January–October 2026 block, but many older years remain absent.
 
-**Caution:** Both secondary pages might ultimately use the same underlying official feed; they are independently hosted, not independent official authorities. Further work should address licensing, provenance and official confirmation. GitHub Actions scheduler may run late or occasionally be skipped, and the real production run has not been proven yet. The workflow may require enabling Actions and the repository's workflow token to have write permissions.
+The first two August 1987 results have been separately checked and are kept in `data/pre-powerball-staging.json`, **not** mixed into the current public dataset, because Powerball and Strike did not exist in 1987. Old-source placeholders of `00` must never be mistaken for drawn Powerball numbers.
 
-To test: GitHub → Actions → Verify Lotto results → Run workflow, inspect the logs. If a run fails, do not disable validation to force a result.
+### Incremental 2018+ importer
 
-## Next steps
-1. Confirm legitimate data reuse rights and authoritative historical dataset.
-2. Audit and correct all seed entries.
-3. Import historical results back to 1987 where reliable records are available, storing source/provenance and game-rule periods.
-4. Add data completeness checks and failure notifications.
-5. Observe successful automatic updates across multiple real draws.
-6. Redesign full UI with a friendly Lotto-results presentation while retaining an advanced analytics view.
+`scripts/backfill_recent.py` checks a small number of missing draws in reverse chronological order using two independent public result archives:
+- https://app.nz-lotto.com/
+- https://www.lottodraw.co.nz/
 
-## Disclaimer
-This website is independent of Lotto NZ and not a ticket checker or gambling service. Check winning numbers and claims directly with Lotto NZ. Historical results do not change independent future-draw probabilities.
+It accepts a draw only when identifier, date, six unique main numbers, bonus ball and Powerball agree. It stops on repeated source errors, does not guess missing results and spaces out requests. `.github/workflows/backfill.yml` is configured for a small daily run; **successful automated operation should be judged from actual GitHub Actions results, not from configuration alone**.
 
+For historical draws before December 2018, further source verification and rights assessment is necessary. More comprehensive historical reuse may require an authorised dataset from Lotto NZ or explicit permission from the provider.
 
-## Lotto-style UI redesign (October 2026)
-Redesigned the responsive public homepage using `index.html`, `styles.css`, `app.js` and `favicon.svg`. It now separates a familiar Lotto-style latest-results experience from the optional number-analysis and historical archive sections. The UI explicitly shows that data coverage is partial and distinguishes two-source cross-checked records from older seed entries. The redesign is committed, but the separate CSS/JS files need successful GitHub Pages deployment and browser verification before this release is considered fully operational.
+### Draw result updates
 
-## Research findings and limitations
-- Lotto first drew on 1 August 1987; the independently cited first draw is 4, 8, 16, 29, 32, 40 (bonus 30). **Historical first-draw record not added to the analysis archive**, because mixed-era data would require rules-aware filters and verified contiguous coverage.
-- Strike launched in 1993, Powerball in 2001. Powerball expanded from 10 to 14 numbers for the 16 September 2026 draw; analyses must partition rules eras.
-- lottodraw.co.nz archive explicitly begins in December 2018, not in 1987.
-- An independently operated archive lists years dating to 1987, but completeness, rights and accuracy are not yet established.
-- A public GitHub project `ricmagno/Lotto_NZ` documents an Excel-based past results import script; it is research material, **not** confirmed complete or legally reusable historical data.
-- We must not infer missing draw results, invent records, or describe this sample as a complete 1987–present dataset.
+`scripts/update_results.py` compares two independent public pages after the Wednesday and Saturday draws. `.github/workflows/update-results.yml` is configured to check for newly confirmed results and, when accepted, score the stored pre-draw model predictions. A scheduled production run following a future draw must still be observed and verified.
 
-## Data intake milestone
-Obtain permission for reliable historical results, audit all current seed data, import back history with provenance, compare against multiple independently published sources, then add versioned game rules, completeness checks and regression tests. Only after this milestone should the redesign be called production-ready.
+## Auditable model experiment
 
+`scripts/model_engine.py` uses at least 30 **earlier**, two-source-verified results to evaluate `adaptive_frequency_v1` against `random_baseline_v1`. It writes:
 
-## 25 October 2026 — data quality / model milestone
-- Added `scripts/stage_history.py` to validate and **stage**, not publish, properly sourced licensed CSV history.
-- Added `scripts/evaluate.py`: rolling, chronological out-of-sample comparisons to a random baseline, with a minimum 30 previously two-source-verified training draws; no look-ahead.
-- Added `.github/workflows/evaluate.yml` to run validation + evaluation on relevant pushes. Scheduled and write workflow success still needs checking in GitHub Actions.
-- Existing public archive: **24 stored rows** (1 two-source cross-checked, 8 single-source, 15 unverified). Some records are discontinuous, spanning 2025 and 2026. No claim of complete archival coverage.
-- Current method isn't a reliable predictor of future random winning numbers. Historical inference can be researched with prospective, precommitted picks, but random-draw outcomes cannot be reliably forecast.
-- Next major external dependency: identify a complete historical dataset with permission for reuse (or obtain it directly from Lotto NZ) and perform independent audits, including rule-era treatment for historic Powerball/Strike.
+- `data/model-picks.json` — future selections, models, target dates, original creation timestamp and training sample size; previous selections are never regenerated
+- `data/model-performance.json` — held-out backtests and actual prospective results scored after a verified draw
 
-### Running the audit locally
-```sh
+The initial published selections for 28 October 2026 used **53 verified historical draws**. Later backfills **must not** retroactively change those original selections.
+
+**No evidence of a dependable winning-number prediction advantage has been established.** For a fair independent draw of six from 40, any fixed six-number line has the same probability of matching the jackpot numbers. Expected average main-number matches per draw: 0.9. A small historical comparison favouring one model over another does not validate a predictive edge.
+
+## Run development tests
+
+```bash
 python -m unittest discover -s tests -v
 python scripts/evaluate.py
-python scripts/stage_history.py path/to/licensed-draws.csv --out data/staged-import.json
+python scripts/model_engine.py
+npm install
+npx playwright install chromium
+npm run test:e2e
 ```
+
+Playwright tests include a 390-pixel mobile viewport, navigation, number picker, results, model scorecard and archive search.
+
+## Responsible use
+
+Results and model selections are for historical research and entertainment. Verify claims with the official Lotto NZ service: https://mylotto.co.nz/. Playing more tickets or following historical patterns does not create a prediction advantage. Play within your means.
