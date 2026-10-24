@@ -97,4 +97,63 @@ window.addEventListener('lottolab:data-ready',()=>{
  const hero=document.getElementById('heroDrawCount');
  if(hero)hero.textContent=count.toLocaleString('en-NZ');
 });
+
+// Touch-reactive finger sparks and tactile ball feedback.
+// One short burst per touch, no scroll interception, haptics, or jackpot theatrics.
+const savedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches||
+ !!(navigator.connection&&navigator.connection.saveData);
+const touchLayer=document.createElement('div');
+touchLayer.className='lotto-touch-layer';
+touchLayer.setAttribute('aria-hidden','true');
+document.body.append(touchLayer);
+let touchEffects=0;
+window.lottoLabTouchEffects=()=>touchEffects;
+function touchPulse(e){
+ if(e.pointerType!=='touch'&&e.pointerType!=='pen')return;
+ if(savedMotion||window.lottoLabMotionEnabled===false||document.hidden)return;
+ if(touchLayer.children.length>20){
+  for(const older of [...touchLayer.children].slice(0,5))older.remove();
+ }
+ const element=e.target instanceof Element?e.target:null;
+ const colored=element?.closest('.ball');
+ const tint=colored?.classList.contains('bonus')?'#ffd373':colored?.classList.contains('power')?'#ff76b4':'#c99bff';
+ const ring=document.createElement('i');
+ ring.className='touch-ring';
+ ring.style.left=e.clientX+'px';
+ ring.style.top=e.clientY+'px';
+ ring.style.setProperty('--ring-color',tint);
+ touchLayer.append(ring);
+ ring.addEventListener('animationend',()=>ring.remove(),{once:true});
+ touchEffects++;
+ for(let i=0;i<3;i++){
+  const point=document.createElement('i');
+  point.className='touch-mote';
+  point.style.left=e.clientX+'px';point.style.top=e.clientY+'px';
+  point.style.setProperty('--ring-color',tint);
+  const direction=(i*2*Math.PI/3)+(e.clientX%23)/23;
+  point.style.setProperty('--dx',Math.round(Math.cos(direction)*27)+'px');
+  point.style.setProperty('--dy',Math.round(Math.sin(direction)*27)+'px');
+  touchLayer.append(point);
+  point.addEventListener('animationend',()=>point.remove(),{once:true});
+ }
+ if(colored){
+  colored.classList.remove('tap-pop');
+  void colored.offsetWidth;
+  colored.classList.add('tap-pop');
+  colored.addEventListener('animationend',()=>colored.classList.remove('tap-pop'),{once:true});
+ }
+}
+document.addEventListener('pointerdown',touchPulse,{passive:true});
+// Each winning main ball has a meaningful touch action: inspect its recorded history.
+$('mainBalls')?.addEventListener('click',event=>{
+ const button=event.target.closest('button[data-inspect]');
+ if(!button)return;
+ const n=Number(button.dataset.inspect),selector=$('universeNumberPicker'),section=$('universe');
+ if(!selector||!section||!Number.isInteger(n))return;
+ selector.value=String(n);
+ selector.dispatchEvent(new Event('change',{bubbles:true}));
+ section.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches||window.lottoLabMotionEnabled===false?'instant':'smooth',block:'start'});
+ announce('Exploring the history of Lotto number '+n);
+});
+
 })();
