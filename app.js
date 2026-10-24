@@ -1,6 +1,5 @@
 'use strict';const $=id=>document.getElementById(id);let draws=[],visible=[],limit=12,selectedNumber=null;
 const ball=(n,kind='')=>'<span class="ball '+kind+'">'+String(n).padStart(2,'0')+'</span>';
-const clean=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;',"'":'&#39;'}[c]));
 const dateNZ=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-NZ',{timeZone:'Pacific/Auckland',weekday:'long',day:'numeric',month:'long',year:'numeric'});
 const calendarDay=d=>new Date(d+'T12:00:00Z').getUTCDay();
 function valid(d){return Number.isInteger(d.draw)&&/^\d{4}-\d{2}-\d{2}$/.test(d.date)&&Array.isArray(d.numbers)&&d.numbers.length===6&&new Set(d.numbers).size===6&&d.numbers.every(n=>Number.isInteger(n)&&n>=1&&n<=40)&&Number.isInteger(d.bonus)&&d.bonus>=1&&d.bonus<=40&&!d.numbers.includes(d.bonus)&&Number.isInteger(d.powerball)&&d.powerball>=1&&d.powerball<=(d.date>='2026-09-16'?14:10)}
