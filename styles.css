@@ -34,3 +34,19 @@
 /* Four research filters: rules, machine, ball set, responsible operator */
 @media(min-width:851px){.context-controls{grid-template-columns:1.35fr 1fr 1fr 1fr}}
 @media(min-width:541px) and (max-width:850px){.context-controls label:first-child{grid-column:auto}}
+
+/* Exactly 20 pre-recorded draw lines: no unlimited on-device generation */
+.picker-top{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.picker-top h3{font:900 24px Outfit;margin:8px 0 3px}
+.picker-top .picker-controls{align-items:start;display:flex;flex-direction:column;gap:7px;min-width:210px}
+.picker-top .picker-controls label{font-size:11px;color:#7e6c94}
+.fixed-picks{display:grid;grid-template-columns:1fr;gap:8px;margin:19px 0}
+.fixed-pick-line{display:flex;align-items:center;gap:12px;border:1px solid #ede5f6;border-radius:13px;padding:11px 13px;background:#fff;min-width:0;flex-wrap:wrap}
+.fixed-pick-name{width:116px;flex:none}.fixed-pick-name strong{display:block;font:900 14px Outfit}.fixed-pick-name small{display:block;color:#8d7fa0;font-size:10px;margin-top:3px}
+.fixed-pick-numbers{display:flex;gap:5px;align-items:center;flex:1;flex-wrap:wrap}
+.fixed-pick-numbers .ball{width:36px;height:36px;font-size:14px;flex:none}
+.fixed-pick-pb{display:inline-block;background:#fde3ef;color:#a91f64;border-radius:8px;padding:10px;font-size:12px;font-weight:900;white-space:nowrap}
+.fixed-copy{padding:8px 13px;min-width:62px}
+.picker-panel .picker-actions{margin-top:20px}
+@media(max-width:570px){.fixed-pick-line{gap:7px;padding:11px}.fixed-pick-name{width:100%;display:flex;justify-content:space-between;gap:8px;align-items:center}.fixed-pick-numbers{flex:1 1 100%}.fixed-pick-numbers .ball{width:35px;height:35px;font-size:13px}.fixed-pick-pb{font-size:11px}.fixed-copy{margin-left:auto}.picker-top .picker-controls{width:100%}.picker-top .picker-controls select{width:100%}}
+@media(max-width:385px){.fixed-pick-numbers .ball{width:32px;height:32px;font-size:12px}}
