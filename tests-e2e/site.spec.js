@@ -15,25 +15,36 @@ test('latest results and scorecard load from validated data',async({page})=>{
  await expect(page.locator('#modelLedgerRows tr')).not.toHaveCount(0);
  await expect(page.locator('#modelLedgerRows')).toContainText('Awaiting result');
  await expect(page.locator('#pickerCount')).toContainText('20 of 20');
- await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
 });
-test('strictly 20 immutable lines per draw and no unlimited reroll',async({page})=>{
+test('20 predictions stay immutable with four-line preview and expansion',async({page})=>{
  await page.goto('/');
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
  await expect(page.locator('#pickerGenerate')).toHaveCount(0);
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
+ const preview=await page.locator('#pickerLines').innerText();
+ const expand=page.locator('#pickerExpand');
+ await expect(expand).toHaveAttribute('aria-expanded','false');
+ await expand.click();
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
- const first=await page.locator('#pickerLines').innerText();
+ await expect(expand).toHaveAttribute('aria-expanded','true');
+ await expand.click();
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
  await page.locator('#pickerMode').selectOption('adaptive_frequency_v1');
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
+ await expand.click();
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
  await page.locator('#pickerMode').selectOption('random_baseline_v1');
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
+ await expand.click();
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
  await page.locator('#pickerMode').selectOption('all');
  await expect(page.locator('#pickerCopyAll')).toBeEnabled();
  const copy=page.locator('#pickerLines .fixed-pick-line').first().locator('button');
  await expect(copy).toBeEnabled();
  await page.reload();
- await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
- expect(await page.locator('#pickerLines').innerText()).toEqual(first);
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
+ expect(await page.locator('#pickerLines').innerText()).toEqual(preview);
 });
 test('archive search filters and inspect number frequencies',async({page})=>{
  await page.goto('/');
@@ -154,6 +165,7 @@ test('Evidence Lab remains usable at iPhone-width 390px without page overflow',a
 test('bonus and Powerball are real color-coded balls, not unplayable ticket choices',async({page})=>{
  await page.goto('/#picker');
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
+ await page.locator('#pickerExpand').click();
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
  await expect(page.locator('#pickerLines .ball.bonus')).toHaveCount(20);
  await expect(page.locator('#pickerLines .ball.power')).toHaveCount(20);
@@ -237,6 +249,7 @@ test('real mobile touch makes a transient ripple, no blocked scrolling, and neve
   const page=await context.newPage();
   await page.goto('/#universe');
   await expect(page.locator('#universeCanvas')).toBeVisible();
+  await page.locator('#pickerExpand').click();
   await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
   const original=await page.locator('#pickerLines').innerText();
   const before=await page.evaluate(()=>window.lottoLabTouchEffects());
@@ -263,4 +276,79 @@ test('reduced-motion mode keeps the Number Universe readable without forced anim
  await page.locator('#universeNumberPicker').selectOption('28');
  await expect(page.locator('#universeSelectedTitle')).toHaveText('Number 28');
  await expect(page.locator('#universeHits')).toHaveText(String(entries.filter(d=>d.numbers.includes(28)).length));
+});
+
+
+test('Powerball and Strike arrows are real accessible controls with useful destinations',async({page})=>{
+ await page.goto('/');
+ const power=page.locator('#powerballGuide'),strike=page.locator('#strikeGuide');
+ await expect(power).not.toHaveAttribute('open');
+ await expect(strike).not.toHaveAttribute('open');
+ await page.locator('#powerballGuide summary').click();
+ await expect(power).toHaveAttribute('open','');
+ await expect(power).toContainText('expanded to 14');
+ await expect(page.locator('#labDeepDive')).not.toHaveAttribute('open');
+ await page.locator('#powerballGuide a[data-open-details="labDeepDive"]').click();
+ await expect(page.locator('#labDeepDive')).toHaveAttribute('open','');
+ await expect(page.locator('#powerChartPanel')).toBeVisible();
+ await expect(page).toHaveURL(/#powerChartPanel$/);
+ await page.locator('#strikeGuide summary').click();
+ await expect(strike).toHaveAttribute('open','');
+ await expect(strike).toContainText('first four balls in the order drawn');
+ await expect(strike).toContainText('does not yet verify their order');
+ const official=page.locator('#strikeGuide a[href*="how-to-play"]');
+ await expect(official).toHaveAttribute('href','https://mylotto.co.nz/lotto/how-to-play');
+ await expect(official).toHaveAttribute('target','_blank');
+ await page.locator('#strikeGuide summary').click();
+ await expect(strike).not.toHaveAttribute('open');
+});
+test('advanced research is optional and accessible, with visible primary filters',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ await expect(page.locator('#ruleFilter')).toBeVisible();
+ await expect(page.locator('#advancedFilters')).not.toHaveAttribute('open');
+ await expect(page.locator('#evidenceDeep')).not.toHaveAttribute('open');
+ await expect(page.locator('.model-compare')).not.toHaveAttribute('open');
+ await page.locator('#advancedFilters summary').click();
+ await expect(page.locator('#advancedFilters')).toHaveAttribute('open','');
+ await expect(page.locator('#equipmentFilter')).toBeDisabled();
+ await expect(page.locator('#ballSetFilter')).toBeDisabled();
+ await expect(page.locator('#operatorFilter')).toBeDisabled();
+ await page.locator('#evidenceDeep summary').click();
+ await expect(page.locator('#evidenceDeep')).toHaveAttribute('open','');
+ await expect(page.locator('#evidenceVerdict')).toContainText(/No individual number|depart from/);
+ await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(391);
+});
+test('all in-page links resolve, and visible buttons have user-perceivable names',async({page})=>{
+ await page.goto('/');
+ const audit=await page.evaluate(()=>{
+  const allIds=new Map(),duplicates=[];
+  for(const el of document.querySelectorAll('[id]')){
+   const key=el.id;allIds.set(key,(allIds.get(key)||0)+1);
+  }
+  for(const [key,count] of allIds)if(count>1)duplicates.push(key);
+  const missing=[...document.querySelectorAll('a[href^="#"]')].filter(a=>a.getAttribute('href').length>1&&!document.getElementById(decodeURIComponent(a.hash.slice(1)))).map(a=>a.getAttribute('href'));
+  const unnamed=[...document.querySelectorAll('button')].filter(b=>!b.textContent.trim()&&!b.getAttribute('aria-label')&&!b.getAttribute('title')).map(b=>b.outerHTML.slice(0,90));
+  return {duplicates,missing,unnamed};
+ });
+ expect(audit).toEqual({duplicates:[],missing:[],unnamed:[]});
+});
+test('archive export downloads a valid CSV rather than a dead button',async({page})=>{
+ await page.goto('/');
+ await expect(page.locator('#archiveCount')).toContainText('matching records');
+ const downloadPromise=page.waitForEvent('download');
+ await page.locator('#exportCsv').click();
+ const download=await downloadPromise;
+ expect(download.suggestedFilename()).toBe('lottolab-nz-draws.csv');
+});
+test('Powerball and Strike guides work by keyboard in narrow viewport',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ await page.locator('#powerballGuide summary').focus();
+ await page.keyboard.press('Enter');
+ await expect(page.locator('#powerballGuide')).toHaveAttribute('open','');
+ await page.locator('#strikeGuide summary').focus();
+ await page.keyboard.press('Space');
+ await expect(page.locator('#strikeGuide')).toHaveAttribute('open','');
+ await expect.poll(()=>page.evaluate(()=>Math.max(document.documentElement.scrollWidth,document.body.scrollWidth))).toBeLessThanOrEqual(391);
 });
