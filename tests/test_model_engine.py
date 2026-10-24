@@ -60,6 +60,10 @@ class ModelResearchTests(unittest.TestCase):
             previous={'target_date':target['date'],'created_at':'2026-10-23T00:00:00Z',
                 'model':'adaptive_frequency_v1','model_version':1,
                 'numbers':target['numbers'],'powerball':target['powerball'],
+                'bonus_prediction':target['bonus'],
+                'bonus_prediction_created_at':'2026-10-23T00:00:00Z',
+                'bonus_prediction_method':'research_only_deterministic_v1',
+                'bonus_is_ticket_selection':False,
                 'training_draws':30,'status':'pending'}
             picks_file.write_text(json.dumps([previous]))
             original=(model.DRAW_FILE,model.PICK_FILE,model.REPORT_FILE)
@@ -74,7 +78,7 @@ class ModelResearchTests(unittest.TestCase):
                 self.assertEqual(scored['main_matches'],6)
                 self.assertTrue(scored['powerball_match'])
                 self.assertEqual(scored['numbers'],target['numbers'])
-                self.assertNotIn('bonus_prediction_match',scored)  # no bonus guess existed before this draw
+                self.assertTrue(scored['bonus_prediction_match'])  # independent research-only score
             finally:
                 model.DRAW_FILE,model.PICK_FILE,model.REPORT_FILE=original
 
