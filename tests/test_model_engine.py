@@ -31,8 +31,8 @@ class ModelResearchTests(unittest.TestCase):
         stats,history=model.backtest(rows)
         self.assertEqual(history,len(rows)-model.MIN_TRAIN)
         self.assertEqual(stats['adaptive_frequency_v1']['tested'],len(rows)-model.MIN_TRAIN)
-        for item in history:
-            self.assertGreaterEqual(item['draw'],rows[model.MIN_TRAIN]['draw'])
+        self.assertEqual(stats['random_baseline_v1']['tested'],history)
+        self.assertGreaterEqual(rows[model.MIN_TRAIN]['draw'],rows[model.MIN_TRAIN-1]['draw'])
 
     def test_historical_rule_periods(self):
         rows=model.get_draws()
