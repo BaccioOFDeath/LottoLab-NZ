@@ -1,5 +1,24 @@
 [
   {
+    "draw": 2632,
+    "date": "2026-10-24",
+    "numbers": [
+      13,
+      17,
+      21,
+      24,
+      26,
+      28
+    ],
+    "bonus": 27,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results",
+      "https://dashtickets.nz/lotto-results/"
+    ]
+  },
+  {
     "draw": 2631,
     "date": "2026-10-21",
     "numbers": [
