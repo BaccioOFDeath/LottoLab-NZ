@@ -330,6 +330,12 @@
       "lon": 176.071,
       "region": "Waikato",
       "precision": "city"
+    },
+    "Taupo": {
+      "lat": -38.687,
+      "lon": 176.071,
+      "region": "Waikato",
+      "precision": "city"
     }
   },
   "coordinate_quality": "All coordinates are approximate city centres or region reference points. Never physical retailer street addresses.",
