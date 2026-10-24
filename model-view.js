@@ -28,7 +28,7 @@ function ledger(picks,history){
     const outcome=confirmed?'<span class="ledger-result">'+count+'/6 main'+(powerMatch?' · PB ✓':' · PB ✕')+'</span>':'<span class="ledger-pending">Awaiting result</span>';
     const label=(friendly[p.model]||'Research model')+' · #'+(p.line_number||1);
     const date=/^\d{4}-\d\d-\d\d$/.test(p.target_date)?p.target_date:'Unknown date';
-    return '<tr><td>'+date+'</td><td>'+label+'</td><td>'+p.numbers.map(n=>String(n).padStart(2,'0')).join(' · ')+'</td><td>'+String(p.powerball).padStart(2,'0')+'</td><td>'+outcome+'</td></tr>';
+    return '<tr><td>'+date+'</td><td>'+label+'</td><td>'+p.numbers.map(n=>String(n).padStart(2,'0')).join(' · ')+'</td><td><span class="ball bonus ledger-ball">'+(Number.isInteger(p.bonus_prediction)?String(p.bonus_prediction).padStart(2,'0'):'—')+'</span></td><td><span class="ball power ledger-ball">'+String(p.powerball).padStart(2,'0')+'</span></td><td>'+outcome+(confirmed&&p.bonus_prediction!=null?' · bonus '+(p.bonus_prediction===actual.bonus?'✓':'✕'):'')+'</td></tr>';
   }).join('')||'<tr><td colspan="5">No recorded selections yet.</td></tr>';
   text('modelLedgerSummary',completed+' selections scored · '+awaiting+' awaiting future draws. All results displayed, including zero matches. Check original dated commits for audit history.');
 }
