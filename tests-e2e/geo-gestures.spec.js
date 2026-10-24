@@ -70,7 +70,7 @@ test('Move mode supports one-finger dragging only when opted in, and reset resto
  await expect(page.locator('#geoMapStage')).toHaveCSS('touch-action','pan-y');
  await page.locator('#geoZoomReset').click();
  await expect(page.locator('#geoZoomValue')).toHaveText('1.0×');
- await expect(page.locator('#geoScene')).toHaveAttribute('style',/scale\(1\)$/);
+ await expect(page.locator('#geoScene')).toHaveAttribute('style',/scale\(1\);$/);
  await expect(page.locator('#geoZoomReset')).toBeDisabled();
 });
 test('pinching never alters source data, location pins, page width or the 20 locked predictions',async({page})=>{
