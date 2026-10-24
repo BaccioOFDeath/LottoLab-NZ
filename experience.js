@@ -38,6 +38,7 @@ function filterCommands(){
 }
 input?.addEventListener('input',filterCommands);
 $('quickClose')?.addEventListener('click',closeCommands);
+$('openQuickNav')?.addEventListener('click',openCommands);
 results?.addEventListener('click',event=>{
  const button=event.target.closest('button[data-jump]');
  if(!button)return;
