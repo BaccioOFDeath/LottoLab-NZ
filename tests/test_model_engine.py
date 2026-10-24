@@ -41,6 +41,38 @@ class ModelResearchTests(unittest.TestCase):
         after,pb=model.select(rows,'2026-10-28','random_baseline_v1')
         self.assertTrue(1<=pb<=14)
 
+
+    def test_prospective_selections_score_against_verified_draw(self):
+        import datetime as dt, json, tempfile
+        from pathlib import Path
+        rows=model.get_draws()
+        target=rows[-1]
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp)
+            draws_file=folder/'draws.json'
+            picks_file=folder/'model-picks.json'
+            report_file=folder/'model-performance.json'
+            draws_file.write_text(json.dumps(rows))
+            previous={'target_date':target['date'],'created_at':'2026-10-23T00:00:00Z',
+                'model':'adaptive_frequency_v1','model_version':1,
+                'numbers':target['numbers'],'powerball':target['powerball'],
+                'training_draws':30,'status':'pending'}
+            picks_file.write_text(json.dumps([previous]))
+            original=(model.DRAW_FILE,model.PICK_FILE,model.REPORT_FILE)
+            try:
+                model.DRAW_FILE=draws_file
+                model.PICK_FILE=picks_file
+                model.REPORT_FILE=report_file
+                model.run(dt.datetime(2026,10,25,12,0,tzinfo=model.NZ))
+                recorded=json.loads(picks_file.read_text())
+                scored=[x for x in recorded if x['target_date']==target['date']][0]
+                self.assertEqual(scored['status'],'scored')
+                self.assertEqual(scored['main_matches'],6)
+                self.assertTrue(scored['powerball_match'])
+                self.assertEqual(scored['numbers'],target['numbers'])
+            finally:
+                model.DRAW_FILE,model.PICK_FILE,model.REPORT_FILE=original
+
     def test_random_expected_is_point_nine(self):
         self.assertAlmostEqual(6*6/40,0.9)
 
