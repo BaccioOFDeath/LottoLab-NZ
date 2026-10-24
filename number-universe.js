@@ -130,13 +130,13 @@ function resize(){
  populateLayout();
  render();
 }
-function nearest(x,y){
+function nearest(x,y,acceptClosest=false){
  let best=null,distance=Infinity;
  for(const node of nodes){
   const d=Math.hypot(node.x-x,node.y-y);
   if(d<distance){best=node;distance=d;}
  }
- return distance<=Math.max(24,(best?.r||12)+12)?best:null;
+ return acceptClosest||distance<=Math.max(24,(best?.r||12)+12)?best:null;
 }
 function coords(e){
  const box=canvas.getBoundingClientRect();return {x:e.clientX-box.left,y:e.clientY-box.top};
@@ -156,7 +156,9 @@ canvas.addEventListener('pointermove',e=>{
 canvas.addEventListener('pointerup',e=>{
  const pos=coords(e);
  if(pointerDown&&pointerDown.id===e.pointerId&&Math.hypot(pos.x-pointerDown.x,pos.y-pointerDown.y)<12){
-  const match=nearest(pos.x,pos.y);
+  // A finger covers more area than a mouse pointer: accept the closest ball
+  // for a stationary touch, even if the animation nudged it away slightly.
+  const match=nearest(pos.x,pos.y,e.pointerType!=='mouse');
   if(match)inspect(match.n);
  }
  pointerDown=null;
