@@ -26,7 +26,7 @@ function ledger(picks,history){
     const count=confirmed?p.numbers.filter(n=>actual.numbers.includes(n)).length:0;
     const powerMatch=confirmed&&actual.powerball===p.powerball;
     const outcome=confirmed?'<span class="ledger-result">'+count+'/6 main'+(powerMatch?' · PB ✓':' · PB ✕')+'</span>':'<span class="ledger-pending">Awaiting result</span>';
-    const label=friendly[p.model]||'Research model';
+    const label=(friendly[p.model]||'Research model')+' · #'+(p.line_number||1);
     const date=/^\d{4}-\d\d-\d\d$/.test(p.target_date)?p.target_date:'Unknown date';
     return '<tr><td>'+date+'</td><td>'+label+'</td><td>'+p.numbers.map(n=>String(n).padStart(2,'0')).join(' · ')+'</td><td>'+String(p.powerball).padStart(2,'0')+'</td><td>'+outcome+'</td></tr>';
   }).join('')||'<tr><td colspan="5">No recorded selections yet.</td></tr>';
@@ -47,7 +47,7 @@ const historical=bt.average_matches===null?'Not yet measured':Number(bt.average_
 text(statsid,'Held-out historical tests: '+bt.tested+' · Average main-ball matches: '+historical+' / 6 · Prospective selections scored: '+real.draws_scored);
 }}
 const next=report.upcoming_date?fmt(report.upcoming_date):'not yet available';
-text('modelMethodStatus','Target date: '+next+' · '+report.verified_draw_count+' cross-checked records · '+report.backtest_draws+' held-out tests. The adaptive model updates after every verified draw. No statistically reliable edge over random picks has been demonstrated.');
+text('modelMethodStatus','Target date: '+next+' · 20 frozen lines (10 experimental + 10 random control), published before the draw. '+report.verified_draw_count+' verified results · '+report.backtest_draws+' historical held-out tests. Original published lines never change. No statistically reliable edge over random picks has been demonstrated.');
 }catch(e){text('modelError','Unable to load model scorecard: '+e.message);for(const id of ['modelAdaptive','modelRandom'])text(id,'Model data unavailable.');}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
