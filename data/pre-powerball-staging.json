@@ -1,0 +1,44 @@
+[
+  {
+    "draw": 1,
+    "date": "1987-08-01",
+    "numbers": [
+      4,
+      8,
+      16,
+      29,
+      32,
+      40
+    ],
+    "bonus": 30,
+    "powerball": null,
+    "strike": null,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-1",
+      "https://www.nz-lotto.com/lotto-nz-results/lotto-draw/1.php"
+    ],
+    "notes": "Powerball and Strike had not launched; website placeholders of 00 are not actual drawn numbers."
+  },
+  {
+    "draw": 2,
+    "date": "1987-08-08",
+    "numbers": [
+      3,
+      9,
+      13,
+      20,
+      36,
+      39
+    ],
+    "bonus": 38,
+    "powerball": null,
+    "strike": null,
+    "verification": "two-source",
+    "sources": [
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2",
+      "https://www.nz-lotto.com/lotto-nz-results/lotto-draw/2.php"
+    ],
+    "notes": "Powerball and Strike had not launched; website placeholders of 00 are not actual drawn numbers."
+  }
+]
