@@ -36,7 +36,7 @@ function updateContextHint(){
 const selected=sample(),era=$('ruleFilter').value;
 const description=era==='pb14'?'New Powerball 1–14 format':era==='pb10'?'Old Powerball 1–10 format':'Lotto 6/40 format across available dates';
 $('contextCount').textContent=selected.length+' comparable draws';
-$('contextHint').textContent=description+' · '+selected.length+' draws analysed. The Lotto main balls retain their 6/40 probabilities. Powerball frequency is analysed within its own rule period. Machine/ball-set IDs must be documented individually; the app will not guess them.';
+$('contextHint').textContent=description+' · '+selected.length+' draws. Six-from-40 main-ball odds stay the same.';
 window.lottoLabAnalysisDraws=selected;
 window.dispatchEvent(new Event('lottolab:analysis-changed'));
 }
