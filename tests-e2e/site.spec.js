@@ -60,6 +60,7 @@ test('like-for-like rule-era analysis changes main statistics and Powerball pool
  await expect(page.locator('#ruleFilter')).toBeVisible();
  await expect(page.locator('#equipmentFilter')).toBeDisabled();
  await expect(page.locator('#ballSetFilter')).toBeDisabled();
+ await expect(page.locator('#operatorFilter')).toBeDisabled();
  await expect(page.locator('#equipmentCoverage')).toContainText('0 of ');
  await page.locator('#ruleFilter').selectOption('pb14');
  await expect(page.locator('#drawCount')).toHaveText(String(recent));
