@@ -1,7 +1,7 @@
 {
-  "total_stored": 36,
-  "two_source_verified": 36,
-  "missing_draws_within_range": 67,
+  "total_stored": 53,
+  "two_source_verified": 53,
+  "missing_draws_within_range": 50,
   "missing_sample_ids": [
     2531,
     2532,
@@ -54,7 +54,7 @@
     2580,
     2581
   ],
-  "held_out_evaluated": 6,
+  "held_out_evaluated": 23,
   "model_ready": true,
   "disclaimer": "Selection comparison is descriptive. It does not imply predictability."
 }
