@@ -528,3 +528,21 @@ body{background:var(--bg)}
 @media(max-width:810px){.geo-map-toolbar{flex-wrap:wrap;gap:10px}.geo-map-tools{width:100%;justify-content:space-between;border-top:1px solid #ffffff22;padding-top:10px}.geo-map-tools button{min-width:37px}.geo-map-tools #geoMove{flex:1;max-width:110px}}
 @media(max-width:390px){.geo-map-tools button{min-width:33px}.geo-gesture-hint{font-size:9px;padding:7px 8px}}
 @media(prefers-reduced-motion:reduce){.geo-map-stage .geo-scene{transition:none!important}}
+
+/* Map readability QC: scale pins against the parent's zoom instead of letting
+   every "1" balloon into a giant, overlapping circle on an iPhone. */
+.geo-pin{
+ transform:translate(-50%,-50%) scale(var(--geo-pin-compensation,1));
+ opacity:var(--geo-pin-opacity,1);
+ transform-origin:50% 50%;
+ will-change:transform;
+}
+.geo-pin-dot{
+ font-size:calc(12px * var(--geo-label-compensation,1));
+ line-height:1;
+ font-variant-numeric:tabular-nums;
+ text-shadow:0 1px 2px #0431475c;
+}
+/* Visible rings and glows now scale with the corrected pin surface. */
+.geo-pin.selected,.geo-pin:hover{box-shadow:0 0 0 5px #f7cb7f88,0 0 12px #ffc487;outline-width:1.5px}
+@media(prefers-reduced-motion:reduce){.geo-pin{transition:none!important}}
