@@ -14,7 +14,11 @@
     ],
     "powerball": 7,
     "training_draws": 53,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 11,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -31,7 +35,11 @@
     ],
     "powerball": 4,
     "training_draws": 53,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 2,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -49,7 +57,11 @@
     ],
     "powerball": 7,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 29,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -67,7 +79,11 @@
     ],
     "powerball": 11,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 31,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -85,7 +101,11 @@
     ],
     "powerball": 14,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 19,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -103,7 +123,11 @@
     ],
     "powerball": 1,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 10,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -121,7 +145,11 @@
     ],
     "powerball": 5,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 3,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -139,7 +167,11 @@
     ],
     "powerball": 5,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 6,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -157,7 +189,11 @@
     ],
     "powerball": 3,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 28,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -175,7 +211,11 @@
     ],
     "powerball": 6,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 7,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -193,7 +233,11 @@
     ],
     "powerball": 13,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 14,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -211,7 +255,11 @@
     ],
     "powerball": 2,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 5,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -229,7 +277,11 @@
     ],
     "powerball": 7,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 26,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -247,7 +299,11 @@
     ],
     "powerball": 7,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 29,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -265,7 +321,11 @@
     ],
     "powerball": 8,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 35,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -283,7 +343,11 @@
     ],
     "powerball": 13,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 5,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -301,7 +365,11 @@
     ],
     "powerball": 2,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 7,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -319,7 +387,11 @@
     ],
     "powerball": 3,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 27,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -337,7 +409,11 @@
     ],
     "powerball": 14,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 28,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   },
   {
     "target_date": "2026-10-28",
@@ -355,6 +431,10 @@
     ],
     "powerball": 9,
     "training_draws": 103,
-    "status": "pending"
+    "status": "pending",
+    "bonus_prediction": 18,
+    "bonus_prediction_created_at": "2026-10-24T21:27:46.718072+00:00",
+    "bonus_prediction_method": "research_only_deterministic_v1",
+    "bonus_is_ticket_selection": false
   }
 ]
