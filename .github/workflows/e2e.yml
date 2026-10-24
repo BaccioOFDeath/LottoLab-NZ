@@ -7,6 +7,8 @@ on:
       - 'app.js'
       - 'model-view.js'
       - 'research-lab.js'
+      - 'number-universe.js'
+      - 'experience.js'
       - 'picker.js'
       - 'styles.css'
       - 'data/**'
