@@ -181,6 +181,42 @@ function renderRanking(groups){
   list.append(button);
  });
 }
+function renderResearch(rows){
+ const tickets=sum(rows),retail=sum(rows.filter(r=>r.channel==='retail')),online=tickets-retail;
+ const precisionCity=sum(rows.filter(r=>r.precision==='city'));
+ const preciseRegion=sum(rows.filter(r=>r.precision==='region'));
+ $('geoSources').textContent=new Set(rows.map(r=>r.source_url)).size;
+ $('geoCityPrecision').textContent=precisionCity;
+ $('geoRegionPrecision').textContent=preciseRegion;
+ $('geoReportDates').textContent=new Set(rows.map(r=>r.draw_date)).size;
+ const pct=v=>tickets?(100*v/tickets).toFixed(1)+'%':'—';
+ $('geoRetailShare').textContent='Retail: '+retail+' ('+pct(retail)+')';
+ $('geoOnlineShare').textContent='MyLotto: '+online+' ('+pct(online)+')';
+ $('geoRetailBar').style.width=(tickets?retail/tickets*100:0).toFixed(2)+'%';
+ $('geoOnlineBar').style.width=(tickets?online/tickets*100:0).toFixed(2)+'%';
+ const latest=dates[index]||'2026-10-01',month=latest.slice(0,7);
+ const [yr,m]=month.split('-').map(Number),months=[];
+ for(let i=11;i>=0;i--){
+  const d=new Date(Date.UTC(yr,m-1-i,1));
+  months.push(d.toISOString().slice(0,7));
+ }
+ const totals=months.map(m=>sum(rows.filter(r=>r.draw_date.startsWith(m))));
+ const max=Math.max(1,...totals),host=$('geoMonthlyBars');
+ host.replaceChildren();
+ for(let i=0;i<months.length;i++){
+  const [y,m]=months[i].split('-').map(Number);
+  const date=new Date(Date.UTC(y,m-1,1));
+  const title=date.toLocaleDateString('en-NZ',{month:'short',year:'numeric',timeZone:'UTC'});
+  const col=make('div',{class:'geo-month-col',title:title+': '+totals[i]+' reported tickets in sampled releases'});
+  const label=make('span',{class:'geo-month-value'},String(totals[i]));
+  const bar=make('span',{class:'geo-month-rail'});
+  bar.append(make('span',{class:'geo-month-fill',style:'height:'+(totals[i]?Math.max(8,100*totals[i]/max):0).toFixed(1)+'%'}));
+  const monthLabel=make('small',{},date.toLocaleDateString('en-NZ',{month:'short',timeZone:'UTC'}));
+  col.append(label,bar,monthLabel);
+  host.append(col);
+ }
+}
+
 function update(){
  filtered=current();const groups=grouped();
  $('geoTotal').textContent=sum(filtered).toLocaleString('en-NZ');
@@ -191,7 +227,7 @@ function update(){
  $('geoMapStatus').textContent=filtered.length?sum(filtered)+' tickets in '+groups.length+
    (layer==='regions'?' regions':' mapped places')+' · selected published reports only · not adjusted for tickets sold.':
    'No reports match this filter or timeline position; try another selection.';
- renderPins(groups);drawHeat(groups);renderRanking(groups);
+ renderPins(groups);drawHeat(groups);renderRanking(groups);renderResearch(filtered);
  if(selected&&groups.some(g=>g.key===selected))inspect(groups.find(g=>g.key===selected));
  else {selected='';$('geoSelectedTitle').textContent='Explore a hotspot';
  $('geoSelectedDescription').textContent='Tap a map marker or ranked location to inspect a published winner report.';
