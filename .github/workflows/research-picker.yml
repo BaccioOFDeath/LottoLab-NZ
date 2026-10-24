@@ -1,0 +1,25 @@
+name: Research model baseline
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '5 19 * * 2,5'
+permissions:
+  contents: write
+jobs:
+  pick:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/research_picker.py
+      - name: Record immutable prospective baseline
+        run: |
+          if git diff --quiet -- data/model-picks.json && [ ! -f data/model-picks.json ]; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/model-picks.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record prospective random baseline'
+          git push
