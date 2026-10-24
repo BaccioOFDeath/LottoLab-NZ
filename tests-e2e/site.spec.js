@@ -240,6 +240,7 @@ test('real mobile touch makes a transient ripple, no blocked scrolling, and neve
   await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
   const original=await page.locator('#pickerLines').innerText();
   const before=await page.evaluate(()=>window.lottoLabTouchEffects());
+  await page.locator('#universeCanvas').scrollIntoViewIfNeeded();
   const bounds=await page.locator('#universeCanvas').boundingBox();
   await page.touchscreen.tap(bounds.x+22,bounds.y+33);
   await expect.poll(()=>page.evaluate(()=>window.lottoLabTouchEffects())).toBeGreaterThan(before);
