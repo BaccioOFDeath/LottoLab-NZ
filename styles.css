@@ -276,3 +276,12 @@ kbd{border:1px solid #e5d9f1;background:#f8f4fc;border-radius:5px;padding:2px 5p
 @keyframes lotto-ball-pop{0%{transform:scale(1)}38%{transform:scale(1.14)}100%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.touch-ring,.touch-mote,.tap-pop{animation:none!important;display:none!important}}
 .motion-off .touch-ring,.motion-off .touch-mote,.motion-off .tap-pop{animation:none!important;display:none!important}
+
+/* Winning balls double as accessible entry points into the 40-ball universe */
+.result-number-button{appearance:none;-webkit-appearance:none;border:1px solid #ffffff66;padding:0;cursor:pointer;touch-action:manipulation;position:relative;transition:transform .18s ease,box-shadow .18s ease;flex:none}
+.result-number-button:hover{transform:translateY(-3px) scale(1.035);box-shadow:inset -4px -6px 8px #38148042,0 11px 20px #49208755}
+.result-number-button:active{transform:translateY(1px) scale(.94)}
+.result-number-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.result-touch-hint{color:#8a68ba;font-size:10px;font-weight:700;letter-spacing:0;text-transform:none}
+@media(max-width:750px){.result-touch-hint{width:100%;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.result-number-button,.hero-universe-link{transition:none!important}}
