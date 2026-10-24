@@ -130,3 +130,22 @@ The **Number Universe** is a source-backed, touch-responsive 40-ball Canvas 2D v
 Research benchmark: [2026 Webby Best UX winners](https://winners.webbyawards.com/winners/websites-and-mobile-sites/features-design/best-user-experience), [2026 Webby Best UI winners](https://winners.webbyawards.com/winners/websites-and-mobile-sites/features-design/best-user-interface), [Awwwards/FWA interaction teardowns](https://rickcreates.com/), and [web.dev accessible motion](https://web.dev/learn/design/accessibility). The design applies general interaction principles and does not copy third-party identities.
 
 **Important:** Historical results and ball-pair frequencies cannot reliably predict a fair draw. LottoLab still lacks a complete 1987–present archive, and pre-draw scoring must be observed through a real future draw.
+
+
+## Geo Lab — New Zealand winner locations & heatmaps
+
+[Open the live Geo Lab](https://baccioofdeath.github.io/LottoLab-NZ/#geo) · [Detailed data and implementation notes](GEO_LAB.md)
+
+**Features:** source-backed New Zealand outline; animated-weather-style winner-density view; accessible town-level map markers and region clustering; filters by Lotto/Powerball/Strike, prize division, retail versus MyLotto reported area, and region; zoom; sample-date replay timeline; source-linked location inspector and top reported towns.
+
+The seed covers **48 curated public report rows representing 51 winning tickets**, across 29 reported cities/areas, 11 regions and 10 *selected* draw dates in 2024–2026. It is *not* a complete census of all winners.
+
+**Accuracy:** A physical retailer pin is only positioned at an approximate **town centre**, never a claimed store door. A MyLotto pin represents a *reported winner area*, **not** a physical ticket-sale location. MyLotto records can be hidden (the default is retailer-only). Every row contains an official or Lotto NZ press-release source URL and a `location_role`.
+
+**Odds:** A high raw win count does not mean a town is luckier, because ticket sales volume and retailer activity are unknown. Sales-normalised comparisons and prediction rankings remain disabled until an independently verified denominator is available. The map makes no claim to predict future winning locations.
+
+**Updating:** `.github/workflows/geo-ingest.yml` runs daily and attempts strict first-division table parsing of public Lotto NZ releases. `scripts/geo_ingest.py` refuses unknown coordinates, ambiguous draw identification and unsupported game types. A successful workflow with zero new records means no new records were accepted — **not** that all future releases are fully ingested. Wider coverage, including accurate future Powerball/Strike retailer locations and pre-2024 archives, requires additional source support and validation.
+
+**Tests:** `tests/test_geo_data.py` checks public source provenance, point validity, online-versus-retail distinction and historic roll-down classification; Playwright covers weather map, Geo filters, marker details, regional grouping, timeline, 390px mobile layout and source-outage fallback. See [GitHub Actions](https://github.com/BaccioOFDeath/LottoLab-NZ/actions).
+
+This is a geographic visualization of reported winners. Past outcomes do not change the odds of a fair independent draw.
