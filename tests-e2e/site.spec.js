@@ -14,18 +14,26 @@ test('latest results and scorecard load from validated data',async({page})=>{
  await expect(page.locator('#modelRandom .model-balls .ball')).toHaveCount(6);
  await expect(page.locator('#modelLedgerRows tr')).not.toHaveCount(0);
  await expect(page.locator('#modelLedgerRows')).toContainText('Awaiting result');
+ await expect(page.locator('#pickerCount')).toContainText('20 of 20');
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
 });
-test('number picker changes modes and copies selections',async({page})=>{
+test('strictly 20 immutable lines per draw and no unlimited reroll',async({page})=>{
  await page.goto('/');
- await expect(page.locator('#pickerBalls .ball')).toHaveCount(6);
- await page.locator('#pickerMode').selectOption('balance');
- await page.locator('#pickerGenerate').click();
- const vals=await page.locator('#pickerBalls .ball').allTextContents();
- const nums=vals.map(Number);
- expect(new Set(nums).size).toBe(6);
- expect(nums.filter(n=>n%2===1).length).toBe(3);
- await page.locator('#pickerMode').selectOption('frequency');
- await expect(page.locator('#pickerStatus')).toContainText(entries.length+' comparable stored draws');
+ await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
+ await expect(page.locator('#pickerGenerate')).toHaveCount(0);
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
+ const first=await page.locator('#pickerLines').innerText();
+ await page.locator('#pickerMode').selectOption('adaptive_frequency_v1');
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
+ await page.locator('#pickerMode').selectOption('random_baseline_v1');
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
+ await page.locator('#pickerMode').selectOption('all');
+ await expect(page.locator('#pickerCopyAll')).toBeEnabled();
+ const copy=page.locator('#pickerLines .fixed-pick-line').first().locator('button');
+ await expect(copy).toBeEnabled();
+ await page.reload();
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
+ expect(await page.locator('#pickerLines').innerText()).toEqual(first);
 });
 test('archive search filters and inspect number frequencies',async({page})=>{
  await page.goto('/');
@@ -70,11 +78,10 @@ test('like-for-like rule-era analysis changes main statistics and Powerball pool
  await expect(page.locator('#drawCount')).toHaveText(String(older));
  await expect(page.locator('#powerPeriod')).toHaveValue('previous');
  await expect(page.locator('#powerRule')).toContainText('PB 1–10');
- await page.locator('#pickerMode').selectOption('frequency');
- await expect(page.locator('#pickerStatus')).toContainText(older+' comparable stored draws');
+ const published=await page.locator('#pickerLines').innerText();
  await page.locator('#ruleFilter').selectOption('all');
  await expect(page.locator('#drawCount')).toHaveText(String(entries.length));
- await expect(page.locator('#pickerStatus')).toContainText(entries.length+' comparable stored draws');
+ expect(await page.locator('#pickerLines').innerText()).toEqual(published);
  await page.locator('.context-history summary').click();
  await expect(page.locator('#contextTimeline')).toContainText('Powerball number pool expanded');
 });
