@@ -138,7 +138,7 @@ Research benchmark: [2026 Webby Best UX winners](https://winners.webbyawards.com
 
 **Features:** source-backed New Zealand outline; animated-weather-style winner-density view; accessible town-level map markers and region clustering; filters by Lotto/Powerball/Strike, prize division, retail versus MyLotto reported area, and region; zoom; sample-date replay timeline; source-linked location inspector and top reported towns.
 
-The seed covers **48 curated public report rows representing 51 winning tickets**, across 29 reported cities/areas, 11 regions and 10 *selected* draw dates in 2024–2026. It is *not* a complete census of all winners.
+The expanded archive now contains **121 source-linked report entries representing 143 winning tickets**, spread across 55 reported towns/areas and 25 selected draw dates in 2024–2026 (researched 25 October 2026). The newly added data includes the official 2026 Powerball jackpot-location recap and more Lotto NZ First/Second Division records. It is *not* a complete census of all winners.
 
 **Accuracy:** A physical retailer pin is only positioned at an approximate **town centre**, never a claimed store door. A MyLotto pin represents a *reported winner area*, **not** a physical ticket-sale location. MyLotto records can be hidden (the default is retailer-only). Every row contains an official or Lotto NZ press-release source URL and a `location_role`.
 
@@ -158,3 +158,9 @@ The map supports **two-finger pinch-to-zoom (1–4×)** centered on your fingers
 The mobile gesture handlers are scoped to the map; they do not globally disable Safari browser pinch/page zoom. New map-gesture regression tests use WebKit Mobile Safari emulation as well as Chromium. Physical iPhone/iPad testing remains a final hardware check.
 
 See [Geo Lab gesture documentation](GEO_LAB.md#pinch-to-zoom-and-map-navigation-iphone-safari--other-browsers) and [browser test runs](https://github.com/BaccioOFDeath/LottoLab-NZ/actions/workflows/e2e.yml).
+
+### October 2026 Geo research upgrade
+- At zoom levels 1–4×, visible hotspot badges and labels now **shrink** as magnification increases; heatmap halos no longer balloon. Town marker locations and click targets remain tied to the map.
+- Expand **Location research & source quality** for distinct press sources, city-versus-region precision, channel share and an explicitly **incomplete** 12-month report timeline. Every number obeys Geo game/division/channel/region/time filters.
+- Added 2026 Powerball jackpot-winning areas from the official October jackpot summary plus source-checked September/October store and online winner-area reports. The importer is conservative and does not manufacture missing locations.
+- This is *not* 143 tickets from all Lotto NZ wins or a representative sample, and the map's concentration cannot reliably predict future locations without ticket-sales denominators.
