@@ -9,13 +9,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=20261025-geo1">
+<link rel="stylesheet" href="./styles.css?v=20261025-geo2-pinch">
 <script defer src="./app.js?v=20261025-geo1"></script><script defer src="./picker.js?v=20261025-geo1"></script>
 <script defer src="./model-view.js?v=20261025-geo1"></script>
 <script defer src="./research-lab.js?v=20261025-geo1"></script>
 <script defer src="./experience.js?v=20261025-geo1"></script>
 <script defer src="./number-universe.js?v=20261025-geo1"></script>
-<script defer src="./geo-lab.js?v=20261025-geo1"></script>
+<script defer src="./geo-lab.js?v=20261025-geo2-pinch"></script>
 </head><body><a href="#results" class="skip-link">Skip to latest results</a><div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 <div class="topline"><div class="shell topline-inner"><span><span class="tiny-led"></span>Independent NZ Lotto research</span><span>Not affiliated with Lotto NZ · <a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official results ↗</a></span></div></div>
 <header class="header"><div class="shell header-inner">
@@ -117,11 +117,11 @@
 <div class="geo-main">
 <div class="geo-map-card">
 <div class="geo-map-toolbar"><div class="geo-mode" role="group" aria-label="Map layers"><button type="button" id="geoHeat" aria-pressed="true" class="geo-mode-button active">◉ Heatmap</button><button type="button" id="geoMarkers" aria-pressed="false" class="geo-mode-button">◎ Markers</button><button type="button" id="geoRegions" aria-pressed="false" class="geo-mode-button">▦ Regions</button></div>
-<div class="geo-map-tools"><button type="button" id="geoZoomIn" aria-label="Zoom in">+</button><button type="button" id="geoZoomOut" aria-label="Zoom out">−</button><button type="button" id="geoZoomReset" aria-label="Reset zoom">↺</button></div></div>
+<div class="geo-map-tools"><button type="button" id="geoMove" aria-pressed="false" aria-label="Enable one-finger map dragging" title="Let one finger move the map instead of scrolling the page">✋ Move</button><button type="button" id="geoZoomOut" aria-label="Zoom out on New Zealand map">−</button><span id="geoZoomValue" class="geo-zoom-value" aria-live="off">1.0×</span><button type="button" id="geoZoomIn" aria-label="Zoom in on New Zealand map">+</button><button type="button" id="geoZoomReset" aria-label="Reset map view" title="Fit New Zealand">↺</button></div></div>
 <div class="geo-map-stage" id="geoMapStage" role="region" aria-label="Interactive New Zealand winning location map">
 <svg id="geoOutline" viewBox="0 0 580 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Simplified outline map of New Zealand"><title>New Zealand map</title><g id="geoCoast"></g></svg>
 <canvas id="geoWeather" aria-hidden="true"></canvas><div id="geoPins" class="geo-pins" aria-label="Winning location markers"></div>
-<div class="geo-map-key"><span><i class="geo-key-retail"></i> Retail town</span><span><i class="geo-key-online"></i> MyLotto area</span></div>
+<div id="geoGestureHint" class="geo-gesture-hint">Pinch with two fingers · drag with two fingers to move</div><div class="geo-map-key"><span><i class="geo-key-retail"></i> Retail town</span><span><i class="geo-key-online"></i> MyLotto area</span></div>
 </div>
 <div class="geo-timeline"><div class="geo-timeline-top"><div><strong>Replay reported wins</strong><span id="geoDateText">Loading reports…</span></div><button type="button" id="geoPlay" aria-pressed="false" disabled>▶ Play</button></div><input type="range" id="geoDateSlider" aria-label="Show reports through this date" min="0" max="0" value="0" disabled><div class="geo-timeline-caption"><span id="geoFrom">First report</span><span id="geoUntil">Latest report</span></div></div>
 <p id="geoMapStatus" role="status" class="geo-map-status">Loading verified publication references…</p>
