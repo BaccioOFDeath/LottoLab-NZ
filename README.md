@@ -51,3 +51,19 @@ Redesigned the responsive public homepage using `index.html`, `styles.css`, `app
 
 ## Data intake milestone
 Obtain permission for reliable historical results, audit all current seed data, import back history with provenance, compare against multiple independently published sources, then add versioned game rules, completeness checks and regression tests. Only after this milestone should the redesign be called production-ready.
+
+
+## 25 October 2026 — data quality / model milestone
+- Added `scripts/stage_history.py` to validate and **stage**, not publish, properly sourced licensed CSV history.
+- Added `scripts/evaluate.py`: rolling, chronological out-of-sample comparisons to a random baseline, with a minimum 30 previously two-source-verified training draws; no look-ahead.
+- Added `.github/workflows/evaluate.yml` to run validation + evaluation on relevant pushes. Scheduled and write workflow success still needs checking in GitHub Actions.
+- Existing public archive: **24 stored rows** (1 two-source cross-checked, 8 single-source, 15 unverified). Some records are discontinuous, spanning 2025 and 2026. No claim of complete archival coverage.
+- Current method isn't a reliable predictor of future random winning numbers. Historical inference can be researched with prospective, precommitted picks, but random-draw outcomes cannot be reliably forecast.
+- Next major external dependency: identify a complete historical dataset with permission for reuse (or obtain it directly from Lotto NZ) and perform independent audits, including rule-era treatment for historic Powerball/Strike.
+
+### Running the audit locally
+```sh
+python -m unittest discover -s tests -v
+python scripts/evaluate.py
+python scripts/stage_history.py path/to/licensed-draws.csv --out data/staged-import.json
+```
