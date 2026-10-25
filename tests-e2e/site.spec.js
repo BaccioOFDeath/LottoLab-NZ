@@ -589,6 +589,13 @@ test('quick number checker compares latest stored draw without claiming prizes',
  await page.locator('#checkNumbers').fill('1 1 2 3 4 5');
  await page.locator('.quick-check-button').click();
  await expect(page.locator('#checkerStatus')).toContainText('six DIFFERENT Lotto numbers');
+ await expect(page.locator('#quickCheckForm .ball-entry-field').nth(1)).toHaveClass(/is-error/);
+ await page.locator('#checkNumbers').fill('1 2 3 4 5 6 7');
+ await page.locator('.quick-check-button').click();
+ await expect(page.locator('#checkerStatus')).toContainText('pasted line contains extra or invalid characters');
+ await page.locator('#checkNumbers').fill('1 2 3 4 5 6');
+ await page.locator('.quick-check-button').click();
+ await expect(page.locator('#checkerStatus')).toContainText('main numbers matched');
 });
 
 test('Location luck analysis compares only sourced reports and labels sales assumptions',async({page})=>{
