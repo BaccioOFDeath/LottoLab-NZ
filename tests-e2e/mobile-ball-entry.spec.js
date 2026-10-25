@@ -19,7 +19,7 @@ test('iPhone-sized quick checker accepts one number in each ball with numeric ke
  await inputs.nth(3).fill('12');
  await inputs.nth(4).fill('33');
  await inputs.nth(5).fill('40');
- await expect(page.locator('#checkNumbers')).toHaveValue('25 4 7 12 33 40');
+ await expect(page.locator('#checkNumbers')).toHaveValue('25 04 07 12 33 40');
  await page.locator('.quick-check-button').click();
  await expect(page.locator('#checkerStatus')).toContainText('main matches');
  await expect(page.locator('#checkerSavedCount')).toHaveText('1 line');
