@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=20261025-geo5-pins">
+<link rel="stylesheet" href="./styles.css?v=20261025-home-priority">
 <script defer src="./app.js?v=20261025-geo1"></script><script defer src="./picker.js?v=20261025-geo1"></script>
 <script defer src="./model-view.js?v=20261025-geo1"></script>
 <script defer src="./research-lab.js?v=20261025-geo1"></script>
@@ -21,15 +21,16 @@
 <div class="topline"><div class="shell topline-inner"><span><span class="tiny-led"></span>Independent NZ Lotto research</span><span>Not affiliated with Lotto NZ · <a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official results ↗</a></span></div></div>
 <header class="header"><div class="shell header-inner">
 <a class="brand" href="#home" aria-label="LottoLab NZ Home"><span class="brand-mark">L<span>●</span></span><span class="brand-type">Lotto<span>Lab</span><small>NEW ZEALAND</small></span></a>
-<nav class="desktop-nav" aria-label="Main navigation"><a href="#home" data-nav="home" class="active">Latest draw</a><a href="#numberWorld" data-nav="numberWorld">Number World</a><a href="#universe" data-nav="universe">Universe</a><a href="#geo" data-nav="geo">Geo Lab</a><a href="#insights" data-nav="insights">Number insights</a><a href="#picker">20 draw lines</a><a href="#archive" data-nav="archive">Draw archive</a><a href="#predictions">Scorecard</a></nav>
+<nav class="desktop-nav" aria-label="Main navigation"><a href="#results" data-nav="results" class="active">Results</a><a href="#picker">Next draw lines</a><a href="#predictions">Accuracy</a><a href="#archive" data-nav="archive">History</a><a href="#deepResearch">Research</a></nav>
 <a class="official-btn" href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official Lotto NZ <span aria-hidden="true">↗</span></a>
 <button type="button" class="command-trigger" id="openQuickNav" aria-label="Open quick navigation search" title="Find pages and features (Command K)"><span aria-hidden="true">⌕</span><kbd>⌘ K</kbd></button><button id="menuToggle" class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
-</div><nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden><a href="#home">Latest draw</a><a href="#results">Results</a><a href="#insights">Number insights</a><a href="#numberWorld">Number World</a><a href="#universe">Number Universe</a><a href="#geo">Geo Lab · Winner map</a><a href="#evidence">Evidence lab</a><a href="#archive">Draw archive</a><a href="#picker">20 locked lines</a><a href="#predictions">Model scorecard</a></nav></header>
+</div><nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden><a href="#results">Latest results</a><a href="#picker">Next-draw selections</a><a href="#predictions">Prediction accuracy</a><a href="#archive">Result history</a><a href="#deepResearch">Advanced research</a></nav></header>
 <main id="home">
-<section class="hero"><div class="shell hero-grid"><div class="hero-copy"><div class="hero-kicker"><span class="pulse-dot"></span> NEW ZEALAND LOTTO RESULTS & INSIGHTS</div><h1>Every number<br>has a <em>story.</em></h1><p>Latest results, immersive number exploration and 20 independently recorded research lines.</p><div class="hero-chips" aria-label="LottoLab features"><span>✦ Interactive Universe</span><span>◆ 20 locked lines</span><span>◉ Source-checked history</span></div><div class="hero-actions"><a class="btn btn-white" href="#results">See latest results <span>→</span></a><a class="btn btn-outline" href="#picker">See all 20 locked lines <span>↗</span></a></div><a class="hero-universe-link" href="#universe"><span aria-hidden="true">✧</span> Explore the touch-responsive Number Universe <span aria-hidden="true">↗</span></a></div>
+<section class="hero"><div class="shell hero-grid"><div class="hero-copy"><div class="hero-kicker"><span class="pulse-dot"></span> NEW ZEALAND LOTTO RESULTS & INSIGHTS</div><h1>Results. Picks.<br><em>Proof.</em></h1><p>Check the latest Lotto result, see the next draw’s 20 published research lines, and judge our predictions against real outcomes.</p><div class="hero-chips" aria-label="LottoLab features"><span>✦ Interactive Universe</span><span>◆ 20 locked lines</span><span>◉ Source-checked history</span></div><div class="hero-actions"><a class="btn btn-white" href="#results">See latest results <span>→</span></a><a class="btn btn-outline" href="#picker">Next draw numbers <span>↗</span></a></div><a class="hero-universe-link" href="#universe"><span aria-hidden="true">✧</span> Explore the touch-responsive Number Universe <span aria-hidden="true">↗</span></a></div>
 <div class="hero-art" aria-hidden="true"><span class="float-ball art-a">7</span><span class="float-ball art-b">21</span><span class="float-ball art-c">4</span><span class="float-ball art-d">33</span><div class="art-halo"></div><span class="spark sp1">✦</span><span class="spark sp2">✧</span><span class="spark sp3">✦</span></div></div></section>
 <section class="shell content">
 <div class="status-strip concise-status"><div class="status-icon">i</div><div><strong>Independent research · Partial history</strong><span>Not official or complete. <a href="https://mylotto.co.nz/lotto/how-to-play" target="_blank" rel="noopener noreferrer">Understand Lotto rules ↗</a></span></div><span class="status-tag" id="dataState">Checking data</span></div>
+<div class="home-priority" aria-label="Start here"><p class="eyebrow violet">THE THREE THINGS YOU CAME FOR</p><div class="home-priority-grid"><a href="#results" class="home-priority-card"><span class="priority-index">01 · RESULTS</span><strong>Latest winning numbers</strong><small>See the newest confirmed Lotto result, Bonus and Powerball.</small><span class="priority-link">Check results ↓</span></a><a href="#picker" class="home-priority-card"><span class="priority-index">02 · NEXT DRAW</span><strong>Which numbers to choose?</strong><small>View 20 fixed research lines for the next draw, with quick copy.</small><span class="priority-link">See next-draw lines ↓</span></a><a href="#predictions" class="home-priority-card"><span class="priority-index">03 · TRACK RECORD</span><strong>How accurate has it been?</strong><small>See actual scored results against random selections. No invented success rate.</small><span class="priority-link">Check performance ↓</span></a></div></div>
 <div class="section-title" id="results"><div><p class="eyebrow pink">THE RESULTS</p><h2>Latest Lotto draw <span class="shine">✦</span></h2></div><span class="section-meta" id="lastUpdated">Loading archive…</span></div>
 <div class="results-grid">
 <article class="result-card">
@@ -242,4 +243,20 @@
   </div>
   <div class="quick-nav-bottom"><span><kbd>⌘</kbd> + <kbd>K</kbd> open</span><span><kbd>Esc</kbd> close</span></div>
 </dialog>
-</body></html>
+<script>
+/* Keep the first visit focused: results, next-draw lines, performance. Research below. */
+(function(){
+ const content=document.querySelector('.shell.content');
+ const world=document.getElementById('numberWorld');
+ const picks=document.getElementById('picker');
+ const performance=document.getElementById('predictions');
+ const results=document.querySelector('.results-grid');
+ if(!content||!world||!picks||!performance||!results)return;
+ results.insertAdjacentElement('afterend',picks);
+ picks.insertAdjacentElement('afterend',performance);
+ const researchHeading=document.createElement('div');
+ researchHeading.id='deepResearch';researchHeading.className='deep-research-heading';
+ researchHeading.innerHTML='<p class="eyebrow violet">WANT TO GO FURTHER?</p><h2>Explore the research tools</h2><p>Historical statistics, geographical winner maps, interactive number worlds and the full archive are below. These are optional deep dives, not required to check the results.</p>';
+ performance.insertAdjacentElement('afterend',researchHeading);
+})();
+</script></body></html>
