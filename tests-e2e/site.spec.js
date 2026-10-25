@@ -96,7 +96,7 @@ test('mobile navigation and touch targets at 390 pixels',async({page})=>{
 test('like-for-like rule-era analysis changes main statistics and Powerball pools',async({page})=>{
  await visit(page,'/');
  const recent=entries.filter(d=>d.date>='2026-09-16').length;
- const older=entries.filter(d=>d.date<'2026-09-13').length;
+ const older=entries.filter(d=>d.date>='2001-02-01'&&d.date<'2026-09-13').length;
  await expect(page.locator('#ruleFilter')).toBeVisible();
  await expect(page.locator('#equipmentFilter')).toBeDisabled();
  await expect(page.locator('#ballSetFilter')).toBeDisabled();
