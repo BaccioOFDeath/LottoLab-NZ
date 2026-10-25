@@ -13,9 +13,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./keno-v2.css?v=20261026-1">
+<link rel="stylesheet" href="./keno-v2.css?v=20261026-2">
 <script defer src="./keno-math.js?v=1"></script>
-<script defer src="./keno.js?v=20261026-1"></script>
+<script defer src="./keno-empirical.js?v=20261026-1"></script>
+<script defer src="./keno.js?v=20261026-2"></script>
 </head>
 <body>
 <a class="skip-link" href="#results">Skip to results</a>
@@ -95,9 +96,21 @@
   <div class="selection-heading"><strong>Your Keno grid · 1–80</strong><small>Tap to choose or deselect numbers</small></div>
   <div class="number-grid" id="builder"></div>
   <div class="ticket-actions"><div class="picked-numbers" id="selection">No numbers selected</div><div class="actions"><button id="randomLine" class="primary-small">Random line</button><button id="frequencyLine" class="soft-button">History-based line</button><button id="copyLine" class="outline-button">Copy numbers</button><button id="clearLine" class="plain-button">Clear</button></div></div>
+  <div class="odds-method-title"><strong>Calculated odds</strong><span>LottoLab's exact 20-from-80 mathematics · not copied from published odds</span></div>
   <div class="odds-cards">
     <div><span>Chance of any prize</span><strong id="oddsAny">—</strong></div><div><span>Chance of matching every pick</span><strong id="oddsAll">—</strong></div><div><span>Expected net return</span><strong id="oddsExpected">—</strong></div><div><span>Cost per draw</span><strong id="oddsCost">—</strong></div>
   </div>
+  <section class="empirical-odds" id="independentOdds" aria-labelledby="independentOddsHeading">
+    <div class="empirical-head"><div><p class="kicker">LOTTOLAB ORIGINAL RESEARCH</p><h3 id="independentOddsHeading">Our historical odds audit</h3><p class="sub">Actual matching outcomes from the site's imported Keno history, compared with our independently calculated mathematical odds.</p></div><span class="audit-label">OBSERVED · NOT PREDICTIVE</span></div>
+    <div class="empirical-metrics">
+      <div><span>Observed chance of any prize</span><strong id="empiricalChance">—</strong></div>
+      <div><span>Observed average matches</span><strong id="empiricalHits">—</strong></div>
+      <div><span>Historical draws analysed</span><strong id="empiricalCount">—</strong></div>
+    </div>
+    <p class="empirical-explanation" id="empiricalExplanation">The audit uses a fixed reference selection until you finish picking a line. It counts actual matches from the imported draw history.</p>
+    <div class="empirical-compare" id="empiricalCompare">Loading our independently calculated odds and observed results…</div>
+    <details class="inline-details empirical-method"><summary>How we calculate and compare these odds <span>+</span></summary><p>Our theoretical probabilities use the hypergeometric distribution: P(k matches) = C(20,k) × C(60,n−k) / C(80,n), where n is the number selected. Historical figures count results for a fixed, predeclared reference line or retrospectively for the line you selected. A 95% Wilson interval shows sampling uncertainty. The payout categories are defined by the current NZ Keno rules. Different historical percentages do not establish better chances in future independent random draws.</p></details>
+  </section>
   <details class="inline-details payout-details"><summary>View the official payout breakdown <span>+</span></summary><div class="scroll"><table><thead><tr><th>Matched</th><th>Odds</th><th>Standard payout</th></tr></thead><tbody id="oddsTable"></tbody></table></div><p class="fineprint"><a href="https://assets.mylotto.co.nz/assets/uploads/5e779b5e-bf65-11f0-a522-3ad4acd14bcf.pdf" target="_blank" rel="noopener">Official Keno rules ↗</a></p></details>
   <p class="fineprint" id="oddsDisclaimer">Ticket cost and payouts change with stake; number-matching probabilities do not.</p>
   <div class="info paired" id="suggestion">Choose a number to see historical co-occurrences.</div>
