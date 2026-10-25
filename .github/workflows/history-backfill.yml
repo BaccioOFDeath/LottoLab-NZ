@@ -1,5 +1,9 @@
 name: Verified Lotto Archive Backfill
 on:
+  push:
+    paths:
+      - 'scripts/backfill_history.py'
+      - '.github/workflows/history-backfill.yml'
   workflow_dispatch:
     inputs:
       limit:
