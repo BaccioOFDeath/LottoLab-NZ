@@ -70,7 +70,7 @@ test('mobile navigation and touch targets at 390 pixels',async({page})=>{
  await expect(page.locator('#mobileNav')).toBeVisible();
  await page.locator('#mobileNav a[href="#predictions"]').click();
  await expect(page.locator('#mobileNav')).toBeHidden();
- await expect(page.locator('#modelVerified')).toHaveText(String(verified));
+ await expect(page.locator('#modelVerified')).toHaveText(String(require('../data/model-report.json').verified_draw_count));
 });
 test('like-for-like rule-era analysis changes main statistics and Powerball pools',async({page})=>{
  await page.goto('/');
