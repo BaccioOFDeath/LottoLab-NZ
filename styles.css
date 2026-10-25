@@ -634,3 +634,10 @@ body{background:var(--bg)}
  .fixed-pick-extras{gap:6px}
  .fixed-pick-extras .pick-extra-label{font-size:8px}
 }
+
+/* Data-driven five-colour frequency legend — values are relative to selected draws. */
+.heat-gradient-legend{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:11px;color:#796c8a}
+.heat-gradient-bar{display:block;min-width:100px;width:128px;height:12px;border-radius:50px;border:1px solid #ded5e6;background:linear-gradient(90deg,#2269c0 0%,#1aa6ad 25%,#f6c741 50%,#f4752d 75%,#bf2743 100%)}
+.frequency-cell{border-color:transparent;font-weight:900;text-shadow:none}
+.frequency-cell.selected{outline:3px solid #30204f;outline-offset:2px}
+@media(max-width:570px){.heat-gradient-legend{gap:6px}.heat-gradient-bar{width:98px;min-width:65px}}
