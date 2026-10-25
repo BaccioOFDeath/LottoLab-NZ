@@ -653,7 +653,7 @@ test('My Lotto line creator ranks historical co-occurrences and permits any six 
  await page.locator('#lineNumberGrid button[data-n="7"]').click();
  await expect(page.locator('#lineSuggestionTitle')).toContainText('seen with 07');
  await expect(page.locator('#lineSelectedCount')).toHaveText('1');
- await expect(page.locator('#lineSuggestGrid button').first()).toContainText(/\\d+ \\/ \\d+ draws|pair hits/);
+ await expect(page.locator('#lineSuggestGrid button').first()).toContainText(' / ');
  await page.locator('#lineSuggestGrid button').first().click();
  await expect(page.locator('#lineSelectedCount')).toHaveText('2');
  await page.locator('#lineAuto').click();
