@@ -13,43 +13,84 @@ function formatLine(p){return p.numbers.map(fmt).join(' - ')+' | PB '+fmt(p.powe
 function valid(p){return p&&Array.isArray(p.numbers)&&p.numbers.length===6&&new Set(p.numbers).size===6&&p.numbers.every(n=>Number.isInteger(n)&&n>=1&&n<=40)&&Number.isInteger(p.powerball)&&p.powerball>=1&&p.powerball<=14&& (p.bonus_prediction==null||(Number.isInteger(p.bonus_prediction)&&p.bonus_prediction>=1&&p.bonus_prediction<=40&&!p.numbers.includes(p.bonus_prediction)&&p.bonus_prediction_created_at))}
 function slot(p){return Number.isInteger(p.line_number)?p.line_number:1}
 async function copy(value,button){try{await navigator.clipboard.writeText(value);const old=button.textContent;button.textContent='Copied ✓';el('pickerStatus').textContent='Copied the already recorded lines — no new numbers were generated.';setTimeout(()=>{button.textContent=old},1600)}catch(e){el('pickerStatus').textContent='Clipboard permission unavailable. Select the numbers to copy.'}}
+const ticketLetters=['A','B','C','D','E','F','G','H','J','K'];
 function render(){
   const selected=el('pickerMode').value;
   const shown=selected==='all'?frozen:frozen.filter(p=>p.model===selected);
-  const display=expanded?shown:shown.slice(0,4);
+  const display=expanded?shown:shown.slice(0,10);
   const list=el('pickerLines');list.replaceChildren();
-  for(const [index,p] of display.entries()){
-    const row=document.createElement('div');row.className='fixed-pick-line';row.setAttribute('role','group');row.setAttribute('aria-label','Lotto ticket line '+(frozen.indexOf(p)+1));
-    const name=document.createElement('div');name.className='fixed-pick-name';
-    const number=document.createElement('strong');number.textContent='Line '+String(frozen.indexOf(p)+1).padStart(2,'0');
-    const method=document.createElement('small');method.textContent=(modeLabels[p.model]||p.model)+' · slot '+slot(p);
-    name.append(number,method);
-    const nums=document.createElement('div');nums.className='fixed-pick-numbers';
-    for(const n of p.numbers){const b=document.createElement('span');b.className='ball';b.textContent=fmt(n);nums.append(b)}
-    const extras=document.createElement('div');extras.className='fixed-pick-extras';
-    const power=document.createElement('div');power.className='pick-extra ticket-power';
-    const powerLabel=document.createElement('span');powerLabel.className='pick-extra-label';powerLabel.textContent='PB';
-    powerLabel.title='Powerball ticket selection';
-    const powerCircle=document.createElement('span');powerCircle.className='ball power';powerCircle.textContent=fmt(p.powerball);
-    power.append(powerLabel,powerCircle);extras.append(power);
-    // The Bonus ball is a research-only forecast, NOT a seventh ticket choice.
-    // Keep it available under a native disclosure, never inline with playable balls.
-    const research=document.createElement('details');research.className='ticket-bonus';
-    const researchToggle=document.createElement('summary');researchToggle.textContent='Bonus forecast (research only)';
-    const bonus=document.createElement('div');bonus.className='pick-extra';
-    const bonusLabel=document.createElement('span');bonusLabel.className='pick-extra-label';
-    bonusLabel.textContent='BONUS · RESEARCH ONLY';
-    const bonusCircle=document.createElement('span');bonusCircle.className='ball bonus';
-    bonusCircle.textContent=p.bonus_prediction==null?'—':fmt(p.bonus_prediction);
-    bonusCircle.title='Bonus is drawn separately and is not a ticket selection. Research-only forecast added '+(p.bonus_prediction_created_at||'when available');
-    bonus.append(bonusLabel,bonusCircle);research.append(researchToggle,bonus);
-    const button=document.createElement('button');button.type='button';button.className='fixed-copy btn btn-export';button.textContent='Copy';button.setAttribute('aria-label','Copy line '+(frozen.indexOf(p)+1));
-    button.addEventListener('click',()=>copy(formatLine(p),button));
-    row.append(name,button,nums,extras,research);list.appendChild(row);
+  const groups=new Map();
+  for(const p of display){
+    if(!groups.has(p.model))groups.set(p.model,[]);
+    groups.get(p.model).push(p);
   }
-  el('pickerStatus').textContent='Showing '+display.length+' of '+shown.length+' locked lines · same numbers for every visitor.';
-  const expand=el('pickerExpand');expand.hidden=shown.length<=4;expand.disabled=false;
-  expand.textContent=expanded?'Show fewer lines ↑':'Show all '+shown.length+' lines ↓';
+  for(const [model,lines] of groups){
+    const ticket=document.createElement('article');ticket.className='lotto-ticket';
+    const ordinal=model==='adaptive_frequency_v1'?1:2;
+    ticket.dataset.ticket=String(ordinal);
+    ticket.setAttribute('aria-label','Research Lotto slip '+ordinal+' with '+lines.length+' of 10 recorded lines');
+    const header=document.createElement('div');header.className='lotto-ticket-head';
+    const logo=document.createElement('span');logo.className='lotto-ticket-logo';logo.textContent='L';
+    const identity=document.createElement('div');identity.className='lotto-ticket-identity';
+    const heading=document.createElement('strong');heading.textContent='LOTTO LAB';
+    const sub=document.createElement('span');sub.textContent=ordinal===1?'TICKET 1 · RESEARCH':'TICKET 2 · RANDOM CONTROL';
+    identity.append(heading,sub);
+    const draw=document.createElement('div');draw.className='lotto-ticket-draw';
+    const drawLabel=document.createElement('strong');drawLabel.textContent='10 LINES';
+    const drawDate=document.createElement('small');drawDate.textContent='Draw '+target;
+    draw.append(drawLabel,drawDate);
+    header.append(logo,identity,draw);
+    const colHeads=document.createElement('div');colHeads.className='lotto-ticket-columns';
+    const numbersTitle=document.createElement('span');numbersTitle.textContent='SIX LOTTO NUMBERS';
+    const powerTitle=document.createElement('span');powerTitle.textContent='PB';
+    colHeads.append(numbersTitle,powerTitle);
+    const rows=document.createElement('div');rows.className='lotto-ticket-rows';
+    for(const p of lines){
+      const index=frozen.indexOf(p);
+      const letter=ticketLetters[slot(p)-1]||String(slot(p));
+      const row=document.createElement('div');row.className='fixed-pick-line';
+      row.dataset.letter=letter;row.setAttribute('role','group');
+      row.setAttribute('aria-label','Line '+letter+', six Lotto numbers '+p.numbers.map(fmt).join(', ')+', Powerball '+fmt(p.powerball));
+      const name=document.createElement('div');name.className='fixed-pick-name';
+      const number=document.createElement('strong');number.textContent=letter;
+      number.title='Line '+String(index+1).padStart(2,'0');
+      name.append(number);
+      const nums=document.createElement('div');nums.className='fixed-pick-numbers';
+      for(const n of p.numbers){
+        const b=document.createElement('span');b.className='ball';b.textContent=fmt(n);nums.append(b);
+      }
+      const extras=document.createElement('div');extras.className='fixed-pick-extras';
+      const power=document.createElement('div');power.className='pick-extra ticket-power';
+      const powerCircle=document.createElement('span');powerCircle.className='ball power';powerCircle.textContent=fmt(p.powerball);
+      powerCircle.title='Powerball '+fmt(p.powerball);
+      power.append(powerCircle);extras.append(power);
+      const button=document.createElement('button');button.type='button';button.className='fixed-copy';
+      button.textContent='⧉';button.title='Copy line '+letter;button.setAttribute('aria-label','Copy line '+letter+' ('+(index+1)+')');
+      button.addEventListener('click',()=>copy(formatLine(p),button));
+      // The Bonus is never a playable ticket ball; reveal its forecast on demand.
+      const research=document.createElement('details');research.className='ticket-bonus';
+      const researchToggle=document.createElement('summary');researchToggle.textContent='Bonus forecast (research only)';
+      researchToggle.title='See non-playable research Bonus forecast';
+      const bonus=document.createElement('div');bonus.className='pick-extra';
+      const bonusLabel=document.createElement('span');bonusLabel.className='pick-extra-label';
+      bonusLabel.textContent='BONUS · RESEARCH ONLY';
+      const bonusCircle=document.createElement('span');bonusCircle.className='ball bonus';
+      bonusCircle.textContent=p.bonus_prediction==null?'—':fmt(p.bonus_prediction);
+      bonusCircle.title='Non-playable Bonus forecast; recorded '+(p.bonus_prediction_created_at||'when available');
+      bonus.append(bonusLabel,bonusCircle);
+      research.append(researchToggle,bonus);
+      row.append(name,nums,extras,button,research);rows.append(row);
+    }
+    const footer=document.createElement('div');footer.className='lotto-ticket-footer';
+    const count=document.createElement('strong');count.textContent='10 research selections · '+(modeLabels[model]||model);
+    const notice=document.createElement('span');notice.textContent='NOT A PURCHASED TICKET · No winning advantage';
+    footer.append(count,notice);
+    ticket.append(header,colHeads,rows,footer);list.append(ticket);
+  }
+  el('pickerStatus').textContent='Showing '+display.length+' of '+shown.length+' locked lines as '+groups.size+' Lotto-style research ticket'+(groups.size===1?'':'s')+'.';
+  const expand=el('pickerExpand');
+  expand.hidden=shown.length<=10;expand.disabled=false;
+  expand.textContent=expanded?'Show first ticket only ↑':'Show both tickets · all '+shown.length+' lines ↓';
   expand.setAttribute('aria-expanded',String(expanded));
 }
 async function init(){

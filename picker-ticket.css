@@ -1,43 +1,61 @@
-/* Compact research slips: true ticket density on small screens, not large stacked cards.
- * Purple = six playable main numbers, pink = PB; Bonus remains disclosure-only.
- */
-#picker .fixed-picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
-#picker .fixed-pick-line{position:relative;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto;gap:7px 7px;align-items:center;min-width:0;margin:0;padding:10px 12px 9px 15px;border:1px solid #d8dfee;border-left:4px solid #6953cb;border-radius:9px;background:#fff;box-shadow:none;overflow:hidden}
-#picker .fixed-pick-line:before{content:'';position:absolute;top:0;right:45px;bottom:0;border-left:1px dashed #e3e7f1;pointer-events:none;display:none}
-#picker .fixed-pick-name{grid-column:1;grid-row:1;display:flex;gap:10px;align-items:baseline;justify-content:flex-start;width:auto;min-width:0}
-#picker .fixed-pick-name strong{font:900 12px/1.1 Outfit,sans-serif;white-space:nowrap;color:#263451}
-#picker .fixed-pick-name small{display:block;font-size:9px;font-weight:650;color:#7c83a0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#picker .fixed-copy{grid-column:2;grid-row:1;min-width:48px;min-height:27px;margin:0;padding:5px 8px;border-radius:6px;border:1px solid #e1d9f2;background:#f5efff;color:#5b3d9e;font-size:10px;font-weight:850;line-height:1}
-#picker .fixed-pick-numbers{grid-column:1;grid-row:2;display:flex;gap:clamp(3px,.65vw,6px);align-items:center;flex-wrap:nowrap;justify-content:flex-start;min-width:0;width:auto;margin:0}
-#picker .fixed-pick-numbers .ball{flex:0 0 auto;display:grid;place-items:center;width:clamp(26px,2.4vw,33px);height:clamp(26px,2.4vw,33px);font-size:11px;border-radius:50%;box-shadow:0 2px 4px #3820561f}
-#picker .fixed-pick-extras{grid-column:2;grid-row:2;display:flex;align-items:center;justify-content:flex-end;min-width:0;margin:0;padding:0}
-#picker .fixed-pick-extras .ticket-power{display:flex;align-items:center;gap:5px;flex-wrap:nowrap}
-#picker .ticket-power .pick-extra-label{font-size:9px;font-weight:900;letter-spacing:0;max-width:none;color:#a43b78}
-#picker .ticket-power .ball.power{width:clamp(26px,2.4vw,33px);height:clamp(26px,2.4vw,33px);font-size:11px}
-#picker .ticket-bonus{grid-column:1/-1;grid-row:3;margin:0;padding:0;min-width:0;font-size:9px;color:#7c8298}
-#picker .ticket-bonus>summary{display:inline-flex;align-items:center;cursor:pointer;list-style:none;font-size:9px;line-height:1.3;min-height:18px;color:#707c9b}
+/* Ticket-style LottoLab research slips; one row = A–K, six blue main balls and one pink PB.
+   These are research selections, NOT an official Lotto NZ ticket or proof of a win. */
+#picker #pickerLines.fixed-picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0 10px;align-items:start}
+#picker .lotto-ticket{--ticket-ball:clamp(23px,7.15vw,34px);display:block;min-width:0;margin:0;overflow:hidden;background:linear-gradient(130deg,#ffe94d 0%,#ffde22 40%,#ffd023 100%);border:1px solid #e2ba06;border-radius:13px;box-shadow:0 6px 0 #d7b128,0 11px 24px #60512127;color:#142542}
+#picker .lotto-ticket-head{display:flex;align-items:center;gap:9px;padding:13px 14px 11px;background:linear-gradient(128deg,#ffe84b,#ffdb11);border-bottom:1px solid #dbad20}
+#picker .lotto-ticket-logo{width:29px;height:29px;border-radius:8px;display:grid;place-items:center;background:#295dba;color:white;font:900 19px/1 Outfit,sans-serif;box-shadow:0 2px 0 #15438b;flex:none}
+#picker .lotto-ticket-identity{display:grid;gap:2px;min-width:0;flex:1}
+#picker .lotto-ticket-identity strong{font:900 16px/1 Outfit,sans-serif;letter-spacing:-.4px;color:#174a93}
+#picker .lotto-ticket-identity span{font:850 8px/1.4 Outfit,sans-serif;letter-spacing:1px;color:#574808}
+#picker .lotto-ticket-draw{display:grid;gap:3px;text-align:right;flex:none}
+#picker .lotto-ticket-draw strong{font:950 12px/1 Outfit,sans-serif;color:#453700}
+#picker .lotto-ticket-draw small{font:750 9px/1.3 Outfit,sans-serif;color:#675200}
+#picker .lotto-ticket-columns{display:flex;justify-content:space-between;align-items:center;padding:8px 43px 4px 37px;gap:5px;font:900 9px/1.2 Outfit,sans-serif;letter-spacing:1px;color:#675200}
+#picker .lotto-ticket-rows{padding:0 9px 8px;display:grid;gap:0}
+#picker .fixed-pick-line{position:relative;box-sizing:border-box;display:grid;grid-template-columns:17px minmax(0,1fr) var(--ticket-ball) 23px 17px;grid-template-rows:auto;align-items:center;column-gap:clamp(2px,.65vw,5px);row-gap:0;min-width:0;min-height:41px;width:100%;margin:0;padding:4px 3px;background:transparent;border:0;border-bottom:1px solid #e8bd1c;border-left:0;border-radius:0;box-shadow:none;overflow:visible}
+#picker .fixed-pick-line:last-child{border-bottom:0}
+#picker .fixed-pick-line:hover{background:#fff8a955;box-shadow:none;border-color:#dfa816}
+#picker .fixed-pick-name{grid-column:1;grid-row:1;display:block;min-width:0;width:auto;margin:0;padding:0;text-align:center}
+#picker .fixed-pick-name strong{display:block;font:950 14px/1 Outfit,sans-serif;color:#202f4b}
+#picker .fixed-pick-name small{display:none}
+#picker .fixed-pick-numbers{grid-column:2;grid-row:1;display:flex;flex:initial;flex-wrap:nowrap;align-items:center;justify-content:space-between;width:100%;min-width:0;margin:0;padding:0;gap:2px}
+#picker .fixed-pick-numbers .ball{box-sizing:border-box;display:grid;place-items:center;flex:0 1 var(--ticket-ball);width:var(--ticket-ball);height:var(--ticket-ball);min-width:0;aspect-ratio:1;border:1px solid #0782bb;border-radius:50%;background:radial-gradient(circle at 30% 20%,#68d6fb 0%,#1193d1 48%,#0863a7 100%);box-shadow:inset 0 1px 2px #ffffff88,0 2px 3px #23648b37;color:#fff;font:900 clamp(10px,2.4vw,14px)/1 Outfit,sans-serif;text-shadow:0 1px 1px #12436d;letter-spacing:0}
+#picker .fixed-pick-extras{grid-column:3;grid-row:1;display:flex;align-items:center;justify-content:center;min-width:0;width:auto;flex:none;margin:0;padding:0}
+#picker .ticket-power{display:flex;gap:0;align-items:center}
+#picker .ticket-power .ball.power{box-sizing:border-box;display:grid;place-items:center;width:var(--ticket-ball);height:var(--ticket-ball);min-width:0;margin:0;border-radius:50%;border:1px solid #cf1a75;background:radial-gradient(circle at 28% 22%,#ff91c9 0%,#ec3f9e 45%,#b91d76 100%);box-shadow:inset 0 1px 2px #fff8,0 2px 3px #823f693f;color:white;font:900 clamp(10px,2.4vw,14px)/1 Outfit,sans-serif;text-shadow:0 1px 1px #863158}
+#picker .fixed-copy{grid-column:4;grid-row:1;display:grid;place-items:center;box-sizing:border-box;min-width:22px;width:23px;height:26px;min-height:26px;margin:0;padding:0;border:1px solid #ba9a19;border-radius:6px;background:#fff7c780;color:#614909;font:900 16px/1 Outfit,sans-serif;box-shadow:none;cursor:pointer;overflow:hidden}
+#picker .fixed-copy:hover,#picker .fixed-copy:focus-visible{background:#fffef2;color:#294b8c}
+#picker .ticket-bonus{grid-column:5;grid-row:1;display:block;min-width:0;margin:0;padding:0;color:#685000;font-size:9px}
+#picker .ticket-bonus>summary{box-sizing:border-box;display:grid;place-items:center;width:17px;height:24px;min-height:24px;overflow:hidden;list-style:none;margin:0;padding:0;font-size:0;cursor:pointer;color:#806014}
 #picker .ticket-bonus>summary::-webkit-details-marker{display:none}
-#picker .ticket-bonus>summary:before{content:'+';font-weight:900;margin-right:5px}
+#picker .ticket-bonus>summary:before{content:'⋯';font:900 16px/1 Outfit,sans-serif;color:#7c640e;margin:0}
+#picker .ticket-bonus[open]{grid-column:1/-1;grid-row:2;display:flex;gap:10px;align-items:center;padding:4px 0 6px 24px}
+#picker .ticket-bonus[open]>summary{width:17px;flex:none}
 #picker .ticket-bonus[open]>summary:before{content:'−'}
-#picker .ticket-bonus .pick-extra{display:flex;align-items:center;gap:7px;padding:5px 0}
-#picker .ticket-bonus .pick-extra-label{font-size:9px;letter-spacing:0;max-width:none}
-#picker .ticket-bonus .ball.bonus{width:24px;height:24px;font-size:10px}
-#picker .fixed-pick-line:focus-within{outline:2px solid #8e73e7;outline-offset:2px}
-@media(max-width:1070px){#picker .fixed-picks{grid-template-columns:1fr}}
+#picker .ticket-bonus .pick-extra{display:flex;gap:8px;align-items:center;padding:0}
+#picker .ticket-bonus .pick-extra-label{font:800 9px/1.3 Outfit,sans-serif;letter-spacing:0;color:#674f00;max-width:none}
+#picker .ticket-bonus .ball.bonus{display:grid;place-items:center;flex:none;width:23px;height:23px;border-radius:50%;font:900 10px Outfit,sans-serif}
+#picker .lotto-ticket-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:5px 8px;padding:10px 14px 12px;background:#ffe26a;border-top:1px dashed #d1a122}
+#picker .lotto-ticket-footer strong{font:900 10px/1.3 Outfit,sans-serif;color:#534210}
+#picker .lotto-ticket-footer span{font:800 8px/1.3 Outfit,sans-serif;color:#816825;letter-spacing:.4px}
+#picker .lotto-ticket .fixed-pick-line:focus-within{outline:2px solid #274fac;outline-offset:-2px;border-radius:3px}
+@media(max-width:1050px){#picker #pickerLines.fixed-picks{grid-template-columns:1fr}}
 @media(max-width:700px){
- #picker .fixed-picks{gap:5px;margin:9px 0}
- #picker .fixed-pick-line{padding:7px 10px 6px 12px;gap:5px 4px;grid-template-rows:auto auto auto;min-height:82px}
- #picker .fixed-pick-name strong{font-size:12px}
- #picker .fixed-pick-name small{font-size:9px}
- #picker .fixed-pick-numbers{gap:clamp(3px,1vw,5px)}
- #picker .fixed-pick-numbers .ball{width:clamp(27px,8.1vw,32px);height:clamp(27px,8.1vw,32px);font-size:11px}
- #picker .ticket-power .ball.power{width:clamp(27px,8.1vw,32px);height:clamp(27px,8.1vw,32px)}
- #picker .fixed-copy{min-height:27px}
+ #picker .lotto-ticket{--ticket-ball:clamp(23px,7.5vw,33px);border-radius:10px}
+ #picker .lotto-ticket-head{padding:10px 11px}
+ #picker .lotto-ticket-columns{padding:7px 40px 3px 33px;font-size:8px}
+ #picker .lotto-ticket-rows{padding:0 7px 6px}
+ #picker .fixed-pick-line{min-height:39px;padding:3px 1px;grid-template-columns:15px minmax(0,1fr) var(--ticket-ball) 22px 16px;column-gap:3px}
+ #picker .fixed-pick-numbers{gap:2px}
+ #picker .fixed-pick-numbers .ball,#picker .ticket-power .ball.power{font-size:11px}
+ #picker .fixed-copy{width:22px;height:25px;min-height:25px}
 }
-@media(max-width:375px){
- #picker .fixed-pick-line{padding-left:8px;padding-right:8px}
- #picker .fixed-pick-numbers .ball{width:clamp(24px,7.6vw,28px);height:clamp(24px,7.6vw,28px);font-size:10px}
- #picker .ticket-power .ball.power{width:26px;height:26px}
- #picker .fixed-pick-numbers{gap:3px}
- #picker .ticket-power .pick-extra-label{font-size:8px}
+@media(max-width:360px){
+ #picker .lotto-ticket{--ticket-ball:clamp(22px,7vw,26px)}
+ #picker .lotto-ticket-rows{padding-inline:4px}
+ #picker .fixed-pick-line{grid-template-columns:13px minmax(0,1fr) var(--ticket-ball) 20px 13px;column-gap:2px}
+ #picker .fixed-pick-numbers .ball,#picker .ticket-power .ball.power{font-size:10px}
+ #picker .fixed-copy{width:20px;min-width:20px}
+ #picker .ticket-bonus>summary{width:13px}
 }
+@media(prefers-reduced-motion:reduce){#picker .lotto-ticket *{transition:none}}
