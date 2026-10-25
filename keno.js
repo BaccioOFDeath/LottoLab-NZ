@@ -223,7 +223,7 @@ function jumpToKenoSection(hash,addHistory){
  // Wait until any previously hidden disclosure is laid out before computing its position.
  requestAnimationFrame(()=>{
   const top=Math.max(0,window.scrollY+target.getBoundingClientRect().top-14);
-  window.scrollTo({top,behavior:'instant'});
+  window.scrollTo({top,behavior:'auto'});
  });
  return true;
 }
