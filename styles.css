@@ -808,3 +808,16 @@ body{color:var(--ink);background:radial-gradient(ellipse at 96% 0%,#e7edff 0%,tr
 }
 @media(max-width:360px){.mobile-action-dock a{font-size:9px}.focus-proof strong{font-size:20px}}
 @media(prefers-reduced-motion:reduce){.home-priority-card,.quick-check-chevron{transition:none!important}.home-priority-card:hover{transform:none}}
+
+/* Compact mobile landing: the winning numbers appear before deep navigation cards. */
+@media(max-width:700px){
+ .home-priority{display:none}
+ .hero-chips{display:none}
+ .hero-copy{padding:20px 0 21px}
+ .hero h1{font-size:clamp(33px,9vw,39px);margin:7px 0}
+ .hero p{font-size:12px;line-height:1.4}
+ .hero-actions{margin-top:14px}
+ .hero-actions .btn{padding:9px 12px;min-height:39px}
+ .content{padding-top:12px}
+ .status-strip{margin-bottom:16px}
+}
