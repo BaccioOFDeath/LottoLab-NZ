@@ -121,7 +121,7 @@ async function refreshModelAudit(){
   const table=document.createElement('table'),head=document.createElement('thead'),tr=document.createElement('tr');
   for(const label of ['Historical strategy','Average hits','5+ hits','Difference vs random']){const th=document.createElement('th');th.textContent=label;tr.append(th)}
   head.append(tr);table.append(head);const body=document.createElement('tbody');
-  const labels={long_term_hot:'Lifetime hot',long_term_cold:'Lifetime cold',recent_hot:'Last 80 hot',recent_cold:'Last 80 cold',balanced_zones:'Balanced zones',blended_hot:'Blended hot',random_control:'Random control'};
+  const labels={long_term_hot:'Lifetime hot',long_term_cold:'Lifetime cold',recent_hot:'Last 80 hot',recent_200_hot:'Last 200 hot',recent_cold:'Last 80 cold',same_time_repeat_hot:'Previous same-time repeat',time_of_day_hot:'Time-of-day frequency',balanced_zones:'Balanced zones',blended_hot:'Blended hot',random_control:'Random control'};
   const random=Number(audit.models.random_control?.average_hits||0);
   for(const [id,label] of Object.entries(labels)){const m=audit.models[id];if(!m)continue;const row=document.createElement('tr');const diff=m.average_hits-random;
    for(const value of [label,m.average_hits.toFixed(3),m.five_or_more_hits+' / '+m.draws,(diff>=0?'+':'')+diff.toFixed(3)]){const cell=document.createElement('td');cell.textContent=value;row.append(cell)}body.append(row)}
