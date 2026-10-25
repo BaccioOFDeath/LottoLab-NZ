@@ -1,3 +1,18 @@
+
+async function revealResearchForLegacyChecks(page){
+ await page.evaluate(()=>{
+  const vault=document.getElementById('deepResearch');vault.open=true;
+  const score=document.getElementById('performanceDetails');if(score)score.open=true;
+  // Existing functional tests exercise every module together. Separately,
+  // clean-layout.spec.js validates the real collapsed visitor experience.
+  for(const panel of document.querySelectorAll('.clean-panel'))panel.hidden=false;
+  for(const disclosure of [...document.querySelectorAll('.clean-tool')]){
+   const body=disclosure.querySelector('.clean-tool-body');
+   if(body)disclosure.replaceWith(...body.children);
+  }
+ });
+}
+
 // Match the website's validated merge: historical one-source rows first, recent verified rows take priority.
 function validDraw(d){
  return Number.isInteger(d.draw)&&/^\d{4}-\d{2}-\d{2}$/.test(d.date)
@@ -22,7 +37,7 @@ const {test,expect}=require('@playwright/test');
    First-visit collapse behavior is independently asserted below. */
 async function visit(page,path){
  await page.goto(path);
- await page.locator('#deepResearch').evaluate(el=>{el.open=true});
+ await revealResearchForLegacyChecks(page);
 }
 
 test('latest results and scorecard load from validated data',async({page})=>{
@@ -575,6 +590,10 @@ test('visitor-first homepage keeps research collapsed but results, picks and rea
  await expect(page.locator('.mobile-action-dock a')).toHaveCount(4);
  await page.locator('.research-vault-summary').click();
  await expect(page.locator('#deepResearch')).toHaveAttribute('open','');
+ await expect(page.locator('#cleanCategoryNav button')).toHaveCount(4);
+ await expect(page.locator('#geoTitle')).toBeHidden();
+ await page.locator('#tool-visuals').click();
+ await page.locator('.clean-tool[data-tool="geo"] > summary').click();
  await expect(page.locator('#geoTitle')).toBeVisible();
 });
 test('quick number checker compares latest stored draw without claiming prizes',async({page})=>{
