@@ -13,7 +13,7 @@ const utf8=new TextEncoder();
 const BOM='\ufeff';
 let active=false;
 const toValue=v=>v===null||v===undefined?'':typeof v==='object'?JSON.stringify(v):String(v);
-const escapeCell=v=>{const s=toValue(v);return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
+const escapeCell=v=>{let s=toValue(v);if(typeof v==='string'&&/^[\t\r\n ]*[=+@-]/.test(s))s="'"+s;return /[\",\r\n]/.test(s)?'\"'+s.replace(/\"/g,'\"\"')+'\"':s;};
 function csv(rows,cols){
  const keys=cols||Object.keys(rows[0]||{});
  return BOM+keys.map(escapeCell).join(',')+'\r\n'+rows.map(row=>keys.map(k=>escapeCell(row[k])).join(',')).join('\r\n')+'\r\n';
