@@ -22,7 +22,44 @@ function parseCsv(s){const lines=s.replace(/^\uFEFF/,'').trim().split(/\r?\n/);c
 $('csvFile').onchange=async e=>{try{const imported=parseCsv(await e.target.files[0].text());if(!imported.length)throw Error('No valid results rows found');const local=JSON.parse(localStorage.getItem(key)||'[]');localStorage.setItem(key,JSON.stringify(merge(local,imported)));records=merge(records,imported);render();$('status').textContent='Imported '+imported.length+' valid rows. Verify against official results; imports are saved on this device.'}catch(e){$('status').textContent='Import failed: '+e.message}};
 $('resetData').onclick=()=>{localStorage.removeItem(key);location.reload()};
 $('exportCsv').onclick=()=>{const csv=['date,draw,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19,n20,multiplier',...records.map(r=>[r.date,r.draw,...r.numbers,r.multiplier||''].join(','))].join('\n');const a=document.createElement('a'),u=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.href=u;a.download='lottolab-keno-results.csv';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
-$('runTest').onclick=()=>{if(records.length<51){$('backtest').textContent='At least 51 chronological draws are needed. Current: '+records.length;return}let total=0,baseline=0,n=0,wins=0;const reference=[1,9,17,25,33,41,49,57,65,73];for(let i=50;i<records.length;i++){const c=counts(records.slice(0,i));const picks=Array.from({length:80},(_,j)=>j+1).sort((a,b)=>c[b]-c[a]||a-b).slice(0,10);const actual=new Set(records[i].numbers);const got=picks.filter(v=>actual.has(v)).length;total+=got;baseline+=reference.filter(v=>actual.has(v)).length;if(got>reference.filter(v=>actual.has(v)).length)wins++;n++}$('backtest').textContent='Walk-forward tested '+n+' draws. Historical-frequency model: '+(total/n).toFixed(3)+' matches per 10-number line. Fixed reference: '+(baseline/n).toFixed(3)+'. Independent random expectation: 2.500. Model exceeded reference in '+wins+'/'+n+' draws. No guarantee of out-of-sample advantage.'};
+function modelLinesFor(history,seedNumber){
+ const all=counts(history),recent=counts(history.slice(-80));
+ const nums=Array.from({length:80},(_,i)=>i+1);
+ const ranked=(c,asc=false)=>nums.slice().sort((a,b)=>asc?c[a]-c[b]||a-b:c[b]-c[a]||a-b).slice(0,10);
+ const hot=ranked(all),momentum=ranked(recent),cold=ranked(recent,true);
+ const pair=Array.from({length:81},()=>new Uint16Array(81));
+ const limited=history.slice(-300), limitedCount=counts(limited);
+ for(const row of limited){for(let i=0;i<row.numbers.length;i++)for(let j=i+1;j<row.numbers.length;j++){const a=row.numbers[i],b=row.numbers[j];pair[a][b]++;pair[b][a]++}}
+ const chosen=[hot[0]];
+ while(chosen.length<10){
+  let next=0,best=-Infinity;
+  for(const n of nums){if(chosen.includes(n))continue;let v=0;for(const k of chosen)v+=pair[n][k]-(limitedCount[n]*limitedCount[k]/limited.length);v+=.05*all[n];if(v>best){best=v;next=n}}
+  chosen.push(next)
+ }
+ const zones=[];for(let low=1;low<=80;low+=8)zones.push(nums.slice(low-1,low+7).sort((a,b)=>all[b]-all[a]||a-b)[0]);
+ let seed=seedNumber>>>0;
+ const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
+ const pool=nums.slice();for(let i=pool.length-1;i>0;i--){const j=Math.floor(rand()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+ return {historical:hot,recent:momentum,cold,network:chosen,spread:zones,random:pool.slice(0,10)};
+}
+$('runTest').onclick=()=>{
+ const panel=$('backtest');if(records.length<51){panel.textContent='At least 51 chronological draws are needed to run walk-forward validation. Loaded: '+records.length;return}
+ const last=Math.max(50,records.length-150),scores={historical:0,recent:0,cold:0,network:0,spread:0,random:0},wins={historical:0,recent:0,cold:0,network:0,spread:0,random:0},n=records.length-last;
+ for(let i=last;i<records.length;i++){
+  const previous=records.slice(Math.max(0,i-600),i),sets=modelLinesFor(previous,Number(records[i].draw)),actual=new Set(records[i].numbers);
+  for(const id of Object.keys(scores)){const hits=sets[id].filter(v=>actual.has(v)).length;scores[id]+=hits;if(hits>=5)wins[id]++}
+ }
+ panel.replaceChildren();
+ const summary=document.createElement('p');summary.textContent='Walk-forward validation across '+n+' held-out draws. Each prediction is generated using previous draws only, with no future data.';
+ panel.append(summary);
+ const table=document.createElement('table'),thead=document.createElement('thead'),head=document.createElement('tr');['Model','Average hits of 10','5+ matches'].forEach(label=>{const th=document.createElement('th');th.textContent=label;head.append(th)});thead.append(head);table.append(thead);
+ const tbody=document.createElement('tbody');
+ for(const [id,name] of Object.entries({historical:'Historical hot',recent:'Recent momentum',cold:'Recent cold',network:'Pair network',spread:'Balanced zones',random:'Random control'})){
+  const tr=document.createElement('tr');[name,(scores[id]/n).toFixed(3),wins[id]+' / '+n].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td)});tbody.append(tr)
+ }
+ table.append(tbody);panel.append(table);
+ const foot=document.createElement('p');foot.className='small';foot.textContent='Random-draw expectation: 2.500 matches per 10-number line. Even apparently better historical results can be chance or overfitting. Comparing many models increases the risk of misleading winners.';panel.append(foot);
+};
 
 const nzDate=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Pacific/Auckland',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const formatDay=s=>{const [y,m,d]=s.split('-').map(Number);return new Intl.DateTimeFormat('en-NZ',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(Date.UTC(y,m-1,d,12)))};
