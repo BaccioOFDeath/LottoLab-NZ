@@ -1,0 +1,20 @@
+/* Mobile-first six Lotto balls: every number is entered separately with a numeric keyboard. */
+.ball-entry-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(4px,1.35vw,10px);align-items:center;width:100%;min-width:0;max-width:530px;margin:12px 0 5px}
+.ball-entry-grid .ball-entry-field,.quick-check .ball-entry-grid input.ball-entry-field,.checker-input-card .ball-entry-grid input.ball-entry-field{box-sizing:border-box;display:block;min-width:0;width:100%;height:auto;min-height:44px;aspect-ratio:1/1;border:2px solid #8470c9;border-radius:50%;padding:0;margin:0;background:radial-gradient(circle at 26% 17%,#fff,#f2ecff 80%);color:#402277;text-align:center;font-family:Outfit,'DM Sans',sans-serif;font-weight:900;font-size:clamp(16px,3.9vw,22px);line-height:1;box-shadow:inset 0 2px 4px #c9b4ee39,0 3px 7px #3a2b6e11;-webkit-appearance:none;appearance:none}
+.ball-entry-grid .ball-entry-field::placeholder{color:#bbb3d1;opacity:1}
+.ball-entry-grid .ball-entry-field:focus,.quick-check .ball-entry-grid input.ball-entry-field:focus,.checker-input-card .ball-entry-grid input.ball-entry-field:focus{outline:3px solid #9f7afe;outline-offset:2px;border-color:#6834cf;background:#fff}
+.ball-entry-grid .ball-entry-field.is-error{border-color:#da5365;background:#fff0f1;color:#9b283e}
+.ball-entry-instructions,.quick-check-body>form .ball-entry-instructions{margin:3px 0 10px;color:#61728d;font-size:11px;font-weight:500;line-height:1.6}
+.ball-entry-paste{margin:1px 0 10px;min-width:0}
+.ball-entry-paste summary{display:list-item;font-size:11px;line-height:1.5;font-weight:850;color:#4f3ca2;cursor:pointer;padding:5px 0}
+.ball-entry-paste[open] summary{margin-bottom:7px}
+.ball-entry-paste input{display:block;width:100%;min-height:43px;max-width:100%;border-radius:8px}
+.quick-check .ball-entry-paste input{font-size:16px}
+.checker-input-card .ball-entry-grid{margin-top:11px}
+.checker-input-card .ball-entry-instructions{margin:3px 0 9px}
+.checker-input-card .ball-entry-paste{margin:0 0 10px}
+.quick-check .quick-check-body form .ball-entry-grid{margin-bottom:1px}
+@media(max-width:380px){.ball-entry-grid{gap:4px}.ball-entry-grid .ball-entry-field,.quick-check .ball-entry-grid input.ball-entry-field,.checker-input-card .ball-entry-grid input.ball-entry-field{min-height:40px;font-size:17px}}
+@media(prefers-reduced-motion:reduce){.ball-entry-grid .ball-entry-field{transition:none}}
+.quick-check .ball-entry-paste summary{display:list-item;min-height:0;margin:0;padding:7px 0;align-items:initial}
+.quick-check .ball-entry-paste[open] summary{margin-bottom:7px}

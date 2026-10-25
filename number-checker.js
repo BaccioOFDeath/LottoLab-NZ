@@ -141,7 +141,7 @@ $('checkerSaved').addEventListener('click',e=>{
  const b=e.target.closest('button[data-action]');if(!b)return;
  const idx=Number(b.dataset.index),v=history[idx];if(!v)return;
  if(b.dataset.action==='load'){
-  $('checkerNumbers').value=v.numbers.map(two).join(' ');$('checkerPB').value=v.powerball===null?'':String(v.powerball);$('checkerName').value=v.name;storeDraft();compare(v,false);feedback('Loaded saved line.');
+  $('checkerNumbers').value=v.numbers.map(two).join(' ');window.dispatchEvent(new CustomEvent('lottolab:load-ball-line',{detail:{numbers:v.numbers}}));$('checkerPB').value=v.powerball===null?'':String(v.powerball);$('checkerName').value=v.name;storeDraft();compare(v,false);feedback('Loaded saved line.');
  }else{
   const next=history.filter((_,i)=>i!==idx);
   try{localStorage.setItem(SAVE,JSON.stringify(next));history=next;renderSaved();feedback('Deleted saved line.');}catch{feedback('Browser storage blocked; could not delete.');}
@@ -151,5 +151,8 @@ $('checkerExport').addEventListener('click',exportBackup);
 $('checkerImport').addEventListener('click',()=>$('checkerImportFile').click());
 $('checkerImportFile').addEventListener('change',e=>importBackup(e.target.files[0]));
 window.addEventListener('lottolab:data-ready',loadArchive);window.addEventListener('lottolab:data-error',coverage);
+window.addEventListener('lottolab:checked-line-added',()=>{
+ try{const value=JSON.parse(localStorage.getItem(SAVE)||'[]');history=Array.isArray(value)?value.map(validate).filter(Boolean).slice(0,MAX):[];renderSaved();}catch{}
+});
 restore();renderSaved();loadArchive();const draft=current();if(!draft.error&&rows.length)compare(draft,false);
 })();
