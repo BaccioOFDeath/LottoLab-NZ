@@ -31,6 +31,18 @@ def next_draw(today):
     while day.weekday() not in (2,5):day+=dt.timedelta(days=1)
     return day.isoformat()
 
+def next_display_draw(now):
+    """Upcoming draw in NZ time; include today's draw until 20:20 local.
+
+    A morning scheduled run must not jump straight to the following Saturday
+    when Wednesday's draw hasn't happened yet.
+    """
+    local=now.astimezone(NZ)
+    today=local.date()
+    if today.weekday() in (2,5) and local.time()<dt.time(20,20):
+        return today.isoformat()
+    return next_draw(today)
+
 def fnv32(value):
     h=2166136261
     for c in value.encode('utf-8'):h=((h^c)*16777619)&0xffffffff
@@ -198,7 +210,7 @@ def run(now=None):
             if (p.get('bonus_prediction') is not None and p.get('bonus_prediction_created_at','')[:10]<p['target_date']):
                 p['bonus_prediction_match']=p['bonus_prediction']==result['bonus']
             p['scored_at']=now.astimezone(dt.timezone.utc).isoformat()
-    target=next_draw(now.astimezone(NZ).date())
+    target=next_display_draw(now)
     history=[r for r in draws if r['date']<target]
     if len(history)>=MIN_TRAIN:
         current=validate_set(picks,target)
