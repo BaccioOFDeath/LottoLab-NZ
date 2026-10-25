@@ -136,32 +136,3 @@ if __name__=='__main__':
  parser.add_argument('--start',default='2018-12')
  args=parser.parse_args()
  process(min(250,max(1,args.limit)),args.start)
-,url,re.I)
-   if mm:
-    try:
-     known=dt.date(int(mm[3]),MONTH_ID[mm[1].lower()],int(mm[2])).isoformat()
-     if known in existing_dates:continue
-    except (ValueError,KeyError):pass
-   checked+=1
-   a=read_first(fetch(url))
-   if not valid(a):skipped+=1;continue
-   if a['draw'] in existing:continue
-   secondary_url=SECOND+str(a['draw'])
-   b=read_second(fetch(secondary_url))
-   if not valid(b) or (a['draw'],a['date'],a['numbers'],a['bonus'],a['powerball'])!=(b['draw'],b['date'],b['numbers'],b['bonus'],b['powerball']):
-    print('Unconfirmed draw',a['draw'],'- skipping');skipped+=1;continue
-   record={**a,'verification':'two-source','sources':[url,secondary_url]}
-   inserted.append(record);existing[a['draw']]=record
-   print('Verified',a['draw'],a['date'])
-   time.sleep(.2)
-  if checked>=limit:break
- if inserted:
-  current.extend(inserted);current.sort(key=lambda r:r['draw'],reverse=True)
-  DATA.write_text(json.dumps(current,indent=2,ensure_ascii=False)+'\n')
- print('Backfill inspected',checked,'pages, imported',len(inserted),'verified draws; skipped',skipped,'unconfirmed. Database total:',len(current))
-if __name__=='__main__':
- parser=argparse.ArgumentParser()
- parser.add_argument('--limit',type=int,default=50)
- parser.add_argument('--start',default='2018-12')
- args=parser.parse_args()
- process(min(250,max(1,args.limit)),args.start)
