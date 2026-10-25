@@ -1,0 +1,41 @@
+name: Legacy Lotto history (1987–2018)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/import_legacy.py'
+      - '.github/workflows/legacy-history.yml'
+  schedule:
+    - cron: '25 4 * * 1'
+permissions:
+  contents: write
+concurrency:
+  group: lottolab-data-writes
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Import one-source historical pages (never invent absent data)
+        run: python scripts/import_legacy.py --start 1 --end 1800 --workers 3
+      - name: Verify both historical datasets
+        run: python -m unittest discover -s tests -v
+      - name: Commit separately labelled historical records
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/legacy-draws.json
+          if git diff --cached --quiet; then echo 'No new historical records'; exit 0; fi
+          git commit -m 'data: source-labelled historical Lotto results 1987-2018'
+          for attempt in 1 2 3 4 5 6 7 8; do
+            git pull --rebase origin main
+            if git push; then exit 0; fi
+            sleep 3
+          done
+          exit 1
