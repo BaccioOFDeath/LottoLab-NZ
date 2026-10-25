@@ -2,7 +2,8 @@ name: Predict & score transparently
 on:
   workflow_dispatch:
   schedule:
-    - cron: '5 19 * * 2,5'
+    # Run every NZ morning: refresh pre-draw records and score recovered results.
+    - cron: '5 19 * * *'
   push:
     paths:
       - 'data/draws.json'
