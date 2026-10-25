@@ -28,6 +28,10 @@
  function compareNumbers(){
   try{
    if(!currentDraw)drawReady();
+   if($('checkNumbers')?.dataset.pasteInvalid==='true'){
+    showCheckMessage('The pasted line contains extra or invalid characters. Enter exactly six numbers, each from 1 to 40.',true);
+    return;
+   }
    const ballFields=[...form.querySelectorAll('.ball-entry-field')];
    const values=ballFields.length===6?ballFields.map(field=>field.value.trim()):$('checkNumbers').value.trim().split(/[\s,;|]+/).filter(Boolean);
    const numbers=values.map(Number);
