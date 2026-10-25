@@ -61,7 +61,9 @@ function wire(id,containerId,labelId){
   const values=readCells();
   original.value=values.filter(Boolean).join(' ');
   try{localStorage.setItem(STORAGE+id,JSON.stringify(values));}catch{}
+  syncing=true;
   original.dispatchEvent(new Event('input',{bubbles:true}));
+  syncing=false;
   mark();
  }
  function mark(){
