@@ -1,0 +1,43 @@
+/* Compact research slips: true ticket density on small screens, not large stacked cards.
+ * Purple = six playable main numbers, pink = PB; Bonus remains disclosure-only.
+ */
+#picker .fixed-picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+#picker .fixed-pick-line{position:relative;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto;gap:7px 7px;align-items:center;min-width:0;margin:0;padding:10px 12px 9px 15px;border:1px solid #d8dfee;border-left:4px solid #6953cb;border-radius:9px;background:#fff;box-shadow:none;overflow:hidden}
+#picker .fixed-pick-line:before{content:'';position:absolute;top:0;right:45px;bottom:0;border-left:1px dashed #e3e7f1;pointer-events:none;display:none}
+#picker .fixed-pick-name{grid-column:1;grid-row:1;display:flex;gap:10px;align-items:baseline;justify-content:flex-start;width:auto;min-width:0}
+#picker .fixed-pick-name strong{font:900 12px/1.1 Outfit,sans-serif;white-space:nowrap;color:#263451}
+#picker .fixed-pick-name small{display:block;font-size:9px;font-weight:650;color:#7c83a0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#picker .fixed-copy{grid-column:2;grid-row:1;min-width:48px;min-height:27px;margin:0;padding:5px 8px;border-radius:6px;border:1px solid #e1d9f2;background:#f5efff;color:#5b3d9e;font-size:10px;font-weight:850;line-height:1}
+#picker .fixed-pick-numbers{grid-column:1;grid-row:2;display:flex;gap:clamp(3px,.65vw,6px);align-items:center;flex-wrap:nowrap;justify-content:flex-start;min-width:0;width:auto;margin:0}
+#picker .fixed-pick-numbers .ball{flex:0 0 auto;display:grid;place-items:center;width:clamp(26px,2.4vw,33px);height:clamp(26px,2.4vw,33px);font-size:11px;border-radius:50%;box-shadow:0 2px 4px #3820561f}
+#picker .fixed-pick-extras{grid-column:2;grid-row:2;display:flex;align-items:center;justify-content:flex-end;min-width:0;margin:0;padding:0}
+#picker .fixed-pick-extras .ticket-power{display:flex;align-items:center;gap:5px;flex-wrap:nowrap}
+#picker .ticket-power .pick-extra-label{font-size:9px;font-weight:900;letter-spacing:0;max-width:none;color:#a43b78}
+#picker .ticket-power .ball.power{width:clamp(26px,2.4vw,33px);height:clamp(26px,2.4vw,33px);font-size:11px}
+#picker .ticket-bonus{grid-column:1/-1;grid-row:3;margin:0;padding:0;min-width:0;font-size:9px;color:#7c8298}
+#picker .ticket-bonus>summary{display:inline-flex;align-items:center;cursor:pointer;list-style:none;font-size:9px;line-height:1.3;min-height:18px;color:#707c9b}
+#picker .ticket-bonus>summary::-webkit-details-marker{display:none}
+#picker .ticket-bonus>summary:before{content:'+';font-weight:900;margin-right:5px}
+#picker .ticket-bonus[open]>summary:before{content:'−'}
+#picker .ticket-bonus .pick-extra{display:flex;align-items:center;gap:7px;padding:5px 0}
+#picker .ticket-bonus .pick-extra-label{font-size:9px;letter-spacing:0;max-width:none}
+#picker .ticket-bonus .ball.bonus{width:24px;height:24px;font-size:10px}
+#picker .fixed-pick-line:focus-within{outline:2px solid #8e73e7;outline-offset:2px}
+@media(max-width:1070px){#picker .fixed-picks{grid-template-columns:1fr}}
+@media(max-width:700px){
+ #picker .fixed-picks{gap:5px;margin:9px 0}
+ #picker .fixed-pick-line{padding:7px 10px 6px 12px;gap:5px 4px;grid-template-rows:auto auto auto;min-height:82px}
+ #picker .fixed-pick-name strong{font-size:12px}
+ #picker .fixed-pick-name small{font-size:9px}
+ #picker .fixed-pick-numbers{gap:clamp(3px,1vw,5px)}
+ #picker .fixed-pick-numbers .ball{width:clamp(27px,8.1vw,32px);height:clamp(27px,8.1vw,32px);font-size:11px}
+ #picker .ticket-power .ball.power{width:clamp(27px,8.1vw,32px);height:clamp(27px,8.1vw,32px)}
+ #picker .fixed-copy{min-height:27px}
+}
+@media(max-width:375px){
+ #picker .fixed-pick-line{padding-left:8px;padding-right:8px}
+ #picker .fixed-pick-numbers .ball{width:clamp(24px,7.6vw,28px);height:clamp(24px,7.6vw,28px);font-size:10px}
+ #picker .ticket-power .ball.power{width:26px;height:26px}
+ #picker .fixed-pick-numbers{gap:3px}
+ #picker .ticket-power .pick-extra-label{font-size:8px}
+}

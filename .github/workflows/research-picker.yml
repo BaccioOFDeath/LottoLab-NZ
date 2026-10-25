@@ -2,7 +2,8 @@ name: Predict & score transparently
 on:
   workflow_dispatch:
   schedule:
-    - cron: '5 19 * * 2,5'
+    # Run every NZ morning: refresh pre-draw records and score recovered results.
+    - cron: '5 19 * * *'
   push:
     paths:
       - 'data/draws.json'
@@ -23,9 +24,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
       - run: python scripts/model_engine.py
       - name: Store timestamped picks and performance
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

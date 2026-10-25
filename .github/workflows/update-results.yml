@@ -7,6 +7,8 @@ on:
       - 'scripts/update_results.py'
   schedule:
     - cron: '15 12,18 * * 3,6'
+    # Later retries the following NZ day if external sources publish slowly.
+    - cron: '15 0,6 * * 0,4'
 permissions:
   contents: write
 concurrency:
@@ -26,6 +28,7 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: python scripts/model_engine.py
       - name: Publish verified draw and score model
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

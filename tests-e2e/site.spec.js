@@ -209,7 +209,7 @@ test('bonus and Powerball are real color-coded balls, not unplayable ticket choi
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
  await expect(page.locator('#pickerLines .ball.bonus')).toHaveCount(20);
  await expect(page.locator('#pickerLines .ball.power')).toHaveCount(20);
- await expect(page.locator('#pickerLines .pick-extra-label').first()).toContainText('RESEARCH ONLY');
+ await expect(page.locator('#pickerLines .ticket-bonus .pick-extra-label').first()).toContainText('RESEARCH ONLY');
  const picks=require('../data/model-picks.json');
  const first=picks.find(p=>p.model==='adaptive_frequency_v1'&&(p.line_number||1)===1);
  const line=page.locator('#pickerLines .fixed-pick-line').first();

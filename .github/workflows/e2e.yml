@@ -11,6 +11,7 @@ on:
       - 'number-universe.js'
       - 'experience.js'
       - 'picker.js'
+      - 'picker-ticket.css'
       - 'styles.css'
       - 'ball-entry.js'
       - 'ball-entry.css'
