@@ -59,3 +59,13 @@
  #picker .ticket-bonus>summary{width:13px}
 }
 @media(prefers-reduced-motion:reduce){#picker .lotto-ticket *{transition:none}}
+
+/* Guard against inherited card-grid rules: playable balls and PB share row one. */
+#picker .fixed-pick-line{display:grid!important;align-items:center!important;grid-auto-flow:row}
+#picker .fixed-pick-line>.fixed-pick-name{grid-column:1!important;grid-row:1!important;align-self:center!important}
+#picker .fixed-pick-line>.fixed-pick-numbers{grid-column:2!important;grid-row:1!important;align-self:center!important}
+#picker .fixed-pick-line>.fixed-pick-extras{grid-column:3!important;grid-row:1!important;align-self:center!important}
+#picker .fixed-pick-line>.fixed-copy{grid-column:4!important;grid-row:1!important;align-self:center!important}
+#picker .fixed-pick-line>.ticket-bonus:not([open]){grid-column:5!important;grid-row:1!important;align-self:center!important}
+#picker .fixed-pick-line>.ticket-bonus[open]{grid-column:1/-1!important;grid-row:2!important}
+#picker .fixed-pick-extras .ticket-power{height:var(--ticket-ball);display:flex;align-items:center;justify-content:center}
