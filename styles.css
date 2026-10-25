@@ -601,3 +601,6 @@ body{background:var(--bg)}
 .world-bottom p{margin:0;font-size:11px;color:#857494;line-height:1.6}
 .world-honesty{font-size:11px;color:#8a7b99;line-height:1.65;margin-top:10px}
 @media(max-width:600px){#worldCanvas{height:390px}.world-overlay{left:14px;top:15px}.world-overlay strong{font-size:20px}.world-actions{left:9px;right:9px;bottom:10px}.world-actions button{flex:1;min-height:42px;padding:9px 5px}.world-bottom{margin:0 2px}}
+
+/* Hidden means hidden, even for styled action buttons and optional archive panels. */
+[hidden]{display:none!important}
