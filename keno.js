@@ -145,8 +145,8 @@ const details=(n,data,c)=>{if(!data.length)return 'Number '+n+': no historical d
 balls('heatmap',n=>{active=n;render()});balls('builder',n=>{if(selected.includes(n))selected=selected.filter(x=>x!==n);else if(selected.length<Number($('pickSize').value)){selected.push(n);reserveNumbers=reserveNumbers.filter(x=>x!==n)}render()});
 $('window').onchange=render;$('pickSize').onchange=()=>{selected=selected.slice(0,Number($('pickSize').value));render()};
 $('clearLine').onclick=()=>{selected=[];reserveNumbers=[];ticketRankScores={};ticketOrigin=null;render()};
-$('randomLine').onclick=()=>{const a=Array.from({length:80},(_,i)=>i+1);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}selected=a.slice(0,Number($('pickSize').value));render()};
-$('frequencyLine').onclick=()=>{const c=counts(sample());selected=Array.from({length:80},(_,i)=>i+1).sort((a,b)=>c[b]-c[a]||a-b).slice(0,Number($('pickSize').value));render()};
+$('randomLine').onclick=()=>{const a=Array.from({length:80},(_,i)=>i+1);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}selected=a.slice(0,Number($('pickSize').value));reserveNumbers=[];ticketRankScores={};ticketOrigin={model:'Random',draw:targetDrawId,time:activeSlot()?.time};render()};
+$('frequencyLine').onclick=()=>{const c=counts(sample());selected=Array.from({length:80},(_,i)=>i+1).sort((a,b)=>c[b]-c[a]||a-b).slice(0,Number($('pickSize').value));reserveNumbers=[];ticketRankScores=Object.fromEntries(selected.map((n,i)=>[n,100-i]));ticketOrigin={model:'Historical frequency',draw:targetDrawId,time:activeSlot()?.time};render()};
 $('copyLine').onclick=async()=>{const txt=chosen().join(', ');try{await navigator.clipboard.writeText(txt);$('status').textContent='Copied: '+txt}catch{$('status').textContent='Copy unavailable; selected numbers: '+txt}};
 function parseCsv(s){const lines=s.replace(/^\uFEFF/,'').trim().split(/\r?\n/);const head=lines.shift().split(',').map(x=>x.trim().toLowerCase());const idx=n=>head.indexOf(n);if(idx('date')<0)throw Error('Missing date column');let result=[];for(const line of lines){const p=line.split(',').map(x=>x.trim().replace(/^"|"$/g,''));let nums=idx('numbers')>=0?p[idx('numbers')]:Array.from({length:20},(_,i)=>p[idx('n'+(i+1))]);const r=sanitize({date:p[idx('date')],draw:idx('draw')<0?'':p[idx('draw')],numbers:nums,multiplier:idx('multiplier')<0?'':p[idx('multiplier')]});if(r)result.push(r)}return result}
 $('csvFile').onchange=async e=>{try{const imported=parseCsv(await e.target.files[0].text());if(!imported.length)throw Error('No valid results rows found');const local=JSON.parse(localStorage.getItem(key)||'[]');localStorage.setItem(key,JSON.stringify(merge(local,imported)));records=merge(records,imported);render();$('status').textContent='Imported '+imported.length+' valid rows. Verify against official results; imports are saved on this device.'}catch(e){$('status').textContent='Import failed: '+e.message}};
@@ -392,6 +392,23 @@ for(const link of document.querySelectorAll('a[href^="#"]')){
  });
 }
 window.addEventListener('hashchange',()=>jumpToKenoSection(window.location.hash,false));
+
+
+const savedDraft=readStore(DRAFT_KEY,null);
+if(savedDraft&&Array.isArray(savedDraft.numbers)&&savedDraft.numbers.every(n=>Number.isInteger(n)&&n>=1&&n<=80)){
+ selected=[...new Set(savedDraft.numbers)].slice(0,10);
+ reserveNumbers=Array.isArray(savedDraft.spares)?[...new Set(savedDraft.spares)].filter(n=>Number.isInteger(n)&&n>=1&&n<=80&&!selected.includes(n)).slice(0,10):[];
+ ticketRankScores=savedDraft.rank&&typeof savedDraft.rank==='object'?savedDraft.rank:{};
+ ticketOrigin=savedDraft.source||null;
+ const count=Math.max(1,Math.min(10,Number(savedDraft.size)||10));
+ $('pickSize').value=String(count);$('oddsPickSize').value=String(count);
+ if([...$('oddsStake').options].some(o=>Number(o.value)===Number(savedDraft.stake)))$('oddsStake').value=String(savedDraft.stake);
+ $('oddsMultiplier').checked=Boolean(savedDraft.multiplier);
+ targetDrawId=savedDraft.target||null;
+ for(const b of $('pickCountPills').querySelectorAll('button'))b.setAttribute('aria-pressed',String(Number(b.value)===count));
+ updateKenoOdds();
+}
+renderSavedTickets();
 
 refreshKeno();
 setInterval(refreshKeno,5*60*1000);
