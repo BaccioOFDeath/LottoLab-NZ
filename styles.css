@@ -1071,3 +1071,8 @@ background-position:center,center!important;background-repeat:no-repeat;backgrou
  .hero{background-image:linear-gradient(180deg,rgba(8,27,52,.85) 0%,rgba(8,26,54,.49) 23%,rgba(13,26,55,.03) 45%,rgba(9,25,51,.15) 74%,rgba(9,26,56,.79) 100%),url('./assets/hero-ai-approved-mobile.webp')!important;
  background-position:center,center!important;background-size:cover,cover!important}
 }
+
+/* Small shared site-visit counter; counts start on introduction, not retroactively. */
+.visitor-counter{display:inline-flex;align-items:center;min-height:29px;margin-top:9px;padding:5px 8px;background:#ffffff0c;border:1px solid #ffffff22;border-radius:8px;max-width:100%}
+.visitor-counter img{display:block;max-width:100%;height:22px;object-fit:contain}
+@media(max-width:700px){.visitor-counter{margin-top:7px;padding:4px 6px}}
