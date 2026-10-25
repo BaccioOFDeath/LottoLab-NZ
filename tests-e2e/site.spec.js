@@ -142,7 +142,7 @@ test('Evidence Lab responds to every rule-era filter and reports audit coverage'
  await expect(page.locator('#evidenceDraws')).toHaveText(String(n14));
  await expect(page.locator('#evidenceExpected')).toHaveText((n14*.15).toFixed(2));
  await page.locator('#ruleFilter').selectOption('pb10');
- const n10=entries.filter(x=>x.date<'2026-09-13').length;
+ const n10=entries.filter(x=>x.date>='2001-02-01'&&x.date<'2026-09-13').length;
  await expect(page.locator('#evidenceDraws')).toHaveText(String(n10));
  await page.locator('#ruleFilter').selectOption('all');
  await expect(page.locator('#evidenceDraws')).toHaveText(String(entries.length));
@@ -510,7 +510,7 @@ test('Geo Lab works at iPhone width without page overflow or hidden reports',asy
  await page.locator('#geoPins button').first().click();
  await expect(page.locator('#geoSelectedList a').first()).toBeVisible();
  await expect.poll(()=>page.evaluate(()=>Math.max(document.documentElement.scrollWidth,document.body.scrollWidth))).toBeLessThanOrEqual(391);
- await expect(page.locator('#geoNormalized')).toBeDisabled();
+ await expect(page.locator('#geoNormalized')).toHaveAttribute('aria-controls','geoScenario');
 });
 test('Geo Lab data outage gives a clear message and does not affect main Lotto results',async({page})=>{
  await page.route('**/data/geo-winners.json',r=>r.fulfill({status:503,body:'temporarily unavailable'}));
