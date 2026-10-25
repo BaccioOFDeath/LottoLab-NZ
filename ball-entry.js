@@ -131,11 +131,10 @@ const quick=wire('checkNumbers','checkNumbers');
 const historical=wire('checkerNumbers','checkerNumbers');
 // A successful latest-draw check also remembers the line in the historical checker library.
 const form=$('quickCheckForm');
-if(form&&quick)form.addEventListener('submit',()=>{
- const numbers=quick.read();
- if(!numbers)return;
- const rawPB=$('checkPowerball')?.value.trim()||'';
- const pb=rawPB===''?null:Number(rawPB);
+if(form&&quick)window.addEventListener('lottolab:quick-check-valid',event=>{
+ const numbers=event.detail?.numbers;
+ if(!Array.isArray(numbers)||numbers.length!==6||new Set(numbers).size!==6)return;
+ const pb=event.detail?.powerball??null;
  if(pb!==null&&(!Number.isInteger(pb)||pb<1||pb>14))return;
  const savedLine={numbers:[...numbers].sort((a,b)=>a-b),powerball:pb,name:'Latest draw check'};
  try{

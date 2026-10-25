@@ -1,0 +1,19 @@
+.data-exports{scroll-margin-top:110px;margin-top:30px;padding:0;border:1px solid #9ec4d6;border-radius:14px;background:linear-gradient(135deg,#f5fcff,#f5f5ff);overflow:hidden;color:#1c3651}
+.export-heading{padding:25px 25px 17px}.export-heading p{font-size:10px;font-weight:900;letter-spacing:1.6px;color:#31789c;margin:0 0 8px}.export-heading h3{font:900 clamp(24px,3.3vw,32px) Outfit;margin:0 0 8px}.export-heading span{font-size:12px;color:#60768c;line-height:1.65}
+.export-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 25px}
+.export-actions button{border:1px solid #b4cada;background:white;color:#245274;border-radius:9px;padding:12px 10px;min-height:46px;font-weight:850;font-size:12px;text-align:center;cursor:pointer}
+.export-actions button:hover{border-color:#469bb8;background:#f0fbff}
+.export-actions .export-all-btn{grid-column:1/-1;background:linear-gradient(110deg,#277aad,#6541b1);color:white;border:0;font-size:13px}
+.export-actions button:disabled{cursor:wait;opacity:.48}
+.export-options{display:flex;align-items:center;flex-wrap:wrap;gap:15px;padding:15px 25px}
+.export-options label{font-size:11px;font-weight:800;color:#39526b;line-height:1.6}
+.export-options label:first-child{flex:1 1 180px}
+.export-options select{margin-left:8px;min-height:38px;border:1px solid #b6c9db;border-radius:7px;background:white;padding:8px;font-size:11px;max-width:210px;color:#294260}
+.export-options .export-private{display:flex;align-items:flex-start;gap:9px;flex:2 1 230px;font-weight:650}
+.export-private input{width:17px;height:17px;accent-color:#5b46b6;flex-shrink:0}
+.export-status{margin:0;padding:5px 25px 12px;color:#356d74;font-size:11px;line-height:1.6;min-height:25px}
+.export-disclaimer{margin:0;padding:14px 25px 18px;border-top:1px solid #d3e1eb;color:#66788d;font-size:10px;line-height:1.65}
+.quick-check .quick-check-status.quick-check-error{border:1px solid #e3a6a8;background:#fff1f1;color:#983b4e!important;font-weight:800}
+.quick-check .quick-check-status.quick-check-completed{border:1px solid #96cfc8;background:#ebfaf7;color:#155d50!important;font-weight:800}
+.quick-check-data-link{display:block;margin:12px 0 0;font-size:11px}
+@media(max-width:470px){.data-exports{margin-top:24px}.export-heading{padding:20px 14px 14px}.export-actions{padding:0 13px;gap:7px}.export-actions button{font-size:11px}.export-options{padding:12px 13px}.export-options label:first-child{flex:1 1 100%}.export-status{padding:7px 13px 12px}.export-disclaimer{padding:13px}}

@@ -19,9 +19,9 @@ test('iPhone-sized quick checker accepts one number in each ball with numeric ke
  await inputs.nth(3).fill('12');
  await inputs.nth(4).fill('33');
  await inputs.nth(5).fill('40');
- await expect(page.locator('#checkNumbers')).toHaveValue('25 4 7 12 33 40');
+ await expect(page.locator('#checkNumbers')).toHaveValue('25 04 07 12 33 40');
  await page.locator('.quick-check-button').click();
- await expect(page.locator('#checkerStatus')).toContainText('main matches');
+ await expect(page.locator('#checkerStatus')).toContainText('main numbers matched');
  await expect(page.locator('#checkerSavedCount')).toHaveText('1 line');
  await page.reload();
  await page.locator('#ticketChecker > summary').click();
@@ -38,8 +38,8 @@ test('pasting a complete line into optional input updates individual balls and c
  expect(numbers).toEqual(newest.numbers);
  await page.locator('#checkPowerball').fill(String(newest.powerball));
  await page.locator('.quick-check-button').click();
- await expect(page.locator('#checkerStatus')).toContainText('6 of 6 main matches');
- await expect(page.locator('#checkerStatus')).toContainText('does not verify a prize');
+ await expect(page.locator('#checkerStatus')).toContainText('6 of 6 main numbers matched');
+ await expect(page.locator('#checkerStatus')).toContainText('not a ticket or prize verification');
 });
 test('historical checker has six editable balls with local saved lines restored',async({page})=>{
  await page.setViewportSize({width:390,height:844});
@@ -63,7 +63,7 @@ test('six-ball entry rejects repeated numbers without losing manually entered va
  for(let i=0;i<6;i++)await balls.nth(i).fill(String(i===5?5:i+1));
  await expect(balls.nth(5)).toHaveClass(/is-error/);
  await page.locator('.quick-check-button').click();
- await expect(page.locator('#checkerStatus')).toContainText('six different Lotto numbers');
+ await expect(page.locator('#checkerStatus')).toContainText('six DIFFERENT Lotto numbers');
  await balls.nth(5).fill('6');
  await expect(balls.nth(5)).not.toHaveClass(/is-error/);
 });

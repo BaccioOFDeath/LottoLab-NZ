@@ -1,0 +1,24 @@
+.data-health{scroll-margin-top:112px;margin-top:28px;border-radius:14px;border:1px solid #bacce3;background:#f8fbff;color:#243a5b;overflow:hidden}
+.health-title{padding:24px 24px 17px;display:flex;justify-content:space-between;gap:15px;align-items:center}
+.health-title p{font-size:10px;letter-spacing:1.6px;font-weight:900;color:#517aab;margin:0 0 8px}
+.health-title h3{font:900 clamp(23px,3vw,30px)/1.1 Outfit;margin:0 0 8px}
+.health-title span{font-size:11px;color:#62748d;line-height:1.6}
+.health-title button{flex-shrink:0;border:1px solid #a7bbd8;background:#fff;color:#2f4f86;border-radius:8px;padding:11px 12px;font-size:11px;font-weight:900;min-height:41px;cursor:pointer}
+.health-title button:disabled{opacity:.55;cursor:not-allowed}
+.health-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:0 24px}
+.health-summary>div{border-radius:9px;border:1px solid #d8e2f0;background:#fff;padding:12px}
+.health-summary span{display:block;color:#70819c;font-size:10px}
+.health-summary strong{display:block;margin-top:4px;font:900 23px Outfit;color:#415c9c}
+.health-explainer{padding:10px 24px;font-size:11px;line-height:1.7;color:#516d8d;margin:0}
+.health-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 24px 18px}
+.health-row{background:#fff;border:1px solid #dfe7f3;border-radius:10px;padding:13px;min-width:0}
+.health-row>div{display:flex;gap:7px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.health-row strong{font:850 12px Outfit;color:#243d63}
+.health-row>div span{font-size:9px;font-weight:800;color:#666b7a;background:#f2f4f9;border-radius:5px;padding:5px 7px}
+.health-row.health-failed{border-color:#e6b5bd}.health-row.health-failed>div span{background:#fff0f1;color:#9c4855}
+.health-row.health-partial>div span{background:#fff4df;color:#81623b}
+.health-row p{font-size:11px;line-height:1.6;color:#60748c;margin:9px 0}
+.health-row>a{font-size:10px;color:#365b9b;text-decoration:underline;font-weight:800}
+.health-date{font-size:10px;line-height:1.6;color:#687a90;padding:13px 24px;margin:0;border-top:1px solid #d9e4f1}
+@media(max-width:740px){.health-grid{grid-template-columns:1fr}}
+@media(max-width:470px){.health-title{padding:18px 13px 13px;align-items:flex-start;flex-direction:column}.health-summary{padding:0 13px;gap:5px}.health-summary>div{padding:9px 7px}.health-summary strong{font-size:18px}.health-summary span{font-size:9px}.health-explainer{padding:11px 13px}.health-grid{padding:0 13px 13px;gap:8px}.health-date{padding:12px 13px}}

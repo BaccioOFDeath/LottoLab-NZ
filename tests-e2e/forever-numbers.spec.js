@@ -27,6 +27,7 @@ test('Number checker compares exact and partial matching draws and saves checked
  await openLab(page);
  const dataset=require('../data/draws.json');
  const line=dataset[0];
+ await page.locator('#numberChecker .ball-entry-paste summary').click();
  await page.locator('#checkerNumbers').fill(line.numbers.join(', '));
  await page.locator('#checkerPB').selectOption(String(line.powerball));
  await page.locator('#checkerName').fill('A known draw');
@@ -36,7 +37,7 @@ test('Number checker compares exact and partial matching draws and saves checked
  await expect(page.locator('#checkerSavedCount')).toHaveText('1 line');
  await page.reload();
  await page.locator('#deepResearch').evaluate(el=>el.open=true);
- await expect(page.locator('#checkerNumbers')).toHaveValue(line.numbers.join(', '));
+ await expect(page.locator('#checkerNumbers')).toHaveValue(line.numbers.map(n=>String(n).padStart(2,'0')).join(' '));
  await expect(page.locator('#checkerSavedCount')).toHaveText('1 line');
  await page.locator('#checkerForever').click();
  await expect(page.locator('#foreverBalls .forever-ball')).toHaveCount(6);
@@ -47,6 +48,7 @@ test('Number checker validates invalid lines and works without the archive',asyn
  await page.route('**/data/draws.json',route=>route.fulfill({status:503,body:'unavailable'}));
  await page.route('**/data/legacy-draws.json',route=>route.fulfill({status:503,body:'unavailable'}));
  await openLab(page);
+ await page.locator('#numberChecker .ball-entry-paste summary').click();
  await page.locator('#checkerNumbers').fill('1 2 3 4 5 5');
  await page.locator('#checkerSearch').click();
  await expect(page.locator('#checkerFeedback')).toContainText('different');
