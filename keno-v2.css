@@ -71,3 +71,6 @@ html{scroll-padding-top:12px}
  .empirical-metrics strong{font-size:14px}
  .empirical-compare{padding:12px}
 }
+
+/* Instant same-page navigation prevents Safari scrolling past the selected section. */
+html{scroll-behavior:auto!important}
