@@ -2,8 +2,16 @@ const entries=require('../data/draws.json');
 const verified=entries.filter(r=>r.verification==='two-source'&&new Set(r.sources||[]).size>=2).length;
 const report=require('../data/model-performance.json');
 const {test,expect}=require('@playwright/test');
+
+/* Existing research tests intentionally open the optional Advanced Lab before interaction.
+   First-visit collapse behavior is independently asserted below. */
+async function visit(page,path){
+ await page.goto(path);
+ await page.locator('#deepResearch').evaluate(el=>{el.open=true});
+}
+
 test('latest results and scorecard load from validated data',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  await expect(page.locator('#latestDraw')).toContainText(String(entries[0].draw));
  await expect(page.locator('#drawCount')).toHaveText(String(entries.length));
  await expect(page.locator('#modelVerified')).toHaveText(String(report.verified_draw_count));
@@ -18,7 +26,7 @@ test('latest results and scorecard load from validated data',async({page})=>{
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
 });
 test('20 predictions stay immutable with four-line preview and expansion',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
  await expect(page.locator('#pickerGenerate')).toHaveCount(0);
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
@@ -47,7 +55,7 @@ test('20 predictions stay immutable with four-line preview and expansion',async(
  expect(await page.locator('#pickerLines').innerText()).toEqual(preview);
 });
 test('archive search filters and inspect number frequencies',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  await page.locator('#searchDraws').fill('2620');
  await expect(page.locator('#archiveCount')).toContainText('1 of 1');
  await page.locator('#searchDraws').fill('');
@@ -62,7 +70,7 @@ test('archive search filters and inspect number frequencies',async({page})=>{
 });
 test('mobile navigation and touch targets at 390 pixels',async({page})=>{
  await page.setViewportSize({width:390,height:844});
- await page.goto('/');
+ await visit(page,'/');
  const menu=page.locator('#menuToggle');
  await expect(menu).toBeVisible();
  await expect(page.locator('#mobileNav')).toBeHidden();
@@ -73,7 +81,7 @@ test('mobile navigation and touch targets at 390 pixels',async({page})=>{
  await expect(page.locator('#modelVerified')).toHaveText(String(require('../data/model-performance.json').verified_draw_count));
 });
 test('like-for-like rule-era analysis changes main statistics and Powerball pools',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  const recent=entries.filter(d=>d.date>='2026-09-16').length;
  const older=entries.filter(d=>d.date<'2026-09-13').length;
  await expect(page.locator('#ruleFilter')).toBeVisible();
@@ -99,7 +107,7 @@ test('like-for-like rule-era analysis changes main statistics and Powerball pool
 
 
 test('civil NZ draw dates stay correct after midnight UTC conversions',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  // The stored result is Saturday 24 Oct, NOT Sunday 25 Oct in New Zealand.
  const latest=entries[0];
  const label=new Date(latest.date+'T12:00:00Z').toLocaleDateString('en-NZ',{timeZone:'UTC',weekday:'long',day:'numeric',month:'long',year:'numeric'});
@@ -107,7 +115,7 @@ test('civil NZ draw dates stay correct after midnight UTC conversions',async({pa
  await expect(page.locator('#lastUpdated')).toContainText(label);
 });
 test('Evidence Lab responds to every rule-era filter and reports audit coverage',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  await expect(page.locator('#evidenceDraws')).toHaveText(String(entries.length));
  await expect(page.locator('#evidenceExpected')).toHaveText((entries.length*6/40).toFixed(2));
  await expect(page.locator('#evidenceVerified')).toHaveText(verified+'/'+entries.length);
@@ -127,7 +135,7 @@ test('Evidence Lab responds to every rule-era filter and reports audit coverage'
  await expect(page.locator('#evidenceDraws')).toHaveText(String(entries.length));
 });
 test('fixed 20-line portfolio is transparent, complete and stable',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  const picks=require('../data/model-picks.json');
  const target=require('../data/model-performance.json').upcoming_date;
  const future=picks.filter(p=>p.target_date===target);
@@ -150,7 +158,7 @@ test('fixed 20-line portfolio is transparent, complete and stable',async({page})
 
 test('Evidence Lab remains usable at iPhone-width 390px without page overflow',async({page})=>{
  await page.setViewportSize({width:390,height:844});
- await page.goto('/#evidence');
+ await visit(page,'/#evidence');
  await expect(page.locator('#evidenceTitle')).toBeVisible();
  await expect(page.locator('#evidenceDraws')).toHaveText(String(entries.length));
  await expect(page.locator('#evidenceDeviations .deviation-row')).toHaveCount(8);
@@ -164,7 +172,7 @@ test('Evidence Lab remains usable at iPhone-width 390px without page overflow',a
 });
 
 test('bonus and Powerball are real color-coded balls, not unplayable ticket choices',async({page})=>{
- await page.goto('/#picker');
+ await visit(page,'/#picker');
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
  await page.locator('#pickerExpand').click();
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
@@ -185,7 +193,7 @@ test('bonus and Powerball are real color-coded balls, not unplayable ticket choi
 });
 test('premium quick search and navigation work on mobile and keyboard',async({page})=>{
  await page.setViewportSize({width:390,height:844});
- await page.goto('/');
+ await visit(page,'/');
  await page.locator('#openQuickNav').click();
  await expect(page.locator('#quickNav')).toBeVisible();
  await page.locator('#quickSearch').fill('evidence');
@@ -208,7 +216,7 @@ test('premium quick search and navigation work on mobile and keyboard',async({pa
 
 
 test('Number Universe inspects actual frequency and follows rule-era filters',async({page})=>{
- await page.goto('/#universe');
+ await visit(page,'/#universe');
  await expect(page.locator('#universeTitle')).toContainText('The Number Universe');
  await expect(page.locator('#universeNumberPicker option')).toHaveCount(41);
  await expect(page.locator('#universeCanvas')).toBeVisible();
@@ -236,7 +244,7 @@ test('Number Universe inspects actual frequency and follows rule-era filters',as
  await expect(page.locator('#universeConnections')).toHaveAttribute('aria-pressed','false');
 });
 test('winning result ball taps open the matching historical number inspector',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  const first=entries[0].numbers[0];
  const winning=page.locator('#mainBalls .result-number-button').first();
  await expect(winning).toHaveAttribute('data-inspect',String(first));
@@ -248,7 +256,7 @@ test('real mobile touch makes a transient ripple, no blocked scrolling, and neve
  const context=await browser.newContext({baseURL:'http://127.0.0.1:4173',hasTouch:true,isMobile:true,deviceScaleFactor:2,viewport:{width:390,height:844}});
  try{
   const page=await context.newPage();
-  await page.goto('/#universe');
+  await visit(page,'/#universe');
   await expect(page.locator('#universeCanvas')).toBeVisible();
   await page.locator('#pickerExpand').click();
   await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
@@ -271,7 +279,7 @@ test('real mobile touch makes a transient ripple, no blocked scrolling, and neve
 });
 test('reduced-motion mode keeps the Number Universe readable without forced animation',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});
- await page.goto('/#universe');
+ await visit(page,'/#universe');
  await expect(page.locator('#universeTitle')).toBeVisible();
  await expect(page.locator('#universeMotion')).toHaveAttribute('aria-pressed','false');
  await page.locator('#universeNumberPicker').selectOption('28');
@@ -281,7 +289,7 @@ test('reduced-motion mode keeps the Number Universe readable without forced anim
 
 
 test('Powerball and Strike arrows are real accessible controls with useful destinations',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  const power=page.locator('#powerballGuide'),strike=page.locator('#strikeGuide');
  await expect(power).not.toHaveAttribute('open');
  await expect(strike).not.toHaveAttribute('open');
@@ -305,7 +313,7 @@ test('Powerball and Strike arrows are real accessible controls with useful desti
 });
 test('advanced research is optional and accessible, with visible primary filters',async({page})=>{
  await page.setViewportSize({width:390,height:844});
- await page.goto('/');
+ await visit(page,'/');
  await expect(page.locator('#ruleFilter')).toBeVisible();
  await expect(page.locator('#advancedFilters')).not.toHaveAttribute('open');
  await expect(page.locator('#evidenceDeep')).not.toHaveAttribute('open');
@@ -321,7 +329,7 @@ test('advanced research is optional and accessible, with visible primary filters
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(391);
 });
 test('all in-page links resolve, and visible buttons have user-perceivable names',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  const audit=await page.evaluate(()=>{
   const allIds=new Map(),duplicates=[];
   for(const el of document.querySelectorAll('[id]')){
@@ -335,7 +343,7 @@ test('all in-page links resolve, and visible buttons have user-perceivable names
  expect(audit).toEqual({duplicates:[],missing:[],unnamed:[]});
 });
 test('archive export downloads a valid CSV rather than a dead button',async({page})=>{
- await page.goto('/');
+ await visit(page,'/');
  await expect(page.locator('#archiveCount')).toContainText('matching records');
  const downloadPromise=page.waitForEvent('download');
  await page.locator('#exportCsv').click();
@@ -344,7 +352,7 @@ test('archive export downloads a valid CSV rather than a dead button',async({pag
 });
 test('Powerball and Strike guides work by keyboard in narrow viewport',async({page})=>{
  await page.setViewportSize({width:390,height:844});
- await page.goto('/');
+ await visit(page,'/');
  await page.locator('#powerballGuide summary').focus();
  await page.keyboard.press('Enter');
  await expect(page.locator('#powerballGuide')).toHaveAttribute('open','');
@@ -364,7 +372,7 @@ test('copy all, individual copy and share use the immutable ticket numbers witho
      async data=>{window.__sharedData=data;}
    });
  });
- await page.goto('/#picker');
+ await visit(page,'/#picker');
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
  await page.locator('#pickerCopyAll').click();
  const all=await page.evaluate(()=>window.__copiedText);
@@ -387,7 +395,7 @@ test('copy all, individual copy and share use the immutable ticket numbers witho
 });
 test('archived results export contains exactly the filtered rows, not only first page',async({page})=>{
  const fs=require('node:fs');
- await page.goto('/');
+ await visit(page,'/');
  await expect(page.locator('#archiveCount')).toContainText('matching records');
  await page.locator('#weekdayFilter').selectOption('3');
  const expected=entries.filter(row=>new Date(row.date+'T12:00:00Z').getUTCDay()===3);
@@ -402,7 +410,7 @@ test('archived results export contains exactly the filtered rows, not only first
 });
 test('data provider failure is explained instead of leaving an infinite loading screen',async({page})=>{
  await page.route('**/data/draws.json',route=>route.fulfill({status:503,contentType:'text/plain',body:'Temporary upstream error'}));
- await page.goto('/');
+ await visit(page,'/');
  await expect(page.locator('#dataState')).toHaveText('Archive unavailable');
  await expect(page.locator('#archiveList')).toContainText('Unable to load archived draw data');
  await expect(page.locator('#latestDate')).toContainText('temporarily unavailable');
@@ -417,7 +425,7 @@ test('Geo Lab loads authentic NZ outline and source-backed retail winning places
  const geo=require('../data/geo-winners.json');
  const retail=geo.records.filter(r=>r.channel==='retail');
  const expected=retail.reduce((n,r)=>n+r.tickets,0);
- await page.goto('/#geo');
+ await visit(page,'/#geo');
  await expect(page.locator('#geoTitle')).toContainText('Where the wins happened');
  await expect(page.locator('#geoTotal')).toHaveText(String(expected));
  await expect(page.locator('#geoRetail')).toHaveText(String(expected));
@@ -436,7 +444,7 @@ test('Geo Lab loads authentic NZ outline and source-backed retail winning places
 });
 test('Geo filters distinguish actual stores from MyLotto winner areas and prize types',async({page})=>{
  const geo=require('../data/geo-winners.json');
- await page.goto('/#geo');
+ await visit(page,'/#geo');
  const channel=page.locator('#geoChannel');
  await channel.selectOption('online');
  const online=geo.records.filter(x=>x.channel==='online').reduce((n,r)=>n+r.tickets,0);
@@ -459,7 +467,7 @@ test('Geo filters distinguish actual stores from MyLotto winner areas and prize 
 });
 test('Geo weather layers, map zoom and historical time replay are real interactions',async({page})=>{
  const geo=require('../data/geo-winners.json');
- await page.goto('/#geo');
+ await visit(page,'/#geo');
  await page.locator('#geoMarkers').click();
  await expect(page.locator('#geoMarkers')).toHaveAttribute('aria-pressed','true');
  await expect(page.locator('#geoHeat')).toHaveAttribute('aria-pressed','false');
@@ -481,7 +489,7 @@ test('Geo weather layers, map zoom and historical time replay are real interacti
 });
 test('Geo Lab works at iPhone width without page overflow or hidden reports',async({page})=>{
  await page.setViewportSize({width:390,height:844});
- await page.goto('/#geo');
+ await visit(page,'/#geo');
  await expect(page.locator('#geoMapStage')).toBeVisible();
  await expect(page.locator('#geoPins button').first()).toBeVisible();
  await page.locator('#geoGame').selectOption('Strike');
@@ -493,7 +501,7 @@ test('Geo Lab works at iPhone width without page overflow or hidden reports',asy
 });
 test('Geo Lab data outage gives a clear message and does not affect main Lotto results',async({page})=>{
  await page.route('**/data/geo-winners.json',r=>r.fulfill({status:503,body:'temporarily unavailable'}));
- await page.goto('/#geo');
+ await visit(page,'/#geo');
  await expect(page.locator('#geoMapStatus')).toContainText('currently unavailable');
  await expect(page.locator('#geoSelectedTitle')).toHaveText('Reports unavailable');
  await expect(page.locator('#latestDraw')).toContainText(String(entries[0].draw));
@@ -504,7 +512,7 @@ test('Geo Lab data outage gives a clear message and does not affect main Lotto r
 test('Geo research panel shows sourced monthly sample, location precision and online mix',async({page})=>{
  const geo=require('../data/geo-winners.json');
  const retail=geo.records.filter(r=>r.channel==='retail');
- await page.goto('/#geo');
+ await visit(page,'/#geo');
  await page.locator('#geoResearch summary').click();
  await expect(page.locator('#geoResearch')).toHaveAttribute('open','');
  await expect(page.locator('#geoSources')).toHaveText(String(new Set(retail.map(r=>r.source_url)).size));
@@ -523,7 +531,7 @@ test('Geo research panel shows sourced monthly sample, location precision and on
 });
 
 test('Number World loads data-backed rotating spatial balls without modifying selections',async({page})=>{
- await page.goto('/#numberWorld');
+ await visit(page,'/#numberWorld');
  await expect(page.locator('#worldTitle')).toContainText('Step inside the numbers');
  await expect(page.locator('#worldSelect option')).toHaveCount(41);
  await expect.poll(()=>page.evaluate(()=>document.getElementById('worldCanvas').width)).toBeGreaterThan(200);
@@ -538,4 +546,31 @@ test('Number World loads data-backed rotating spatial balls without modifying se
  await page.locator('#worldReset').click();
  await expect(page.locator('#worldSelected')).toHaveText('Explore the number world');
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
+});
+
+
+test('visitor-first homepage keeps research collapsed but results, picks and real proof accessible',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ await expect(page.locator('#deepResearch')).not.toHaveAttribute('open');
+ await expect(page.locator('#home')).toBeVisible();
+ await expect(page.locator('#pickerCount')).toContainText('20 of 20');
+ await expect(page.locator('#focusScored')).toHaveText(/^\d+$/);
+ await expect(page.locator('#focusBacktest')).toContainText('vs');
+ await expect(page.locator('.mobile-action-dock a')).toHaveCount(4);
+ await page.locator('.research-vault-summary').click();
+ await expect(page.locator('#deepResearch')).toHaveAttribute('open','');
+ await expect(page.locator('#geoTitle')).toBeVisible();
+});
+test('quick number checker compares latest stored draw without claiming prizes',async({page})=>{
+ await page.goto('/');
+ await page.locator('#ticketChecker summary').click();
+ await page.locator('#checkNumbers').fill(entries[0].numbers.join(' '));
+ await page.locator('#checkPowerball').fill(String(entries[0].powerball));
+ await page.locator('.quick-check-button').click();
+ await expect(page.locator('#checkerStatus')).toContainText('6 of 6 main matches');
+ await expect(page.locator('#checkerStatus')).toContainText('does not verify a prize');
+ await page.locator('#checkNumbers').fill('1 1 2 3 4 5');
+ await page.locator('.quick-check-button').click();
+ await expect(page.locator('#checkerStatus')).toContainText('six different Lotto numbers');
 });
