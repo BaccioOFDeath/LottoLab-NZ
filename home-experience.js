@@ -18,9 +18,9 @@
   event.preventDefault();
   const output=$('checkerStatus');
   if(!currentDraw){output.textContent='Results have not loaded; please try again after the archive is available.';return}
-  const fields=$('checkNumbers').value.trim().split(/[\\s,;|/\\-]+/).filter(Boolean);
+  const fields=$('checkNumbers').value.trim().split(/[\s,;|/\-]+/).filter(Boolean);
   const numbers=fields.map(Number);
-  if(numbers.length!==6||numbers.some((n,i)=>!/^\\d{1,2}$/.test(fields[i])||!Number.isInteger(n)||n<1||n>40)||new Set(numbers).size!==6){
+  if(numbers.length!==6||numbers.some((n,i)=>!/^\d{1,2}$/.test(fields[i])||!Number.isInteger(n)||n<1||n>40)||new Set(numbers).size!==6){
    output.textContent='Enter exactly six different Lotto numbers from 1 to 40, separated by spaces or commas.';return
   }
   const pbField=$('checkPowerball').value.trim();
