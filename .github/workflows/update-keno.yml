@@ -12,6 +12,9 @@ on:
       - 'scripts/keno_slot_picks.py'
       - 'tests/test_keno_slot_picks.py'
       - 'tests/test_keno_ticket_tools.cjs'
+      - 'tests/test_keno_ui.cjs'
+      - 'keno.js'
+      - 'keno.html'
       - 'keno-ticket-tools.js'
   schedule:
     # Pre-draw NZST/NZDT windows, including 10am, 1pm, 3pm, 6pm draws.
@@ -43,6 +46,10 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_keno_slot_picks.py' -v
       - name: Verify exact Keno probability engine
         run: node --test tests/test_keno_math.cjs tests/test_keno_ticket_tools.cjs
+      - name: Run Keno page interaction tests
+        run: |
+          npm install --no-save --no-audit --no-fund jsdom@26
+          node --test tests/test_keno_ui.cjs
       - name: Update Keno history, with conservative incremental backfill
         env:
           GITHUB_EVENT_SCHEDULE: ${{ github.event.schedule }}
