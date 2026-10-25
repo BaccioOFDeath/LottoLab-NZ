@@ -60,6 +60,7 @@ function wire(id,containerId,labelId){
   if(syncing)return;
   const values=readCells();
   original.value=values.filter(Boolean).join(' ');
+  original.dataset.pasteInvalid='false';
   try{localStorage.setItem(STORAGE+id,JSON.stringify(values));}catch{}
   syncing=true;
   original.dispatchEvent(new Event('input',{bubbles:true}));
@@ -79,12 +80,17 @@ function wire(id,containerId,labelId){
  }
  original.addEventListener('input',()=>{
   if(syncing)return;
-  const parsed=readSix(original.value);
-  if(parsed){
-   syncing=true;inputs.forEach((el,i)=>{el.value=pad(parsed[i]);});syncing=false;
-   try{localStorage.setItem(STORAGE+id,JSON.stringify(inputs.map(e=>e.value)));}catch{}
-   mark();
-  }
+  const raw=original.value.trim();
+  const tokens=raw?raw.split(/[\s,;|\/-]+/).filter(Boolean):[];
+  const malformed=tokens.length>6||tokens.some(t=>!/^\d{1,2}$/.test(t));
+  original.dataset.pasteInvalid=String(malformed);
+  syncing=true;
+  inputs.forEach((el,i)=>{
+   el.value=tokens[i]&&/^\d{1,2}$/.test(tokens[i])?tokens[i]:'';
+  });
+  syncing=false;
+  try{localStorage.setItem(STORAGE+id,JSON.stringify(inputs.map(e=>e.value)));}catch{}
+  mark();
  });
  inputs.forEach((input,index)=>{
   input.addEventListener('input',()=>{
