@@ -56,20 +56,18 @@ def read_second(soup):
  text=main.get_text('\n',strip=True)
  m=DATE2.search(text)
  if not m:return None
- # Result numbers are located between first two horizontal rules and the next.
- html=str(main)
- first=html.find('<hr')
- if first<0:return None
- prior=BeautifulSoup(html[:first],'html.parser').get_text('\n',strip=True)
- after=html[first:]
- second=after.find('<hr',3)
- bonusblock=BeautifulSoup(after[:second] if second>=0 else after,'html.parser').get_text('\n',strip=True)
- lines=[z.strip() for z in prior.splitlines() if re.fullmatch(r'\d{1,2}',z.strip())]
- if len(lines)<7:return None
- nums=sorted(int(v) for v in lines[-7:-1])
- bonus=int(lines[-1])
- pvals=[z.strip() for z in bonusblock.splitlines() if re.fullmatch(r'\d{1,2}',z.strip())]
- if len(pvals)<1:return None
+ # Provider separates six main numbers plus bonus, Powerball and Strike
+ # with horizontal rules. Parse only the appropriate two sections.
+ parts=re.split(r'<hr\\b[^>]*>',str(main),flags=re.I)
+ if len(parts)<4:return None
+ lotto=BeautifulSoup(parts[1],'html.parser').get_text('\\n',strip=True)
+ power_section=BeautifulSoup(parts[2],'html.parser').get_text('\\n',strip=True)
+ lines=[z.strip() for z in lotto.splitlines() if re.fullmatch(r'\\d{1,2}',z.strip())]
+ if len(lines)!=7:return None
+ nums=sorted(int(v) for v in lines[:6])
+ bonus=int(lines[6])
+ pvals=[z.strip() for z in power_section.splitlines() if re.fullmatch(r'\\d{1,2}',z.strip())]
+ if len(pvals)!=1:return None
  return dict(draw=int(m[1]),date=m[2],numbers=nums,bonus=bonus,powerball=int(pvals[0]))
 def valid(r):
  if not r or len(r['numbers'])!=6 or len(set(r['numbers']))!=6:return False
