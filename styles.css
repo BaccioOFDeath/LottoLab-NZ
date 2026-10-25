@@ -641,3 +641,20 @@ body{background:var(--bg)}
 .frequency-cell{border-color:transparent;font-weight:900;text-shadow:none}
 .frequency-cell.selected{outline:3px solid #30204f;outline-offset:2px}
 @media(max-width:570px){.heat-gradient-legend{gap:6px}.heat-gradient-bar{width:98px;min-width:65px}}
+
+/* Visitor-first home: three obvious actions, then results, picks, measured accuracy. */
+.home-priority{margin:18px 0 28px}
+.home-priority>.eyebrow{margin:0 0 11px}
+.home-priority-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.home-priority-card{display:flex;flex-direction:column;gap:9px;padding:20px;border:1px solid #e4d5f6;border-radius:17px;background:white;box-shadow:0 5px 19px #2810480a;min-width:0}
+.home-priority-card:nth-child(2){border-color:#e59cd0;background:#fffafd}
+.home-priority-card strong{font:900 clamp(17px,2vw,23px)/1.18 Outfit,sans-serif;color:#28153f}
+.home-priority-card small{font-size:12px;line-height:1.55;color:#70627e;flex:1}
+.priority-index{font-size:10px;letter-spacing:1.1px;font-weight:900;color:#7e3de1}
+.priority-link{font-weight:900;font-size:12px;color:#6632ac}
+.home-priority-card:hover,.home-priority-card:focus-visible{outline:2px solid #a77dec;outline-offset:2px}
+.deep-research-heading{margin:46px 0 20px;border-top:1px solid #e6d9f1;padding-top:28px;scroll-margin-top:115px}
+.deep-research-heading h2{font:900 clamp(28px,4vw,40px)/1.1 Outfit,sans-serif;margin:8px 0}
+.deep-research-heading p:last-child{max-width:640px;color:#756b86;font-size:14px;line-height:1.65}
+#results,#picker,#predictions{scroll-margin-top:105px}
+@media(max-width:700px){.home-priority-grid{grid-template-columns:1fr;gap:8px}.home-priority-card{padding:13px 15px;gap:5px;border-radius:13px}.home-priority-card strong{font-size:19px}.home-priority-card small{font-size:11px}.home-priority{margin-top:12px}.hero-grid{min-height:0}.hero-copy{padding:34px 0}.hero-art{display:none}}
