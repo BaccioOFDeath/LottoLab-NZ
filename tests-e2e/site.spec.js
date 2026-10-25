@@ -195,6 +195,7 @@ test('Evidence Lab remains usable at iPhone-width 390px without page overflow',a
  await expect(page.locator('#portfolioBars .portfolio-number')).toHaveCount(40);
  await expect(page.locator('#portfolioUnique')).toHaveText('20 / 20');
  await page.locator('#menuToggle').click();
+ await page.locator('#mobileNav .mobile-menu-group summary').filter({hasText:'History & patterns'}).click();
  await expect(page.locator('#mobileNav a[href="#evidence"]')).toBeVisible();
  const size=await page.evaluate(()=>({viewport:window.innerWidth,doc:document.documentElement.scrollWidth,body:document.body.scrollWidth}));
  expect(size.viewport).toBe(390);
@@ -711,7 +712,7 @@ test('My Lotto line creator ranks historical co-occurrences and permits any six 
 test('Line creator renders manual selection on archival data outage',async({page})=>{
  await page.route('**/data/draws.json',route=>route.fulfill({status:503,body:'unavailable'}));
  await page.route('**/data/legacy-draws.json',route=>route.fulfill({status:503,body:'unavailable'}));
- await page.goto('/');
+ await page.goto('/#lineCreator');
  await expect(page.locator('#lineNumberGrid button')).toHaveCount(40);
  await expect(page.locator('#lineAuto')).toBeDisabled();
  for(const n of [1,2,3,4,5,6])await page.locator('#lineNumberGrid button[data-n="'+n+'"]').click();
