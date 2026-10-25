@@ -521,3 +521,21 @@ test('Geo research panel shows sourced monthly sample, location precision and on
  await expect(page.locator('#geoSources')).toHaveText(String(new Set(geo.records.map(r=>r.source_url)).size));
  await expect(page.locator('#geoResearch')).toContainText('partial sample');
 });
+
+test('Number World loads data-backed rotating spatial balls without modifying selections',async({page})=>{
+ await page.goto('/#numberWorld');
+ await expect(page.locator('#worldTitle')).toContainText('Step inside the numbers');
+ await expect(page.locator('#worldSelect option')).toHaveCount(41);
+ await expect.poll(()=>page.evaluate(()=>document.getElementById('worldCanvas').width)).toBeGreaterThan(200);
+ await expect(page.locator('#worldStatus')).toContainText('stored draws');
+ await page.locator('#worldSelect').selectOption('17');
+ const expected=entries.filter(r=>r.numbers.includes(17)).length;
+ await expect(page.locator('#worldInfo')).toContainText(expected+' appearances');
+ await page.locator('#worldConnections').click();
+ await expect(page.locator('#worldConnections')).toHaveAttribute('aria-pressed','true');
+ await page.locator('#worldSpin').click();
+ await expect(page.locator('#worldSpin')).toHaveAttribute('aria-pressed','false');
+ await page.locator('#worldReset').click();
+ await expect(page.locator('#worldSelected')).toHaveText('Explore the number world');
+ await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
+});
