@@ -26,7 +26,7 @@ test('all four combination sizes show historical evidence and source counts',asy
 });
 test('site audit shows section-specific load states and honest archive coverage',async({page})=>{
  await openLab(page);
- await expect(page.locator('#healthRows .health-row')).toHaveCount(10);
+ await expect(page.locator('#healthRows .health-row')).toHaveCount(15);
  const count=await page.evaluate(()=>window.lottoLabDraws.length);
  await expect(page.locator('#healthDraws')).toHaveText(count.toLocaleString('en-NZ'));
  await expect(page.locator('#healthSummary')).toContainText('PARTIAL archive');
