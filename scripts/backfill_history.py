@@ -105,10 +105,16 @@ def process(limit,start):
   if not page:continue
   for url in archive_links(page):
    if checked>=limit:break
-   # Archive detail slugs contain the calendar date; skip known dates before
-   # making an HTTP request, otherwise daily batches would keep retrying
-   # the same first 100 pages forever.
-   mm=re.search(r'/results-([a-z]+)-(\d{1,2})-(\d{4})
+   # Slugs contain the draw date. Skip already imported dates before fetching
+   # detail pages, so subsequent scheduled batches progressively move backwards.
+   mm=re.search(r'/results-([a-z]+)-(\d{1,2})-(\d{4})$',url,re.I)
+   if mm:
+    try:
+     date_slug=dt.date(int(mm[3]),MONTH_ID[mm[1].lower()],int(mm[2])).isoformat()
+     if date_slug in existing_dates:continue
+    except (ValueError,KeyError):pass
+   checked+=1
+   a=read_first(fetch(url))
    if not valid(a):skipped+=1;continue
    if a['draw'] in existing:continue
    secondary_url=SECOND+str(a['draw'])
