@@ -199,6 +199,17 @@ $('foreverSaved').addEventListener('click',event=>{
 $('foreverExport').addEventListener('click',exportBackup);
 $('foreverImport').addEventListener('click',()=>$('foreverImportFile').click());
 $('foreverImportFile').addEventListener('change',e=>importBackup(e.target.files[0]));
+
+window.addEventListener('lottolab:forever-from-checker',event=>{
+ const line=event.detail;
+ if(!line||!Array.isArray(line.numbers)||line.numbers.length!==6||new Set(line.numbers).size!==6
+  ||line.numbers.some(n=>!Number.isInteger(n)||n<1||n>40)
+  ||!Number.isInteger(line.powerball)||line.powerball<1||line.powerball>14)return;
+ current={numbers:[...line.numbers].sort((a,b)=>a-b),powerball:line.powerball,mode:'manual',birthday:false};
+ $('foreverName').value=(line.name||'My forever numbers').slice(0,48);
+ renderCurrent();
+ status('Loaded your manually entered numbers. Select Lock and save this set to keep it forever.');
+});
 window.addEventListener('lottolab:data-ready',readArchive);
 window.addEventListener('lottolab:data-error',()=>{$('foreverSample').textContent='Archive unavailable · random mode works';});
 load();renderCurrent();renderSaved();readArchive();
