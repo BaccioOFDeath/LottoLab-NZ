@@ -44,7 +44,7 @@ results?.addEventListener('click',event=>{
  if(!button)return;
  const section=document.getElementById(button.dataset.jump);
  closeCommands();
- if(section){section.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});history.replaceState(null,'','#'+section.id);}
+ if(section){const lab=$('deepResearch');if(lab&&lab.contains(section))lab.open=true;history.replaceState(null,'','#'+section.id);requestAnimationFrame(()=>section.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'}));}
 });
 dialog?.addEventListener('click',event=>{if(event.target===dialog)closeCommands()});
 document.addEventListener('keydown',event=>{
@@ -152,7 +152,8 @@ $('mainBalls')?.addEventListener('click',event=>{
  if(!selector||!section||!Number.isInteger(n))return;
  selector.value=String(n);
  selector.dispatchEvent(new Event('change',{bubbles:true}));
- section.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches||window.lottoLabMotionEnabled===false?'instant':'smooth',block:'start'});
+ const lab=$('deepResearch');if(lab&&lab.contains(section))lab.open=true;
+ requestAnimationFrame(()=>section.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches||window.lottoLabMotionEnabled===false?'instant':'smooth',block:'start'}));
  announce('Exploring the history of Lotto number '+n);
 });
 
@@ -165,6 +166,7 @@ document.addEventListener('click',event=>{
  if(!detail||!destination)return;
  event.preventDefault();
  detail.open=true;
+ const lab=$('deepResearch');if(lab&&lab.contains(destination))lab.open=true;
  history.replaceState(null,'',a.hash);
  requestAnimationFrame(()=>destination.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'}));
 });
