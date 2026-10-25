@@ -37,7 +37,7 @@ test('Number checker compares exact and partial matching draws and saves checked
  await expect(page.locator('#checkerSavedCount')).toHaveText('1 line');
  await page.reload();
  await page.locator('#deepResearch').evaluate(el=>el.open=true);
- await expect(page.locator('#checkerNumbers')).toHaveValue(line.numbers.join(', '));
+ await expect(page.locator('#checkerNumbers')).toHaveValue(line.numbers.map(n=>String(n).padStart(2,'0')).join(' '));
  await expect(page.locator('#checkerSavedCount')).toHaveText('1 line');
  await page.locator('#checkerForever').click();
  await expect(page.locator('#foreverBalls .forever-ball')).toHaveCount(6);
