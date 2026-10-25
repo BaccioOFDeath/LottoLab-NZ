@@ -1,10 +1,24 @@
 {
-  "draw_count": 11403,
+  "draw_count": 11404,
   "first_date": "2019-01-05",
-  "last_date": "2026-10-25",
-  "latest_draw": "27911",
+  "last_date": "2026-10-26",
+  "earliest_source_date": "2019-01-05",
+  "latest_draw": "27912",
+  "missing_draw_ids": 1,
+  "missing_draw_ids_sample": [
+    18285
+  ],
+  "missing_completed_day_slots": 1,
+  "missing_slot_sample": [
+    {
+      "date": "2020-03-24",
+      "time": "1:00 pm"
+    }
+  ],
   "partial_days": 1,
+  "duplicate_date_time_slots": 0,
+  "records_with_source_url": 11404,
   "conflicts_this_run": 0,
   "source": "https://www.lottodraw.co.nz/keno/archive",
-  "disclaimer": "Independent, unofficial history. Check against Lotto NZ."
+  "disclaimer": "Independently sourced results, not official verification. Check winnings with Lotto NZ."
 }
