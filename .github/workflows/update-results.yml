@@ -7,6 +7,8 @@ on:
       - 'scripts/update_results.py'
   schedule:
     - cron: '15 12,18 * * 3,6'
+    # Later retries the following NZ day if external sources publish slowly.
+    - cron: '15 0,6 * * 0,4'
 permissions:
   contents: write
 concurrency:
