@@ -577,7 +577,8 @@ test('visitor-first homepage keeps research collapsed but results, picks and rea
 });
 test('quick number checker compares latest stored draw without claiming prizes',async({page})=>{
  await page.goto('/');
- await page.locator('#ticketChecker summary').click();
+ await page.locator('#ticketChecker > summary').click();
+ await page.locator('#ticketChecker .ball-entry-paste summary').click();
  await page.locator('#checkNumbers').fill(entries[0].numbers.join(' '));
  await page.locator('#checkPowerball').fill(String(entries[0].powerball));
  await page.locator('.quick-check-button').click();
