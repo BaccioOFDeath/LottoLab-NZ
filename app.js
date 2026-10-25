@@ -50,7 +50,22 @@ const periodPb=Array(cap+1).fill(0);for(const d of periodRows)periodPb[d.powerba
 const top=periodPb.slice(1).map((count,i)=>({number:i+1,count})).sort((a,b)=>b.count-a.count||a.number-b.number)[0];
 $('topPower').textContent=periodRows.length?String(top.number).padStart(2,'0'):'—';
 $('powerRule').textContent=periodRows.length?top.count+' / '+periodRows.length+' draws · PB 1–'+cap:'No PB 1–'+cap+' draws in selected conditions';
-const max=Math.max(1,...counts);$('frequencyGrid').innerHTML=counts.slice(1).map((c,i)=>{let alpha=(.08+c/max*.86).toFixed(3);return '<button type="button" class="frequency-cell '+(selectedNumber===i+1?'selected':'')+'" data-number="'+(i+1)+'" title="Number '+(i+1)+': '+c+' appearance(s)" style="background:rgba(120,62,244,'+alpha+');color:'+(c/max>.50?'white':'#52387c')+'">'+String(i+1).padStart(2,'0')+'</button>'}).join('');
+// Map observed minimum to cold blue and maximum to hot red (relative to this filtered sample).
+const frequencyValues=counts.slice(1),frequencyMin=Math.min(...frequencyValues),frequencyMax=Math.max(...frequencyValues);
+const heatStops=[[34,105,192],[26,166,173],[246,199,65],[244,117,45],[191,39,67]];
+function heatColor(value){
+ const t=frequencyMax===frequencyMin?.5:(value-frequencyMin)/(frequencyMax-frequencyMin);
+ const segment=Math.min(heatStops.length-2,Math.floor(t*(heatStops.length-1)));
+ const ratio=Math.max(0,Math.min(1,t*(heatStops.length-1)-segment));
+ const rgb=heatStops[segment].map((v,j)=>Math.round(v+(heatStops[segment+1][j]-v)*ratio));
+ const linear=rgb.map(v=>{const x=v/255;return x<=.04045?x/12.92:Math.pow((x+.055)/1.055,2.4)});
+ const luminance=.2126*linear[0]+.7152*linear[1]+.0722*linear[2];
+ return {background:'rgb('+rgb.join(',')+')',foreground:luminance>.34?'#231733':'#ffffff'};
+}
+$('frequencyGrid').innerHTML=frequencyValues.map((c,i)=>{
+ const heat=heatColor(c);
+ return '<button type="button" class="frequency-cell '+(selectedNumber===i+1?'selected':'')+'" data-number="'+(i+1)+'" aria-label="Number '+(i+1)+', '+c+' appearances" title="Number '+(i+1)+': '+c+' appearances" style="background:'+heat.background+';color:'+heat.foreground+'">'+String(i+1).padStart(2,'0')+'</button>';
+}).join('');
 $('sampleExplanation').textContent='Based on '+n+' stored draws ('+(6*n)+' main-ball observations).';const see=selectedNumber;const detail=see?ranking.find(x=>x.number===see):null;$('numberDetail').textContent=detail?'Number '+see+' appeared '+detail.count+' time(s) in the selected sample ('+(100*detail.count/n).toFixed(1)+'% of draws). Expected probability per draw under 6/40 rules: 15%.':'Select a number in the heat map to see its history.';
 $('patternList').innerHTML=[['Average odd numbers',(odd/n).toFixed(2)+' / 6'],['Average sum of six numbers',(sum/n).toFixed(1)],['Draws containing consecutive numbers',(100*withConsecutive/n).toFixed(1)+'%'],['Expected appearances per number',(6*n/40).toFixed(2)]].map(([a,b])=>'<div class="pattern-row"><span>'+a+'</span><strong>'+b+'</strong></div>').join('');
 $('pairList').innerHTML=[...pairs.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,12).map(([k,v])=>'<span class="pair">'+k.replace(',',' + ')+' <small>· '+v+'x</small></span>').join('');updatePower();}
