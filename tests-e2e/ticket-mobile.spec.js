@@ -58,9 +58,11 @@ test('narrow iPhone layout keeps six blue Lotto balls and pink PB in each ticket
   const bounds=selector=>row.querySelector(selector).getBoundingClientRect();
   const number=bounds('.fixed-pick-numbers');
   const pb=bounds('.ticket-power .ball.power');
+  const main=bounds('.fixed-pick-numbers .ball');
   const frame=row.getBoundingClientRect();
-  return {numbersBeforePB:number.right<pb.left+1,pbWithin:pb.right<=frame.right+1,overflow:row.scrollWidth>row.clientWidth+1};
+  const verticalOffset=Math.abs((main.top+main.bottom)/2-(pb.top+pb.bottom)/2);
+  return {numbersBeforePB:number.right<pb.left+1,pbWithin:pb.right<=frame.right+1,verticalOffset,overflow:row.scrollWidth>row.clientWidth+1};
  }));
- expect(geometry.every(x=>x.numbersBeforePB&&x.pbWithin&&!x.overflow)).toBe(true);
+ expect(geometry.every(x=>x.numbersBeforePB&&x.pbWithin&&x.verticalOffset<=3&&!x.overflow)).toBe(true);
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(321);
 });
