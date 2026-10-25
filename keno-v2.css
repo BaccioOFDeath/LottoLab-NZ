@@ -74,3 +74,40 @@ html{scroll-padding-top:12px}
 
 /* Instant same-page navigation prevents Safari scrolling past the selected section. */
 html{scroll-behavior:auto!important}
+
+
+/* Draw-specific tickets / saved lines / exact chosen-set odds */
+.draw-choice{display:flex;flex-wrap:wrap;gap:10px 15px;align-items:center;border:1px solid #dce8f6;background:#f4faff;padding:12px 14px;border-radius:12px;margin:12px 0}
+.draw-choice label{font-weight:850;font-size:12px;color:#30527d}
+.draw-choice select{flex:1;min-width:190px;max-width:480px;background:white;border:1px solid #cddcf0;border-radius:9px;padding:10px 12px;color:#254477;font-weight:800}
+.draw-choice span{font-size:11px;color:#5d7190}
+.slot-insights{display:flex;flex-direction:column;gap:5px;border-left:4px solid #26cabb;background:#f2fffc;border-radius:0 9px 9px 0;padding:11px 13px;color:#2b5d69;font-size:12px;line-height:1.55}
+.slot-insights strong{color:#087a85}
+.prediction-actions{display:flex;gap:6px;flex-wrap:wrap}
+.prediction-actions button{white-space:nowrap}
+.save-prediction,.save-button{background:#dcfff5;border:1px solid #7adecf;border-radius:9px;color:#087571;padding:9px 12px;font-size:12px;font-weight:900;cursor:pointer}
+.save-prediction:hover,.save-button:hover{background:#bbf5e7}
+.prediction-card .ticket-bottom{gap:7px}
+.prediction-card .ticket-bottom .small{max-width:48%}
+.reduction-message{border:1px solid #daebf9;background:#f0f9ff;color:#2e6783;padding:11px 13px;margin:12px 0;border-radius:10px;font-size:12px;line-height:1.5}
+.selection-odds{background:linear-gradient(125deg,#ecfffb,#eff4ff);border:1px solid #b7e7e7;border-radius:13px;padding:16px;margin:16px 0;color:#254b7c}
+.selection-odds>strong{font:850 19px Outfit,sans-serif;color:#14366f}
+.selection-odds p{font-size:12px;line-height:1.65;color:#526d8c}
+.chosen-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.chosen-metrics>div{background:white;border:1px solid #d3e8f5;padding:12px;border-radius:9px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.chosen-metrics small{font-size:11px;color:#63788d}
+.chosen-metrics b{font:800 15px Outfit,sans-serif;color:#143774;overflow-wrap:anywhere}
+.saved-ticket-panel{background:white;border:1px solid #e0e4f5;border-radius:13px;padding:17px;margin:19px 0}
+.saved-ticket-panel h3{font:850 19px Outfit,sans-serif;margin:0}
+.saved-ticket-panel .section-head{margin-bottom:10px}
+.saved-ticket-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;font-size:12px;color:#78849a;margin:12px 0}
+.saved-line{padding:13px;background:#f7f9ff;border:1px solid #dce6f7;border-radius:10px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.saved-line>div:first-child{min-width:0}
+.saved-line strong{display:block;color:#173765;font:800 15px Outfit,sans-serif}
+.saved-line small{display:block;font-size:11px;color:#66809b;margin:7px 0}
+.saved-balls{display:flex;flex-wrap:wrap;gap:4px}
+.saved-balls span{background:#d6faf3;color:#11627d;padding:5px 6px;border-radius:7px;font-size:11px;font-weight:850}
+.saved-actions{display:flex;flex-direction:column;gap:3px;flex-shrink:0}
+.saved-actions button{padding:7px 8px;font-size:11px}
+@media(max-width:650px){.saved-ticket-list{grid-template-columns:1fr}.draw-choice select{min-width:175px}.prediction-card .ticket-bottom .small{max-width:55%}.prediction-actions{justify-content:flex-end}.prediction-actions button{font-size:11px;padding:7px 9px}}
+@media(max-width:390px){.chosen-metrics{gap:6px}.chosen-metrics>div{padding:9px}.chosen-metrics b{font-size:13px}.draw-choice{padding:10px}.draw-choice select{max-width:100%}.saved-line{flex-wrap:wrap}.saved-actions{flex-direction:row}}
