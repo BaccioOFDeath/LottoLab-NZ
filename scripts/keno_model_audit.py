@@ -17,7 +17,8 @@ WARMUP = 200
 WINDOW = 80
 MODELS = (
     "long_term_hot", "long_term_cold", "recent_hot",
-    "recent_cold", "balanced_zones", "blended_hot", "random_control",
+    "recent_cold", "balanced_zones", "blended_hot",
+    "same_time_repeat_hot", "time_of_day_hot", "recent_200_hot", "random_control",
 )
 
 def top(counter, reverse=False):
@@ -25,7 +26,8 @@ def top(counter, reverse=False):
     values.sort(key=lambda n: (counter[n], n) if reverse else (-counter[n], n))
     return tuple(values[:10])
 
-def selections(all_counts, recent_counts, historical_n, window_n, seed):
+def selections(all_counts, recent_counts, historical_n, window_n, seed,
+               last_time_draw=None, time_counts=None, last_200_counts=None):
     blended = {n: .65 * recent_counts[n] / max(1, window_n) +
                   .35 * all_counts[n] / max(1, historical_n) for n in range(1, 81)}
     result = {
@@ -34,6 +36,11 @@ def selections(all_counts, recent_counts, historical_n, window_n, seed):
         "recent_hot": top(recent_counts),
         "recent_cold": top(recent_counts, reverse=True),
         "blended_hot": top(blended),
+        "same_time_repeat_hot": tuple(sorted(
+            last_time_draw or top(recent_counts),
+            key=lambda n: (-recent_counts[n], n))[:10]),
+        "time_of_day_hot": top(time_counts or all_counts),
+        "recent_200_hot": top(last_200_counts or recent_counts),
         "balanced_zones": tuple(
             max(range(i, i+8), key=lambda n: (all_counts[n], -n))
             for i in range(1, 81, 8))
@@ -60,6 +67,10 @@ def run(draws):
     all_counts = Counter()
     recent_counts = Counter()
     recent_queue = deque()
+    recent_200_queue = deque()
+    recent_200_counts = Counter()
+    by_time_counts = defaultdict(Counter)
+    previous_by_time = {}
     totals = {m: {"total_hits": 0, "five_or_more_hits": 0} for m in MODELS}
     years = defaultdict(lambda: {m: {"total_hits": 0, "five_or_more_hits": 0} for m in MODELS})
     year_n = Counter()
@@ -69,7 +80,12 @@ def run(draws):
         if len(numbers) != 20 or len(set(numbers)) != 20:
             raise ValueError("Invalid draw at index %s" % i)
         if i >= WARMUP:
-            choices = selections(all_counts, recent_counts, i, len(recent_queue), int(row["draw"]))
+            current_time = row.get("time", "")
+            choices = selections(
+                all_counts, recent_counts, i, len(recent_queue), int(row["draw"]),
+                last_time_draw=previous_by_time.get(current_time),
+                time_counts=by_time_counts[current_time],
+                last_200_counts=recent_200_counts)
             winning = set(numbers)
             for name, line in choices.items():
                 hits = sum(number in winning for number in line)
@@ -81,6 +97,14 @@ def run(draws):
             n += 1
             year_n[row["date"][:4]] += 1
         all_counts.update(numbers)
+        current_time = row.get("time", "")
+        by_time_counts[current_time].update(numbers)
+        previous_by_time[current_time] = numbers
+        recent_200_counts.update(numbers)
+        recent_200_queue.append(numbers)
+        if len(recent_200_queue) > 200:
+            for value in recent_200_queue.popleft():
+                recent_200_counts[value] -= 1
         recent_counts.update(numbers)
         recent_queue.append(numbers)
         if len(recent_queue) > WINDOW:
@@ -109,6 +133,9 @@ def run(draws):
             "recent_cold": "Least common 10 numbers across previous 80 draws",
             "balanced_zones": "Most common number from each disjoint group of eight",
             "blended_hot": "65% prior 80-draw frequency plus 35% prior lifetime frequency",
+            "same_time_repeat_hot": "From the previous draw at the same time of day, select its ten most frequent numbers over the preceding 80 draws; trained only on prior results",
+            "time_of_day_hot": "Most frequent ten numbers in previous draws at the same daily draw time",
+            "recent_200_hot": "Most frequent ten numbers in the 200 draws preceding the target draw",
             "random_control": "Repeatable random 10-number set seeded from that draw identifier"
         },
         "disclaimer": "No model is proven to improve odds. History before each target draw only; z-scores are descriptive and uncorrected for multiple testing. Repeated tuning on these results overfits. Independent external validation required."
