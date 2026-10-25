@@ -119,12 +119,13 @@ function render(){
   histogram(selected);
 }
 window.addEventListener('lottolab:analysis-changed',render);
+window.addEventListener('lottolab:data-ready',()=>{if(Array.isArray(window.lottoLabDraws)&&window.lottoLabDraws.length){allRows=window.lottoLabDraws;quality();render()}});
 Promise.all([
   fetch('./data/draws.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('./data/model-picks.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]).catch(()=>[]),
   fetch('./data/draw-context.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
 ]).then(([rows,records,context])=>{
-  allRows=Array.isArray(rows)?rows.filter(x=>Number.isInteger(x.draw)&&Array.isArray(x.numbers)&&x.numbers.length===6):[];
+  allRows=Array.isArray(window.lottoLabDraws)&&window.lottoLabDraws.length?window.lottoLabDraws:(Array.isArray(rows)?rows.filter(x=>Number.isInteger(x.draw)&&Array.isArray(x.numbers)&&x.numbers.length===6):[]);
   if(!allRows.length){set('evidenceVerdict','Historical draws temporarily unavailable. Try reloading the site.');set('coverageNote','Source records unavailable.');set('evidenceVerified','—');}
   picks=Array.isArray(records)?records:[];
   drawContext=context||{};
