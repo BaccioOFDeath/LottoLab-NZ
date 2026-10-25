@@ -13,7 +13,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: lottolab-model-engine
+  group: lottolab-data-writes
   cancel-in-progress: false
 jobs:
   evaluate:
