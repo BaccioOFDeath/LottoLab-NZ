@@ -149,14 +149,21 @@ async function action(kind){
    if(rows.length){for(let n=rows[0].draw;n<=rows[rows.length-1].draw;n++)if(!ids.has(n))gaps.push({missing_draw:n});}
    files.push({name:'missing_draw_ids.csv',text:csv(gaps,['missing_draw'])});
    for(const k of [2,3,4,5])files.push({name:'historical_combinations_'+k+'_numbers.csv',text:onlyRows(combinations(rows,k))});
-   const sources=['model-picks.json','model-performance.json','geo-winners.json','geo-places.json','draw-context.json','evaluation-summary.json','pre-powerball-staging.json'];
+   const sources=['model-picks.json','model-performance.json','geo-winners.json','geo-places.json','nz-outline.geojson','draw-context.json','evaluation-summary.json','pre-powerball-staging.json'];
    const summary=[{dataset:'merged Lotto draw records',status:'loaded',records:rows.length,notes:'Partial archive: '+gaps.length+' missing IDs within recorded range.'}],missing=[];
    const data=await Promise.all(sources.map(async path=>{try{return {path,value:await source(path)}}catch(e){return {path,error:e.message}};}));
    for(const entry of data){
     if(entry.error){missing.push(entry.path+': '+entry.error);summary.push({dataset:entry.path,status:'unavailable',records:0,notes:entry.error});continue;}
-    let name=entry.path.replace('.json','').replace(/-/g,'_'),records=[],value=entry.value;
+    let name=entry.path.replace(/\.(?:geojson|json)$/,'').replace(/-/g,'_'),records=[],value=entry.value;
     if(entry.path==='geo-winners.json')records=genericRows(value.records||[]);
     else if(entry.path==='geo-places.json')records=Object.entries(value.places||{}).map(([place,v])=>({place,...v}));
+    else if(entry.path==='nz-outline.geojson'){
+     records=[];
+     const polygons=value.geometry?.type==='MultiPolygon'?value.geometry.coordinates:[value.geometry?.coordinates||[]];
+     polygons.forEach((polygon,polygonIndex)=>polygon.forEach((ring,ringIndex)=>ring.forEach((point,pointIndex)=>{
+      if(Array.isArray(point)&&point.length>=2)records.push({polygon:polygonIndex,ring:ringIndex,point:pointIndex,longitude:point[0],latitude:point[1],geometry_note:'Simplified national boundary, not store locations'});
+     })));
+    }
     else if(entry.path==='draw-context.json'){
      files.push({name:'draw_rule_events.csv',text:onlyRows(genericRows(value.events||[]))});
      records=flatObject(value.operations||{});
