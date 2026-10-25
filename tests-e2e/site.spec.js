@@ -447,7 +447,7 @@ test('Geo Lab loads authentic NZ outline and source-backed retail winning places
  await expect.poll(()=>page.evaluate(()=>document.getElementById('geoWeather').width)).toBeGreaterThan(10);
  await expect(page.locator('#geoPins .geo-pin')).not.toHaveCount(0);
  await expect(page.locator('#geoMapStatus')).toContainText('not adjusted for tickets sold');
- await expect(page.locator('#geoNormalized')).toBeDisabled();
+ await expect(page.locator('#geoNormalized')).toHaveAttribute('aria-controls','geoScenario');
  await expect(page.locator('#geoRanking .geo-rank-item').first()).toContainText('Auckland');
  await page.locator('#geoRanking .geo-rank-item').first().click();
  await expect(page.locator('#geoSelectedTitle')).toHaveText('Auckland');
@@ -586,4 +586,40 @@ test('quick number checker compares latest stored draw without claiming prizes',
  await page.locator('#checkNumbers').fill('1 1 2 3 4 5');
  await page.locator('.quick-check-button').click();
  await expect(page.locator('#checkerStatus')).toContainText('six different Lotto numbers');
+});
+
+test('Location luck analysis compares only sourced reports and labels sales assumptions',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await visit(page,'/#geo');
+ await expect(page.locator('#geoTopPlace')).not.toHaveText('Loading locations…');
+ await expect(page.locator('#geoNormalized')).toBeEnabled();
+ await page.locator('#geoNormalized').click();
+ await expect(page.locator('#geoScenario')).toBeVisible();
+ await expect(page.locator('#geoCompareA option')).not.toHaveCount(0);
+ await expect(page.locator('#geoCompareB option')).not.toHaveCount(0);
+ await expect(page.locator('#geoBreakEven')).toContainText('Break-even sales ratio');
+ await expect(page.locator('#geoScenarioResult')).toContainText('hypothetical');
+ await page.locator('#geoSalesRatio').fill('2');
+ await expect(page.locator('#geoRatioValue')).toHaveText('2×');
+ await expect(page.locator('#geoScenarioResult')).toContainText('does not demonstrate different Lotto odds');
+ await page.locator('#geoGame').selectOption('Powerball');
+ await expect(page.locator('#geoCompareScope')).toContainText('Powerball');
+ await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(391);
+});
+test('Mobile navigation lands each core section below sticky header with breathing space',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ for(const id of ['picker','predictions','deepResearch','results']){
+  await page.locator('.mobile-action-dock a[href="#'+id+'"]').click();
+  await expect.poll(()=>page.evaluate(key=>{
+   const h=document.querySelector('.header').getBoundingClientRect();
+   return Math.round(document.getElementById(key).getBoundingClientRect().top-h.bottom);
+  },id)).toBeGreaterThanOrEqual(12);
+  const gap=await page.evaluate(key=>{
+   const h=document.querySelector('.header').getBoundingClientRect();
+   return document.getElementById(key).getBoundingClientRect().top-h.bottom;
+  },id);
+  expect(gap).toBeLessThan(90);
+ }
+ await expect(page.locator('#deepResearch')).toHaveAttribute('open','');
 });
