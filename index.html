@@ -16,14 +16,15 @@
 <script defer src="./experience.js?v=20261025-geo1"></script>
 <script defer src="./number-universe.js?v=20261025-geo1"></script>
 <script defer src="./geo-lab.js?v=20261025-geo5-pins"></script>
+<script defer src="./number-world.js?v=world1"></script>
 </head><body><a href="#results" class="skip-link">Skip to latest results</a><div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 <div class="topline"><div class="shell topline-inner"><span><span class="tiny-led"></span>Independent NZ Lotto research</span><span>Not affiliated with Lotto NZ · <a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official results ↗</a></span></div></div>
 <header class="header"><div class="shell header-inner">
 <a class="brand" href="#home" aria-label="LottoLab NZ Home"><span class="brand-mark">L<span>●</span></span><span class="brand-type">Lotto<span>Lab</span><small>NEW ZEALAND</small></span></a>
-<nav class="desktop-nav" aria-label="Main navigation"><a href="#home" data-nav="home" class="active">Latest draw</a><a href="#universe" data-nav="universe">Universe</a><a href="#geo" data-nav="geo">Geo Lab</a><a href="#insights" data-nav="insights">Number insights</a><a href="#picker">20 draw lines</a><a href="#archive" data-nav="archive">Draw archive</a><a href="#predictions">Scorecard</a></nav>
+<nav class="desktop-nav" aria-label="Main navigation"><a href="#home" data-nav="home" class="active">Latest draw</a><a href="#numberWorld" data-nav="numberWorld">Number World</a><a href="#universe" data-nav="universe">Universe</a><a href="#geo" data-nav="geo">Geo Lab</a><a href="#insights" data-nav="insights">Number insights</a><a href="#picker">20 draw lines</a><a href="#archive" data-nav="archive">Draw archive</a><a href="#predictions">Scorecard</a></nav>
 <a class="official-btn" href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official Lotto NZ <span aria-hidden="true">↗</span></a>
 <button type="button" class="command-trigger" id="openQuickNav" aria-label="Open quick navigation search" title="Find pages and features (Command K)"><span aria-hidden="true">⌕</span><kbd>⌘ K</kbd></button><button id="menuToggle" class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
-</div><nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden><a href="#home">Latest draw</a><a href="#results">Results</a><a href="#insights">Number insights</a><a href="#universe">Number Universe</a><a href="#geo">Geo Lab · Winner map</a><a href="#evidence">Evidence lab</a><a href="#archive">Draw archive</a><a href="#picker">20 locked lines</a><a href="#predictions">Model scorecard</a></nav></header>
+</div><nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden><a href="#home">Latest draw</a><a href="#results">Results</a><a href="#insights">Number insights</a><a href="#numberWorld">Number World</a><a href="#universe">Number Universe</a><a href="#geo">Geo Lab · Winner map</a><a href="#evidence">Evidence lab</a><a href="#archive">Draw archive</a><a href="#picker">20 locked lines</a><a href="#predictions">Model scorecard</a></nav></header>
 <main id="home">
 <section class="hero"><div class="shell hero-grid"><div class="hero-copy"><div class="hero-kicker"><span class="pulse-dot"></span> NEW ZEALAND LOTTO RESULTS & INSIGHTS</div><h1>Every number<br>has a <em>story.</em></h1><p>Latest results, immersive number exploration and 20 independently recorded research lines.</p><div class="hero-chips" aria-label="LottoLab features"><span>✦ Interactive Universe</span><span>◆ 20 locked lines</span><span>◉ Source-checked history</span></div><div class="hero-actions"><a class="btn btn-white" href="#results">See latest results <span>→</span></a><a class="btn btn-outline" href="#picker">See all 20 locked lines <span>↗</span></a></div><a class="hero-universe-link" href="#universe"><span aria-hidden="true">✧</span> Explore the touch-responsive Number Universe <span aria-hidden="true">↗</span></a></div>
 <div class="hero-art" aria-hidden="true"><span class="float-ball art-a">7</span><span class="float-ball art-b">21</span><span class="float-ball art-c">4</span><span class="float-ball art-d">33</span><div class="art-halo"></div><span class="spark sp1">✦</span><span class="spark sp2">✧</span><span class="spark sp3">✦</span></div></div></section>
@@ -51,6 +52,16 @@
 </details>
 </div>
 </aside></div>
+<section id="numberWorld" class="world-section" aria-labelledby="worldTitle">
+<div class="world-head"><p class="eyebrow">LOTTOLAB · THE NUMBER WORLD</p><h2 id="worldTitle">Step inside the numbers <span aria-hidden="true">✦</span></h2><p>Inspired by spatial file explorers: orbit a world of all 40 Lotto numbers. Select any ball to reveal its real draw history and observed relationships.</p></div>
+<div class="world-stage">
+<canvas id="worldCanvas" role="img" aria-label="Interactive spatial world containing 40 historical Lotto numbers. A numbered selector below provides keyboard access."></canvas>
+<div class="world-overlay"><span>40 FLOATING BALLS · REAL DATA</span><strong id="worldSelected">Explore the number world</strong><small id="worldInfo">Drag to rotate · pinch to zoom · tap to select</small></div>
+<div class="world-actions"><button type="button" id="worldSpin" aria-pressed="true">◌ Auto-orbit</button><button type="button" id="worldConnections" aria-pressed="false">⟷ Connections</button><button type="button" id="worldReset">↺ Reset</button></div>
+</div>
+<div class="world-bottom"><label for="worldSelect">Inspect a Lotto ball<select id="worldSelect"><option value="">Choose 1–40</option></select></label><p id="worldStatus" role="status">Loading source-backed number frequencies…</p></div>
+<p class="world-honesty">The orb represents actual historical appearance frequencies in the selected Lotto draw sample, not the physical draw machine or future winning probabilities. Motion is disabled for reduced-motion preferences.</p>
+</section>
 <section id="universe" class="universe-section" aria-labelledby="universeTitle">
   <div class="universe-outer">
     <div class="universe-head">
@@ -223,7 +234,7 @@
   <div id="quickCommands" class="quick-commands">
     <button type="button" data-jump="results"><span>◉</span><strong>Latest draw</strong><small>Actual winning numbers</small></button>
     <button type="button" data-jump="picker"><span>✦</span><strong>20 locked lines</strong><small>Copy or share your lines</small></button>
-    <button type="button" data-jump="universe"><span>✳</span><strong>Number Universe</strong><small>Touch-responsive 40-ball data field</small></button><button type="button" data-jump="geo"><span>◎</span><strong>Geo Lab</strong><small>Winning locations, hotspot heatmap and timeline</small></button>
+    <button type="button" data-jump="numberWorld"><span>✦</span><strong>Number World</strong><small>Orbit a spatial 40-ball historical explorer</small></button><button type="button" data-jump="universe"><span>✳</span><strong>Number Universe</strong><small>Touch-responsive 40-ball data field</small></button><button type="button" data-jump="geo"><span>◎</span><strong>Geo Lab</strong><small>Winning locations, hotspot heatmap and timeline</small></button>
     <button type="button" data-jump="evidence"><span>◈</span><strong>Evidence Lab</strong><small>Test patterns against chance</small></button>
     <button type="button" data-jump="insights"><span>▦</span><strong>Number insights</strong><small>Filters, frequency, pairs</small></button>
     <button type="button" data-jump="predictions"><span>◆</span><strong>Prediction history</strong><small>Publicly audited results</small></button>
