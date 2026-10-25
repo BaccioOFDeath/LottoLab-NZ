@@ -280,15 +280,42 @@ def main():
     a = ap.parse_args()
     draws, conflicts = collect(load_draws(), max(1, a.recent_days), max(0, a.backfill_days))
     write_json(DATA, draws)
+    # Reconcile the archive against historical draw IDs and daily draw slots.
+    # This checks completeness but does not claim independent official verification.
     dates = Counter(x["date"] for x in draws)
-    missing_days = [d for d, v in dates.items() if v < 4]
-    health = {"draw_count": len(draws),
-              "first_date": draws[0]["date"] if draws else None,
-              "last_date": draws[-1]["date"] if draws else None,
-              "latest_draw": draws[-1]["draw"] if draws else None,
-              "partial_days": len(missing_days), "conflicts_this_run": conflicts,
-              "source": BASE + "/keno/archive",
-              "disclaimer": "Independent, unofficial history. Check against Lotto NZ."}
+    ids = {int(x["draw"]) for x in draws}
+    min_id, max_id = (min(ids), max(ids)) if ids else (0, 0)
+    missing_ids = [i for i in range(min_id, max_id + 1) if i not in ids]
+    times = ("10:00 am", "1:00 pm", "3:00 pm", "6:00 pm")
+    found_slots = {(x["date"], x["time"].lower()) for x in draws}
+    duplicate_slots = len(draws) - len(found_slots)
+    today = dt.datetime.now(NZ).date()
+    first_day = dt.date.fromisoformat(draws[0]["date"]) if draws else today
+    gaps = []
+    day = first_day
+    while day < today:
+        for clock in times:
+            if (day.isoformat(), clock) not in found_slots:
+                gaps.append({"date": day.isoformat(), "time": clock})
+        day += dt.timedelta(days=1)
+    n_provenance = sum(bool(x.get("source")) for x in draws)
+    health = {
+        "draw_count": len(draws),
+        "first_date": draws[0]["date"] if draws else None,
+        "last_date": draws[-1]["date"] if draws else None,
+        "earliest_source_date": "2019-01-05",
+        "latest_draw": draws[-1]["draw"] if draws else None,
+        "missing_draw_ids": len(missing_ids),
+        "missing_draw_ids_sample": missing_ids[:50],
+        "missing_completed_day_slots": len(gaps),
+        "missing_slot_sample": gaps[:50],
+        "partial_days": sum(1 for d, n in dates.items() if n < 4 and d < today.isoformat()),
+        "duplicate_date_time_slots": duplicate_slots,
+        "records_with_source_url": n_provenance,
+        "conflicts_this_run": conflicts,
+        "source": BASE + "/keno/archive",
+        "disclaimer": "Independently sourced results, not official verification. Check winnings with Lotto NZ."
+    }
     write_json(HEALTH, health, pretty=True)
     publish_picks(draws)
     if conflicts:
