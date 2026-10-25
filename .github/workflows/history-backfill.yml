@@ -42,5 +42,10 @@ jobs:
           git add data/draws.json
           if git diff --cached --quiet; then echo 'No verified additions this run'; exit 0; fi
           git commit -m 'data: backfill verified historical Lotto draws'
-          git pull --rebase origin main
-          git push
+          for attempt in 1 2 3 4 5 6 7 8; do
+            git pull --rebase origin main
+            if git push; then exit 0; fi
+            echo "Concurrent repo update during push; retrying $attempt/8"
+            sleep 3
+          done
+          exit 1
