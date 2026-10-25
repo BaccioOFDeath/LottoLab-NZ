@@ -581,3 +581,23 @@ body{background:var(--bg)}
    A lingering .25s transform transition made Reset report 1× while the
    visible map was still enlarged, producing misleading giant markers. */
 .geo-map-stage .geo-scene{transition:none!important}
+
+.world-section{margin:35px 0 48px;scroll-margin-top:105px}
+.world-head .eyebrow{color:#ac55e7;font-weight:900;letter-spacing:1.6px}
+.world-head h2{font:900 clamp(28px,4vw,45px) Outfit,sans-serif;color:#271546;margin:7px 0}
+.world-head h2 span{color:#cc63ef}.world-head p:not(.eyebrow){color:#867598;font-size:13px;max-width:750px;line-height:1.7}
+.world-stage{position:relative;overflow:hidden;border-radius:24px;border:1px solid #7145b6;background:#100a2f;box-shadow:0 18px 45px #34135b32}
+#worldCanvas{display:block;width:100%;height:480px;touch-action:pan-y;cursor:grab}
+#worldCanvas:active{cursor:grabbing}
+.world-overlay{position:absolute;left:23px;top:22px;pointer-events:none;display:flex;flex-direction:column;gap:7px;max-width:calc(100% - 46px)}
+.world-overlay span{color:#dbb8ff;font-size:10px;letter-spacing:1.4px;font-weight:900}
+.world-overlay strong{font:900 24px Outfit;color:#fff}.world-overlay small{color:#d6c5ef;font-size:11px;line-height:1.6}
+.world-actions{position:absolute;bottom:18px;left:18px;right:18px;display:flex;flex-wrap:wrap;gap:8px}
+.world-actions button{background:#ffffff18;border:1px solid #ffffff56;border-radius:11px;color:#fff;padding:11px 13px;font-size:11px;font-weight:900;cursor:pointer;backdrop-filter:blur(9px)}
+.world-actions button[aria-pressed=true]{background:#b985fc;color:#281147}
+.world-bottom{display:flex;gap:20px;align-items:end;justify-content:space-between;flex-wrap:wrap;border:1px solid #e9def5;border-radius:0 0 16px 16px;background:#fff;padding:16px;margin:0 10px}
+.world-bottom label{font-size:11px;color:#6b5485;font-weight:800}
+#worldSelect{display:block;min-width:180px;border:1px solid #dac9ec;border-radius:9px;padding:10px;margin-top:6px;font-size:12px}
+.world-bottom p{margin:0;font-size:11px;color:#857494;line-height:1.6}
+.world-honesty{font-size:11px;color:#8a7b99;line-height:1.65;margin-top:10px}
+@media(max-width:600px){#worldCanvas{height:390px}.world-overlay{left:14px;top:15px}.world-overlay strong{font-size:20px}.world-actions{left:9px;right:9px;bottom:10px}.world-actions button{flex:1;min-height:42px;padding:9px 5px}.world-bottom{margin:0 2px}}
