@@ -1,0 +1,57 @@
+name: Unattended LottoLab freshness watch
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/site-health.yml'
+      - 'scripts/check_site_freshness.py'
+      - 'tests/test_auto_maintenance.py'
+  schedule:
+    # Twice daily, including a NZ afternoon after result publication grace.
+    - cron: '30 2,14 * * *'
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: lottolab-site-health
+  cancel-in-progress: false
+jobs:
+  health:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test schedule and freshness rules
+        run: python -m unittest discover -s tests -v
+      - id: verify
+        name: Check verified latest draw and 20 future lines
+        continue-on-error: true
+        run: python scripts/check_site_freshness.py
+      - name: Open or resolve a GitHub maintenance alert
+        if: always() && steps.verify.outcome != 'skipped'
+        uses: actions/github-script@v7
+        env:
+          HEALTH_OUTCOME: ${{ steps.verify.outcome }}
+        with:
+          script: |
+            const title = '[LottoLab] Automated update needs attention';
+            const failure = process.env.HEALTH_OUTCOME !== 'success';
+            const {owner, repo} = context.repo;
+            const issues = await github.paginate(github.rest.issues.listForRepo, {owner, repo, state:'open', per_page:100});
+            const existing = issues.find(x => !x.pull_request && x.title === title);
+            const run = 'https://github.com/' + owner + '/' + repo + '/actions/runs/' + context.runId;
+            if (failure) {
+              const body = 'A missing or stale independently verified draw, or incomplete next-draw research lines, was found.\n\nReview this run: ' + run + '\n\nAutomated importers retry on their normal schedules. Do not publish invented results or treat unverified sources as confirmed.';
+              if (existing) await github.rest.issues.createComment({owner,repo,issue_number:existing.number,body:'Still needs attention. Run: ' + run});
+              else await github.rest.issues.create({owner,repo,title,body});
+            } else if (existing) {
+              await github.rest.issues.createComment({owner,repo,issue_number:existing.number,body:'Automated freshness check recovered: ' + run});
+              await github.rest.issues.update({owner,repo,issue_number:existing.number,state:'closed'});
+            }
+      - name: Mark health check failed if verification is stale
+        if: steps.verify.outcome == 'failure'
+        run: exit 1
