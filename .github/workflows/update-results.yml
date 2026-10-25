@@ -32,8 +32,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # Avoid timestamp-only scorecard commits and needless rebase conflicts.
+          # The daily model workflow independently refreshes performance.
+          if git diff --quiet -- data/draws.json; then echo 'No new verified draw; no publication needed'; exit 0; fi
           git add data/draws.json data/model-picks.json data/model-performance.json
-          if git diff --cached --quiet; then exit 0; fi
           git commit -m 'data: publish verified draw and audit research predictions'
           git pull --rebase origin main
           git push
