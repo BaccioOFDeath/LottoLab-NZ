@@ -75,3 +75,14 @@ a:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(
 .odds-lab a{color:#6ef5e1;font-size:13px;font-weight:700}
 @media(max-width:850px){.odds-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:490px){.odds-cards{gap:8px}.odds-cards>div{padding:12px 9px}.odds-cards strong{font-size:15px}.odds-controls{gap:10px}.odds-controls select{min-width:120px}.odds-lab h2{font-size:25px}}
+
+
+.audit-details{border:1px solid #4b8691;border-radius:13px;margin-top:16px;background:rgba(18,47,64,.64);overflow:hidden}
+.audit-details summary{display:flex;flex-direction:column;gap:5px;padding:17px 20px;cursor:pointer;list-style:none}
+.audit-details summary::-webkit-details-marker{display:none}
+.audit-details summary:after{content:"↓";position:absolute;right:38px;color:#73ead8;font-size:20px}
+.audit-details summary strong{font-size:16px;color:#eafffd}
+.audit-details summary span{font-size:12px;color:#adc9d2}
+.audit-details[open] summary:after{content:"↑"}
+.audit-details #modelAudit{margin:0 13px 13px;overflow:auto}
+.audit-details table{min-width:560px}
