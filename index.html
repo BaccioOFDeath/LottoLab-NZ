@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="./local-data.css?v=20261025-local1">
 <link rel="stylesheet" href="./data-health.css?v=20261025-health1">
 <link rel="stylesheet" href="./data-export.css?v=20261025-exports1">
+<link rel="stylesheet" href="./clean-layout.css?v=20261025-clean1">
 <script defer src="./app.js?v=20261025-geo1"></script><script defer src="./picker.js?v=20261025-geo1"></script>
 <script defer src="./model-view.js?v=20261025-geo1"></script>
 <script defer src="./research-lab.js?v=20261025-studio-v3"></script>
@@ -38,15 +39,16 @@
 <script defer src="./local-data.js?v=20261025-local1"></script>
 <script defer src="./data-health.js?v=20261025-health1"></script>
 <script defer src="./data-export.js?v=20261025-exports1"></script>
-<script defer src="./anchor-navigation.js?v=20261025-anchors3"></script>
+<script defer src="./anchor-navigation.js?v=20261025-anchors4"></script>
+<script defer src="./clean-layout.js?v=20261025-clean1"></script>
 </head><body><a href="#results" class="skip-link">Skip to latest results</a><div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 <div class="topline"><div class="shell topline-inner"><span><span class="tiny-led"></span>Independent NZ Lotto research</span><span>Not affiliated with Lotto NZ · <a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official results ↗</a></span></div></div>
 <header class="header"><div class="shell header-inner">
 <a class="brand" href="#home" aria-label="LottoLab NZ Home"><span class="brand-mark">L<span>●</span></span><span class="brand-type">Lotto<span>Lab</span><small>NEW ZEALAND</small></span></a>
-<nav class="desktop-nav" aria-label="Main navigation"><a href="#results" data-nav="results" class="active">Results</a><a href="#picker">Next draw lines</a><a href="#lineCreator">Create line</a><a href="#foreverNumbers">Forever numbers</a><a href="#numberChecker">Check numbers</a><a href="#combinations">Combinations</a><a href="#predictions">Accuracy</a><a href="#archive" data-nav="archive">History</a><a href="#deepResearch">Research</a></nav>
+<nav class="desktop-nav" aria-label="Main navigation"><a href="#results" data-nav="results" class="active">Results</a><a href="#ticketChecker">Check numbers</a><a href="#picker">Next draw</a><a href="#predictions">Accuracy</a><a href="#deepResearch">Explore tools</a></nav>
 <a class="official-btn" href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official Lotto NZ <span aria-hidden="true">↗</span></a>
 <button type="button" class="command-trigger" id="openQuickNav" aria-label="Open quick navigation search" title="Find pages and features (Command K)"><span aria-hidden="true">⌕</span><kbd>⌘ K</kbd></button><button id="menuToggle" class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
-</div><nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden><a href="#results">Latest results</a><a href="#picker">Next-draw selections</a><a href="#lineCreator">Create my own line</a><a href="#foreverNumbers">My forever numbers</a><a href="#numberChecker">Check my numbers</a><a href="#combinations">Top combinations</a><a href="#myData">My saved data</a><a href="#dataHealth">Data health audit</a><a href="#dataExports">Download CSV</a><a href="#predictions">Prediction accuracy</a><a href="#archive">Result history</a><a href="#deepResearch">Advanced research</a><a href="#evidence">Evidence Lab</a></nav></header>
+</div><nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden><a href="#results">Latest Lotto results</a><a href="#ticketChecker">Check my numbers</a><a href="#picker">Next draw</a><a href="#predictions">Accuracy</a><details class="mobile-menu-group"><summary>My numbers</summary><div class="mobile-menu-group-links"><a href="#lineCreator">Create a line</a><a href="#foreverNumbers">Forever numbers</a><a href="#numberChecker">Historical checker</a></div></details><details class="mobile-menu-group"><summary>History & patterns</summary><div class="mobile-menu-group-links"><a href="#archive">Draw archive</a><a href="#combinations">Top combinations</a><a href="#insights">Number statistics</a><a href="#evidence">Evidence Lab</a></div></details><details class="mobile-menu-group"><summary>Maps & interactive</summary><div class="mobile-menu-group-links"><a href="#geo">Winning locations</a><a href="#numberWorld">Number World</a><a href="#universe">Number Universe</a></div></details><details class="mobile-menu-group"><summary>Data & settings</summary><div class="mobile-menu-group-links"><a href="#dataExports">Download CSV</a><a href="#myData">Saved data & clear</a><a href="#dataHealth">Data coverage</a></div></details><a href="#deepResearch">Explore all tools</a></nav></header>
 <main id="home">
 <section class="hero"><div class="shell hero-grid"><div class="hero-copy"><div class="hero-kicker"><span class="pulse-dot"></span> LOTTO NZ · RESULTS & RESEARCH</div><h1>Results. Picks.<br><em>Proof.</em></h1><p>Latest verified results. Published lines for the next draw. A prediction record you can actually check.</p><div class="hero-actions"><a class="btn btn-white" href="#results">See latest results <span>→</span></a><a class="btn btn-outline" href="#picker">Next draw numbers <span>↗</span></a></div><a class="hero-universe-link" href="#universe"><span aria-hidden="true">✧</span> Explore the touch-responsive Number Universe <span aria-hidden="true">↗</span></a></div>
 <div class="hero-art" aria-hidden="true"><span class="float-ball art-a">7</span><span class="float-ball art-b">21</span><span class="float-ball art-c">4</span><span class="float-ball art-d">33</span><div class="art-halo"></div><span class="spark sp1">✦</span><span class="spark sp2">✧</span><span class="spark sp3">✦</span></div></div></section>
@@ -331,7 +333,7 @@
  picks.insertAdjacentElement('afterend',performance);
  const vault=document.createElement('details');
  vault.id='deepResearch';vault.className='research-vault';
- vault.innerHTML='<summary class="research-vault-summary"><span class="vault-wordmark">ADVANCED LAB</span><span class="vault-title">Explore history, maps & research</span><span class="vault-subtitle">Draw archive, number frequencies, Geo Lab, 40-ball universe and statistical tools — open only when you want them.</span><span class="vault-toggle" aria-hidden="true">Explore tools ↗</span></summary><div class="research-vault-content"></div>';
+ vault.innerHTML='<summary class="research-vault-summary"><span class="vault-wordmark">EVERYTHING ELSE</span><span class="vault-title">Explore tools</span><span class="vault-subtitle">Create lines, explore history and maps, or manage data — without cluttering the homepage.</span><span class="vault-toggle" aria-hidden="true">Browse tools ↓</span></summary><div class="research-vault-content"></div>';
  performance.insertAdjacentElement('afterend',vault);
  const vaultContent=vault.querySelector('.research-vault-content');
  while(vault.nextElementSibling) vaultContent.appendChild(vault.nextElementSibling);
@@ -349,4 +351,4 @@
  vault.addEventListener('toggle',()=>{if(vault.open)requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')))});
  openForHash();
 })();
-</script><nav class="mobile-action-dock" aria-label="Primary destinations"><a href="#results"><span aria-hidden="true">◉</span>Results</a><a href="#picker"><span aria-hidden="true">✦</span>Next draw</a><a href="#predictions"><span aria-hidden="true">▤</span>Accuracy</a><a href="#deepResearch"><span aria-hidden="true">☷</span>Explore</a></nav></body></html>
+</script><nav class="mobile-action-dock" aria-label="Primary destinations"><a href="#results"><span aria-hidden="true">◉</span>Results</a><a href="#picker"><span aria-hidden="true">✦</span>Next draw</a><a href="#predictions"><span aria-hidden="true">▤</span>Accuracy</a><a href="#deepResearch"><span aria-hidden="true">☷</span>Tools</a></nav></body></html>
