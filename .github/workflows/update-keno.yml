@@ -11,6 +11,8 @@ on:
       - 'scripts/keno_model_audit.py'
       - 'scripts/keno_slot_picks.py'
       - 'tests/test_keno_slot_picks.py'
+      - 'tests/test_keno_ticket_tools.cjs'
+      - 'keno-ticket-tools.js'
   schedule:
     # Pre-draw NZST/NZDT windows, including 10am, 1pm, 3pm, 6pm draws.
     # GitHub may delay schedule delivery; the publisher checks actual NZ time.
@@ -40,7 +42,7 @@ jobs:
       - name: Validate independent draw-specific Keno prediction engine
         run: python -m unittest discover -s tests -p 'test_keno_slot_picks.py' -v
       - name: Verify exact Keno probability engine
-        run: node --test tests/test_keno_math.cjs
+        run: node --test tests/test_keno_math.cjs tests/test_keno_ticket_tools.cjs
       - name: Update Keno history, with conservative incremental backfill
         env:
           GITHUB_EVENT_SCHEDULE: ${{ github.event.schedule }}
