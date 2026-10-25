@@ -102,6 +102,31 @@ async function refreshKeno(){
  renderPredictions();
 }
 
+function updateKenoOdds(){
+ const api=window.KenoMath;if(!api||!$('oddsPickSize'))return;
+ const n=Number($('oddsPickSize').value),stake=Number($('oddsStake').value),multiplier=$('oddsMultiplier').checked;
+ try{
+  const data=api.getStats(n,stake,multiplier);
+  const fmt=new Intl.NumberFormat('en-NZ',{maximumFractionDigits:2});
+  const money=x=>new Intl.NumberFormat('en-NZ',{style:'currency',currency:'NZD',maximumFractionDigits:2}).format(x);
+  $('oddsAny').textContent='1 in '+fmt.format(data.oddsOfAnyPrize);
+  $('oddsAll').textContent='1 in '+fmt.format(data.oddsAllMatched);
+  $('oddsExpected').textContent=money(data.expectedNet)+' net';
+  $('oddsCost').textContent=money(data.cost);
+  $('oddsTable').replaceChildren();
+  for(const r of data.rows){
+   if(!r.basePrize)continue;
+   const tr=document.createElement('tr');
+   const parts=[r.matches+' of '+n,'1 in '+fmt.format(1/r.probability),money(r.payout)];
+   for(const value of parts){const td=document.createElement('td');td.textContent=value;tr.append(td)}
+   $('oddsTable').append(tr);
+  }
+  $('oddsDisclaimer').textContent='Official Keno paytable effective 23 October 2025. '+(multiplier?'Multiplier doubles the ticket cost; values shown are standard prizes before any random multiplier. Expected net uses an approximate multiplier-weighted return. ':'')+'Expected return assumes fair independent draws. Estimated net return includes ticket cost but excludes high-tier prize-cap adjustments. Stakes change cost and payout, never the draw probability.';
+ }catch(e){$('oddsDisclaimer').textContent=e.message}
+}
+for(const id of ['oddsPickSize','oddsStake','oddsMultiplier'])$(id).addEventListener('change',updateKenoOdds);
+updateKenoOdds();
+
 refreshKeno();
 setInterval(refreshKeno,5*60*1000);
 })();
