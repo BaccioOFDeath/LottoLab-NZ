@@ -10,8 +10,8 @@ const two=n=>String(n).padStart(2,'0');let rows=[],history=[];
 for(let n=1;n<=14;n++){const o=document.createElement('option');o.value=String(n);o.textContent=two(n);$('checkerPB').append(o);}
 function parse(value){
  const raw=value.trim();if(!raw)return {error:'Enter your six numbers first.'};
- if(!/^[\d,\s;|/-]+$/.test(raw))return {error:'Use six numbers separated by spaces, commas or hyphens; enter Powerball separately.'};
- const tokens=raw.split(/[\s,;|/-]+/).filter(Boolean);
+ if(!/^[\d,\s;|\/-]+$/.test(raw))return {error:'Use six numbers separated by spaces, commas or hyphens; enter Powerball separately.'};
+ const tokens=raw.split(/[\s,;|\/-]+/).filter(Boolean);
  if(tokens.length!==6)return {error:'Enter exactly six Lotto numbers.'};
  const numbers=tokens.map(Number);
  if(numbers.some(n=>!Number.isInteger(n)||n<1||n>40))return {error:'Main numbers must be between 1 and 40.'};
