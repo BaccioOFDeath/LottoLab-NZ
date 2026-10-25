@@ -5699,5 +5699,1753 @@
       "https://www.lottodraw.co.nz/lotto/results-december-2-2023",
       "https://app.nz-lotto.com/loto-statistics/results/mylotto-2330"
     ]
+  },
+  {
+    "draw": 2329,
+    "date": "2023-11-29",
+    "numbers": [
+      2,
+      3,
+      5,
+      9,
+      14,
+      36
+    ],
+    "bonus": 25,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-29-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2329"
+    ]
+  },
+  {
+    "draw": 2328,
+    "date": "2023-11-25",
+    "numbers": [
+      13,
+      16,
+      31,
+      33,
+      35,
+      37
+    ],
+    "bonus": 19,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-25-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2328"
+    ]
+  },
+  {
+    "draw": 2327,
+    "date": "2023-11-22",
+    "numbers": [
+      3,
+      9,
+      16,
+      19,
+      25,
+      34
+    ],
+    "bonus": 1,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-22-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2327"
+    ]
+  },
+  {
+    "draw": 2326,
+    "date": "2023-11-18",
+    "numbers": [
+      7,
+      11,
+      12,
+      27,
+      33,
+      39
+    ],
+    "bonus": 24,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-18-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2326"
+    ]
+  },
+  {
+    "draw": 2325,
+    "date": "2023-11-15",
+    "numbers": [
+      7,
+      12,
+      17,
+      19,
+      34,
+      36
+    ],
+    "bonus": 21,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-15-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2325"
+    ]
+  },
+  {
+    "draw": 2324,
+    "date": "2023-11-11",
+    "numbers": [
+      5,
+      19,
+      23,
+      31,
+      39,
+      40
+    ],
+    "bonus": 25,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-11-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2324"
+    ]
+  },
+  {
+    "draw": 2323,
+    "date": "2023-11-08",
+    "numbers": [
+      2,
+      3,
+      11,
+      20,
+      25,
+      39
+    ],
+    "bonus": 14,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-8-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2323"
+    ]
+  },
+  {
+    "draw": 2322,
+    "date": "2023-11-04",
+    "numbers": [
+      10,
+      11,
+      12,
+      23,
+      24,
+      25
+    ],
+    "bonus": 6,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-4-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2322"
+    ]
+  },
+  {
+    "draw": 2321,
+    "date": "2023-11-01",
+    "numbers": [
+      2,
+      6,
+      13,
+      26,
+      28,
+      32
+    ],
+    "bonus": 16,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-november-1-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2321"
+    ]
+  },
+  {
+    "draw": 2320,
+    "date": "2023-10-28",
+    "numbers": [
+      2,
+      14,
+      22,
+      24,
+      35,
+      36
+    ],
+    "bonus": 9,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-28-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2320"
+    ]
+  },
+  {
+    "draw": 2319,
+    "date": "2023-10-25",
+    "numbers": [
+      9,
+      10,
+      20,
+      21,
+      26,
+      35
+    ],
+    "bonus": 6,
+    "powerball": 2,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-25-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2319"
+    ]
+  },
+  {
+    "draw": 2318,
+    "date": "2023-10-21",
+    "numbers": [
+      8,
+      13,
+      26,
+      29,
+      33,
+      40
+    ],
+    "bonus": 23,
+    "powerball": 4,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-21-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2318"
+    ]
+  },
+  {
+    "draw": 2317,
+    "date": "2023-10-18",
+    "numbers": [
+      6,
+      11,
+      13,
+      28,
+      36,
+      40
+    ],
+    "bonus": 32,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-18-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2317"
+    ]
+  },
+  {
+    "draw": 2316,
+    "date": "2023-10-14",
+    "numbers": [
+      4,
+      6,
+      9,
+      12,
+      20,
+      36
+    ],
+    "bonus": 5,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-14-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2316"
+    ]
+  },
+  {
+    "draw": 2315,
+    "date": "2023-10-11",
+    "numbers": [
+      1,
+      7,
+      12,
+      14,
+      19,
+      31
+    ],
+    "bonus": 30,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-11-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2315"
+    ]
+  },
+  {
+    "draw": 2314,
+    "date": "2023-10-07",
+    "numbers": [
+      5,
+      25,
+      28,
+      34,
+      36,
+      38
+    ],
+    "bonus": 15,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-7-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2314"
+    ]
+  },
+  {
+    "draw": 2313,
+    "date": "2023-10-04",
+    "numbers": [
+      8,
+      13,
+      14,
+      19,
+      23,
+      26
+    ],
+    "bonus": 6,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-4-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2313"
+    ]
+  },
+  {
+    "draw": 2312,
+    "date": "2023-09-30",
+    "numbers": [
+      1,
+      21,
+      22,
+      27,
+      29,
+      31
+    ],
+    "bonus": 3,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-30-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2312"
+    ]
+  },
+  {
+    "draw": 2311,
+    "date": "2023-09-27",
+    "numbers": [
+      3,
+      6,
+      9,
+      11,
+      19,
+      27
+    ],
+    "bonus": 23,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-27-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2311"
+    ]
+  },
+  {
+    "draw": 2310,
+    "date": "2023-09-23",
+    "numbers": [
+      15,
+      25,
+      27,
+      28,
+      37,
+      40
+    ],
+    "bonus": 33,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-23-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2310"
+    ]
+  },
+  {
+    "draw": 2309,
+    "date": "2023-09-20",
+    "numbers": [
+      4,
+      12,
+      27,
+      29,
+      37,
+      38
+    ],
+    "bonus": 30,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-20-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2309"
+    ]
+  },
+  {
+    "draw": 2308,
+    "date": "2023-09-16",
+    "numbers": [
+      5,
+      13,
+      20,
+      32,
+      34,
+      35
+    ],
+    "bonus": 6,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-16-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2308"
+    ]
+  },
+  {
+    "draw": 2307,
+    "date": "2023-09-13",
+    "numbers": [
+      1,
+      2,
+      16,
+      21,
+      33,
+      40
+    ],
+    "bonus": 39,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-13-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2307"
+    ]
+  },
+  {
+    "draw": 2306,
+    "date": "2023-09-09",
+    "numbers": [
+      4,
+      8,
+      17,
+      24,
+      32,
+      37
+    ],
+    "bonus": 12,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-9-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2306"
+    ]
+  },
+  {
+    "draw": 2305,
+    "date": "2023-09-06",
+    "numbers": [
+      13,
+      22,
+      25,
+      26,
+      32,
+      36
+    ],
+    "bonus": 21,
+    "powerball": 4,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-6-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2305"
+    ]
+  },
+  {
+    "draw": 2304,
+    "date": "2023-09-02",
+    "numbers": [
+      1,
+      5,
+      6,
+      20,
+      36,
+      39
+    ],
+    "bonus": 2,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-september-2-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2304"
+    ]
+  },
+  {
+    "draw": 2303,
+    "date": "2023-08-30",
+    "numbers": [
+      9,
+      17,
+      22,
+      30,
+      36,
+      40
+    ],
+    "bonus": 20,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-30-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2303"
+    ]
+  },
+  {
+    "draw": 2302,
+    "date": "2023-08-26",
+    "numbers": [
+      22,
+      23,
+      26,
+      30,
+      36,
+      39
+    ],
+    "bonus": 28,
+    "powerball": 2,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-26-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2302"
+    ]
+  },
+  {
+    "draw": 2301,
+    "date": "2023-08-23",
+    "numbers": [
+      1,
+      14,
+      15,
+      17,
+      18,
+      24
+    ],
+    "bonus": 8,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-23-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2301"
+    ]
+  },
+  {
+    "draw": 2300,
+    "date": "2023-08-19",
+    "numbers": [
+      5,
+      18,
+      26,
+      28,
+      31,
+      39
+    ],
+    "bonus": 16,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-19-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2300"
+    ]
+  },
+  {
+    "draw": 2299,
+    "date": "2023-08-16",
+    "numbers": [
+      7,
+      17,
+      19,
+      29,
+      36,
+      38
+    ],
+    "bonus": 20,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-16-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2299"
+    ]
+  },
+  {
+    "draw": 2298,
+    "date": "2023-08-12",
+    "numbers": [
+      15,
+      19,
+      20,
+      23,
+      31,
+      33
+    ],
+    "bonus": 8,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-12-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2298"
+    ]
+  },
+  {
+    "draw": 2297,
+    "date": "2023-08-09",
+    "numbers": [
+      4,
+      13,
+      14,
+      34,
+      35,
+      40
+    ],
+    "bonus": 15,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-9-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2297"
+    ]
+  },
+  {
+    "draw": 2296,
+    "date": "2023-08-05",
+    "numbers": [
+      18,
+      23,
+      24,
+      26,
+      28,
+      32
+    ],
+    "bonus": 16,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-5-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2296"
+    ]
+  },
+  {
+    "draw": 2295,
+    "date": "2023-08-02",
+    "numbers": [
+      6,
+      23,
+      25,
+      27,
+      28,
+      32
+    ],
+    "bonus": 17,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-august-2-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2295"
+    ]
+  },
+  {
+    "draw": 2294,
+    "date": "2023-07-29",
+    "numbers": [
+      4,
+      10,
+      13,
+      18,
+      21,
+      34
+    ],
+    "bonus": 40,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-29-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2294"
+    ]
+  },
+  {
+    "draw": 2293,
+    "date": "2023-07-26",
+    "numbers": [
+      17,
+      19,
+      23,
+      25,
+      27,
+      37
+    ],
+    "bonus": 13,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-26-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2293"
+    ]
+  },
+  {
+    "draw": 2292,
+    "date": "2023-07-22",
+    "numbers": [
+      3,
+      4,
+      12,
+      22,
+      24,
+      25
+    ],
+    "bonus": 10,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-22-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2292"
+    ]
+  },
+  {
+    "draw": 2291,
+    "date": "2023-07-19",
+    "numbers": [
+      6,
+      20,
+      23,
+      28,
+      35,
+      38
+    ],
+    "bonus": 2,
+    "powerball": 2,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-19-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2291"
+    ]
+  },
+  {
+    "draw": 2290,
+    "date": "2023-07-15",
+    "numbers": [
+      7,
+      11,
+      15,
+      21,
+      24,
+      34
+    ],
+    "bonus": 6,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-15-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2290"
+    ]
+  },
+  {
+    "draw": 2289,
+    "date": "2023-07-12",
+    "numbers": [
+      8,
+      22,
+      29,
+      34,
+      36,
+      37
+    ],
+    "bonus": 11,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-12-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2289"
+    ]
+  },
+  {
+    "draw": 2288,
+    "date": "2023-07-08",
+    "numbers": [
+      6,
+      8,
+      10,
+      18,
+      25,
+      32
+    ],
+    "bonus": 2,
+    "powerball": 4,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-8-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2288"
+    ]
+  },
+  {
+    "draw": 2287,
+    "date": "2023-07-05",
+    "numbers": [
+      4,
+      7,
+      26,
+      29,
+      36,
+      38
+    ],
+    "bonus": 23,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-5-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2287"
+    ]
+  },
+  {
+    "draw": 2286,
+    "date": "2023-07-01",
+    "numbers": [
+      9,
+      23,
+      24,
+      25,
+      30,
+      34
+    ],
+    "bonus": 10,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-july-1-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2286"
+    ]
+  },
+  {
+    "draw": 2285,
+    "date": "2023-06-28",
+    "numbers": [
+      4,
+      5,
+      8,
+      15,
+      31,
+      33
+    ],
+    "bonus": 29,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-28-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2285"
+    ]
+  },
+  {
+    "draw": 2284,
+    "date": "2023-06-24",
+    "numbers": [
+      6,
+      7,
+      21,
+      22,
+      23,
+      40
+    ],
+    "bonus": 29,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-24-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2284"
+    ]
+  },
+  {
+    "draw": 2283,
+    "date": "2023-06-21",
+    "numbers": [
+      4,
+      8,
+      10,
+      16,
+      28,
+      32
+    ],
+    "bonus": 40,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-21-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2283"
+    ]
+  },
+  {
+    "draw": 2282,
+    "date": "2023-06-17",
+    "numbers": [
+      2,
+      10,
+      13,
+      17,
+      19,
+      21
+    ],
+    "bonus": 30,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-17-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2282"
+    ]
+  },
+  {
+    "draw": 2281,
+    "date": "2023-06-14",
+    "numbers": [
+      2,
+      3,
+      9,
+      18,
+      22,
+      37
+    ],
+    "bonus": 23,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-14-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2281"
+    ]
+  },
+  {
+    "draw": 2280,
+    "date": "2023-06-10",
+    "numbers": [
+      2,
+      10,
+      15,
+      23,
+      24,
+      40
+    ],
+    "bonus": 27,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-10-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2280"
+    ]
+  },
+  {
+    "draw": 2279,
+    "date": "2023-06-07",
+    "numbers": [
+      6,
+      15,
+      24,
+      30,
+      34,
+      37
+    ],
+    "bonus": 29,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-7-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2279"
+    ]
+  },
+  {
+    "draw": 2278,
+    "date": "2023-06-03",
+    "numbers": [
+      3,
+      4,
+      6,
+      19,
+      25,
+      29
+    ],
+    "bonus": 18,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-june-3-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2278"
+    ]
+  },
+  {
+    "draw": 2277,
+    "date": "2023-05-31",
+    "numbers": [
+      3,
+      11,
+      14,
+      18,
+      21,
+      25
+    ],
+    "bonus": 23,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-31-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2277"
+    ]
+  },
+  {
+    "draw": 2276,
+    "date": "2023-05-27",
+    "numbers": [
+      4,
+      15,
+      17,
+      21,
+      22,
+      29
+    ],
+    "bonus": 2,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-27-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2276"
+    ]
+  },
+  {
+    "draw": 2275,
+    "date": "2023-05-24",
+    "numbers": [
+      5,
+      17,
+      28,
+      30,
+      33,
+      38
+    ],
+    "bonus": 34,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-24-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2275"
+    ]
+  },
+  {
+    "draw": 2274,
+    "date": "2023-05-20",
+    "numbers": [
+      14,
+      31,
+      32,
+      37,
+      38,
+      40
+    ],
+    "bonus": 22,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-20-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2274"
+    ]
+  },
+  {
+    "draw": 2273,
+    "date": "2023-05-17",
+    "numbers": [
+      2,
+      12,
+      13,
+      20,
+      23,
+      38
+    ],
+    "bonus": 36,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-17-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2273"
+    ]
+  },
+  {
+    "draw": 2272,
+    "date": "2023-05-13",
+    "numbers": [
+      7,
+      16,
+      17,
+      18,
+      19,
+      34
+    ],
+    "bonus": 26,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-13-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2272"
+    ]
+  },
+  {
+    "draw": 2271,
+    "date": "2023-05-10",
+    "numbers": [
+      4,
+      20,
+      22,
+      31,
+      35,
+      38
+    ],
+    "bonus": 29,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-10-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2271"
+    ]
+  },
+  {
+    "draw": 2270,
+    "date": "2023-05-06",
+    "numbers": [
+      8,
+      10,
+      15,
+      18,
+      25,
+      27
+    ],
+    "bonus": 21,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-6-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2270"
+    ]
+  },
+  {
+    "draw": 2269,
+    "date": "2023-05-03",
+    "numbers": [
+      8,
+      11,
+      20,
+      30,
+      33,
+      39
+    ],
+    "bonus": 18,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-may-3-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2269"
+    ]
+  },
+  {
+    "draw": 2268,
+    "date": "2023-04-29",
+    "numbers": [
+      4,
+      8,
+      25,
+      27,
+      36,
+      40
+    ],
+    "bonus": 19,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-29-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2268"
+    ]
+  },
+  {
+    "draw": 2267,
+    "date": "2023-04-26",
+    "numbers": [
+      3,
+      15,
+      23,
+      29,
+      36,
+      40
+    ],
+    "bonus": 4,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-26-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2267"
+    ]
+  },
+  {
+    "draw": 2266,
+    "date": "2023-04-22",
+    "numbers": [
+      1,
+      12,
+      13,
+      18,
+      21,
+      34
+    ],
+    "bonus": 6,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-22-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2266"
+    ]
+  },
+  {
+    "draw": 2265,
+    "date": "2023-04-19",
+    "numbers": [
+      2,
+      3,
+      13,
+      25,
+      27,
+      33
+    ],
+    "bonus": 22,
+    "powerball": 3,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-19-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2265"
+    ]
+  },
+  {
+    "draw": 2264,
+    "date": "2023-04-15",
+    "numbers": [
+      1,
+      2,
+      19,
+      23,
+      29,
+      35
+    ],
+    "bonus": 36,
+    "powerball": 4,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-15-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2264"
+    ]
+  },
+  {
+    "draw": 2263,
+    "date": "2023-04-12",
+    "numbers": [
+      1,
+      10,
+      12,
+      19,
+      28,
+      35
+    ],
+    "bonus": 34,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-12-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2263"
+    ]
+  },
+  {
+    "draw": 2262,
+    "date": "2023-04-08",
+    "numbers": [
+      12,
+      24,
+      31,
+      34,
+      36,
+      37
+    ],
+    "bonus": 39,
+    "powerball": 4,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-8-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2262"
+    ]
+  },
+  {
+    "draw": 2261,
+    "date": "2023-04-05",
+    "numbers": [
+      5,
+      14,
+      17,
+      25,
+      28,
+      38
+    ],
+    "bonus": 13,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-5-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2261"
+    ]
+  },
+  {
+    "draw": 2260,
+    "date": "2023-04-01",
+    "numbers": [
+      7,
+      10,
+      18,
+      20,
+      33,
+      40
+    ],
+    "bonus": 17,
+    "powerball": 10,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-april-1-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2260"
+    ]
+  },
+  {
+    "draw": 2259,
+    "date": "2023-03-29",
+    "numbers": [
+      14,
+      23,
+      24,
+      35,
+      36,
+      37
+    ],
+    "bonus": 29,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-march-29-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2259"
+    ]
+  },
+  {
+    "draw": 2258,
+    "date": "2023-03-25",
+    "numbers": [
+      4,
+      5,
+      8,
+      19,
+      28,
+      31
+    ],
+    "bonus": 38,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-march-25-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2258"
+    ]
+  },
+  {
+    "draw": 2257,
+    "date": "2023-03-22",
+    "numbers": [
+      7,
+      16,
+      29,
+      32,
+      33,
+      38
+    ],
+    "bonus": 9,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-march-22-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2257"
+    ]
+  },
+  {
+    "draw": 2251,
+    "date": "2023-03-01",
+    "numbers": [
+      14,
+      15,
+      17,
+      26,
+      34,
+      35
+    ],
+    "bonus": 30,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-march-1-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2251"
+    ]
+  },
+  {
+    "draw": 2250,
+    "date": "2023-02-25",
+    "numbers": [
+      14,
+      18,
+      22,
+      28,
+      30,
+      32
+    ],
+    "bonus": 23,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-february-25-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2250"
+    ]
+  },
+  {
+    "draw": 2249,
+    "date": "2023-02-22",
+    "numbers": [
+      1,
+      2,
+      23,
+      25,
+      30,
+      31
+    ],
+    "bonus": 3,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-february-22-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2249"
+    ]
+  },
+  {
+    "draw": 2248,
+    "date": "2023-02-18",
+    "numbers": [
+      4,
+      5,
+      16,
+      20,
+      22,
+      33
+    ],
+    "bonus": 26,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-february-18-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2248"
+    ]
+  },
+  {
+    "draw": 2247,
+    "date": "2023-02-15",
+    "numbers": [
+      7,
+      24,
+      26,
+      27,
+      28,
+      39
+    ],
+    "bonus": 37,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-february-15-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2247"
+    ]
+  },
+  {
+    "draw": 2246,
+    "date": "2023-02-11",
+    "numbers": [
+      5,
+      14,
+      28,
+      32,
+      34,
+      36
+    ],
+    "bonus": 10,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-february-11-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2246"
+    ]
+  },
+  {
+    "draw": 2245,
+    "date": "2023-02-08",
+    "numbers": [
+      2,
+      10,
+      15,
+      18,
+      24,
+      29
+    ],
+    "bonus": 5,
+    "powerball": 4,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-february-8-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2245"
+    ]
+  },
+  {
+    "draw": 2244,
+    "date": "2023-02-04",
+    "numbers": [
+      11,
+      13,
+      19,
+      21,
+      36,
+      40
+    ],
+    "bonus": 27,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-february-4-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2244"
+    ]
+  },
+  {
+    "draw": 2243,
+    "date": "2023-02-01",
+    "numbers": [
+      1,
+      3,
+      9,
+      11,
+      31,
+      39
+    ],
+    "bonus": 24,
+    "powerball": 2,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-february-1-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2243"
+    ]
+  },
+  {
+    "draw": 2242,
+    "date": "2023-01-28",
+    "numbers": [
+      13,
+      16,
+      17,
+      22,
+      27,
+      28
+    ],
+    "bonus": 3,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-january-28-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2242"
+    ]
+  },
+  {
+    "draw": 2241,
+    "date": "2023-01-25",
+    "numbers": [
+      5,
+      11,
+      12,
+      18,
+      24,
+      30
+    ],
+    "bonus": 20,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-january-25-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2241"
+    ]
+  },
+  {
+    "draw": 2240,
+    "date": "2023-01-21",
+    "numbers": [
+      4,
+      19,
+      28,
+      35,
+      37,
+      40
+    ],
+    "bonus": 30,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-january-21-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2240"
+    ]
+  },
+  {
+    "draw": 2239,
+    "date": "2023-01-18",
+    "numbers": [
+      1,
+      4,
+      7,
+      23,
+      28,
+      35
+    ],
+    "bonus": 17,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-january-18-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2239"
+    ]
+  },
+  {
+    "draw": 2238,
+    "date": "2023-01-14",
+    "numbers": [
+      5,
+      20,
+      28,
+      29,
+      32,
+      38
+    ],
+    "bonus": 3,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-january-14-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2238"
+    ]
+  },
+  {
+    "draw": 2237,
+    "date": "2023-01-11",
+    "numbers": [
+      9,
+      10,
+      18,
+      22,
+      24,
+      33
+    ],
+    "bonus": 4,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-january-11-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2237"
+    ]
+  },
+  {
+    "draw": 2236,
+    "date": "2023-01-07",
+    "numbers": [
+      1,
+      3,
+      7,
+      15,
+      24,
+      30
+    ],
+    "bonus": 22,
+    "powerball": 9,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-january-7-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2236"
+    ]
+  },
+  {
+    "draw": 2235,
+    "date": "2023-01-04",
+    "numbers": [
+      5,
+      9,
+      13,
+      16,
+      23,
+      25
+    ],
+    "bonus": 14,
+    "powerball": 1,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-january-4-2023",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2235"
+    ]
+  },
+  {
+    "draw": 2234,
+    "date": "2022-12-31",
+    "numbers": [
+      13,
+      19,
+      23,
+      33,
+      34,
+      36
+    ],
+    "bonus": 4,
+    "powerball": 8,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-december-31-2022",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2234"
+    ]
+  },
+  {
+    "draw": 2233,
+    "date": "2022-12-28",
+    "numbers": [
+      1,
+      3,
+      11,
+      27,
+      33,
+      37
+    ],
+    "bonus": 26,
+    "powerball": 7,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-december-28-2022",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2233"
+    ]
   }
 ]
