@@ -1,3 +1,18 @@
+
+async function revealResearchForLegacyChecks(page){
+ await page.evaluate(()=>{
+  const vault=document.getElementById('deepResearch');vault.open=true;
+  const score=document.getElementById('performanceDetails');if(score)score.open=true;
+  // Existing functional tests exercise every module together. Separately,
+  // clean-layout.spec.js validates the real collapsed visitor experience.
+  for(const panel of document.querySelectorAll('.clean-panel'))panel.hidden=false;
+  for(const disclosure of [...document.querySelectorAll('.clean-tool')]){
+   const body=disclosure.querySelector('.clean-tool-body');
+   if(body)disclosure.replaceWith(...body.children);
+  }
+ });
+}
+
 const {test,expect}=require('@playwright/test');
 const fs=require('fs');
 
@@ -17,7 +32,7 @@ function zipNames(bytes){
 
 async function start(page){
  await page.goto('/');
- await page.locator('#deepResearch').evaluate(el=>el.open=true);
+ await revealResearchForLegacyChecks(page);
  await expect(page.locator('#dataExports')).toBeVisible();
 }
 test('download a complete history CSV with correct columns and stored 1987 first results',async({page})=>{
