@@ -16,13 +16,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=20261025-studio-v3">
+<link rel="stylesheet" href="./styles.css?v=20261025-sections-v4">
 <script defer src="./app.js?v=20261025-geo1"></script><script defer src="./picker.js?v=20261025-geo1"></script>
 <script defer src="./model-view.js?v=20261025-geo1"></script>
 <script defer src="./research-lab.js?v=20261025-studio-v3"></script>
 <script defer src="./experience.js?v=20261025-studio-v4"></script>
 <script defer src="./number-universe.js?v=20261025-geo1"></script>
-<script defer src="./geo-lab.js?v=20261025-geo5-pins"></script>
+<script defer src="./geo-lab.js?v=20261025-sales-scenario"></script>
 <script defer src="./number-world.js?v=world1"></script><script defer src="./home-experience.js?v=studio2"></script>
 </head><body><a href="#results" class="skip-link">Skip to latest results</a><div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 <div class="topline"><div class="shell topline-inner"><span><span class="tiny-led"></span>Independent NZ Lotto research</span><span>Not affiliated with Lotto NZ · <a href="https://mylotto.co.nz/" target="_blank" rel="noopener noreferrer">Official results ↗</a></span></div></div>
@@ -148,7 +148,29 @@
 <aside class="geo-side">
 <div class="geo-detail-card"><div class="geo-card-kicker">LOCATION INSPECTOR ✳</div><h3 id="geoSelectedTitle">Explore a hotspot</h3><p id="geoSelectedDescription">Tap a location or choose one from the ranking to view its published winning-ticket reports.</p><div id="geoSelectedList" class="geo-selected-list"><p class="geo-empty">Map coordinates are town-level approximations, not actual shop addresses.</p></div></div>
 <div class="geo-leaders"><div class="geo-card-kicker">REPORTED WIN LOCATIONS</div><h3>Top places in this sample</h3><div id="geoRanking" class="geo-ranking"><p class="geo-empty">Loading…</p></div></div>
-<div class="geo-outlook"><div class="geo-card-kicker">SALES-ADJUSTED ANALYSIS</div><h3>Is somewhere luckier?</h3><div class="geo-outlook-badge">Not established</div><p>More winning tickets can simply mean more tickets sold. We don't have verified sales volumes by place.</p><button id="geoNormalized" type="button" disabled title="Requires verified ticket sales volume by location">Normalised rates unavailable</button></div>
+<div class="geo-outlook" id="geoLuckPanel">
+<div class="geo-card-kicker">LOCATION EVIDENCE · NOT A FORECAST</div>
+<h3>Is somewhere luckier?</h3>
+<span class="geo-outlook-badge">No proven location advantage</span>
+<p>Here's what the published winning-ticket reports actually show. More reported wins could simply reflect more tickets sold or more complete reporting.</p>
+<div class="geo-luck-snapshot" aria-live="polite"><span>Top reported place in this selection</span><strong id="geoTopPlace">Loading locations…</strong><small id="geoTopCount">Based on the selected reports only</small></div>
+<button id="geoNormalized" type="button" aria-controls="geoScenario" aria-expanded="false">Compare two locations using sales assumptions <span aria-hidden="true">⌄</span></button>
+<div id="geoScenario" class="geo-scenario" hidden>
+ <p class="geo-scenario-intro">Choose two reported places. Move the slider to explore <strong>hypothetical</strong> ticket-sales exposure — these are not real sales figures.</p>
+ <div class="geo-compare-fields">
+  <label for="geoCompareA">Place A<select id="geoCompareA" aria-label="First location to compare"></select></label>
+  <label for="geoCompareB">Place B<select id="geoCompareB" aria-label="Second location to compare"></select></label>
+ </div>
+ <div class="geo-compare-totals"><div><span>Place A · reported wins</span><strong id="geoCompareCountA">—</strong></div><div><span>Place B · reported wins</span><strong id="geoCompareCountB">—</strong></div></div>
+ <p id="geoBreakEven" class="geo-break-even" aria-live="polite">Choose two places to compare their reported win counts.</p>
+ <label class="geo-ratio-label" for="geoSalesRatio">Assume Place A sold <strong id="geoRatioValue">1×</strong> as many tickets as Place B</label>
+ <input id="geoSalesRatio" type="range" min="0.25" max="10" step="0.25" value="1" aria-label="Hypothetical sales volume ratio of place A to B">
+ <div class="geo-ratio-extremes"><span>A sold fewer tickets</span><span>A sold more tickets</span></div>
+ <p id="geoScenarioResult" class="geo-scenario-result" role="status">Illustrative comparison only.</p>
+ <p id="geoCompareScope" class="geo-compare-scope"></p>
+</div>
+<div class="geo-evidence-note"><strong>What would prove a difference?</strong> Comparable ticket-line sales by place, game and draw period, plus complete winner coverage. These figures aren't available in this dataset, so the map cannot establish higher odds anywhere. <a href="https://mylotto.co.nz/about-us/reports-and-statements" target="_blank" rel="noopener noreferrer">Lotto NZ public reports ↗</a></div>
+</div>
 </aside>
 </div>
 <div class="geo-footer"><p><strong>Location quality matters.</strong> Retail points represent towns, not shop doors. MyLotto locations show reported winner areas, not points of sale. Sources cover only selected results.</p><a href="https://mylotto.co.nz/media-releases" target="_blank" rel="noopener noreferrer">Lotto NZ winning-location reports ↗</a></div>
