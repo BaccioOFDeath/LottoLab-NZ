@@ -142,9 +142,9 @@ $('importSaved').onchange=async event=>{
 
 const render=()=>{const d=sample(),c=counts(d),last=latest();$('drawCount').textContent=records.length.toLocaleString();$('dateRange').textContent=records.length?records[0].date+' → '+last.date:'No history';$('latestDraw').textContent=last?last.draw||last.date:'—';if($('latestDateLabel'))$('latestDateLabel').textContent=last?last.date:'No published draws';if($('latestTimeLabel'))$('latestTimeLabel').textContent=last?last.time||'Time unavailable':'—';if($('latestBalls')){const root=$('latestBalls');root.replaceChildren();if(last){last.numbers.forEach(n=>{const b=document.createElement('span');b.textContent=String(n).padStart(2,'0');root.append(b)})}else root.textContent='Historical results have not loaded yet.'}$('status').textContent=records.length?'Loaded '+records.length.toLocaleString()+' distinct verified-format draw records. Imported results must still be checked against their source.':'No verified historical Keno draws have been imported yet. Upload a results CSV to begin.';const rows=records.slice(-30).reverse();$('historyRows').replaceChildren();rows.forEach(r=>{const tr=document.createElement('tr');[r.date,r.draw||'—',r.numbers.join(' · '),r.multiplier||'—'].forEach(t=>{let td=document.createElement('td');td.textContent=t;tr.append(td)});$('historyRows').append(tr)});[...$('heatmap').children].forEach(b=>{const n=Number(b.dataset.number),p=d.length?c[n]/d.length:0;b.style.background=d.length?'hsl('+Math.round(200-160*Math.min(1,p/.4))+' 55% '+Math.round(18+25*Math.min(1,p/.4))+'%)':'';b.title=n+': '+c[n]+' / '+d.length+' draws';b.classList.toggle('selected',active===n)});[...$('builder').children].forEach(b=>b.classList.toggle('selected',selected.includes(Number(b.dataset.number))));$('selection').textContent=selected.length?chosen().join('  ·  '):'No numbers selected';$('numberDetails').textContent=active==null?'Select a number to inspect historical frequency and pairings.':details(active,d,c);$('suggestion').textContent=selected.length?details(selected[selected.length-1],d,c):'Select a number to inspect historical co-occurrences.';if(!last||!selected.length)$('checkResult').textContent='Load historical results and select a line to check the latest draw.';else{const match=selected.filter(n=>last.numbers.includes(n));$('checkResult').textContent=match.length+' of '+selected.length+' matched on '+last.date+' ('+(last.draw||'draw unknown')+'): '+(match.join(', ')||'none')+'. This is not a prize determination.'}renderIndependentOdds();renderChosenSetOdds();persistDraft();};
 const details=(n,data,c)=>{if(!data.length)return 'Number '+n+': no historical data loaded.';const pair=Array(81).fill(0);data.filter(r=>r.numbers.includes(n)).forEach(r=>r.numbers.forEach(v=>{if(v!==n)pair[v]++}));const top=Array.from({length:80},(_,i)=>i+1).filter(x=>x!==n).sort((a,b)=>pair[b]-pair[a]||a-b).slice(0,5);return 'Number '+n+': '+c[n]+' appearances / '+data.length+' draws ('+(100*c[n]/data.length).toFixed(1)+'%). Top co-occurrences: '+top.map(x=>x+' ('+pair[x]+')').join(', ')+'. These do not improve future odds.'};
-balls('heatmap',n=>{active=n;render()});balls('builder',n=>{if(selected.includes(n))selected=selected.filter(x=>x!==n);else if(selected.length<Number($('pickSize').value))selected.push(n);render()});
+balls('heatmap',n=>{active=n;render()});balls('builder',n=>{if(selected.includes(n))selected=selected.filter(x=>x!==n);else if(selected.length<Number($('pickSize').value)){selected.push(n);reserveNumbers=reserveNumbers.filter(x=>x!==n)}render()});
 $('window').onchange=render;$('pickSize').onchange=()=>{selected=selected.slice(0,Number($('pickSize').value));render()};
-$('clearLine').onclick=()=>{selected=[];render()};
+$('clearLine').onclick=()=>{selected=[];reserveNumbers=[];ticketRankScores={};ticketOrigin=null;render()};
 $('randomLine').onclick=()=>{const a=Array.from({length:80},(_,i)=>i+1);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}selected=a.slice(0,Number($('pickSize').value));render()};
 $('frequencyLine').onclick=()=>{const c=counts(sample());selected=Array.from({length:80},(_,i)=>i+1).sort((a,b)=>c[b]-c[a]||a-b).slice(0,Number($('pickSize').value));render()};
 $('copyLine').onclick=async()=>{const txt=chosen().join(', ');try{await navigator.clipboard.writeText(txt);$('status').textContent='Copied: '+txt}catch{$('status').textContent='Copy unavailable; selected numbers: '+txt}};
@@ -353,7 +353,11 @@ function updateKenoOdds(){
 function setPickCount(n){
  const size=Number(n);if(!Number.isInteger(size)||size<1||size>10)return;
  $('pickSize').value=String(size);$('oddsPickSize').value=String(size);
- if(selected.length>size)selected=selected.slice(0,size);
+ const outcome=window.KenoTicketTools.resize(selected,reserveNumbers,size,referenceRank());
+ selected=outcome.selected;reserveNumbers=outcome.reserve;
+ const message=$('reductionMessage');
+ if(outcome.removed?.length)message.textContent='Kept the '+selected.length+' highest-ranked numbers by '+(ticketOrigin?.model||'historical time-slot')+' score. Parked '+outcome.removed.length+' for restoration: '+outcome.removed.join(', ')+'. Increase the count to restore them.';
+ else if(outcome.restored?.length)message.textContent='Restored '+outcome.restored.length+' saved-in-reserve numbers: '+outcome.restored.join(', ')+'.';
  for(const button of $('pickCountPills').querySelectorAll('button'))button.setAttribute('aria-pressed',String(Number(button.value)===size));
  updateKenoOdds();render();
 }
@@ -361,7 +365,7 @@ for(let i=1;i<=10;i++){const b=document.createElement('button');b.type='button';
 $('pickSize').addEventListener('change',()=>setPickCount($('pickSize').value));
 $('oddsPickSize').addEventListener('change',()=>setPickCount($('oddsPickSize').value));
 
-for(const id of ['oddsPickSize','oddsStake','oddsMultiplier'])$(id).addEventListener('change',updateKenoOdds);
+for(const id of ['oddsPickSize','oddsStake','oddsMultiplier'])$(id).addEventListener('change',()=>{updateKenoOdds();renderChosenSetOdds();persistDraft()});
 updateKenoOdds();
 
 /* Safari-safe section jumps: use a fixed small offset and no smooth-scroll race. */
