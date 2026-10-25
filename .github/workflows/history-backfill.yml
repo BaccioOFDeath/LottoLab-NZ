@@ -1,0 +1,42 @@
+name: Verified Lotto Archive Backfill
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: Maximum pages inspected in this run
+        required: false
+        default: '100'
+      start:
+        description: Earliest archive month (YYYY-MM); source begins 2018-12
+        required: false
+        default: '2018-12'
+  schedule:
+    - cron: '40 2 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: lottolab-data-writes
+  cancel-in-progress: false
+jobs:
+  verify-and-backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Import only matching historical results
+        run: python scripts/backfill_history.py --limit ${{ inputs.limit || '100' }} --start ${{ inputs.start || '2018-12' }}
+      - name: Verify archive invariants
+        run: python -m unittest discover -s tests -v
+      - name: Commit verified additions
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/draws.json
+          if git diff --cached --quiet; then echo 'No verified additions this run'; exit 0; fi
+          git commit -m 'data: backfill verified historical Lotto draws'
+          git pull --rebase origin main
+          git push
