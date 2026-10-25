@@ -19,7 +19,7 @@ concurrency:
 jobs:
   refresh-keno:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,9 +38,9 @@ jobs:
         run: |
           backfill=0
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] || [ "$GITHUB_EVENT_NAME" = "push" ]; then
-            backfill=300
+            backfill=4000
           elif [ "$GITHUB_EVENT_SCHEDULE" = '40 20 * * *' ]; then
-            backfill=200
+            backfill=300
           fi
           python scripts/update_keno.py --recent-days 7 --backfill-days "$backfill"
       - name: Publish new verified records and dated research lines
