@@ -29,7 +29,7 @@ test('ticket playable numbers and PB are prominent while research-only bonus is 
  await expect(first.locator('.ticket-bonus .ball.bonus')).toBeHidden();
  await first.locator('.ticket-bonus > summary').click();
  await expect(first.locator('.ticket-bonus .ball.bonus')).toBeVisible();
- await expect(first.locator('.pick-extra-label')).toContainText('RESEARCH ONLY');
+ await expect(first.locator('.ticket-bonus .pick-extra-label')).toContainText('RESEARCH ONLY');
  const value=await first.locator('.fixed-pick-numbers .ball').allTextContents();
  const pb=await first.locator('.ticket-power .ball.power').innerText();
  expect(value).toHaveLength(6);expect(pb).toMatch(/^\d\d$/);
