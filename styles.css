@@ -1056,3 +1056,18 @@ html{scroll-padding-top:var(--section-jump-clearance);scroll-behavior:auto}
 .line-maker-link{font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){.build-ball{transform:none!important}}
+
+/* Approved original-render aesthetic, backed by local optimized WebP (not approximated SVG).
+   This still contains no UI text: navigational controls remain native accessible elements. */
+.hero{background-color:#0a2241!important;
+background-image:linear-gradient(90deg,rgba(7,24,48,.47) 0%,rgba(8,26,52,.28) 29%,rgba(12,25,58,.03) 54%,transparent 75%),url('./assets/hero-ai-approved.webp')!important;
+background-position:center,center!important;background-repeat:no-repeat;background-size:cover!important}
+.hero:before{background:radial-gradient(ellipse at 25% 70%,rgba(45,64,161,.12),transparent 55%)!important}
+.hero:after{background:linear-gradient(115deg,transparent 42%,rgba(130,229,255,.07) 59%,transparent 72%)!important}
+@media(min-width:701px) and (max-width:1000px){
+ .hero{background-image:linear-gradient(90deg,rgba(7,25,49,.76),rgba(9,25,57,.48) 42%,rgba(17,31,69,0) 75%),url('./assets/hero-ai-approved.webp')!important}
+}
+@media(max-width:700px){
+ .hero{background-image:linear-gradient(180deg,rgba(8,27,52,.85) 0%,rgba(8,26,54,.49) 23%,rgba(13,26,55,.03) 45%,rgba(9,25,51,.15) 74%,rgba(9,26,56,.79) 100%),url('./assets/hero-ai-approved.webp')!important;
+ background-position:center,94% center!important;background-size:cover,auto 100%!important}
+}
