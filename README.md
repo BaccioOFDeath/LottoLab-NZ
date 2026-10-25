@@ -164,3 +164,12 @@ See [Geo Lab gesture documentation](GEO_LAB.md#pinch-to-zoom-and-map-navigation-
 - Expand **Location research & source quality** for distinct press sources, city-versus-region precision, channel share and an explicitly **incomplete** 12-month report timeline. Every number obeys Geo game/division/channel/region/time filters.
 - Added 2026 Powerball jackpot-winning areas from the official October jackpot summary plus source-checked September/October store and online winner-area reports. The importer is conservative and does not manufacture missing locations.
 - This is *not* 143 tickets from all Lotto NZ wins or a representative sample, and the map's concentration cannot reliably predict future locations without ticket-sales denominators.
+
+
+## Historical backfill and Number World — October 2026
+
+**Historical results:** The live `data/draws.json` now contains at least **108 independently cross-checked draws** (oldest draw #2525, 15 October 2025). A new progressive `.github/workflows/history-backfill.yml` workflow attempts to import older published draws, comparing the full result against independent third-party Lotto archives and rejecting disagreement, bad date, duplicate draw IDs or invalid six-ball/bonus/power combinations. Source links are preserved. The first pass specifically targets **December 2018 onward**, the confirmed coverage of LottoDraw; it is **not** a 1987–present archive. Each scheduled batch has a finite request limit and commits only verified additions. The website's coverage must be read from its actual data, never from the existence of a scheduled workflow. To go back to 1987, historical sources with reliable records and use rights are still needed.
+
+**Spatial Number World:** A new `#numberWorld` interactive 40-ball scene takes inspiration from navigation ideas in the owner's FileStructureMapper projects. Visitors can orbit around a 3D-like floating number sphere, select each ball, inspect the real frequency from the chosen rule-era sample, enable links from observed number-pair appearances, and pause motion. Accessible native number selection and reduced-motion handling are included. This is a light Canvas projection rather than a game engine, and is not a predictor.
+
+**Statistical caution:** The known archive has gaps. Historical records from before Powerball's introduction require `powerball:null` and era-aware validation rather than inventing a Powerball number. A draw's presence never implies a prediction advantage.
