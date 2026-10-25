@@ -10,7 +10,7 @@ const sample=()=>Number($('window').value)?records.slice(-Number($('window').val
 const counts=data=>{const c=Array(81).fill(0);data.forEach(r=>r.numbers.forEach(n=>c[n]++));return c};
 const balls=(id,handler)=>{const root=$(id);root.replaceChildren();for(let n=1;n<=80;n++){const b=document.createElement('button');b.className='ball';b.textContent=n;b.type='button';b.dataset.number=n;b.onclick=()=>handler(n);root.append(b)}};
 const chosen=()=>[...selected].sort((a,b)=>a-b);
-const render=()=>{const d=sample(),c=counts(d),last=latest();$('drawCount').textContent=records.length.toLocaleString();$('dateRange').textContent=records.length?records[0].date+' → '+last.date:'No history';$('latestDraw').textContent=last?last.draw||last.date:'—';if($('latestDateLabel'))$('latestDateLabel').textContent=last?last.date:'No published draws';if($('latestTimeLabel'))$('latestTimeLabel').textContent=last?last.time||'Time unavailable':'—';if($('latestBalls')){const root=$('latestBalls');root.replaceChildren();if(last){last.numbers.forEach(n=>{const b=document.createElement('span');b.textContent=String(n).padStart(2,'0');root.append(b)})}else root.textContent='Historical results have not loaded yet.'}$('status').textContent=records.length?'Loaded '+records.length.toLocaleString()+' distinct verified-format draw records. Imported results must still be checked against their source.':'No verified historical Keno draws have been imported yet. Upload a results CSV to begin.';const rows=records.slice(-30).reverse();$('historyRows').replaceChildren();rows.forEach(r=>{const tr=document.createElement('tr');[r.date,r.draw||'—',r.numbers.join(' · '),r.multiplier||'—'].forEach(t=>{let td=document.createElement('td');td.textContent=t;tr.append(td)});$('historyRows').append(tr)});[...$('heatmap').children].forEach(b=>{const n=Number(b.dataset.number),p=d.length?c[n]/d.length:0;b.style.background=d.length?'hsl('+Math.round(200-160*Math.min(1,p/.4))+' 55% '+Math.round(18+25*Math.min(1,p/.4))+'%)':'';b.title=n+': '+c[n]+' / '+d.length+' draws';b.classList.toggle('selected',active===n)});[...$('builder').children].forEach(b=>b.classList.toggle('selected',selected.includes(Number(b.dataset.number))));$('selection').textContent=selected.length?chosen().join('  ·  '):'No numbers selected';$('numberDetails').textContent=active==null?'Select a number to inspect historical frequency and pairings.':details(active,d,c);$('suggestion').textContent=selected.length?details(selected[selected.length-1],d,c):'Select a number to inspect historical co-occurrences.';if(!last||!selected.length)$('checkResult').textContent='Load historical results and select a line to check the latest draw.';else{const match=selected.filter(n=>last.numbers.includes(n));$('checkResult').textContent=match.length+' of '+selected.length+' matched on '+last.date+' ('+(last.draw||'draw unknown')+'): '+(match.join(', ')||'none')+'. This is not a prize determination.'}};
+const render=()=>{const d=sample(),c=counts(d),last=latest();$('drawCount').textContent=records.length.toLocaleString();$('dateRange').textContent=records.length?records[0].date+' → '+last.date:'No history';$('latestDraw').textContent=last?last.draw||last.date:'—';if($('latestDateLabel'))$('latestDateLabel').textContent=last?last.date:'No published draws';if($('latestTimeLabel'))$('latestTimeLabel').textContent=last?last.time||'Time unavailable':'—';if($('latestBalls')){const root=$('latestBalls');root.replaceChildren();if(last){last.numbers.forEach(n=>{const b=document.createElement('span');b.textContent=String(n).padStart(2,'0');root.append(b)})}else root.textContent='Historical results have not loaded yet.'}$('status').textContent=records.length?'Loaded '+records.length.toLocaleString()+' distinct verified-format draw records. Imported results must still be checked against their source.':'No verified historical Keno draws have been imported yet. Upload a results CSV to begin.';const rows=records.slice(-30).reverse();$('historyRows').replaceChildren();rows.forEach(r=>{const tr=document.createElement('tr');[r.date,r.draw||'—',r.numbers.join(' · '),r.multiplier||'—'].forEach(t=>{let td=document.createElement('td');td.textContent=t;tr.append(td)});$('historyRows').append(tr)});[...$('heatmap').children].forEach(b=>{const n=Number(b.dataset.number),p=d.length?c[n]/d.length:0;b.style.background=d.length?'hsl('+Math.round(200-160*Math.min(1,p/.4))+' 55% '+Math.round(18+25*Math.min(1,p/.4))+'%)':'';b.title=n+': '+c[n]+' / '+d.length+' draws';b.classList.toggle('selected',active===n)});[...$('builder').children].forEach(b=>b.classList.toggle('selected',selected.includes(Number(b.dataset.number))));$('selection').textContent=selected.length?chosen().join('  ·  '):'No numbers selected';$('numberDetails').textContent=active==null?'Select a number to inspect historical frequency and pairings.':details(active,d,c);$('suggestion').textContent=selected.length?details(selected[selected.length-1],d,c):'Select a number to inspect historical co-occurrences.';if(!last||!selected.length)$('checkResult').textContent='Load historical results and select a line to check the latest draw.';else{const match=selected.filter(n=>last.numbers.includes(n));$('checkResult').textContent=match.length+' of '+selected.length+' matched on '+last.date+' ('+(last.draw||'draw unknown')+'): '+(match.join(', ')||'none')+'. This is not a prize determination.'}renderIndependentOdds();};
 const details=(n,data,c)=>{if(!data.length)return 'Number '+n+': no historical data loaded.';const pair=Array(81).fill(0);data.filter(r=>r.numbers.includes(n)).forEach(r=>r.numbers.forEach(v=>{if(v!==n)pair[v]++}));const top=Array.from({length:80},(_,i)=>i+1).filter(x=>x!==n).sort((a,b)=>pair[b]-pair[a]||a-b).slice(0,5);return 'Number '+n+': '+c[n]+' appearances / '+data.length+' draws ('+(100*c[n]/data.length).toFixed(1)+'%). Top co-occurrences: '+top.map(x=>x+' ('+pair[x]+')').join(', ')+'. These do not improve future odds.'};
 balls('heatmap',n=>{active=n;render()});balls('builder',n=>{if(selected.includes(n))selected=selected.filter(x=>x!==n);else if(selected.length<Number($('pickSize').value))selected.push(n);render()});
 $('window').onchange=render;$('pickSize').onchange=()=>{selected=selected.slice(0,Number($('pickSize').value));render()};
@@ -140,6 +140,40 @@ async function refreshKeno(){
  refreshModelAudit();
 }
 
+function renderIndependentOdds(){
+ const target=$('independentOdds');if(!target)return;
+ const engine=window.KenoEmpirical,math=window.KenoMath;
+ if(!engine||!math){$('empiricalCompare').textContent='Odds analysis unavailable: calculation modules did not load.';return}
+ const n=Number($('pickSize').value);
+ const chosenLine=selected.length===n?chosen():[];
+ let observed;
+ try{observed=engine.evaluate(records,chosenLine,n,math.TABLE[n])}
+ catch(e){$('empiricalCompare').textContent='Unable to calculate historical comparison: '+e.message;return}
+ const calculated=math.getStats(n,Number($('oddsStake').value),$('oddsMultiplier').checked);
+ const p=calculated.probabilityOfAnyPrize,ci=observed.interval95;
+ const pct=x=>(x*100).toFixed(2)+'%';
+ const number=x=>new Intl.NumberFormat('en-NZ',{maximumFractionDigits:2}).format(x);
+ $('empiricalChance').textContent=observed.draws?(observed.wins?('1 in '+number(observed.observedOdds)):'0 recorded wins'):'No data';
+ $('empiricalHits').textContent=observed.draws?observed.averageMatches.toFixed(3)+' / '+n:'—';
+ $('empiricalCount').textContent=observed.draws.toLocaleString('en-NZ');
+ const mode=observed.method==='chosen-retrospective'?'your '+n+' chosen numbers':'a fixed '+n+'-number reference line';
+ $('empiricalExplanation').textContent='Analysed '+mode+': '+observed.numbers.join(', ')+
+ '. '+(observed.method==='chosen-retrospective'?'This is an in-sample retrospective check, not a prediction backtest.':
+ 'This reference line was defined independently of these historical outcomes.')+
+ ' Your stake or Multiplier does not change the frequency of matching numbers.';
+ const comparison=$('empiricalCompare');comparison.replaceChildren();
+ const title=document.createElement('strong');title.textContent='LottoLab calculated: '+pct(p)+' (1 in '+number(calculated.oddsOfAnyPrize)+')';
+ const measured=document.createElement('span');
+ if(observed.draws){
+   const inside=ci.lower<=p&&p<=ci.upper;
+   measured.textContent='Historical sample: '+pct(observed.observedPrizeRate)+
+     ' ('+observed.wins+' prize-tier matches in '+number(observed.draws)+' draws); 95% uncertainty interval '+pct(ci.lower)+'–'+pct(ci.upper)+'. '+
+     (inside?'The calculated rate lies within this interval.':
+       'The sample differs from the calculated rate; sampling effects, post-selection bias or data quality may contribute.');
+ }else measured.textContent='No imported draw results are available for comparison yet.';
+ const small=document.createElement('small');small.textContent='Different observed percentages are normal in finite samples. These statistics do not change the odds of future fair draws. Lotto NZ payout tiers determine what counts as a prize.';
+ comparison.append(title,measured,small);
+}
 function updateKenoOdds(){
  const api=window.KenoMath;if(!api||!$('oddsPickSize'))return;
  const n=Number($('oddsPickSize').value),stake=Number($('oddsStake').value),multiplier=$('oddsMultiplier').checked;
