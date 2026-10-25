@@ -3,7 +3,7 @@
    to prevent a previous section occupying the target viewport mid-animation. */
 (()=>{
  'use strict';
- const targets=new Set(['home','results','picker','lineCreator','foreverNumbers','numberChecker','predictions','deepResearch','archive','geo','insights','evidence','numberWorld','universe','powerChartPanel']);
+ const targets=new Set(['home','results','picker','lineCreator','foreverNumbers','numberChecker','combinations','myData','dataHealth','predictions','deepResearch','archive','geo','insights','evidence','numberWorld','universe','powerChartPanel']);
  const header=()=>document.querySelector('.header');
  const deepLab=()=>document.getElementById('deepResearch');
  let jumpId=0;
