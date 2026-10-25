@@ -8,8 +8,10 @@ function validDraw(d){
 }
 const current=require('../data/draws.json');
 const historical=require('../data/legacy-draws.json');
+const prePowerball=require('../data/pre-powerball-staging.json');
 const combined=new Map();
 for(const d of historical.filter(validDraw))combined.set(d.draw,d);
+for(const d of prePowerball.filter(validDraw))combined.set(d.draw,d);
 for(const d of current.filter(validDraw))combined.set(d.draw,d);
 const entries=[...combined.values()].sort((a,b)=>b.draw-a.draw);
 const verified=entries.filter(r=>r.verification==='two-source'&&new Set(r.sources||[]).size>=2).length;
