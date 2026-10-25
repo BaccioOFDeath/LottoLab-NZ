@@ -53,35 +53,36 @@ test('latest results and scorecard load from validated data',async({page})=>{
  await expect(page.locator('#modelLedgerRows tr')).not.toHaveCount(0);
  await expect(page.locator('#modelLedgerRows')).toContainText('Awaiting result');
  await expect(page.locator('#pickerCount')).toContainText('20 of 20');
- await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
 });
-test('20 predictions stay immutable with four-line preview and expansion',async({page})=>{
+test('20 predictions stay immutable across ten-line ticket preview and expansion',async({page})=>{
  await visit(page,'/');
  await expect(page.locator('#pickerCount')).toHaveText('20 of 20 lines locked');
  await expect(page.locator('#pickerGenerate')).toHaveCount(0);
- await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
  const preview=await page.locator('#pickerLines').innerText();
  const expand=page.locator('#pickerExpand');
  await expect(expand).toHaveAttribute('aria-expanded','false');
  await expand.click();
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(20);
+ await expect(page.locator('#pickerLines .lotto-ticket')).toHaveCount(2);
  await expect(expand).toHaveAttribute('aria-expanded','true');
  await expand.click();
- await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
  await page.locator('#pickerMode').selectOption('adaptive_frequency_v1');
- await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
- await expand.click();
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
+ await expect(expand).toBeHidden();
+ await expect(page.locator('#pickerLines .lotto-ticket')).toHaveCount(1);
  await page.locator('#pickerMode').selectOption('random_baseline_v1');
- await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
- await expand.click();
  await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
+ await expect(expand).toBeHidden();
+ await expect(page.locator('#pickerLines .lotto-ticket')).toHaveCount(1);
  await page.locator('#pickerMode').selectOption('all');
  await expect(page.locator('#pickerCopyAll')).toBeEnabled();
  const copy=page.locator('#pickerLines .fixed-pick-line').first().locator('button');
  await expect(copy).toBeEnabled();
  await page.reload();
- await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(4);
+ await expect(page.locator('#pickerLines .fixed-pick-line')).toHaveCount(10);
  expect(await page.locator('#pickerLines').innerText()).toEqual(preview);
 });
 test('archive search filters and inspect number frequencies',async({page})=>{
