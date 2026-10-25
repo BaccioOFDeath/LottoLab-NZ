@@ -584,11 +584,11 @@ test('quick number checker compares latest stored draw without claiming prizes',
  await page.locator('#checkNumbers').fill(entries[0].numbers.join(' '));
  await page.locator('#checkPowerball').fill(String(entries[0].powerball));
  await page.locator('.quick-check-button').click();
- await expect(page.locator('#checkerStatus')).toContainText('6 of 6 main matches');
- await expect(page.locator('#checkerStatus')).toContainText('does not verify a prize');
+ await expect(page.locator('#checkerStatus')).toContainText('6 of 6 main numbers matched');
+ await expect(page.locator('#checkerStatus')).toContainText('not a ticket or prize verification');
  await page.locator('#checkNumbers').fill('1 1 2 3 4 5');
  await page.locator('.quick-check-button').click();
- await expect(page.locator('#checkerStatus')).toContainText('six different Lotto numbers');
+ await expect(page.locator('#checkerStatus')).toContainText('six DIFFERENT Lotto numbers');
 });
 
 test('Location luck analysis compares only sourced reports and labels sales assumptions',async({page})=>{
