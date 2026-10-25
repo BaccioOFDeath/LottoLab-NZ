@@ -181,6 +181,53 @@ function renderRanking(groups){
   list.append(button);
  });
 }
+
+/* Reported-win comparison: usable without inventing per-location ticket sales.
+   Exposure slider is explicitly HYPOTHETICAL, not an actual odds estimate. */
+let comparisonPlaces=[];
+const humanRatio=n=>Number(n.toFixed(2)).toLocaleString('en-NZ',{maximumFractionDigits:2})+'×';
+function updateSalesScenario(){
+ const a=comparisonPlaces.find(x=>x.key===$('geoCompareA').value);
+ const b=comparisonPlaces.find(x=>x.key===$('geoCompareB').value);
+ const slider=$('geoSalesRatio'),ratio=Number(slider.value);
+ $('geoRatioValue').textContent=humanRatio(ratio);
+ if(!a||!b||a.key===b.key){
+  $('geoCompareCountA').textContent=a?a.tickets:'—';
+  $('geoCompareCountB').textContent=b?b.tickets:'—';
+  $('geoBreakEven').textContent='Select two different places with published reports to compare.';
+  $('geoScenarioResult').textContent='No comparable location pair is available for the selected filters.';
+  return;
+ }
+ $('geoCompareCountA').textContent=String(a.tickets);
+ $('geoCompareCountB').textContent=String(b.tickets);
+ const breakEven=a.tickets/b.tickets;
+ $('geoBreakEven').textContent='Break-even sales ratio: '+a.place+' would need '+humanRatio(breakEven)+' as many tickets sold as '+b.place+' for their reported-wins-per-ticket rates to match, assuming equally complete reporting.';
+ const illustrative=breakEven/ratio;
+ const conclusion=Math.abs(illustrative-1)<.015?
+   'the reported-win rates would be approximately equal':
+   a.place+' would show '+humanRatio(illustrative)+' '+(illustrative>1?'the':'the')+' reported wins per assumed ticket compared with '+b.place;
+ $('geoScenarioResult').textContent='Under this hypothetical sales assumption, '+conclusion+'. This does not demonstrate different Lotto odds or predict future winner locations.';
+ $('geoCompareScope').textContent='Scope: '+(state.channel==='all'?'Retail and online winner areas combined':state.channel==='online'?'Online winner areas — not sales locations':'Retail shop towns only')+' · '+(state.game==='all'?'all games':state.game)+' · '+(state.tier==='all'?'all selected prize categories':labelTier[state.tier])+' · published reports through '+(dates[index]||'unknown')+'. Reporting coverage is incomplete.';
+}
+function renderLuckier(){
+ comparisonPlaces=groupPlaces(filtered);
+ const first=comparisonPlaces[0];
+ $('geoTopPlace').textContent=first?first.place:'No reported places for these filters';
+ $('geoTopCount').textContent=first?first.tickets+' published winning ticket'+(first.tickets===1?'':'s')+' · '+(state.channel==='online'?'reported winner area':'not adjusted for ticket sales'):'Try a different map filter or timeline date';
+ const aEl=$('geoCompareA'),bEl=$('geoCompareB');
+ const previousA=aEl.value,previousB=bEl.value;
+ for(const select of [aEl,bEl]){
+  select.replaceChildren();
+  for(const group of comparisonPlaces)select.append(make('option',{value:group.key},group.place+' · '+group.tickets+' reported'));
+ }
+ aEl.value=comparisonPlaces.some(g=>g.key===previousA)?previousA:(comparisonPlaces[0]?.key||'');
+ bEl.value=comparisonPlaces.some(g=>g.key===previousB&&g.key!==aEl.value)?previousB:(comparisonPlaces.find(g=>g.key!==aEl.value)?.key||'');
+ const ready=comparisonPlaces.length>=2;
+ aEl.disabled=!ready;bEl.disabled=!ready;$('geoSalesRatio').disabled=!ready;
+ $('geoNormalized').disabled=!ready;
+ $('geoNormalized').title=ready?'Compare published winner counts under explicitly hypothetical ticket-sales volumes':'Two reported places are needed to compare';
+ updateSalesScenario();
+}
 function renderResearch(rows){
  const tickets=sum(rows),retail=sum(rows.filter(r=>r.channel==='retail')),online=tickets-retail;
  const precisionCity=sum(rows.filter(r=>r.precision==='city'));
@@ -227,7 +274,7 @@ function update(){
  $('geoMapStatus').textContent=filtered.length?sum(filtered)+' tickets in '+groups.length+
    (layer==='regions'?' regions':' mapped places')+' · selected published reports only · not adjusted for tickets sold.':
    'No reports match this filter or timeline position; try another selection.';
- renderPins(groups);drawHeat(groups);renderRanking(groups);renderResearch(filtered);
+ renderPins(groups);drawHeat(groups);renderRanking(groups);renderResearch(filtered);renderLuckier();
  if(selected&&groups.some(g=>g.key===selected))inspect(groups.find(g=>g.key===selected));
  else {selected='';$('geoSelectedTitle').textContent='Explore a hotspot';
  $('geoSelectedDescription').textContent='Tap a map marker or ranked location to inspect a published winner report.';
@@ -410,6 +457,16 @@ function gestures(){
 }
 
 function initialise(){
+ $('geoNormalized').addEventListener('click',()=>{
+  const panel=$('geoScenario');
+  const open=panel.hidden;
+  panel.hidden=!open;
+  $('geoNormalized').setAttribute('aria-expanded',String(open));
+  if(open&&$('geoCompareA').options.length)$('geoCompareA').focus({preventScroll:true});
+ });
+ $('geoCompareA').addEventListener('change',()=>{if($('geoCompareA').value===$('geoCompareB').value){const other=comparisonPlaces.find(g=>g.key!==$('geoCompareA').value);if(other)$('geoCompareB').value=other.key;}updateSalesScenario();});
+ $('geoCompareB').addEventListener('change',()=>{if($('geoCompareB').value===$('geoCompareA').value){const other=comparisonPlaces.find(g=>g.key!==$('geoCompareB').value);if(other)$('geoCompareA').value=other.key;}updateSalesScenario();});
+ $('geoSalesRatio').addEventListener('input',updateSalesScenario);
  $('geoGame').addEventListener('change',e=>{state.game=e.target.value;selected='';update();});
  $('geoTier').addEventListener('change',e=>{state.tier=e.target.value;selected='';update();});
  $('geoChannel').addEventListener('change',e=>{state.channel=e.target.value;selected='';update();});
