@@ -111,3 +111,36 @@ html{scroll-behavior:auto!important}
 .saved-actions button{padding:7px 8px;font-size:11px}
 @media(max-width:650px){.saved-ticket-list{grid-template-columns:1fr}.draw-choice select{min-width:175px}.prediction-card .ticket-bottom .small{max-width:55%}.prediction-actions{justify-content:flex-end}.prediction-actions button{font-size:11px;padding:7px 9px}}
 @media(max-width:390px){.chosen-metrics{gap:6px}.chosen-metrics>div{padding:9px}.chosen-metrics b{font-size:13px}.draw-choice{padding:10px}.draw-choice select{max-width:100%}.saved-line{flex-wrap:wrap}.saved-actions{flex-direction:row}}
+
+
+/* AI-generated Keno hero — official LottoLab artwork, hosted in this repo. */
+.hero{
+  position:relative;
+  background-color:#e9f3ff;
+  background-image:
+    linear-gradient(90deg,rgba(247,251,255,.95) 0%,rgba(247,251,255,.78) 29%,rgba(247,251,255,.18) 51%,rgba(247,251,255,0) 75%),
+    url("./assets/keno-hero-20261026.webp");
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero-inner{position:relative;z-index:1}
+.keno-art{display:none!important}
+@media(max-width:720px){
+  .hero{
+    background-image:
+      linear-gradient(180deg,rgba(247,251,255,.90) 0%,rgba(247,251,255,.72) 26%,rgba(247,251,255,.38) 48%,rgba(247,251,255,.06) 72%,rgba(238,242,255,.30) 100%),
+      url("./assets/keno-hero-20261026.webp");
+    background-size:cover;
+    background-position:62% center;
+  }
+  .hero h1,.hero p,.hero .eyebrow{position:relative;z-index:2}
+  .hero-copy{width:100%}
+  .hero-actions{position:relative;z-index:3}
+}
+@media(max-width:420px){
+  .hero{background-position:64% center}
+  .hero h1{filter:drop-shadow(0 1px 6px rgba(250,253,255,.5))}
+}
