@@ -60,18 +60,18 @@
     {
       "id": "network",
       "name": "Pair network",
-      "description": "Most historical co-appearances across the training draws",
+      "description": "Greedy pair co-occurrence above independent expectation; experimental only",
       "numbers": [
+        1,
+        3,
         10,
-        16,
-        19,
-        25,
+        21,
         30,
-        35,
-        41,
-        52,
+        50,
         55,
-        57
+        60,
+        61,
+        64
       ]
     },
     {
@@ -110,5 +110,6 @@
     }
   ],
   "source": "https://www.lottodraw.co.nz/keno/results-october-25-2026",
-  "note": "Exploratory research only. All sets have equal theoretical odds; created after 10 am on 26 October and eligible only from the 1 pm draw onward."
+  "note": "Created after the 10am 26 Oct draw; eligible for the 1pm, 3pm and 6pm draws only. No model can improve the theoretical odds.",
+  "first_scored_draw": 27913
 }
