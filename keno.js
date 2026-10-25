@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
 const $=id=>document.getElementById(id), base='./data/keno-results.json', key='lottolab-keno-import-v1';
-let records=[],selected=[],active=null,dailyPicks=null;
+let records=[],selected=[],active=null,dailyPicks=null,ticketsExpanded=false;
 const iso=s=>/^\d{4}-\d{2}-\d{2}$/.test(s)&&!Number.isNaN(Date.parse(s+'T12:00:00Z'));
 const sanitize=r=>{if(!r||!iso(String(r.date||'')))return null;let n=Array.isArray(r.numbers)?r.numbers:String(r.numbers||'').trim().split(/[ ;|]+/).map(Number);n=n.map(Number);if(n.length!==20||new Set(n).size!==20||n.some(x=>!Number.isInteger(x)||x<1||x>80))return null;const draw=String(r.draw||'').trim();return {date:String(r.date),draw,time:r.time||"",source:r.source||"",numbers:n.sort((a,b)=>a-b),multiplier:r.multiplier||null};};
 const merge=(a,b)=>{const m=new Map();[...a,...b].forEach(x=>{const r=sanitize(x);if(r)m.set(r.date+'|'+r.draw+'|'+r.numbers.join('-'),r)});return [...m.values()].sort((x,y)=>x.date.localeCompare(y.date)||Number(x.draw||0)-Number(y.draw||0))};
@@ -10,7 +10,7 @@ const sample=()=>Number($('window').value)?records.slice(-Number($('window').val
 const counts=data=>{const c=Array(81).fill(0);data.forEach(r=>r.numbers.forEach(n=>c[n]++));return c};
 const balls=(id,handler)=>{const root=$(id);root.replaceChildren();for(let n=1;n<=80;n++){const b=document.createElement('button');b.className='ball';b.textContent=n;b.type='button';b.dataset.number=n;b.onclick=()=>handler(n);root.append(b)}};
 const chosen=()=>[...selected].sort((a,b)=>a-b);
-const render=()=>{const d=sample(),c=counts(d),last=latest();$('drawCount').textContent=records.length.toLocaleString();$('dateRange').textContent=records.length?records[0].date+' → '+last.date:'No history';$('latestDraw').textContent=last?last.draw||last.date:'—';$('status').textContent=records.length?'Loaded '+records.length.toLocaleString()+' distinct verified-format draw records. Imported results must still be checked against their source.':'No verified historical Keno draws have been imported yet. Upload a results CSV to begin.';const rows=records.slice(-30).reverse();$('historyRows').replaceChildren();rows.forEach(r=>{const tr=document.createElement('tr');[r.date,r.draw||'—',r.numbers.join(' · '),r.multiplier||'—'].forEach(t=>{let td=document.createElement('td');td.textContent=t;tr.append(td)});$('historyRows').append(tr)});[...$('heatmap').children].forEach(b=>{const n=Number(b.dataset.number),p=d.length?c[n]/d.length:0;b.style.background=d.length?'hsl('+Math.round(200-160*Math.min(1,p/.4))+' 55% '+Math.round(18+25*Math.min(1,p/.4))+'%)':'';b.title=n+': '+c[n]+' / '+d.length+' draws';b.classList.toggle('selected',active===n)});[...$('builder').children].forEach(b=>b.classList.toggle('selected',selected.includes(Number(b.dataset.number))));$('selection').textContent=selected.length?chosen().join('  ·  '):'No numbers selected';$('numberDetails').textContent=active==null?'Select a number to inspect historical frequency and pairings.':details(active,d,c);$('suggestion').textContent=selected.length?details(selected[selected.length-1],d,c):'Select a number to inspect historical co-occurrences.';if(!last||!selected.length)$('checkResult').textContent='Load historical results and select a line to check the latest draw.';else{const match=selected.filter(n=>last.numbers.includes(n));$('checkResult').textContent=match.length+' of '+selected.length+' matched on '+last.date+' ('+(last.draw||'draw unknown')+'): '+(match.join(', ')||'none')+'. This is not a prize determination.'}};
+const render=()=>{const d=sample(),c=counts(d),last=latest();$('drawCount').textContent=records.length.toLocaleString();$('dateRange').textContent=records.length?records[0].date+' → '+last.date:'No history';$('latestDraw').textContent=last?last.draw||last.date:'—';if($('latestDateLabel'))$('latestDateLabel').textContent=last?last.date:'No published draws';if($('latestTimeLabel'))$('latestTimeLabel').textContent=last?last.time||'Time unavailable':'—';if($('latestBalls')){const root=$('latestBalls');root.replaceChildren();if(last){last.numbers.forEach(n=>{const b=document.createElement('span');b.textContent=String(n).padStart(2,'0');root.append(b)})}else root.textContent='Historical results have not loaded yet.'}$('status').textContent=records.length?'Loaded '+records.length.toLocaleString()+' distinct verified-format draw records. Imported results must still be checked against their source.':'No verified historical Keno draws have been imported yet. Upload a results CSV to begin.';const rows=records.slice(-30).reverse();$('historyRows').replaceChildren();rows.forEach(r=>{const tr=document.createElement('tr');[r.date,r.draw||'—',r.numbers.join(' · '),r.multiplier||'—'].forEach(t=>{let td=document.createElement('td');td.textContent=t;tr.append(td)});$('historyRows').append(tr)});[...$('heatmap').children].forEach(b=>{const n=Number(b.dataset.number),p=d.length?c[n]/d.length:0;b.style.background=d.length?'hsl('+Math.round(200-160*Math.min(1,p/.4))+' 55% '+Math.round(18+25*Math.min(1,p/.4))+'%)':'';b.title=n+': '+c[n]+' / '+d.length+' draws';b.classList.toggle('selected',active===n)});[...$('builder').children].forEach(b=>b.classList.toggle('selected',selected.includes(Number(b.dataset.number))));$('selection').textContent=selected.length?chosen().join('  ·  '):'No numbers selected';$('numberDetails').textContent=active==null?'Select a number to inspect historical frequency and pairings.':details(active,d,c);$('suggestion').textContent=selected.length?details(selected[selected.length-1],d,c):'Select a number to inspect historical co-occurrences.';if(!last||!selected.length)$('checkResult').textContent='Load historical results and select a line to check the latest draw.';else{const match=selected.filter(n=>last.numbers.includes(n));$('checkResult').textContent=match.length+' of '+selected.length+' matched on '+last.date+' ('+(last.draw||'draw unknown')+'): '+(match.join(', ')||'none')+'. This is not a prize determination.'}};
 const details=(n,data,c)=>{if(!data.length)return 'Number '+n+': no historical data loaded.';const pair=Array(81).fill(0);data.filter(r=>r.numbers.includes(n)).forEach(r=>r.numbers.forEach(v=>{if(v!==n)pair[v]++}));const top=Array.from({length:80},(_,i)=>i+1).filter(x=>x!==n).sort((a,b)=>pair[b]-pair[a]||a-b).slice(0,5);return 'Number '+n+': '+c[n]+' appearances / '+data.length+' draws ('+(100*c[n]/data.length).toFixed(1)+'%). Top co-occurrences: '+top.map(x=>x+' ('+pair[x]+')').join(', ')+'. These do not improve future odds.'};
 balls('heatmap',n=>{active=n;render()});balls('builder',n=>{if(selected.includes(n))selected=selected.filter(x=>x!==n);else if(selected.length<Number($('pickSize').value))selected.push(n);render()});
 $('window').onchange=render;$('pickSize').onchange=()=>{selected=selected.slice(0,Number($('pickSize').value));render()};
@@ -66,31 +66,46 @@ const formatDay=s=>{const [y,m,d]=s.split('-').map(Number);return new Intl.DateT
 const copyText=async text=>{try{await navigator.clipboard.writeText(text);return true}catch{return false}};
 function renderPredictions(){
  const list=$('suggestedLines'), meta=$('picksMeta'), intro=$('picksIntro'),date=$('picksDate'),score=$('dailyScore');
- if(!list)return;list.replaceChildren();
- if(!dailyPicks||!Array.isArray(dailyPicks.models)||!dailyPicks.models.length){list.textContent='No dated Keno research selections have been published yet.';meta.textContent='Awaiting validated daily selection file';score.textContent='No daily model performance can be calculated without a published selection.';return}
- if(date)date.textContent='Research lines for '+formatDay(dailyPicks.date);
- const today=nzDate();
- const aged=dailyPicks.date!==today;
- const eligible=Number(dailyPicks.first_scored_draw||0);
- const countEligible=records.filter(r=>r.date===dailyPicks.date&&(!eligible||Number(r.draw)>=eligible));
- intro.textContent=(aged?'These are the most recently published selections, not fresh picks for today. ':'')+'Dated model selections using '+(dailyPicks.training_draws||'?')+' earlier results. All valid 10-number lines have equal mathematical odds; models are research experiments only.';
- meta.textContent='Saved '+new Date(dailyPicks.created_at).toLocaleString('en-NZ',{timeZone:'Pacific/Auckland',dateStyle:'medium',timeStyle:'short'})+' NZT · eligible from '+(dailyPicks.eligible_from||'publication')+' · historical sample '+dailyPicks.training_draws;
- const recordSets=countEligible.map(r=>({draw:r.draw,ns:new Set(r.numbers)}));
+ if(!list)return;
+ list.replaceChildren();list.dataset.expanded=String(ticketsExpanded);
+ const toggle=$('togglePicks');
+ if(toggle){toggle.textContent=ticketsExpanded?'Show fewer tickets ↑':'View all 6 tickets ↓';toggle.setAttribute('aria-expanded',String(ticketsExpanded));toggle.onclick=()=>{ticketsExpanded=!ticketsExpanded;list.dataset.expanded=String(ticketsExpanded);toggle.textContent=ticketsExpanded?'Show fewer tickets ↑':'View all 6 tickets ↓';toggle.setAttribute('aria-expanded',String(ticketsExpanded))}}
+ if(!dailyPicks||!Array.isArray(dailyPicks.models)||!dailyPicks.models.length){list.textContent='Dated Keno research tickets have not yet been published.';meta.textContent='Awaiting selections';score.textContent='No draw record or historical model performance is claimed without published selections.';if(toggle)toggle.hidden=true;return}
+ if(toggle)toggle.hidden=dailyPicks.models.length<=2;
+ const stale=dailyPicks.date!==nzDate(), eligible=Number(dailyPicks.first_scored_draw||0);
+ if(date)date.textContent=(stale?'MOST RECENT POSTED · ':'DAILY RESEARCH · ')+formatDay(dailyPicks.date).toUpperCase();
+ const valid=records.filter(r=>r.date===dailyPicks.date&&(!eligible||Number(r.draw)>=eligible));
+ const sets=valid.map(r=>({draw:r.draw,ns:new Set(r.numbers)}));
+ intro.textContent=(stale?'These are the last published tickets, NOT new selections for today. ':'')+
+ 'Each ticket highlights its ten numbers on the full 1–80 Keno grid. '+
+ 'Models use earlier results and have exactly the same theoretical draw probability as random picks.';
+ meta.textContent='Published '+new Date(dailyPicks.created_at).toLocaleString('en-NZ',{timeZone:'Pacific/Auckland',dateStyle:'medium',timeStyle:'short'})+
+ ' NZT · '+(dailyPicks.training_draws||'—')+' training draws · eligible from '+(dailyPicks.eligible_from||'publication');
  dailyPicks.models.forEach((m,i)=>{
-  const card=document.createElement('article');card.className='prediction-card'+(m.id==='random'?' control':'');
-  const index=document.createElement('div');index.className='ticket-number';index.textContent='TICKET '+String(i+1).padStart(2,'0')+(m.id==='random'?' · CONTROL':' · MODEL');
-  const title=document.createElement('h3');title.textContent=m.name;const sub=document.createElement('div');sub.className='subtitle';sub.textContent=m.description||'Historical research selection';
-  const balls=document.createElement('div');balls.className='prediction-balls';const numbers=Array.isArray(m.numbers)?m.numbers:[];
-  numbers.forEach(n=>{const b=document.createElement('span');b.textContent=String(n).padStart(2,'0');balls.append(b)});
-  const bottom=document.createElement('footer'), stats=document.createElement('div');stats.className='small';
-  if(recordSets.length){const matches=recordSets.map(r=>numbers.filter(n=>r.ns.has(n)).length);const sum=matches.reduce((a,b)=>a+b,0);const chip=document.createElement('span');chip.className='score-chip';chip.textContent=(sum/matches.length).toFixed(2)+' avg matches';stats.append(chip);stats.append(document.createTextNode(' '+matches.length+' draws'))}
-  else stats.textContent='Awaiting next eligible draw';
-  const use=document.createElement('button');use.type='button';use.textContent='Use numbers';use.setAttribute('aria-label','Load '+m.name+' numbers into ticket builder');
-  use.onclick=()=>{selected=[...numbers];$('pickSize').value=String(numbers.length);render();document.getElementById('builder').scrollIntoView({behavior:'smooth',block:'center'})};
-  bottom.append(stats,use);card.append(index,title,sub,balls,bottom);list.append(card);
+  const numbers=Array.isArray(m.numbers)?m.numbers.map(Number):[];
+  const chosenSet=new Set(numbers);
+  if(numbers.length!==10||chosenSet.size!==10||numbers.some(n=>!Number.isInteger(n)||n<1||n>80))return;
+  const card=document.createElement('article');card.className='prediction-card'+(m.id==='random'?' control':'');card.setAttribute('aria-label',m.name+' Keno number ticket');
+  const head=document.createElement('div');head.className='ticket-header';
+  const block=document.createElement('div');const ticketTag=document.createElement('div');ticketTag.className='ticket-number';ticketTag.textContent='KENO TICKET '+String(i+1).padStart(2,'0')+(m.id==='random'?' · CONTROL':'');
+  const title=document.createElement('h3');title.textContent=m.name;
+  const sub=document.createElement('p');sub.className='subtitle';sub.textContent=m.description||'Historical research selection';
+  block.append(ticketTag,title,sub);const badge=document.createElement('div');badge.className='ticket-meta';badge.textContent='10 / 80';head.append(block,badge);
+  const sheet=document.createElement('div');sheet.className='ticket-sheet';
+  const top=document.createElement('div');top.className='ticket-topline';const name=document.createElement('span');name.textContent='LOTTOLAB KENO · NZ';const count=document.createElement('span');count.textContent='MARKED: 10';top.append(name,count);
+  const grid=document.createElement('div');grid.className='ticket-grid';grid.setAttribute('aria-label','Numbers 1 to 80; marked numbers: '+numbers.slice().sort((a,b)=>a-b).join(', '));
+  for(let n=1;n<=80;n++){const cell=document.createElement('span');cell.className='ticket-cell'+(chosenSet.has(n)?' hit':'');cell.textContent=String(n).padStart(2,'0');grid.append(cell)}
+  const sheetBottom=document.createElement('div');sheetBottom.className='ticket-sheet-footer';const f1=document.createElement('span');f1.textContent='1—80 KENO';const f2=document.createElement('span');f2.textContent='TEN NUMBERS PICKED';sheetBottom.append(f1,f2);sheet.append(top,grid,sheetBottom);
+  const footer=document.createElement('div');footer.className='ticket-bottom';const stats=document.createElement('div');stats.className='small';
+  if(sets.length){const values=sets.map(r=>numbers.filter(n=>r.ns.has(n)).length);const average=values.reduce((a,b)=>a+b,0)/sets.length;const chip=document.createElement('span');chip.className='score-chip';chip.textContent=average.toFixed(2)+' avg matches';stats.append(chip);stats.append(document.createTextNode(' · '+sets.length+' scored draw'+(sets.length===1?'':'s')))}
+  else stats.textContent='Not yet scored · awaiting eligible draw';
+  const use=document.createElement('button');use.className='use-ticket';use.type='button';use.textContent='Use ticket ↗';use.setAttribute('aria-label','Load '+m.name+' into Keno line builder');
+  use.onclick=()=>{selected=numbers.slice();setPickCount(numbers.length);render();$('builderPanel')?.scrollIntoView({behavior:'smooth',block:'start'})};
+  footer.append(stats,use);card.append(head,sheet,footer);list.append(card);
  });
- score.textContent=countEligible.length?'Verified results for '+countEligible.length+' eligible draw(s) are now compared above. Expected matches for each 10-number line: 2.5 per draw.':'No eligible draw results available yet. Today’s selections are eligible for subsequent draws only; earlier draws never count as model successes.';
- $('copyAllPicks').onclick=async()=>{const content=dailyPicks.models.map((m,i)=>String(i+1)+'. '+m.name+': '+m.numbers.join(', ')).join('\n');const okay=await copyText('LottoLab Keno '+dailyPicks.date+'\n'+content);$('status').textContent=okay?'Copied all published model lines.':'Copy not available in this browser.'};
+ score.textContent=sets.length?'Results are now available for '+sets.length+' eligible draw(s). The score shown on each ticket uses only results after its publication.':
+ 'No eligible draw results are available for these research tickets yet. Earlier draws are excluded from scoring.';
+ $('copyAllPicks').onclick=async()=>{const copy='LottoLab Keno tickets '+dailyPicks.date+'\n'+dailyPicks.models.map((m,i)=>'Ticket '+(i+1)+' · '+m.name+': '+m.numbers.join(', ')).join('\n');$('status').textContent=(await copyText(copy))?'All Keno ticket numbers copied.':'Copy unavailable on this browser.'};
 }
 async function refreshModelAudit(){
  const target=$('modelAudit');if(!target)return;
@@ -147,6 +162,17 @@ function updateKenoOdds(){
   $('oddsDisclaimer').textContent='Official Keno paytable effective 23 October 2025. '+(multiplier?'Multiplier doubles the ticket cost; values shown are standard prizes before any random multiplier. Expected net uses an approximate multiplier-weighted return. ':'')+'Expected return assumes fair independent draws. Estimated net return includes ticket cost but excludes high-tier prize-cap adjustments. Stakes change cost and payout, never the draw probability.';
  }catch(e){$('oddsDisclaimer').textContent=e.message}
 }
+function setPickCount(n){
+ const size=Number(n);if(!Number.isInteger(size)||size<1||size>10)return;
+ $('pickSize').value=String(size);$('oddsPickSize').value=String(size);
+ if(selected.length>size)selected=selected.slice(0,size);
+ for(const button of $('pickCountPills').querySelectorAll('button'))button.setAttribute('aria-pressed',String(Number(button.value)===size));
+ updateKenoOdds();render();
+}
+for(let i=1;i<=10;i++){const b=document.createElement('button');b.type='button';b.textContent=i;b.value=i;b.setAttribute('aria-pressed',String(i===10));b.onclick=()=>setPickCount(i);$('pickCountPills').append(b)}
+$('pickSize').addEventListener('change',()=>setPickCount($('pickSize').value));
+$('oddsPickSize').addEventListener('change',()=>setPickCount($('oddsPickSize').value));
+
 for(const id of ['oddsPickSize','oddsStake','oddsMultiplier'])$(id).addEventListener('change',updateKenoOdds);
 updateKenoOdds();
 
