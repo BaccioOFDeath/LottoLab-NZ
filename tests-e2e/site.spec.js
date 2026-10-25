@@ -635,13 +635,13 @@ test('new orbit hero has no misleading fake-button chips and primary links work'
   const cs=getComputedStyle(e);
   return {bg:cs.backgroundImage,rect:e.getBoundingClientRect().toJSON(),width:document.documentElement.scrollWidth};
  });
- expect(mobile.bg).toContain('hero-orbits-mobile.svg');
+ expect(mobile.bg).toContain('hero-ai-approved-mobile.webp');
  expect(mobile.width).toBeLessThanOrEqual(391);
  await page.locator('.hero-actions a[href="#picker"]').click();
  await expect(page).toHaveURL(/#picker$/);
  await page.setViewportSize({width:1440,height:900});
  const desktop=await page.locator('.hero').evaluate(e=>getComputedStyle(e).backgroundImage);
- expect(desktop).toContain('hero-orbits.svg');
+ expect(desktop).toContain('hero-ai-approved.webp');
 });
 
 test('My Lotto line creator ranks historical co-occurrences and permits any six distinct balls',async({page})=>{
