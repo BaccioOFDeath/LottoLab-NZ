@@ -881,7 +881,7 @@ html{scroll-padding-top:var(--section-jump-clearance);scroll-behavior:auto}
  position:relative;
  isolation:isolate;
  background-color:#0c2345!important;
- background-image:linear-gradient(90deg,rgba(7,26,48,.93) 0%,rgba(10,32,62,.91) 24%,rgba(16,34,69,.66) 45%,rgba(16,32,65,.10) 68%,rgba(23,29,68,.04) 100%),url('./assets/hero-orbits.svg')!important;
+ background-image:linear-gradient(90deg,rgba(7,26,48,.94) 0%,rgba(8,27,53,.84) 27%,rgba(11,30,62,.37) 46%,rgba(14,27,67,0) 62%,rgba(18,26,68,0) 100%),url('./assets/hero-orbits.svg')!important;
  background-repeat:no-repeat,no-repeat;
  background-position:center,center center;
  background-size:cover,cover;
@@ -932,7 +932,7 @@ html{scroll-padding-top:var(--section-jump-clearance);scroll-behavior:auto}
 .hero-art,.hero-universe-link,.hero-chips{display:none!important}
 /* On narrower desktop layouts, protect headline contrast from luminous balls. */
 @media(min-width:701px) and (max-width:1000px){
- .hero{background-position:center,55% center;background-image:linear-gradient(90deg,rgba(7,27,49,.97),rgba(9,28,57,.90) 39%,rgba(17,32,69,.37) 80%),url('./assets/hero-orbits.svg')!important}
+ .hero{background-position:center,55% center;background-image:linear-gradient(90deg,rgba(7,27,49,.93),rgba(9,28,57,.73) 34%,rgba(17,32,69,.13) 72%),url('./assets/hero-orbits.svg')!important}
  .hero-grid{min-height:415px!important}
  .hero-copy{max-width:62%!important;padding:39px 0!important}
  .hero h1{font-size:clamp(44px,6.5vw,62px)!important}
@@ -942,7 +942,7 @@ html{scroll-padding-top:var(--section-jump-clearance);scroll-behavior:auto}
 /* Mobile: designed illustrated band between the promise and the two functional buttons. */
 @media(max-width:700px){
  .hero{
-  background-image:linear-gradient(180deg,rgba(9,29,56,.78) 0%,rgba(12,32,67,.30) 29%,rgba(21,27,69,.03) 50%,rgba(11,31,63,.35) 75%,rgba(10,27,58,.85) 100%),url('./assets/hero-orbits-mobile.svg')!important;
+  background-image:linear-gradient(180deg,rgba(9,29,56,.73) 0%,rgba(12,32,67,.25) 22%,rgba(21,27,69,0) 36%,rgba(11,31,63,0) 70%,rgba(10,27,58,.86) 100%),url('./assets/hero-orbits-mobile.svg')!important;
   background-position:center,center center!important;
   background-size:cover,cover!important;
  }
