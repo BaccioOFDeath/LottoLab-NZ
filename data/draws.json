@@ -1956,5 +1956,100 @@
       "https://www.lottodraw.co.nz/lotto/results-november-1-2025",
       "https://app.nz-lotto.com/loto-statistics/results/mylotto-2530"
     ]
+  },
+  {
+    "draw": 2529,
+    "date": "2025-10-29",
+    "numbers": [
+      4,
+      13,
+      14,
+      24,
+      30,
+      33
+    ],
+    "bonus": 38,
+    "powerball": 2,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-29-2025",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2529"
+    ]
+  },
+  {
+    "draw": 2528,
+    "date": "2025-10-25",
+    "numbers": [
+      3,
+      20,
+      22,
+      24,
+      36,
+      37
+    ],
+    "bonus": 19,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-25-2025",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2528"
+    ]
+  },
+  {
+    "draw": 2527,
+    "date": "2025-10-22",
+    "numbers": [
+      3,
+      9,
+      12,
+      15,
+      31,
+      37
+    ],
+    "bonus": 39,
+    "powerball": 6,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-22-2025",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2527"
+    ]
+  },
+  {
+    "draw": 2526,
+    "date": "2025-10-18",
+    "numbers": [
+      10,
+      20,
+      26,
+      32,
+      33,
+      37
+    ],
+    "bonus": 29,
+    "powerball": 2,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-18-2025",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2526"
+    ]
+  },
+  {
+    "draw": 2525,
+    "date": "2025-10-15",
+    "numbers": [
+      12,
+      14,
+      15,
+      17,
+      38,
+      40
+    ],
+    "bonus": 19,
+    "powerball": 5,
+    "verification": "two-source",
+    "sources": [
+      "https://www.lottodraw.co.nz/lotto/results-october-15-2025",
+      "https://app.nz-lotto.com/loto-statistics/results/mylotto-2525"
+    ]
   }
 ]
