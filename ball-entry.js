@@ -8,7 +8,7 @@ const STORAGE='lottolab:ball-entry-draft:v1:';
 const SAVED='lottolab:checked-lines:v1';
 const pad=n=>String(n).padStart(2,'0');
 function readSix(text){
- const tokens=String(text||'').trim().split(/[\s,;|/-]+/).filter(Boolean);
+ const tokens=String(text||'').trim().split(/[\s,;|\/-]+/).filter(Boolean);
  if(tokens.length!==6||tokens.some(t=>!/^\d{1,2}$/.test(t)))return null;
  const n=tokens.map(Number);
  return n.every(x=>x>=1&&x<=40)&&new Set(n).size===6?n:null;
@@ -43,17 +43,12 @@ function wire(id,containerId,labelId){
   const help=parent.querySelector('p');
   if(help)help.textContent='Enter one number per ball, or use the full-line paste option.';
  }
- parent.insertBefore(grid,pasteBox);parent.insertBefore(tip,pasteBox);parent.insertBefore(pasteBox,parent.children[parent.children.length-1]||null);
- // For the quick checker, both grid and paste controls must stay before the PB / Submit row.
- if(containerId==='checkNumbers'){
-  const bottom=parent.querySelector('.quick-check-bottom');
-  if(bottom){parent.insertBefore(grid,bottom);parent.insertBefore(tip,bottom);parent.insertBefore(pasteBox,bottom);}
- }
- // For the historical checker, the source input sits between its label and helper paragraph.
- if(containerId==='checkerNumbers'){
-  const help=parent.querySelector('p');
-  if(help){parent.insertBefore(grid,help);parent.insertBefore(tip,help);parent.insertBefore(pasteBox,help);}
- }
+ // The original input was directly after the primary label in both checker forms.
+ // Insert the new fields at its previous location, keeping the existing form controls.
+ const insertion=containerId==='checkNumbers'?parent.querySelector('.quick-check-bottom'):parent.querySelector('p');
+ parent.insertBefore(grid,insertion);
+ parent.insertBefore(tip,insertion);
+ parent.insertBefore(pasteBox,insertion);
  let syncing=false;
  function readCells(){return inputs.map(el=>el.value.trim());}
  function setCells(values){
