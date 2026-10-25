@@ -30,7 +30,7 @@ const nav=hub.querySelector('#cleanCategoryNav'),panels=hub.querySelector('#clea
 const paneMap=new Map(),buttonMap=new Map(),tools=new Map();
 for(const [key,title,hint,icon] of categories){
  const btn=document.createElement('button');btn.type='button';btn.className='clean-category';
- btn.dataset.category=key;btn.setAttribute('aria-pressed','false');btn.setAttribute('aria-controls','cleanPanel-'+key);
+ btn.id='tool-'+key;btn.dataset.category=key;btn.setAttribute('aria-pressed','false');btn.setAttribute('aria-controls','cleanPanel-'+key);
  const symbol=document.createElement('span');symbol.className='clean-category-icon';symbol.textContent=icon;symbol.setAttribute('aria-hidden','true');
  const label=document.createElement('span');label.className='clean-category-copy';
  const strong=document.createElement('strong');strong.textContent=title;const small=document.createElement('small');small.textContent=hint;label.append(strong,small);
