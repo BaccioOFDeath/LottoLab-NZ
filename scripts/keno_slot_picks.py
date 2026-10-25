@@ -57,7 +57,8 @@ def build_models(train,slot,draw_number):
     # Paired lag-one transitions across consecutive draws of the SAME time slot.
     lag_occ=Counter()
     lag_total=Counter()
-    for previous,current in zip(nslot[-700:-1],nslot[-699:]):
+    historical_pairs = nslot[-700:]
+    for previous,current in zip(historical_pairs, historical_pairs[1:]):
         for predecessor in previous["numbers"]:
             lag_total[predecessor]+=1
             for following in current["numbers"]:
