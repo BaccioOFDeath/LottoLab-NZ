@@ -19,7 +19,7 @@ function render(){
   const display=expanded?shown:shown.slice(0,4);
   const list=el('pickerLines');list.replaceChildren();
   for(const [index,p] of display.entries()){
-    const row=document.createElement('div');row.className='fixed-pick-line';
+    const row=document.createElement('div');row.className='fixed-pick-line';row.setAttribute('role','group');row.setAttribute('aria-label','Lotto ticket line '+(frozen.indexOf(p)+1));
     const name=document.createElement('div');name.className='fixed-pick-name';
     const number=document.createElement('strong');number.textContent='Line '+String(frozen.indexOf(p)+1).padStart(2,'0');
     const method=document.createElement('small');method.textContent=(modeLabels[p.model]||p.model)+' · slot '+slot(p);
@@ -27,23 +27,25 @@ function render(){
     const nums=document.createElement('div');nums.className='fixed-pick-numbers';
     for(const n of p.numbers){const b=document.createElement('span');b.className='ball';b.textContent=fmt(n);nums.append(b)}
     const extras=document.createElement('div');extras.className='fixed-pick-extras';
+    const power=document.createElement('div');power.className='pick-extra ticket-power';
+    const powerLabel=document.createElement('span');powerLabel.className='pick-extra-label';powerLabel.textContent='PB';
+    powerLabel.title='Powerball ticket selection';
+    const powerCircle=document.createElement('span');powerCircle.className='ball power';powerCircle.textContent=fmt(p.powerball);
+    power.append(powerLabel,powerCircle);extras.append(power);
+    // The Bonus ball is a research-only forecast, NOT a seventh ticket choice.
+    // Keep it available under a native disclosure, never inline with playable balls.
+    const research=document.createElement('details');research.className='ticket-bonus';
+    const researchToggle=document.createElement('summary');researchToggle.textContent='Bonus forecast (research only)';
     const bonus=document.createElement('div');bonus.className='pick-extra';
     const bonusLabel=document.createElement('span');bonusLabel.className='pick-extra-label';
     bonusLabel.textContent='BONUS · RESEARCH ONLY';
     const bonusCircle=document.createElement('span');bonusCircle.className='ball bonus';
     bonusCircle.textContent=p.bonus_prediction==null?'—':fmt(p.bonus_prediction);
-    bonusCircle.title='Bonus is a seventh drawn ball, not a ticket selection. Research-only forecast added '+(p.bonus_prediction_created_at||'when available');
-    bonus.append(bonusLabel,bonusCircle);
-    const power=document.createElement('div');power.className='pick-extra';
-    const powerLabel=document.createElement('span');powerLabel.className='pick-extra-label';
-    powerLabel.textContent='POWERBALL';
-    const powerCircle=document.createElement('span');powerCircle.className='ball power';
-    powerCircle.textContent=fmt(p.powerball);
-    power.append(powerLabel,powerCircle);
-    extras.append(bonus,power);
+    bonusCircle.title='Bonus is drawn separately and is not a ticket selection. Research-only forecast added '+(p.bonus_prediction_created_at||'when available');
+    bonus.append(bonusLabel,bonusCircle);research.append(researchToggle,bonus);
     const button=document.createElement('button');button.type='button';button.className='fixed-copy btn btn-export';button.textContent='Copy';button.setAttribute('aria-label','Copy line '+(frozen.indexOf(p)+1));
     button.addEventListener('click',()=>copy(formatLine(p),button));
-    row.append(name,nums,extras,button);list.appendChild(row);
+    row.append(name,button,nums,extras,research);list.appendChild(row);
   }
   el('pickerStatus').textContent='Showing '+display.length+' of '+shown.length+' locked lines · same numbers for every visitor.';
   const expand=el('pickerExpand');expand.hidden=shown.length<=4;expand.disabled=false;
