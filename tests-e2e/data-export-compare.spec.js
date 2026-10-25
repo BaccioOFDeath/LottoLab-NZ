@@ -1,5 +1,20 @@
 const {test,expect}=require('@playwright/test');
 const fs=require('fs');
+
+function zipNames(bytes){
+ const end=bytes.length-22;
+ expect(bytes.readUInt32LE(end)).toBe(0x06054b50);
+ const count=bytes.readUInt16LE(end+10),names=[],central=bytes.readUInt32LE(end+16);
+ let pos=central;
+ for(let i=0;i<count;i++){
+  expect(bytes.readUInt32LE(pos)).toBe(0x02014b50);
+  const nameLength=bytes.readUInt16LE(pos+28),extra=bytes.readUInt16LE(pos+30),comment=bytes.readUInt16LE(pos+32);
+  names.push(bytes.subarray(pos+46,pos+46+nameLength).toString('utf8'));
+  pos+=46+nameLength+extra+comment;
+ }
+ return names;
+}
+
 async function start(page){
  await page.goto('/');
  await page.locator('#deepResearch').evaluate(el=>el.open=true);
@@ -43,15 +58,15 @@ test('all-data ZIP contains CSV series and manifests, user data is optional',asy
  expect(download.suggestedFilename()).toMatch(/\.zip$/);
  const bytes=fs.readFileSync(await download.path());
  expect(bytes.readUInt32LE(0)).toBe(0x04034b50);
- const content=bytes.toString('latin1');
- for(const filename of ['lotto_draw_history.csv','historical_combinations_5_numbers.csv','dataset_coverage_manifest.csv','geo_winners.csv','model_picks.csv','README_data_notes.txt'])
-  expect(content).toContain(filename);
- expect(content).not.toContain('my_saved_lines_private.csv');
+ const entries=zipNames(bytes);
+ for(const filename of ['lotto_draw_history.csv','historical_combinations_5_numbers.csv','dataset_coverage_manifest.csv','geo_winners.csv','model_picks.csv','nz_outline.csv','README_data_notes.txt'])
+  expect(entries).toContain(filename);
+ expect(entries).not.toContain('my_saved_lines_private.csv');
  await page.locator('#exportLocal').check();
  const withPrivate=page.waitForEvent('download');
  await page.locator('#exportAll').click();
  const privateZip=await withPrivate;
- expect(fs.readFileSync(await privateZip.path()).toString('latin1')).toContain('my_saved_lines_private.csv');
+ expect(zipNames(fs.readFileSync(await privateZip.path()))).toContain('my_saved_lines_private.csv');
 });
 test('quick compare always reports incomplete and duplicate balls; successful check is saved',async({page})=>{
  await page.setViewportSize({width:390,height:844});
