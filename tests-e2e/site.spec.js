@@ -1,4 +1,17 @@
-const entries=require('../data/draws.json');
+// Match the website's validated merge: historical one-source rows first, recent verified rows take priority.
+function validDraw(d){
+ return Number.isInteger(d.draw)&&/^\d{4}-\d{2}-\d{2}$/.test(d.date)
+ &&Array.isArray(d.numbers)&&d.numbers.length===6&&new Set(d.numbers).size===6
+ &&d.numbers.every(n=>Number.isInteger(n)&&n>=1&&n<=40)
+ &&Number.isInteger(d.bonus)&&d.bonus>=1&&d.bonus<=40&&!d.numbers.includes(d.bonus)
+ &&((d.date<'2001-02-01'&&d.powerball===null)||(Number.isInteger(d.powerball)&&d.powerball>=1&&d.powerball<=(d.date>='2026-09-16'?14:10)));
+}
+const current=require('../data/draws.json');
+const historical=require('../data/legacy-draws.json');
+const combined=new Map();
+for(const d of historical.filter(validDraw))combined.set(d.draw,d);
+for(const d of current.filter(validDraw))combined.set(d.draw,d);
+const entries=[...combined.values()].sort((a,b)=>b.draw-a.draw);
 const verified=entries.filter(r=>r.verification==='two-source'&&new Set(r.sources||[]).size>=2).length;
 const report=require('../data/model-performance.json');
 const {test,expect}=require('@playwright/test');
