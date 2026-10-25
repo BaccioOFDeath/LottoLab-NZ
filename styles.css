@@ -1068,6 +1068,6 @@ background-position:center,center!important;background-repeat:no-repeat;backgrou
  .hero{background-image:linear-gradient(90deg,rgba(7,25,49,.76),rgba(9,25,57,.48) 42%,rgba(17,31,69,0) 75%),url('./assets/hero-ai-approved.webp')!important}
 }
 @media(max-width:700px){
- .hero{background-image:linear-gradient(180deg,rgba(8,27,52,.85) 0%,rgba(8,26,54,.49) 23%,rgba(13,26,55,.03) 45%,rgba(9,25,51,.15) 74%,rgba(9,26,56,.79) 100%),url('./assets/hero-ai-approved.webp')!important;
- background-position:center,94% center!important;background-size:cover,auto 100%!important}
+ .hero{background-image:linear-gradient(180deg,rgba(8,27,52,.85) 0%,rgba(8,26,54,.49) 23%,rgba(13,26,55,.03) 45%,rgba(9,25,51,.15) 74%,rgba(9,26,56,.79) 100%),url('./assets/hero-ai-approved-mobile.webp')!important;
+ background-position:center,center!important;background-size:cover,cover!important}
 }
