@@ -13,10 +13,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./keno-v2.css?v=20261026-3">
+<link rel="stylesheet" href="./keno-v2.css?v=20261026-4">
 <script defer src="./keno-math.js?v=1"></script>
 <script defer src="./keno-empirical.js?v=20261026-1"></script>
-<script defer src="./keno.js?v=20261026-3"></script>
+<script defer src="./keno.js?v=20261026-4"></script>
 </head>
 <body>
 <a class="skip-link" href="#results">Skip to results</a>
@@ -58,9 +58,11 @@
 
 <section id="today" class="feature-card picks-card">
   <div class="section-head">
-    <div class="section-title"><span class="section-icon violet">✦</span><div><p class="kicker" id="picksDate">NEXT DRAW · RESEARCH TICKETS</p><h2>Suggested Keno tickets</h2><p class="sub">Real 1–80 Keno ticket grids with researched numbers marked.</p></div></div>
+    <div class="section-title"><span class="section-icon violet">✦</span><div><p class="kicker" id="picksDate">NEXT DRAW · RESEARCH TICKETS</p><h2>Suggested Keno tickets</h2><p class="sub">Six different research models, with a unique ticket for each draw time.</p></div></div>
     <button type="button" class="soft-button" id="togglePicks" aria-expanded="false">View all 6 tickets ↓</button>
   </div>
+  <div class="draw-choice"><label for="slotChoice">Research tickets for draw</label><select id="slotChoice" aria-label="Choose Keno draw time"><option value="">Loading draw times…</option></select><span id="slotFreshness">Pre-draw predictions recorded with a timestamp</span></div>
+  <div class="slot-insights" id="slotInsights">Loading historical time-of-day analysis…</div>
   <p id="picksIntro" class="picks-explainer">Time-stamped selections tested only against draws occurring afterwards. No strategy has proven higher winning odds.</p>
   <div id="suggestedLines" class="prediction-grid"><div class="loading-card">Loading research tickets…</div></div>
   <div class="picks-footer"><button id="copyAllPicks" type="button" class="outline-button">Copy all tickets</button><span id="picksMeta" class="fineprint">Loading selection timestamp…</span></div>
@@ -87,7 +89,7 @@
 </details>
 
 <section id="builderPanel" class="feature-card builder-card">
-  <div class="section-head"><div class="section-title"><span class="section-icon cyan">▦</span><div><p class="kicker">BUILD YOUR OWN LINE</p><h2>Keno ticket builder</h2><p class="sub">Choose 1–10 numbers and your stake, then check the exact probabilities.</p></div></div></div>
+  <div class="section-head"><div class="section-title"><span class="section-icon cyan">▦</span><div><p class="kicker">BUILD YOUR OWN LINE</p><h2>Keno ticket builder</h2><p class="sub">Choose 1–10 numbers, select your stake, inspect this exact set's historical patterns and save the ticket.</p></div></div></div>
   <div class="builder-controls">
     <div><span class="control-label">How many numbers?</span><div class="pick-count-control" id="pickCountPills" role="group" aria-label="Number of Keno picks"></div><label class="visually-hidden">Pick count<select id="pickSize"><option>10</option><option>9</option><option>8</option><option>7</option><option>6</option><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label><label class="visually-hidden">Odds size<select id="oddsPickSize"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option selected>10</option></select></label></div>
     <div><label for="oddsStake" class="control-label">Stake per draw</label><select id="oddsStake"><option value="1">$1</option><option value="2">$2</option><option value="3">$3</option><option value="4">$4</option><option value="5">$5</option><option value="10">$10</option><option value="20">$20</option><option value="50">$50</option><option value="100">$100</option></select></div>
@@ -95,7 +97,10 @@
   </div>
   <div class="selection-heading"><strong>Your Keno grid · 1–80</strong><small>Tap to choose or deselect numbers</small></div>
   <div class="number-grid" id="builder"></div>
-  <div class="ticket-actions"><div class="picked-numbers" id="selection">No numbers selected</div><div class="actions"><button id="randomLine" class="primary-small">Random line</button><button id="frequencyLine" class="soft-button">History-based line</button><button id="copyLine" class="outline-button">Copy numbers</button><button id="clearLine" class="plain-button">Clear</button></div></div>
+  <div class="ticket-actions"><div class="picked-numbers" id="selection">No numbers selected</div><div class="actions"><button id="randomLine" class="primary-small">Random line</button><button id="frequencyLine" class="soft-button">History-based line</button><button id="saveLine" class="save-button" type="button">Save this ticket</button><button id="copyLine" class="outline-button">Copy numbers</button><button id="clearLine" class="plain-button">Clear</button></div></div>
+  <p id="reductionMessage" class="reduction-message" role="status">When reducing the number of picks, LottoLab retains the highest-ranked selections and keeps the others in reserve for restoration.</p>
+  <div class="selection-odds" id="selectedOdds"><strong>Odds for your exact numbers</strong><p>Choose a complete ticket above to see its historical appearances, same-time pattern strength and calculated chances.</p></div>
+  <section id="savedTicketSection" class="saved-ticket-panel"><div class="section-head"><div><p class="kicker">PERSISTENT TICKETS</p><h3>My saved Keno tickets</h3><p class="sub">Saved to this browser on this device, even when you leave the page.</p></div><button type="button" id="exportSaved" class="outline-button">Export saved tickets</button></div><div id="savedTicketList" class="saved-ticket-list">No saved tickets yet.</div><div class="actions"><label class="upload soft-button">Import saved tickets<input id="importSaved" type="file" accept=".json,application/json"></label></div></section>
   <div class="odds-method-title"><strong>Calculated odds</strong><span>LottoLab's exact 20-from-80 mathematics · not copied from published odds</span></div>
   <div class="odds-cards">
     <div><span>Chance of any prize</span><strong id="oddsAny">—</strong></div><div><span>Chance of matching every pick</span><strong id="oddsAll">—</strong></div><div><span>Expected net return</span><strong id="oddsExpected">—</strong></div><div><span>Cost per draw</span><strong id="oddsCost">—</strong></div>
