@@ -116,7 +116,8 @@ def run(draws):
         for year, values in sorted(years.items())
     }
     return {
-        "generated_utc": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "source_cutoff_draw": draws[-1]["draw"] if draws else None,
+        "source_cutoff_date": draws[-1]["date"] if draws else None,
         "draws_in_database": len(draws),
         "warmup_draws": min(WARMUP, len(draws)),
         "walk_forward_evaluated_draws": n,
