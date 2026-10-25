@@ -16,3 +16,5 @@
 .quick-check .quick-check-body form .ball-entry-grid{margin-bottom:1px}
 @media(max-width:380px){.ball-entry-grid{gap:4px}.ball-entry-grid .ball-entry-field,.quick-check .ball-entry-grid input.ball-entry-field,.checker-input-card .ball-entry-grid input.ball-entry-field{min-height:40px;font-size:17px}}
 @media(prefers-reduced-motion:reduce){.ball-entry-grid .ball-entry-field{transition:none}}
+.quick-check .ball-entry-paste summary{display:list-item;min-height:0;margin:0;padding:7px 0;align-items:initial}
+.quick-check .ball-entry-paste[open] summary{margin-bottom:7px}
