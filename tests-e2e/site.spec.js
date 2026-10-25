@@ -623,3 +623,23 @@ test('Mobile navigation lands each core section below sticky header with breathi
  }
  await expect(page.locator('#deepResearch')).toHaveAttribute('open','');
 });
+
+test('new orbit hero has no misleading fake-button chips and primary links work',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ await expect(page.locator('.hero-chips')).toHaveCount(0);
+ await expect(page.locator('.hero-actions a')).toHaveCount(2);
+ await expect(page.locator('.hero-actions a[href="#results"]')).toBeVisible();
+ await expect(page.locator('.hero-actions a[href="#picker"]')).toBeVisible();
+ const mobile=await page.locator('.hero').evaluate(e=>{
+  const cs=getComputedStyle(e);
+  return {bg:cs.backgroundImage,rect:e.getBoundingClientRect().toJSON(),width:document.documentElement.scrollWidth};
+ });
+ expect(mobile.bg).toContain('hero-orbits-mobile.svg');
+ expect(mobile.width).toBeLessThanOrEqual(391);
+ await page.locator('.hero-actions a[href="#picker"]').click();
+ await expect(page).toHaveURL(/#picker$/);
+ await page.setViewportSize({width:1440,height:900});
+ const desktop=await page.locator('.hero').evaluate(e=>getComputedStyle(e).backgroundImage);
+ expect(desktop).toContain('hero-orbits.svg');
+});
