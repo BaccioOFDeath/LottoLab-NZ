@@ -92,6 +92,28 @@ function renderPredictions(){
  score.textContent=countEligible.length?'Verified results for '+countEligible.length+' eligible draw(s) are now compared above. Expected matches for each 10-number line: 2.5 per draw.':'No eligible draw results available yet. Today’s selections are eligible for subsequent draws only; earlier draws never count as model successes.';
  $('copyAllPicks').onclick=async()=>{const content=dailyPicks.models.map((m,i)=>String(i+1)+'. '+m.name+': '+m.numbers.join(', ')).join('\n');const okay=await copyText('LottoLab Keno '+dailyPicks.date+'\n'+content);$('status').textContent=okay?'Copied all published model lines.':'Copy not available in this browser.'};
 }
+async function refreshModelAudit(){
+ const target=$('modelAudit');if(!target)return;
+ try{
+  const response=await fetch('./data/keno-model-audit.json',{cache:'no-store'});
+  if(!response.ok)throw Error('Audit has not been published');
+  const audit=await response.json();
+  if(!audit.walk_forward_evaluated_draws||!audit.models)throw Error('No evaluated draws yet');
+  target.replaceChildren();
+  const intro=document.createElement('p');
+  intro.textContent=audit.walk_forward_evaluated_draws.toLocaleString('en-NZ')+' unseen historical draws scored after training, with '+audit.warmup_draws+' warm-up draws. Expected hits on any 10-number line: 2.50 per draw. These are descriptive comparisons, not proof of future performance.';
+  target.append(intro);
+  const table=document.createElement('table'),head=document.createElement('thead'),tr=document.createElement('tr');
+  for(const label of ['Historical strategy','Average hits','5+ hits','Difference vs random']){const th=document.createElement('th');th.textContent=label;tr.append(th)}
+  head.append(tr);table.append(head);const body=document.createElement('tbody');
+  const labels={long_term_hot:'Lifetime hot',long_term_cold:'Lifetime cold',recent_hot:'Last 80 hot',recent_cold:'Last 80 cold',balanced_zones:'Balanced zones',blended_hot:'Blended hot',random_control:'Random control'};
+  const random=Number(audit.models.random_control?.average_hits||0);
+  for(const [id,label] of Object.entries(labels)){const m=audit.models[id];if(!m)continue;const row=document.createElement('tr');const diff=m.average_hits-random;
+   for(const value of [label,m.average_hits.toFixed(3),m.five_or_more_hits+' / '+m.draws,(diff>=0?'+':'')+diff.toFixed(3)]){const cell=document.createElement('td');cell.textContent=value;row.append(cell)}body.append(row)}
+  table.append(body);target.append(table);
+  const note=document.createElement('p');note.className='small';note.textContent='Models tested chronologically without future data. Multiple comparisons and repeated tuning can overfit. Actual fair-draw probabilities are unchanged by these historical patterns.';target.append(note);
+ }catch(e){target.textContent='Research audit not yet available: '+e.message+'. Only source-checked draws are displayed; no simulated performance.'}
+}
 async function refreshKeno(){
  try{
   const response=await fetch(base,{cache:'no-store'});if(!response.ok)throw Error('Keno history unavailable');
@@ -100,6 +122,7 @@ async function refreshKeno(){
  }catch(e){if(!records.length){try{records=merge([],JSON.parse(localStorage.getItem(key)||'[]'))}catch{records=[]};render();$('status').textContent='Unable to refresh remote history: '+e.message}}
  try{const p=await fetch('./data/keno-daily-picks.json',{cache:'no-store'});if(p.ok){dailyPicks=await p.json()}}catch{}
  renderPredictions();
+ refreshModelAudit();
 }
 
 function updateKenoOdds(){
