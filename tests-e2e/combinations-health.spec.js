@@ -1,7 +1,22 @@
+
+async function revealResearchForLegacyChecks(page){
+ await page.evaluate(()=>{
+  const vault=document.getElementById('deepResearch');vault.open=true;
+  const score=document.getElementById('performanceDetails');if(score)score.open=true;
+  // Existing functional tests exercise every module together. Separately,
+  // clean-layout.spec.js validates the real collapsed visitor experience.
+  for(const panel of document.querySelectorAll('.clean-panel'))panel.hidden=false;
+  for(const disclosure of [...document.querySelectorAll('.clean-tool')]){
+   const body=disclosure.querySelector('.clean-tool-body');
+   if(body)disclosure.replaceWith(...body.children);
+  }
+ });
+}
+
 const {test,expect}=require('@playwright/test');
 async function openLab(page,url='/'){
  await page.goto(url);
- await page.locator('#deepResearch').evaluate(el=>{el.open=true;});
+ await revealResearchForLegacyChecks(page);
  await expect(page.locator('#dataHealth')).toBeVisible();
  await expect(page.locator('#combinations')).toBeVisible();
 }
@@ -45,7 +60,7 @@ test('local data manager exports, clears and never touches unrelated website sto
  });
  await page.locator('#healthRefresh').click();
  await page.reload();
- await page.locator('#deepResearch').evaluate(el=>{el.open=true;});
+ await revealResearchForLegacyChecks(page);
  await expect(page.locator('#localForeverCount')).toHaveText('1');
  await expect(page.locator('#localCheckedCount')).toHaveText('1');
  const capture=page.waitForEvent('download');

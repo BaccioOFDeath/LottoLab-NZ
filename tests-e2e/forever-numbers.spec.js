@@ -1,8 +1,23 @@
+
+async function revealResearchForLegacyChecks(page){
+ await page.evaluate(()=>{
+  const vault=document.getElementById('deepResearch');vault.open=true;
+  const score=document.getElementById('performanceDetails');if(score)score.open=true;
+  // Existing functional tests exercise every module together. Separately,
+  // clean-layout.spec.js validates the real collapsed visitor experience.
+  for(const panel of document.querySelectorAll('.clean-panel'))panel.hidden=false;
+  for(const disclosure of [...document.querySelectorAll('.clean-tool')]){
+   const body=disclosure.querySelector('.clean-tool-body');
+   if(body)disclosure.replaceWith(...body.children);
+  }
+ });
+}
+
 const {test,expect}=require('@playwright/test');
 
 async function openLab(page){
  await page.goto('/');
- await page.locator('#deepResearch').evaluate(el=>el.open=true);
+ await revealResearchForLegacyChecks(page);
  await expect(page.locator('#foreverNumbers')).toBeVisible();
 }
 test('Forever Numbers generates six unique Lotto balls, locks locally and survives reload',async({page})=>{
@@ -18,7 +33,7 @@ test('Forever Numbers generates six unique Lotto balls, locks locally and surviv
  await expect(page.locator('#foreverCount')).toHaveText('1');
  await expect(page.locator('#foreverSaved')).toContainText('Saturday forever');
  await page.reload();
- await page.locator('#deepResearch').evaluate(el=>el.open=true);
+ await revealResearchForLegacyChecks(page);
  await expect(page.locator('#foreverCount')).toHaveText('1');
  await expect(page.locator('#foreverSaved')).toContainText('Saturday forever');
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(1280);
@@ -36,7 +51,7 @@ test('Number checker compares exact and partial matching draws and saves checked
  await expect(page.locator('#checkerResults')).toContainText('Draw #'+line.draw);
  await expect(page.locator('#checkerSavedCount')).toHaveText('1 line');
  await page.reload();
- await page.locator('#deepResearch').evaluate(el=>el.open=true);
+ await revealResearchForLegacyChecks(page);
  await expect(page.locator('#checkerNumbers')).toHaveValue(line.numbers.map(n=>String(n).padStart(2,'0')).join(' '));
  await expect(page.locator('#checkerSavedCount')).toHaveText('1 line');
  await page.locator('#checkerForever').click();

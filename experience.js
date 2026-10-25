@@ -44,7 +44,7 @@ results?.addEventListener('click',event=>{
  if(!button)return;
  const section=document.getElementById(button.dataset.jump);
  closeCommands();
- if(section){const lab=$('deepResearch');if(lab&&lab.contains(section))lab.open=true;history.replaceState(null,'','#'+section.id);requestAnimationFrame(()=>section.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'}));}
+ if(section){history.replaceState(null,'','#'+section.id);if(typeof window.lottoLabJumpTo==='function')window.lottoLabJumpTo(section.id);else requestAnimationFrame(()=>section.scrollIntoView({block:'start'}));}
 });
 dialog?.addEventListener('click',event=>{if(event.target===dialog)closeCommands()});
 document.addEventListener('keydown',event=>{
