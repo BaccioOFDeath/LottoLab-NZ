@@ -210,6 +210,31 @@ $('oddsPickSize').addEventListener('change',()=>setPickCount($('oddsPickSize').v
 for(const id of ['oddsPickSize','oddsStake','oddsMultiplier'])$(id).addEventListener('change',updateKenoOdds);
 updateKenoOdds();
 
+/* Safari-safe section jumps: use a fixed small offset and no smooth-scroll race. */
+function jumpToKenoSection(hash,addHistory){
+ if(!hash||hash[0]!=='#')return false;
+ const id=decodeURIComponent(hash.slice(1)),target=document.getElementById(id);
+ if(!target)return false;
+ const advanced=target.closest('#advancedTools');
+ if(advanced&&advanced.tagName==='DETAILS')advanced.open=true;
+ if(target.tagName==='DETAILS'&&['advancedTools','modelProof'].includes(target.id))target.open=true;
+ const menu=document.querySelector('.site-menu');if(menu)menu.open=false;
+ if(addHistory&&window.location.hash!==hash)window.history.pushState(null,'',hash);
+ // Wait until any previously hidden disclosure is laid out before computing its position.
+ requestAnimationFrame(()=>{
+  const top=Math.max(0,window.scrollY+target.getBoundingClientRect().top-14);
+  window.scrollTo({top,behavior:'instant'});
+ });
+ return true;
+}
+for(const link of document.querySelectorAll('a[href^="#"]')){
+ link.addEventListener('click',event=>{
+  const hash=link.getAttribute('href');
+  if(hash&&jumpToKenoSection(hash,true))event.preventDefault();
+ });
+}
+window.addEventListener('hashchange',()=>jumpToKenoSection(window.location.hash,false));
+
 refreshKeno();
 setInterval(refreshKeno,5*60*1000);
 })();
