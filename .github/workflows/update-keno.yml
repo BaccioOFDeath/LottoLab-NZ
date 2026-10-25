@@ -1,0 +1,56 @@
+name: Update Keno data and pre-draw scorecard
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/update_keno.py'
+      - '.github/workflows/update-keno.yml'
+      - 'tests/test_keno.py'
+  schedule:
+    # 08:40 NZST / 09:40 NZDT. Publish lines before the first draw.
+    - cron: '40 20 * * *'
+    # Both NZ daylight-saving and standard times, after each daily draw.
+    - cron: '35 0,1,2,3,5,6,22,23 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: lottolab-data-writes
+  cancel-in-progress: false
+jobs:
+  refresh-keno:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install HTML parsing dependencies
+        run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5'
+      - name: Validate importer and model logic
+        run: python -m unittest discover -s tests -p 'test_keno.py' -v
+      - name: Update Keno history, with conservative incremental backfill
+        env:
+          GITHUB_EVENT_SCHEDULE: ${{ github.event.schedule }}
+        shell: bash
+        run: |
+          backfill=0
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] || [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            backfill=300
+          elif [ "$GITHUB_EVENT_SCHEDULE" = '40 20 * * *' ]; then
+            backfill=200
+          fi
+          python scripts/update_keno.py --recent-days 7 --backfill-days "$backfill"
+      - name: Publish new verified records and dated research lines
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/keno-*.json
+          if git diff --cached --quiet; then echo "No Keno changes"; exit 0; fi
+          git commit -m 'data: refresh Keno draw history and retained daily scorecard'
+          git pull --rebase origin main
+          git push origin main
