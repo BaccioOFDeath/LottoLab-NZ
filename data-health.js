@@ -9,8 +9,12 @@ const root=document.createElement('section');root.id='dataHealth';root.className
 root.innerHTML="<div class=\"health-title\"><div><p>TRANSPARENT DATA COVERAGE</p><h3 id=\"healthHeading\">Site data & quality audit</h3><span>What actually loaded, how much historical coverage exists and which sections still use partial data.</span></div><button type=\"button\" id=\"healthRefresh\">Run audit again</button></div>\n<div class=\"health-summary\"><div><span>Stored Lotto draws</span><strong id=\"healthDraws\">—</strong></div><div><span>Cross-checked draws</span><strong id=\"healthVerified\">—</strong></div><div><span>Missing draw IDs in range</span><strong id=\"healthMissing\">—</strong></div></div>\n<p id=\"healthSummary\" class=\"health-explainer\" role=\"status\" aria-live=\"polite\">Checking live data source files and available site sections…</p>\n<div id=\"healthRows\" class=\"health-grid\"></div>\n<p id=\"healthDate\" class=\"health-date\">Data status reflects stored files at the time checked, not official real-time Lotto NZ updates.</p>";anchor.insertAdjacentElement('afterend',root);
 const $=id=>document.getElementById(id);
 const items=[
- ['Latest results and archive','results','draws'],
+ ['Latest draw and result status','results','draws'],
+ ['Historical archive search','archive','archive'],
+ ['Latest-draw number checker','ticketChecker','quick'],
  ['Number frequency, pairings & history','insights','analysis'],
+ ['Powerball and Strike guides','powerballGuide','rules'],
+ ['Advanced research filters','advancedFilters','filters'],
  ['Forever Numbers and history checker','foreverNumbers','saved'],
  ['2–5 number combinations','combinations','combos'],
  ['Next draw research lines','picker','picks'],
@@ -18,9 +22,10 @@ const items=[
  ['Evidence Lab & source coverage','evidence','evidence'],
  ['Geo Lab winning locations','geo','geo'],
  ['Number Universe & Number World','universe','universe'],
- ['Equipment and rule history','insights','context']
+ ['Equipment and rule history','insights','context'],
+ ['CSV and complete data exports','dataExports','exports']
 ];
-let running=false,errors=[];
+let running=false,needsRerun=false,errors=[];
 window.addEventListener('error',event=>{if(event.message)errors.push(String(event.message).slice(0,120));});
 window.addEventListener('unhandledrejection',event=>{errors.push(String(event.reason||'An unhandled request failed').slice(0,120));});
 function output(id,value){$(id).textContent=String(value);}
@@ -44,7 +49,7 @@ function newZealandToday(){
  return new Intl.DateTimeFormat('en-CA',{timeZone:'Pacific/Auckland',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 }
 async function audit(){
- if(running)return;running=true;
+ if(running){needsRerun=true;return;}running=true;
  $('healthRefresh').disabled=true;output('healthSummary','Rechecking the available archive, model, location and rule datasets…');
  const files=['draws.json','legacy-draws.json','model-picks.json','model-performance.json','geo-winners.json','nz-outline.geojson','draw-context.json'];
  const found=await Promise.all(files.map(async path=>{try{return {path,data:await jsonFile(path)}}catch(e){return {path,error:e.message}};}));
@@ -71,6 +76,22 @@ async function audit(){
   else if(kind==='draws'){
    if(!archiveLoaded){state='failed';desc='Merged draw archive did not initialise. '+fileSummary('draws.json');}
    else{state=missing||verified<live.length?'partial':'ok';desc=latestDesc+' '+(daysSince>7?'Latest stored draw is more than seven days old. ':'')+'Missing '+missing+' draw IDs in the stored number range.';if(daysSince>7)state='failed';}
+  }else if(kind==='archive'){
+   state=archiveLoaded&&has('archiveList')?'partial':'failed';
+   desc=archiveLoaded?'Historical archive controls use '+live.length+' stored draws, with '+missing+' missing IDs within the stored range.':'Archive or search controls unavailable.';
+  }else if(kind==='quick'){
+   const balls=document.querySelectorAll('#quickCheckForm .ball-entry-field');
+   state=archiveLoaded&&balls.length===6?'ok':'failed';
+   desc=balls.length+' individual number fields; compares against the latest available stored draw. It does not verify ticket purchases or payouts.';
+  }else if(kind==='rules'){
+   state=has('strikeGuide')&&has('powerChart')&&archiveLoaded?'partial':'failed';
+   desc='Powerball uses the appropriate historical number pools (1–10 before the 2026 change, 1–14 afterward). This site does not have a complete historical Strike results dataset.';
+  }else if(kind==='filters'){
+   state=has('labDeepDive')&&has('evidenceDeep')&&archiveLoaded?'partial':'failed';
+   desc='Filter panels are available but source/sample coverage is incomplete; machine, operator and ball-set assignment histories are not fully documented.';
+  }else if(kind==='exports'){
+   state=has('exportDraws')&&has('exportAll')&&archiveLoaded?'partial':'failed';
+   desc='Lotto draws, combinations, winning locations, model picks and research ZIP export from available source records. Source gaps are listed in the ZIP manifest.';
   }else if(kind==='analysis'){
    if(!Array.isArray(window.lottoLabAnalysisDraws)){state='failed';desc='Shared number-analysis sample not initialised.';}
    else{state=archiveLoaded?'partial':'failed';desc=window.lottoLabAnalysisDraws.length+' draws available in the current analysis filters. The archive is incomplete; equipment filters cannot infer missing assignment IDs.';}
@@ -122,9 +143,10 @@ async function audit(){
   'Unable to confirm the public draw archive.'+problem);
  output('healthDate','Last checked: '+dateStamp()+'. '+(errors.length?'Browser errors seen since this tool loaded: '+errors.length+'.':'No uncaught browser errors captured since this tool loaded.')+' This audit checks files, metadata and section presence; it is not an official Lotto NZ audit.');
  $('healthRefresh').disabled=false;running=false;
+ if(needsRerun){needsRerun=false;queueMicrotask(()=>audit());}
 }
 $('healthRefresh').addEventListener('click',audit);
-window.addEventListener('lottolab:data-ready',()=>{if(!running)audit();});
-window.addEventListener('lottolab:data-error',()=>{if(!running)audit();});
+window.addEventListener('lottolab:data-ready',audit);
+window.addEventListener('lottolab:data-error',audit);
 audit();
 })();
