@@ -9,11 +9,14 @@ on:
       - 'tests/test_keno_math.cjs'
       - 'keno-math.js'
       - 'scripts/keno_model_audit.py'
+      - 'scripts/keno_slot_picks.py'
+      - 'tests/test_keno_slot_picks.py'
   schedule:
-    # 08:40 NZST / 09:40 NZDT. Publish lines before the first draw.
-    - cron: '40 20 * * *'
-    # Both NZ daylight-saving and standard times, after each daily draw.
-    - cron: '35 0,1,2,3,5,6,22,23 * * *'
+    # Pre-draw NZST/NZDT windows, including 10am, 1pm, 3pm, 6pm draws.
+    # GitHub may delay schedule delivery; the publisher checks actual NZ time.
+    - cron: '35 20,21,23,0,1,2,4,5 * * *'
+    # Shortly after published results to score the previous tickets.
+    - cron: '35 3,6,22 * * *'
 permissions:
   contents: write
 concurrency:
@@ -34,6 +37,8 @@ jobs:
         run: python -m pip install --disable-pip-version-check 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5'
       - name: Validate importer and model logic
         run: python -m unittest discover -s tests -p 'test_keno.py' -v
+      - name: Validate independent draw-specific Keno prediction engine
+        run: python -m unittest discover -s tests -p 'test_keno_slot_picks.py' -v
       - name: Verify exact Keno probability engine
         run: node --test tests/test_keno_math.cjs
       - name: Update Keno history, with conservative incremental backfill
@@ -42,12 +47,12 @@ jobs:
         shell: bash
         run: |
           backfill=0
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] || [ "$GITHUB_EVENT_NAME" = "push" ]; then
-            backfill=4000
-          elif [ "$GITHUB_EVENT_SCHEDULE" = '40 20 * * *' ]; then
-            backfill=300
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            backfill=500
           fi
           python scripts/update_keno.py --recent-days 7 --backfill-days "$backfill"
+      - name: Publish locked predictions for each upcoming Keno draw time
+        run: python scripts/keno_slot_picks.py
       - name: Produce out-of-sample Keno research audit
         run: python scripts/keno_model_audit.py
       - name: Publish new sourced records and dated research scorecards
