@@ -1,0 +1,495 @@
+{
+  "version": 1,
+  "game": "lotto",
+  "snapshots": [
+    {
+      "id": "07a5aa40e7f187e34266855e",
+      "sha256": "c9775767d277c9532fcc8d71a374e0451cc2d4a3f90bf45d9ef663e6a20e40dc",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 7,
+        "numbers": [
+          5,
+          13,
+          14,
+          19,
+          37,
+          40
+        ],
+        "powerball": 5,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "08c2ae66f64913f44132bb72",
+      "sha256": "44ba642bd6ec8e7886bf3ad2dd66dd069c210790e55ba994f6d0a024cb565c6c",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 6,
+        "numbers": [
+          1,
+          6,
+          24,
+          30,
+          36,
+          39
+        ],
+        "powerball": 5,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "0dca6185f97f409f5f55bb7a",
+      "sha256": "0bcdd3d87933e78f036dd33335210dcbc7982aff40568a052e4155c36666d742",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 10,
+        "numbers": [
+          7,
+          13,
+          18,
+          24,
+          26,
+          32
+        ],
+        "powerball": 13,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "0df0733748e6d6ef98b65017",
+      "sha256": "283ccd98537ab32270414decdbb9bc38f0950346a5006cac05bbef6d4cdf8e4a",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 5,
+        "numbers": [
+          1,
+          2,
+          6,
+          11,
+          31,
+          40
+        ],
+        "powerball": 8,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "26e4e32ae6c49cf1e6829ad5",
+      "sha256": "d13260d3dbfb6c755171baceaf6ec749c7c875171f39995b721bd3714e4847af",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 6,
+        "numbers": [
+          8,
+          13,
+          24,
+          27,
+          37,
+          40
+        ],
+        "powerball": 13,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "31118f55b7666b41690b12fc",
+      "sha256": "d3b4f3ce411d3cb9f74522dddaa802bc1f626441213fae10d6ae51e65db7c60e",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 2,
+        "numbers": [
+          7,
+          8,
+          12,
+          17,
+          25,
+          26
+        ],
+        "powerball": 7,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "492b7578c8423a8dde01ea53",
+      "sha256": "47a8c9c159eb085b0d8f4bde0e9f4e56d119647aec974e9c6c19f977696354b1",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 9,
+        "numbers": [
+          15,
+          22,
+          25,
+          29,
+          35,
+          38
+        ],
+        "powerball": 14,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "4bb986ea01eaef9c04cc7c13",
+      "sha256": "e1ea44eb8e46a36b4a08b395dc5b36088e02a724624ecab3ebfaa41c863a46e4",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 8,
+        "numbers": [
+          1,
+          2,
+          3,
+          26,
+          32,
+          38
+        ],
+        "powerball": 3,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "4cdb5e202cc37e4c5fde1f9d",
+      "sha256": "961e178c6e80bced8924f6f5be347f29e7965a359031378417ba1d83e851e50a",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 9,
+        "numbers": [
+          13,
+          16,
+          23,
+          27,
+          32,
+          37
+        ],
+        "powerball": 6,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "7d2fc856ef03d2e8e614296c",
+      "sha256": "0d0b545600e8ef161dc4491336a2eb6c2bdb599e56db6fbfd85020ddbb223515",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 3,
+        "numbers": [
+          5,
+          7,
+          12,
+          20,
+          22,
+          33
+        ],
+        "powerball": 7,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "8cf6f4fe271a6279bcfdfd39",
+      "sha256": "41bb86d94dbdb1d989f5eaf4d314ec131c39f7a7dc3822e382003a6276842fa3",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 1,
+        "numbers": [
+          1,
+          3,
+          4,
+          19,
+          22,
+          37
+        ],
+        "powerball": 7,
+        "published_at": "2026-10-24T11:48:07.547Z",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "8fad3deed99f7e91f4c4199a",
+      "sha256": "2616e75210d937141bb3f5cdf6d97aba3a4a84d671f443dc0d88d90b8f93fc07",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 7,
+        "numbers": [
+          8,
+          15,
+          18,
+          19,
+          30,
+          37
+        ],
+        "powerball": 2,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "987302e2da114a077fcab91b",
+      "sha256": "6148c0d08f7618c12c8de31a074227f66be7246f01dbc696e2f779b7be494da5",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 1,
+        "numbers": [
+          11,
+          12,
+          21,
+          29,
+          36,
+          39
+        ],
+        "powerball": 4,
+        "published_at": "2026-10-24T11:48:07.547Z",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "a085960d70de3b49adf41af2",
+      "sha256": "4b0158728407e2f0a5f12e10ef481e75dd761a03f231f384bfd040c82cb2ee7a",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 3,
+        "numbers": [
+          14,
+          20,
+          25,
+          26,
+          32,
+          36
+        ],
+        "powerball": 11,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "a4bde089d1ef06ee264a9f10",
+      "sha256": "b78e445fac46b9f36deb98ba410866b83604c70e94fd59936f3a05feab96e27f",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 4,
+        "numbers": [
+          11,
+          12,
+          13,
+          20,
+          30,
+          36
+        ],
+        "powerball": 7,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "a6f7b3406675cec188b731b1",
+      "sha256": "5a3530dac77fe73e6756bf74dc75518ad8b1cbd2b0ac7f2fec4a1266006808d3",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 4,
+        "numbers": [
+          1,
+          7,
+          17,
+          22,
+          30,
+          38
+        ],
+        "powerball": 14,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "b8b37734d680c0303d8b0e83",
+      "sha256": "a67677c09eb947cf4a5d77f7d7990f0cb5710a48c602a7f6b10021648ef3d2d7",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 2,
+        "numbers": [
+          6,
+          7,
+          10,
+          17,
+          26,
+          37
+        ],
+        "powerball": 2,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "c247e6885c5d003d39a5b9d0",
+      "sha256": "e19be7aac0739e2ea35a86d2937911f3896684feae9c6dabc2b3c12083976600",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 8,
+        "numbers": [
+          15,
+          19,
+          20,
+          34,
+          36,
+          40
+        ],
+        "powerball": 3,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "cb8bb50e1c16f524b6ec9038",
+      "sha256": "cb3c4c788f3e5696a27c41c8f7bce0a590071943798c2221ab4260bc4d8e5047",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "random_baseline_v1",
+        "line": 10,
+        "numbers": [
+          4,
+          7,
+          12,
+          14,
+          31,
+          36
+        ],
+        "powerball": 9,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "cd0c739701c97abac594e8e9",
+      "sha256": "b81bf63df75d678986b0e3cfa603c1e137aceed8711cf7c0b3ecc119a36ffef0",
+      "prediction": {
+        "target_draw": "",
+        "target_date": "2026-10-28",
+        "model": "adaptive_frequency_v1",
+        "line": 5,
+        "numbers": [
+          4,
+          7,
+          9,
+          16,
+          21,
+          22
+        ],
+        "powerball": 1,
+        "published_at": "2026-10-24T21:05:22.355230+00:00",
+        "draw_at": null
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    }
+  ],
+  "summary": {},
+  "conflicts": [],
+  "counts": {
+    "locked": 20,
+    "verified_scored": 0,
+    "awaiting": 20,
+    "without_publication_evidence": 0
+  },
+  "note": "Publication times are supplied by prediction records, not independently authenticated. Retroactive editing is detected after the first ledger snapshot; Git history provides stronger audit evidence. No model is proven to beat chance."
+}
