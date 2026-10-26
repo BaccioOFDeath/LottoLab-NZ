@@ -10,6 +10,7 @@ on:
       - 'scripts/model_engine.py'
       - 'scripts/evolution_lotto.py'
       - 'scripts/forward_ledger.py'
+      - 'tests/test_forward_ledger.py'
       - 'tests/test_model_engine.py'
       - '.github/workflows/research-picker.yml'
 permissions:
