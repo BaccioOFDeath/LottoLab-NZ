@@ -20,6 +20,10 @@ on:
     # Pre-draw NZST/NZDT windows, including 10am, 1pm, 3pm, 6pm draws.
     # GitHub may delay schedule delivery; the publisher checks actual NZ time.
     - cron: '35 20,21,23,0,1,2,4,5 * * *'
+    # More frequent source checks near every NZ draw. Use UTC hours for BOTH
+    # NZST (+12) and NZDT (+13); importer only publishes sourced valid draws.
+    # GitHub Actions cron can be delayed; refreshes are idempotent.
+    - cron: '7,22,37,52 0,1,2,3,5,6,21,22 * * *'
     # Shortly after published results to score the previous tickets.
     - cron: '35 3,6,22 * * *'
 permissions:
