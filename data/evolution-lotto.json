@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "game": "lotto",
+  "status": "experimental_evaluation_only",
+  "champion": "random_baseline_v1",
+  "candidate": "recent_80_hot",
+  "candidate_verified": false,
+  "reason": "No independently established improvement over a random control. Future prospective confirmation is required.",
+  "draws_in_database": 392,
+  "evaluated_draws": 362,
+  "discovery_draws": 271,
+  "holdout_draws": 91,
+  "discovery_cutoff_draw": "2541",
+  "last_evaluated_draw": "2632",
+  "last_evaluated_date": "2026-10-24",
+  "expected_matches_for_any_6_numbers": 0.9,
+  "models": {
+    "adaptive_frequency_v1": {
+      "discovery": {
+        "draws": 271,
+        "average_matches": 0.8893,
+        "three_or_more": 8
+      },
+      "holdout": {
+        "draws": 91,
+        "average_matches": 0.73626,
+        "three_or_more": 1
+      },
+      "comparison": {
+        "delta_vs_random": -0.10989,
+        "paired_z": -0.928,
+        "lower_95_delta": -0.34204
+      }
+    },
+    "recent_80_hot": {
+      "discovery": {
+        "draws": 271,
+        "average_matches": 0.9631,
+        "three_or_more": 14
+      },
+      "holdout": {
+        "draws": 91,
+        "average_matches": 0.9011,
+        "three_or_more": 4
+      },
+      "comparison": {
+        "delta_vs_random": 0.05495,
+        "paired_z": 0.449,
+        "lower_95_delta": -0.18498
+      }
+    },
+    "all_time_hot": {
+      "discovery": {
+        "draws": 271,
+        "average_matches": 0.89299,
+        "three_or_more": 9
+      },
+      "holdout": {
+        "draws": 91,
+        "average_matches": 0.91209,
+        "three_or_more": 2
+      },
+      "comparison": {
+        "delta_vs_random": 0.06593,
+        "paired_z": 0.604,
+        "lower_95_delta": -0.14803
+      }
+    },
+    "random_baseline_v1": {
+      "discovery": {
+        "draws": 271,
+        "average_matches": 0.91144,
+        "three_or_more": 9
+      },
+      "holdout": {
+        "draws": 91,
+        "average_matches": 0.84615,
+        "three_or_more": 2
+      },
+      "comparison": {
+        "delta_vs_random": 0.0,
+        "paired_z": 0,
+        "lower_95_delta": 0.0
+      }
+    }
+  },
+  "limitations": "Exploratory walk-forward scoring only. No automated promotion. Re-testing many times can overfit the holdout; a new frozen future confirmation window is necessary."
+}
