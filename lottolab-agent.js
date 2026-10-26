@@ -84,12 +84,16 @@ async function load(){
   audit:game==="keno"?got(1):null,slots:game==="keno"?got(2):null,
   performance:game==="lotto"?got(2):null,picks:game==="lotto"?got(3):null,savedTickets:savedTickets()};
  const conf=got(4);if(conf&&typeof conf.endpoint==="string"&&/^https:\/\/[\w.-]+(?:\/[\w./?-]*)?$/.test(conf.endpoint)&&conf.endpoint.length<300)apiEndpoint=conf.endpoint;
- status.textContent=apiEndpoint?"AI explanations · verified research":"Verified research calculations";
+ status.textContent=window.LottoLabBYOK?.active()?"Personal AI connected · research backed":(apiEndpoint?"AI explanations · verified research":"Verified research calculations");
  return ctx;
  })().catch(e=>{dataPromise=null;status.textContent="Data unavailable";throw e});
  return dataPromise;
 }
 async function improveText(q,evidence){
+ if(window.LottoLabBYOK?.active()){
+  try{return await window.LottoLabBYOK.explain(q,evidence,history)}
+  catch(e){status.textContent='Personal AI connection failed · research mode';message('error','Your personal AI could not connect: '+String(e.message||e).slice(0,160)+'. The calculated research answer is still available.');return null}
+ }
  if(!apiEndpoint)return null;
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),11000);
  try{
