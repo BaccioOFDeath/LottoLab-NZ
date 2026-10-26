@@ -4,11 +4,13 @@ on:
   push:
     paths:
       - 'lottolab-agent.js'
+      - 'lottolab-byok.js'
       - 'lottolab-agent.css'
       - 'lottolab-research-engine.js'
       - 'lottolab-ai-config.json'
       - 'workers/lottolab-ai/**'
       - 'tests/test_lottolab_ai.cjs'
+      - 'tests/test_lottolab_byok.cjs'
       - '.github/workflows/lottolab-ai-tests.yml'
 permissions:
   contents: read
@@ -24,4 +26,4 @@ jobs:
       - name: Install DOM test runtime
         run: npm install --no-save --no-audit --no-fund jsdom@26
       - name: Run research and chatbot regression tests
-        run: node --test tests/test_lottolab_ai.cjs
+        run: node --test tests/test_lottolab_ai.cjs tests/test_lottolab_byok.cjs
