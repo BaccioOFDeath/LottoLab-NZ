@@ -1,0 +1,27 @@
+name: LottoLab AI research tests
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'lottolab-agent.js'
+      - 'lottolab-agent.css'
+      - 'lottolab-research-engine.js'
+      - 'lottolab-ai-config.json'
+      - 'workers/lottolab-ai/**'
+      - 'tests/test_lottolab_ai.cjs'
+      - '.github/workflows/lottolab-ai-tests.yml'
+permissions:
+  contents: read
+jobs:
+  research-assistant:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install DOM test runtime
+        run: npm install --no-save --no-audit --no-fund jsdom@26
+      - name: Run research and chatbot regression tests
+        run: node --test tests/test_lottolab_ai.cjs
