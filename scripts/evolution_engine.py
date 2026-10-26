@@ -76,7 +76,7 @@ def evaluate(rows):
                        "comparison":compare(name)}
     candidates=[name for name in MODELS if name!=CONTROL]
     # Pick discovery winner, never choose via future (holdout) information.
-    candidates.sort(key=lambda name:(-metrics[name]["discovery"]["average_matches"],name))
+    candidates.sort(key=lambda name:(-(metrics[name]["discovery"]["average_matches"] or 0),name))
     candidate=candidates[0] if candidates else None
     proof=metrics[candidate]["comparison"] if candidate and holdout else {}
     validated=(bool(candidate) and len(discovery)>=MIN_DISCOVERY and
