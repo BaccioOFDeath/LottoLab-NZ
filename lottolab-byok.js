@@ -69,15 +69,22 @@ function attach(){
  if(!w?.document)return;
  const panel=w.document.querySelector("#llai-root .llai-panel"),header=w.document.querySelector("#llai-root .llai-top");
  if(!panel||!header||w.document.getElementById("llai-byok-panel"))return;
- const btn=w.document.createElement("button");btn.type="button";btn.className="llai-settings-toggle";btn.title="Your AI settings";btn.setAttribute("aria-label","Your AI settings");btn.textContent="⚙";
+ const btn=w.document.createElement("button");btn.type="button";btn.className="llai-settings-toggle";btn.title="Your AI settings";btn.setAttribute("aria-label","Your AI settings");btn.textContent="⚙ AI Settings";btn.setAttribute("aria-expanded","false");
  header.insertBefore(btn,header.querySelector(".llai-reset"));
  const box=w.document.createElement("section");box.className="llai-byok-panel";box.id="llai-byok-panel";box.hidden=true;
  box.innerHTML='<div class="llai-byok-head"><strong>Your AI · Local settings</strong><button type="button" class="llai-byok-close" aria-label="Close AI settings">×</button></div><p class="llai-byok-info">Optional: use your own API key and AI model. LottoLab still calculates the evidence. Your key is sent directly to the selected provider and kept only in this browser tab’s session, not uploaded to LottoLab.</p><label for="llai-provider">Provider</label><select id="llai-provider"><option value="openrouter">OpenRouter (recommended · choose many models)</option><option value="openai">OpenAI API (experimental browser support)</option></select><label for="llai-model">Model ID</label><input id="llai-model" type="text" maxlength="110" autocomplete="off" spellcheck="false"><label for="llai-provider-key">API key (session-only)</label><input id="llai-provider-key" type="password" maxlength="500" autocomplete="off" placeholder="Paste personal API key"><p class="llai-byok-warning">Browser scripts can access session keys. Your question and research summary go to your selected AI provider. Use a dedicated key with a strict spending limit and avoid shared devices. Some providers block browser requests; OpenRouter generally supports them.</p><label class="llai-byok-consent"><input id="llai-consent" type="checkbox"> I understand the browser security and provider billing risks.</label><div class="llai-byok-actions"><button type="button" id="llai-activate" class="llai-send">Connect my AI</button><button type="button" id="llai-disconnect" class="llai-disconnect">Remove key</button></div><p id="llai-byok-status" role="status"></p><a class="llai-byok-help" href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">Get an OpenRouter API key ↗</a>';
  panel.insertBefore(box,panel.querySelector(".llai-messages"));
+ const shortcuts=w.document.createElement("div");shortcuts.className="llai-byok-shortcuts";
+ const quick=w.document.createElement("button");quick.type="button";quick.className="llai-setup-cta";quick.textContent="⚙ Connect your own AI · Add API key";
+ shortcuts.append(quick);
+ const messages=panel.querySelector(".llai-messages");
+ if(messages)messages.insertBefore(shortcuts,messages.firstChild);
+
  const provider=box.querySelector("#llai-provider"),model=box.querySelector("#llai-model"),key=box.querySelector("#llai-provider-key"),consent=box.querySelector("#llai-consent"),status=box.querySelector("#llai-byok-status");
  function sync(){provider.value=settings.provider;model.value=settings.model;key.value="";key.placeholder=active()?"Key connected for this tab · paste to replace":"Paste personal API key";status.textContent=active()?"Connected: "+PROVIDERS[settings.provider].name+" · "+settings.model:"Default: free LottoLab research mode";const live=w.document.getElementById("llai-status");if(live)live.textContent=active()?"Personal AI connected · research backed":"Verified research calculations";}
  provider.addEventListener("change",()=>{model.value=PROVIDERS[provider.value]?.defaultModel||""});
  btn.onclick=()=>{box.hidden=!box.hidden;btn.setAttribute("aria-expanded",String(!box.hidden));if(!box.hidden)sync()};
+ quick.onclick=()=>{box.hidden=false;btn.setAttribute("aria-expanded","true");sync()};
  box.querySelector(".llai-byok-close").onclick=()=>{box.hidden=true;btn.setAttribute("aria-expanded","false")};
  box.querySelector("#llai-activate").onclick=()=>{try{store(provider.value,model.value.trim(),key.value.trim(),consent.checked);sync();status.textContent="Connected for this browser tab. Your next question will use "+settings.model+". Provider charges may apply."}catch(e){status.textContent=e.message}};
  box.querySelector("#llai-disconnect").onclick=()=>{disconnect();sync();status.textContent="Personal key cleared. Default research assistant is active."};
