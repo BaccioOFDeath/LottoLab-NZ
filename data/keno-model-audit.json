@@ -1,83 +1,83 @@
 {
-  "source_cutoff_draw": "27912",
+  "source_cutoff_draw": "27913",
   "source_cutoff_date": "2026-10-26",
-  "draws_in_database": 11404,
+  "draws_in_database": 11405,
   "warmup_draws": 200,
-  "walk_forward_evaluated_draws": 11204,
+  "walk_forward_evaluated_draws": 11205,
   "first_date": "2019-01-05",
   "last_date": "2026-10-26",
   "number_picks_per_line": 10,
   "theoretical_expected_hits": 2.5,
   "models": {
     "long_term_hot": {
-      "total_hits": 27835,
+      "total_hits": 27836,
       "five_or_more_hits": 734,
-      "average_hits": 2.48438,
-      "normal_approx_z_vs_random_expectation": -1.2827,
-      "draws": 11204
+      "average_hits": 2.48425,
+      "normal_approx_z_vs_random_expectation": -1.2936,
+      "draws": 11205
     },
     "long_term_cold": {
-      "total_hits": 28055,
+      "total_hits": 28056,
       "five_or_more_hits": 755,
-      "average_hits": 2.50402,
-      "normal_approx_z_vs_random_expectation": 0.3298,
-      "draws": 11204
+      "average_hits": 2.50388,
+      "normal_approx_z_vs_random_expectation": 0.3188,
+      "draws": 11205
     },
     "recent_hot": {
-      "total_hits": 28222,
+      "total_hits": 28223,
       "five_or_more_hits": 740,
-      "average_hits": 2.51892,
-      "normal_approx_z_vs_random_expectation": 1.5539,
-      "draws": 11204
+      "average_hits": 2.51879,
+      "normal_approx_z_vs_random_expectation": 1.5428,
+      "draws": 11205
     },
     "recent_cold": {
-      "total_hits": 27821,
+      "total_hits": 27824,
       "five_or_more_hits": 720,
-      "average_hits": 2.48313,
-      "normal_approx_z_vs_random_expectation": -1.3853,
-      "draws": 11204
+      "average_hits": 2.48318,
+      "normal_approx_z_vs_random_expectation": -1.3816,
+      "draws": 11205
     },
     "balanced_zones": {
-      "total_hits": 27987,
+      "total_hits": 27989,
       "five_or_more_hits": 734,
-      "average_hits": 2.49795,
-      "normal_approx_z_vs_random_expectation": -0.1686,
-      "draws": 11204
+      "average_hits": 2.4979,
+      "normal_approx_z_vs_random_expectation": -0.1722,
+      "draws": 11205
     },
     "blended_hot": {
-      "total_hits": 28187,
+      "total_hits": 28188,
       "five_or_more_hits": 750,
-      "average_hits": 2.5158,
-      "normal_approx_z_vs_random_expectation": 1.2973,
-      "draws": 11204
+      "average_hits": 2.51566,
+      "normal_approx_z_vs_random_expectation": 1.2863,
+      "draws": 11205
     },
     "same_time_repeat_hot": {
-      "total_hits": 28238,
+      "total_hits": 28240,
       "five_or_more_hits": 760,
-      "average_hits": 2.52035,
-      "normal_approx_z_vs_random_expectation": 1.6711,
-      "draws": 11204
+      "average_hits": 2.5203,
+      "normal_approx_z_vs_random_expectation": 1.6674,
+      "draws": 11205
     },
     "time_of_day_hot": {
-      "total_hits": 27929,
+      "total_hits": 27930,
       "five_or_more_hits": 730,
-      "average_hits": 2.49277,
-      "normal_approx_z_vs_random_expectation": -0.5937,
-      "draws": 11204
+      "average_hits": 2.49264,
+      "normal_approx_z_vs_random_expectation": -0.6047,
+      "draws": 11205
     },
     "recent_200_hot": {
-      "total_hits": 28198,
+      "total_hits": 28199,
       "five_or_more_hits": 740,
-      "average_hits": 2.51678,
-      "normal_approx_z_vs_random_expectation": 1.378,
-      "draws": 11204
+      "average_hits": 2.51664,
+      "normal_approx_z_vs_random_expectation": 1.3669,
+      "draws": 11205
     },
     "random_control": {
-      "total_hits": 27903,
+      "total_hits": 27905,
       "five_or_more_hits": 692,
-      "average_hits": 2.49045,
-      "normal_approx_z_vs_random_expectation": -0.7843,
-      "draws": 11204
+      "average_hits": 2.49041,
+      "normal_approx_z_vs_random_expectation": -0.7879,
+      "draws": 11205
     }
   },
   "by_year": {
@@ -587,74 +587,74 @@
     },
     "2026": {
       "long_term_hot": {
-        "total_hits": 2974,
+        "total_hits": 2975,
         "five_or_more_hits": 80,
-        "average_hits": 2.49288,
-        "normal_approx_z_vs_random_expectation": -0.1909,
-        "draws": 1193
+        "average_hits": 2.49162,
+        "normal_approx_z_vs_random_expectation": -0.2245,
+        "draws": 1194
       },
       "long_term_cold": {
-        "total_hits": 2913,
+        "total_hits": 2914,
         "five_or_more_hits": 70,
-        "average_hits": 2.44174,
-        "normal_approx_z_vs_random_expectation": -1.5611,
-        "draws": 1193
+        "average_hits": 2.44054,
+        "normal_approx_z_vs_random_expectation": -1.5941,
+        "draws": 1194
       },
       "recent_hot": {
-        "total_hits": 3043,
+        "total_hits": 3044,
         "five_or_more_hits": 79,
-        "average_hits": 2.55071,
-        "normal_approx_z_vs_random_expectation": 1.3589,
-        "draws": 1193
+        "average_hits": 2.54941,
+        "normal_approx_z_vs_random_expectation": 1.3247,
+        "draws": 1194
       },
       "recent_cold": {
-        "total_hits": 2929,
+        "total_hits": 2932,
         "five_or_more_hits": 79,
-        "average_hits": 2.45516,
-        "normal_approx_z_vs_random_expectation": -1.2017,
-        "draws": 1193
+        "average_hits": 2.45561,
+        "normal_approx_z_vs_random_expectation": -1.19,
+        "draws": 1194
       },
       "balanced_zones": {
-        "total_hits": 2973,
+        "total_hits": 2975,
         "five_or_more_hits": 84,
-        "average_hits": 2.49204,
-        "normal_approx_z_vs_random_expectation": -0.2134,
-        "draws": 1193
+        "average_hits": 2.49162,
+        "normal_approx_z_vs_random_expectation": -0.2245,
+        "draws": 1194
       },
       "blended_hot": {
-        "total_hits": 3017,
+        "total_hits": 3018,
         "five_or_more_hits": 88,
-        "average_hits": 2.52892,
-        "normal_approx_z_vs_random_expectation": 0.7749,
-        "draws": 1193
+        "average_hits": 2.52764,
+        "normal_approx_z_vs_random_expectation": 0.7409,
+        "draws": 1194
       },
       "same_time_repeat_hot": {
-        "total_hits": 3045,
+        "total_hits": 3047,
         "five_or_more_hits": 93,
-        "average_hits": 2.55239,
-        "normal_approx_z_vs_random_expectation": 1.4039,
-        "draws": 1193
+        "average_hits": 2.55193,
+        "normal_approx_z_vs_random_expectation": 1.392,
+        "draws": 1194
       },
       "time_of_day_hot": {
-        "total_hits": 3063,
+        "total_hits": 3064,
         "five_or_more_hits": 84,
-        "average_hits": 2.56748,
-        "normal_approx_z_vs_random_expectation": 1.8082,
-        "draws": 1193
+        "average_hits": 2.56616,
+        "normal_approx_z_vs_random_expectation": 1.7737,
+        "draws": 1194
       },
       "recent_200_hot": {
-        "total_hits": 3065,
+        "total_hits": 3066,
         "five_or_more_hits": 86,
-        "average_hits": 2.56915,
-        "normal_approx_z_vs_random_expectation": 1.8531,
-        "draws": 1193
+        "average_hits": 2.56784,
+        "normal_approx_z_vs_random_expectation": 1.8186,
+        "draws": 1194
       },
       "random_control": {
-        "total_hits": 2935,
+        "total_hits": 2937,
         "five_or_more_hits": 80,
-        "average_hits": 2.46018,
-        "normal_approx_z_vs_random_expectation": -1.0669,
-        "draws": 1193
+        "average_hits": 2.4598,
+        "normal_approx_z_vs_random_expectation": -1.0777,
+        "draws": 1194
       }
     }
   },
