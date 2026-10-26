@@ -1,0 +1,30 @@
+/* Shared LottoLab hero campaign headline. 
+   Intentionally scoped so no other headings, ticket grids or analytics change. */
+.hero h1.lab-headline{
+  font-size:clamp(34px,4.5vw,60px)!important;
+  line-height:1.08!important;
+  letter-spacing:-.045em!important;
+  max-width:100%;
+  text-wrap:balance;
+}
+.hero h1.lab-headline > em,
+.hero h1.lab-headline > span{
+  display:block;
+  font-size:.80em;
+  line-height:1.16;
+  font-style:normal;
+  letter-spacing:-.035em;
+  text-wrap:balance;
+}
+@media (min-width:701px) and (max-width:1000px){
+  .hero h1.lab-headline{font-size:clamp(32px,4.2vw,50px)!important}
+  .hero h1.lab-headline > em,.hero h1.lab-headline > span{font-size:.87em}
+}
+@media (max-width:700px){
+  .hero h1.lab-headline{font-size:clamp(31px,8.6vw,42px)!important;line-height:1.12!important;letter-spacing:-.035em!important}
+  .hero h1.lab-headline > em,.hero h1.lab-headline > span{font-size:.89em;line-height:1.17;letter-spacing:-.045em}
+}
+@media (max-width:360px){
+  .hero h1.lab-headline{font-size:31px!important}
+  .hero h1.lab-headline > em,.hero h1.lab-headline > span{font-size:.84em}
+}
