@@ -11,7 +11,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from math import sqrt
 from collections import Counter, deque, defaultdict
-from scripts.keno_model_audit import selections, MODELS
+from keno_model_audit import selections, MODELS
 
 ROOT=Path(__file__).resolve().parents[1]
 IN=ROOT/"data/keno-results.json"
