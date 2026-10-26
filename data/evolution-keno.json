@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "status": "experimental_evaluation_only",
+  "champion": "random_control",
+  "candidate": "blended_hot",
+  "candidate_verified": false,
+  "promotion_policy": "Manual review required even after passing strict tests; historical champion always stays the random control until independently confirmed.",
+  "reason": "No independently established improvement over a random control.",
+  "draws_in_database": 11405,
+  "evaluated_draws": 11205,
+  "discovery_draws": 8403,
+  "holdout_draws": 2802,
+  "discovery_cutoff_draw": "25111",
+  "last_evaluated_draw": "27913",
+  "last_evaluated_date": "2026-10-26",
+  "expected_matches_for_any_10_numbers": 2.5,
+  "selection_method": "Select best mean on first 75% of walk-forward evaluation; test exactly that candidate on final 25%. No future data used to create individual tickets.",
+  "thresholds": {
+    "minimum_discovery_draws": 1000,
+    "minimum_holdout_draws": 1000,
+    "paired_z_minimum": 3.5
+  },
+  "models": {
+    "long_term_hot": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.48292,
+        "five_or_more": 540
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.48822,
+        "five_or_more": 194
+      },
+      "comparison": {
+        "delta_vs_random": -0.0339,
+        "paired_z": -0.96,
+        "lower_95_delta": -0.1031,
+        "upper_95_delta": 0.03529
+      }
+    },
+    "long_term_cold": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.51553,
+        "five_or_more": 569
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.46895,
+        "five_or_more": 186
+      },
+      "comparison": {
+        "delta_vs_random": -0.05318,
+        "paired_z": -1.571,
+        "lower_95_delta": -0.11952,
+        "upper_95_delta": 0.01316
+      }
+    },
+    "recent_hot": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.51565,
+        "five_or_more": 560
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.52819,
+        "five_or_more": 180
+      },
+      "comparison": {
+        "delta_vs_random": 0.00607,
+        "paired_z": 0.178,
+        "lower_95_delta": -0.06071,
+        "upper_95_delta": 0.07284
+      }
+    },
+    "recent_cold": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.48197,
+        "five_or_more": 537
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.4868,
+        "five_or_more": 183
+      },
+      "comparison": {
+        "delta_vs_random": -0.03533,
+        "paired_z": -1.025,
+        "lower_95_delta": -0.1029,
+        "upper_95_delta": 0.03224
+      }
+    },
+    "balanced_zones": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.49149,
+        "five_or_more": 547
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.51713,
+        "five_or_more": 187
+      },
+      "comparison": {
+        "delta_vs_random": -0.005,
+        "paired_z": -0.143,
+        "lower_95_delta": -0.07357,
+        "upper_95_delta": 0.06357
+      }
+    },
+    "blended_hot": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.5172,
+        "five_or_more": 560
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.51106,
+        "five_or_more": 190
+      },
+      "comparison": {
+        "delta_vs_random": -0.01106,
+        "paired_z": -0.327,
+        "lower_95_delta": -0.07742,
+        "upper_95_delta": 0.05529
+      }
+    },
+    "same_time_repeat_hot": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.50422,
+        "five_or_more": 547
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.56852,
+        "five_or_more": 213
+      },
+      "comparison": {
+        "delta_vs_random": 0.0464,
+        "paired_z": 1.357,
+        "lower_95_delta": -0.02061,
+        "upper_95_delta": 0.1134
+      }
+    },
+    "time_of_day_hot": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.47447,
+        "five_or_more": 545
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.54711,
+        "five_or_more": 185
+      },
+      "comparison": {
+        "delta_vs_random": 0.02498,
+        "paired_z": 0.731,
+        "lower_95_delta": -0.04196,
+        "upper_95_delta": 0.09193
+      }
+    },
+    "recent_200_hot": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.50839,
+        "five_or_more": 548
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.5414,
+        "five_or_more": 192
+      },
+      "comparison": {
+        "delta_vs_random": 0.01927,
+        "paired_z": 0.559,
+        "lower_95_delta": -0.04835,
+        "upper_95_delta": 0.0869
+      }
+    },
+    "random_control": {
+      "discovery": {
+        "draws": 8403,
+        "average_matches": 2.47983,
+        "five_or_more": 495
+      },
+      "holdout": {
+        "draws": 2802,
+        "average_matches": 2.52213,
+        "five_or_more": 197
+      },
+      "comparison": {
+        "delta_vs_random": 0.0,
+        "paired_z": 0,
+        "lower_95_delta": 0.0,
+        "upper_95_delta": 0.0
+      }
+    }
+  },
+  "limitations": "Multiple testing and repeated reruns on growing history reduce independence; treat the confirmation as exploratory and require frozen prospective results. All valid Keno sets have identical theoretical draw odds."
+}
