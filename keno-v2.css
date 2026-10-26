@@ -144,3 +144,9 @@ html{scroll-behavior:auto!important}
   .hero{background-position:64% center}
   .hero h1{filter:drop-shadow(0 1px 6px rgba(250,253,255,.5))}
 }
+
+
+/* Clear Keno publication state for recent draw windows. */
+.keno-freshness{font-size:12px;line-height:1.5;color:#27677d;background:#e9f9fa;border:1px solid #c1e8ed;border-radius:10px;padding:11px 13px;margin:14px 0 5px}
+.keno-freshness.pending{color:#785a1a;background:#fff8e8;border-color:#f1db9b}
+.keno-freshness.verified{color:#126c58;background:#e3faf2;border-color:#b6e7d5}
