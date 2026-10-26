@@ -34,16 +34,27 @@ test("BYOK only sends request to fixed supported provider over HTTPS and summari
   assert.match(request.messages[request.messages.length-1].content,/1000/);
  }finally{d.window.close()}
 });
-test("BYOK settings buttons work and key does not appear in HTML",()=>{
- const d=setup(),w=d.window,api=w.LottoLabBYOK;
+test("key first loads actual models and selector only accepts provider output",async()=>{
+ const d=setup(),w=d.window,api=w.LottoLabBYOK;const calls=[];
  try{
-  const settings=w.document.querySelector(".llai-settings-toggle");assert.ok(settings);settings.click();
+  const settings=w.document.querySelector(".llai-settings-toggle");settings.click();
   const panel=w.document.getElementById("llai-byok-panel");assert.equal(panel.hidden,false);
-  const input=w.document.getElementById("llai-provider-key");input.value="sk-super-private-456";
-  w.document.getElementById("llai-consent").checked=true;
+  const key=w.document.getElementById("llai-provider-key"),select=w.document.getElementById("llai-model");
+  assert.equal(select.disabled,true);
+  key.value="sk-super-private-456";w.document.getElementById("llai-consent").checked=true;
+  w.fetch=async(url,request)=>{calls.push({url,request});return {ok:true,json:async()=>({data:[{id:"openai/gpt-5-mini",name:"GPT 5 mini",architecture:{output_modalities:["text"]}},{id:"acme/vision-only",architecture:{output_modalities:["image"]}}]})}};
+  w.document.getElementById("llai-fetch-models").click();
+  await new Promise(r=>setTimeout(r,25));
+  assert.equal(calls.length,1);
+  assert.equal(calls[0].url,"https://openrouter.ai/api/v1/models/user");
+  assert.equal(calls[0].request.headers.Authorization,"Bearer sk-super-private-456");
+  assert.equal(select.disabled,false);
+  assert.equal(select.options.length,2);
+  select.value="openai/gpt-5-mini";
   w.document.getElementById("llai-activate").click();
+  await new Promise(r=>setTimeout(r,25));
   assert.equal(api.active(),true);
-  assert.equal(input.value,"");
+  assert.equal(key.value,"");
   assert.ok(!panel.innerHTML.includes("sk-super-private-456"));
   w.document.getElementById("llai-disconnect").click();
   assert.equal(api.active(),false);
