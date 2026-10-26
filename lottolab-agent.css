@@ -72,3 +72,24 @@ button.llai-context:hover{background:#c8f6eb}
 button.llai-context:focus-visible{outline:3px solid #67d5c7;outline-offset:3px}
 .prediction-card>button.llai-context{margin:0 13px 13px}
 @media(max-width:730px){button.llai-context{font-size:10.5px}}
+
+
+/* Settings for optional private personal AI key. The key is never injected into markup. */
+#llai-root .llai-settings-toggle{border:1px solid #ffffff45;background:#ffffff16;color:#fff;border-radius:9px;min-width:31px;height:31px;font-size:21px;display:grid;place-items:center;padding:0}
+#llai-root .llai-settings-toggle:hover{background:#ffffff36}
+#llai-root .llai-byok-panel[hidden]{display:none!important}
+#llai-root .llai-byok-panel{position:absolute;z-index:4;inset:65px 0 0;background:#fff;display:flex;flex-direction:column;gap:7px;padding:16px 17px;overflow:auto;box-shadow:0 8px 24px #08193830}
+#llai-root .llai-byok-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#llai-root .llai-byok-head strong{font:850 18px Outfit,"DM Sans",sans-serif;color:#19345c}
+#llai-root .llai-byok-close{background:#eff4ff;border:1px solid #d4e1f4;border-radius:8px;color:#294173;font-size:24px;line-height:1;width:35px;height:35px}
+#llai-root .llai-byok-info{font-size:12px;color:#506884;line-height:1.6;margin:4px 0 6px}
+#llai-root .llai-byok-panel>label:not(.llai-byok-consent){font-size:12px;font-weight:800;color:#23416c;margin-top:6px}
+#llai-root .llai-byok-panel select,#llai-root .llai-byok-panel input:not([type=checkbox]){border:1px solid #c8d7ea;color:#24365c;background:#fbfcff;border-radius:9px;padding:11px 12px;font-size:13px;width:100%;min-height:42px}
+#llai-root .llai-byok-warning{font-size:11px;color:#7b5324;background:#fff7ea;border:1px solid #ecd4a9;padding:10px;border-radius:10px;line-height:1.5;margin:6px 0}
+#llai-root .llai-byok-consent{display:flex;gap:8px;align-items:flex-start;color:#354b68;font-size:12px;line-height:1.5}
+#llai-root .llai-byok-consent input{flex-shrink:0;margin-top:3px;accent-color:#16b7a5}
+#llai-root .llai-byok-actions{display:flex;gap:8px;margin-top:7px;flex-wrap:wrap}
+#llai-root .llai-byok-actions button{font-size:12px;font-weight:800;padding:10px 13px}
+#llai-root .llai-disconnect{background:#f5f6fd;border:1px solid #d7dce9;color:#495f81;border-radius:9px}
+#llai-root #llai-byok-status{color:#2e5976;font-size:12px;line-height:1.5;margin:8px 0}
+#llai-root .llai-byok-help{font-size:12px;color:#335c99;text-decoration:underline;margin:2px 0 14px}
