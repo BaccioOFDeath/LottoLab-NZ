@@ -1,0 +1,12 @@
+name = "lottolab-ai"
+main = "src/worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGIN = "https://baccioofdeath.github.io"
+AI_MODEL = "gpt-5-mini"
+HOURLY_LIMIT = "20"
+
+# Add RATE_LIMIT_KV in the Cloudflare dashboard after creating a KV namespace.
+# Add OPENAI_API_KEY as an encrypted Worker secret. Do not commit real keys.
