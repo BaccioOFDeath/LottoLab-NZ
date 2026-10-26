@@ -11,6 +11,7 @@ on:
       - 'scripts/keno_model_audit.py'
       - 'scripts/keno_slot_picks.py'
       - 'scripts/evolution_engine.py'
+      - 'scripts/forward_ledger.py'
       - 'tests/test_keno_slot_picks.py'
       - 'tests/test_keno_ticket_tools.cjs'
       - 'tests/test_keno_ui.cjs'
@@ -72,13 +73,15 @@ jobs:
         run: python scripts/keno_model_audit.py
       - name: Evolve model research with chronological holdout testing
         run: python scripts/evolution_engine.py
+      - name: Score locked Keno research predictions
+        run: python scripts/forward_ledger.py --game keno --results data/keno-results.json --predictions data/keno-slot-picks.json --ledger data/forward-ledger-keno.json
       - name: Publish new sourced records and dated research scorecards
         if: github.ref == 'refs/heads/main'
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/keno-*.json data/evolution-keno.json
+          git add data/keno-*.json data/evolution-keno.json data/forward-ledger-keno.json
           if git diff --cached --quiet; then echo "No Keno changes"; exit 0; fi
           git commit -m 'data: refresh Keno draw history and retained daily scorecard'
           git pull --rebase origin main
