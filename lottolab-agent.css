@@ -102,3 +102,14 @@ button.llai-context:focus-visible{outline:3px solid #67d5c7;outline-offset:3px}
 #llai-root .llai-setup-cta{display:block;width:100%;padding:10px 12px;background:#ecfdf8;color:#155d6f;border:1px solid #9ce8d6;border-radius:10px;font-size:12px;font-weight:850;line-height:1.3;text-align:center;cursor:pointer}
 #llai-root .llai-setup-cta:hover{background:#d7f9ed}
 @media(max-width:400px){#llai-root .llai-settings-toggle{min-width:83px;padding:0 7px!important;font-size:10px!important}#llai-root .llai-avatar{width:30px;height:30px}#llai-root .llai-heading strong{font-size:16px}}
+
+/* Official API key directory below the personal AI connection controls. */
+#llai-root .llai-api-directory{margin:13px 0 7px;padding:14px;border:1px solid #d8e5f2;border-radius:13px;background:#f6f9ff}
+#llai-root .llai-api-directory>strong{font:850 15px/1.3 Outfit,"DM Sans",sans-serif;color:#233c70}
+#llai-root .llai-api-directory>p{color:#5a6d88;font-size:11px;line-height:1.5;margin:7px 0 12px}
+#llai-root .llai-api-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#llai-root .llai-api-links a{display:flex;flex-direction:column;gap:5px;min-height:65px;padding:11px 10px;border:1px solid #cdddec;border-radius:9px;background:#fff;color:#26538e;text-decoration:none;font-size:12px;font-weight:850;line-height:1.25}
+#llai-root .llai-api-links a:hover{border-color:#3dcebc;background:#ebfdf9}
+#llai-root .llai-api-links small{font-size:10px;color:#677a91;font-weight:500;line-height:1.4}
+#llai-root .llai-api-directory>.llai-api-note{margin:12px 0 0;font-size:10px;color:#647289}
+@media(max-width:380px){#llai-root .llai-api-links{grid-template-columns:1fr}#llai-root .llai-api-links a{min-height:0}}
