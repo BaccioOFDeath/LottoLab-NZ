@@ -1,0 +1,4 @@
+{
+  "endpoint": "",
+  "note": "Leave blank for data-grounded research mode. To enable generative explanations, deploy the secured Cloudflare Worker, add its HTTPS URL here and configure server-side secrets. Never put an API key in this public file."
+}
