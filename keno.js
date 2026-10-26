@@ -203,7 +203,7 @@ function renderPredictions(){
  if(toggle){toggle.textContent=ticketsExpanded?'Show fewer tickets ↑':'View all 6 tickets ↓';toggle.setAttribute('aria-expanded',String(ticketsExpanded));toggle.onclick=()=>{ticketsExpanded=!ticketsExpanded;list.dataset.expanded=String(ticketsExpanded);toggle.textContent=ticketsExpanded?'Show fewer tickets ↑':'View all 6 tickets ↓';toggle.setAttribute('aria-expanded',String(ticketsExpanded))}}
  if(!picks||!Array.isArray(picks.models)||!picks.models.length){list.textContent='Dated Keno research tickets have not yet been published.';meta.textContent='Awaiting selections';score.textContent='No draw record or historical model performance is claimed without published selections.';if(toggle)toggle.hidden=true;return}
  if(toggle)toggle.hidden=picks.models.length<=2;
- const stale=picks.date!==nzDate(), eligible=Number(dailyPicks.first_scored_draw||0);
+ const stale=Boolean(picks.eligible_from&&Date.parse(picks.eligible_from)<=Date.now()), eligible=Number(picks.draw||picks.first_scored_draw||0);
  if(date)date.textContent=(stale?'PUBLISHED RESEARCH · ':'UPCOMING KENO DRAW · ')+formatDay(picks.date).toUpperCase()+(picks.time?' · '+picks.time+' · #'+picks.draw:'');
  const valid=records.filter(r=>r.date===picks.date&&(picks.draw?String(r.draw)===String(picks.draw):(!eligible||Number(r.draw)>=eligible)));
  const sets=valid.map(r=>({draw:r.draw,ns:new Set(r.numbers)}));
@@ -265,6 +265,21 @@ async function refreshModelAudit(){
   const note=document.createElement('p');note.className='small';note.textContent='Models tested chronologically without future data. Multiple comparisons and repeated tuning can overfit. Actual fair-draw probabilities are unchanged by these historical patterns.';target.append(note);
  }catch(e){target.textContent='Research audit not yet available: '+e.message+'. Only source-checked draws are displayed; no simulated performance.'}
 }
+function updateKenoFreshness(){
+ const target=$('kenoResultFreshness');if(!target)return;
+ const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Pacific/Auckland',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
+ const get=k=>parts.find(x=>x.type===k)?.value||'';
+ const today=[get('year'),get('month'),get('day')].join('-'),minutes=Number(get('hour'))*60+Number(get('minute'));
+ const recent=latest();
+ const due=[['10:00 am',600],['1:00 pm',780],['3:00 pm',900],['6:00 pm',1080]].filter(x=>minutes>=x[1]+2);
+ const expected=due.at(-1),todayResults=records.filter(x=>x.date===today);
+ const published=todayResults.some(x=>expected&&x.time===expected[0]);
+ target.classList.toggle('pending',Boolean(expected&&!published));
+ target.classList.toggle('verified',Boolean(expected&&published));
+ if(!expected){target.textContent='Next Keno draw at 10:00am NZ time. Latest published result: '+(recent?.date||'unavailable')+'.';}
+ else if(!published){target.textContent=expected[0]+' result awaiting source publication or our next refresh. Showing last available draw '+(recent?.draw||'—')+' ('+(recent?.time||'time unavailable')+'). Automatic checks continue; no winning numbers are guessed.';}
+ else{target.textContent='Latest published '+expected[0]+' result is loaded. Draw '+(recent?.draw||'—')+' · '+today+'.';}
+}
 function renderDrawChoices(){
  const el=$('slotChoice');if(!el)return;
  const slots=Array.isArray(slotPicks?.slots)?slotPicks.slots.slice().sort((a,b)=>+a.draw-+b.draw):[];
@@ -275,7 +290,7 @@ function renderDrawChoices(){
   targetDrawId=String((upcoming||slots.at(-1)).draw);
  el.replaceChildren();
  slots.slice(-28).forEach(p=>{const opt=document.createElement('option');opt.value=String(p.draw);
-  opt.textContent=p.date+' · '+p.time+' · #'+p.draw+(Date.parse(p.eligible_from)>now?' · upcoming':' · recorded');
+  opt.textContent=p.date+' · '+p.time+' · #'+p.draw+(Date.parse(p.eligible_from)>now?' · upcoming':(records.some(r=>String(r.draw)===String(p.draw))?' · result loaded':' · awaiting result'));
   el.append(opt)});
  el.value=String(targetDrawId);
  const selectedP=activeSlot();
@@ -286,11 +301,11 @@ async function refreshKeno(){
  try{
   const response=await fetch(base,{cache:'no-store'});if(!response.ok)throw Error('Keno history unavailable');
   const data=await response.json();let stored=[];try{stored=JSON.parse(localStorage.getItem(key)||'[]')}catch{}
-  records=merge(Array.isArray(data)?data:(data.draws||[]),stored);render();
+  records=merge(Array.isArray(data)?data:(data.draws||[]),stored);render();updateKenoFreshness();
  }catch(e){if(!records.length){try{records=merge([],JSON.parse(localStorage.getItem(key)||'[]'))}catch{records=[]};render();$('status').textContent='Unable to refresh remote history: '+e.message}}
  try{const p=await fetch('./data/keno-daily-picks.json',{cache:'no-store'});if(p.ok){dailyPicks=await p.json()}}catch{}
  try{const p=await fetch('./data/keno-slot-picks.json',{cache:'no-store'});if(p.ok){slotPicks=await p.json()}}catch{}
- renderDrawChoices();renderPredictions();renderChosenSetOdds();
+ renderDrawChoices();renderPredictions();renderChosenSetOdds();updateKenoFreshness();
  refreshModelAudit();
 }
 
