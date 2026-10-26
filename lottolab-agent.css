@@ -65,3 +65,10 @@
 }
 @media(max-width:360px){#llai-root .llai-launcher{padding:10px 11px;font-size:11px}#llai-root .llai-panel{bottom:calc(73px + env(safe-area-inset-bottom));height:calc(100dvh - 105px - env(safe-area-inset-bottom));max-height:calc(100dvh - 105px - env(safe-area-inset-bottom))}}
 @media(prefers-reduced-motion:reduce){#llai-root *,#llai-root *:before,#llai-root *:after{transition:none!important}}
+
+/* Context controls live in existing page cards, outside the floating chat root. */
+button.llai-context{display:inline-flex;align-items:center;justify-content:center;gap:5px;max-width:100%;border:1px solid #9de6db;background:#eafffa;color:#087b7b;border-radius:9px;padding:8px 11px;font:800 11px/1.3 "DM Sans",system-ui,sans-serif;cursor:pointer}
+button.llai-context:hover{background:#c8f6eb}
+button.llai-context:focus-visible{outline:3px solid #67d5c7;outline-offset:3px}
+.prediction-card>button.llai-context{margin:0 13px 13px}
+@media(max-width:730px){button.llai-context{font-size:10.5px}}
