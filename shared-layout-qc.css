@@ -1,0 +1,61 @@
+/* Shared LottoLab design audit — typography, mobile header, hero, CTA, dock.
+ * Last stylesheet on BOTH game pages, deliberately limited to branded chrome.
+ * Individual research modules retain their own data-specific layouts. */
+:root{--lab-ink:#13284b;--lab-accent:#51e1ce;--lab-gutter:20px;--lab-font:"DM Sans",system-ui,-apple-system,sans-serif;--lab-display:Outfit,"DM Sans",sans-serif}
+body.lab-game-lotto,body.lab-game-keno{font-family:var(--lab-font);-webkit-text-size-adjust:100%}
+body.lab-game-lotto :is(button,input,select,textarea),body.lab-game-keno :is(button,input,select,textarea){font-family:var(--lab-font)}
+body.lab-game-lotto .topline,body.lab-game-keno .topline{min-height:34px;font-size:12px;line-height:18px;font-weight:700;letter-spacing:.015em;display:flex;align-items:center}
+body.lab-game-lotto .topline-inner{width:100%;min-height:34px;align-items:center}
+body.lab-game-keno .topline{padding-top:7px;padding-bottom:7px}
+body.lab-game-lotto :is(.header,.topline),body.lab-game-keno :is(.site-header,.topline){max-width:100%}
+body.lab-game-lotto .brand,body.lab-game-keno .brand{display:flex;align-items:center;gap:9px;min-width:0}
+body.lab-game-lotto .brand-mark,body.lab-game-keno .brand-square{width:44px;height:44px;min-width:44px;min-height:44px;border-radius:12px;transform:none;font:900 28px/1 var(--lab-display);display:grid;place-items:center}
+body.lab-game-lotto .brand-type,body.lab-game-keno .brand strong{font:900 24px/1 var(--lab-display);letter-spacing:-.055em}
+body.lab-game-lotto .brand-type small,body.lab-game-keno .brand small{font:800 8px/1.2 var(--lab-font);letter-spacing:2.6px;margin-top:6px;white-space:nowrap}
+body.lab-game-lotto .game-mode-nav,body.lab-game-keno .game-switch{padding:4px;gap:3px;border-radius:13px;box-shadow:none}
+body.lab-game-lotto .game-mode-nav a,body.lab-game-keno .game-switch a{display:flex;align-items:center;justify-content:center;min-width:73px;min-height:43px;padding:9px 13px;border:0;border-radius:10px;font:800 13px/1.2 var(--lab-font);letter-spacing:0;text-decoration:none}
+body.lab-game-lotto .hero .hero-kicker,body.lab-game-keno .hero .eyebrow{font:850 11px/1.5 var(--lab-font);letter-spacing:2px;text-transform:uppercase}
+body.lab-game-lotto .hero h1.lab-headline,body.lab-game-keno .hero h1.lab-headline{font-family:var(--lab-display)!important;font-weight:900!important;font-size:clamp(40px,5vw,66px)!important;line-height:1.07!important;letter-spacing:-.05em!important;margin:22px 0 17px!important;text-wrap:balance}
+body.lab-game-lotto .hero h1.lab-headline>em,body.lab-game-keno .hero h1.lab-headline>span{font-size:.82em!important;line-height:1.17!important;letter-spacing:-.045em!important;font-style:normal}
+body.lab-game-lotto .hero-copy>p,body.lab-game-keno .hero-copy>p{font-family:var(--lab-font);font-size:clamp(15px,1.5vw,18px)!important;line-height:1.6!important;max-width:630px;margin:0!important;text-wrap:pretty}
+body.lab-game-lotto .hero-actions .btn,body.lab-game-keno .hero-actions a{font:850 15px/1.3 var(--lab-font)!important;border-radius:11px!important;min-height:53px!important;padding:14px 19px!important;gap:12px;text-decoration:none;display:flex;align-items:center;justify-content:space-between}
+body.lab-game-lotto .mobile-action-dock a,body.lab-game-keno .mobile-dock a{font:800 11px/1.25 var(--lab-font);text-align:center;white-space:nowrap}
+@media(max-width:900px){
+ body.lab-game-lotto .hero h1.lab-headline,body.lab-game-keno .hero h1.lab-headline{font-size:clamp(35px,6vw,54px)!important}
+}
+@media(max-width:720px){
+ :root{--lab-gutter:17px}
+ body.lab-game-lotto .topline,body.lab-game-keno .topline{min-height:34px;padding:7px 17px;font-size:11px;letter-spacing:.01em}
+ body.lab-game-lotto .topline-inner{min-height:20px;padding:0}
+ body.lab-game-lotto .header-inner,body.lab-game-keno .header-inner{height:76px;min-height:76px;gap:8px;align-items:center;padding-top:11px;padding-bottom:11px}
+ body.lab-game-lotto .shell.header-inner{padding-left:17px;padding-right:17px}
+ body.lab-game-keno .header-inner{padding-left:17px;padding-right:17px}
+ body.lab-game-lotto .brand-mark,body.lab-game-keno .brand-square{height:42px;width:42px;min-width:42px;min-height:42px;font-size:27px}
+ body.lab-game-lotto .brand-type,body.lab-game-keno .brand strong{font-size:22px}
+ body.lab-game-lotto .brand-type small,body.lab-game-keno .brand small{font-size:7px;letter-spacing:2px;margin-top:5px}
+ body.lab-game-lotto .game-mode-nav,body.lab-game-keno .game-switch{margin:0;gap:2px;padding:4px;border-radius:12px}
+ body.lab-game-lotto .game-mode-nav a,body.lab-game-keno .game-switch a{min-width:67px;min-height:42px;padding:8px 10px;font-size:12px;border-radius:9px}
+ body.lab-game-lotto .hero .hero-kicker,body.lab-game-keno .hero .eyebrow{font-size:10px!important;letter-spacing:1.5px!important;line-height:1.5}
+ body.lab-game-lotto .hero-grid,body.lab-game-keno .hero-inner{min-height:550px!important}
+ body.lab-game-lotto .hero-copy,body.lab-game-keno .hero-copy{min-height:550px!important;padding:28px 0 29px!important;width:100%!important;max-width:100%!important;display:flex;flex-direction:column;align-items:stretch}
+ body.lab-game-lotto .hero .shell{padding-left:var(--lab-gutter);padding-right:var(--lab-gutter)}
+ body.lab-game-keno .hero-inner{padding:0 var(--lab-gutter)!important;display:block}
+ body.lab-game-lotto .hero h1.lab-headline,body.lab-game-keno .hero h1.lab-headline{font-size:clamp(31px,8vw,43px)!important;line-height:1.08!important;letter-spacing:-.047em!important;margin:20px 0 14px!important;max-width:100%!important}
+ body.lab-game-lotto .hero h1.lab-headline>em,body.lab-game-keno .hero h1.lab-headline>span{font-size:.89em!important;line-height:1.15!important}
+ body.lab-game-lotto .hero-copy>p,body.lab-game-keno .hero-copy>p{font-size:14px!important;line-height:1.56!important;max-width:360px!important;width:100%!important;margin:0!important}
+ body.lab-game-lotto .hero-actions,body.lab-game-keno .hero-actions{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:9px!important;max-width:none!important;width:100%!important;margin-top:auto!important;padding:0!important}
+ body.lab-game-lotto .hero-actions .btn,body.lab-game-keno .hero-actions a{width:100%!important;min-height:49px!important;padding:13px 16px!important;font-size:13px!important;border-radius:10px!important;margin:0!important;flex-shrink:0}
+ body.lab-game-lotto .mobile-action-dock,body.lab-game-keno .mobile-dock{height:70px;min-height:70px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:0;padding:8px 8px max(8px,env(safe-area-inset-bottom));background:#fffffff4;border-top:1px solid #e1e7f2;box-shadow:0 -3px 15px #1f336012;z-index:60}
+ body.lab-game-lotto .mobile-action-dock a,body.lab-game-keno .mobile-dock a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px!important;min-width:0;min-height:50px;padding:2px!important}
+ body.lab-game-lotto .mobile-action-dock a span,body.lab-game-keno .mobile-dock a span{font-size:23px!important;line-height:1.1}
+ body.lab-game-lotto #llai-root .llai-launcher,body.lab-game-keno #llai-root .llai-launcher{right:15px;bottom:calc(82px + env(safe-area-inset-bottom));padding:11px 13px}
+ body.lab-game-lotto #llai-root .llai-panel,body.lab-game-keno #llai-root .llai-panel{bottom:calc(80px + env(safe-area-inset-bottom))}
+}
+@media(max-width:390px){
+ body.lab-game-lotto .header-inner,body.lab-game-keno .header-inner{padding-left:10px!important;padding-right:10px!important;gap:5px}
+ body.lab-game-lotto .game-mode-nav a,body.lab-game-keno .game-switch a{min-width:52px;padding:8px 7px;font-size:11px}
+ body.lab-game-lotto .brand-mark,body.lab-game-keno .brand-square{min-width:36px;width:36px;min-height:36px;height:36px;font-size:23px}
+ body.lab-game-lotto .brand-type,body.lab-game-keno .brand strong{font-size:19px}
+ body.lab-game-lotto .brand-type small,body.lab-game-keno .brand small{font-size:6px;letter-spacing:1.7px}
+ body.lab-game-lotto .hero h1.lab-headline,body.lab-game-keno .hero h1.lab-headline{font-size:30px!important}
+}
