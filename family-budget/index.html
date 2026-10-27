@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101c2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Our Budget">
+  <meta name="description" content="A private, mobile-first family budget, spending tracker and mortgage planner.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <title>Our Budget · Family finances</title>
+  <style>
+    :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;color:#152239;background:#f4f6fa;font-synthesis:none}
+    *{box-sizing:border-box}html{min-height:100%;scroll-behavior:smooth}body{margin:0;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+    .shell{max-width:1100px;margin:0 auto;padding:26px 26px 110px}.top{display:flex;justify-content:space-between;align-items:center;margin:0 0 28px}.brand{display:flex;align-items:center;gap:12px}.brandmark{display:grid;place-items:center;background:#102136;color:#fff;width:44px;height:44px;border-radius:15px;font-size:22px;box-shadow:0 8px 22px #162f4930}.brand small{font-size:10px;letter-spacing:2.1px;font-weight:800;color:#7f8b9c}.brand strong{display:block;font-size:19px;letter-spacing:-.6px}.topright{display:flex;align-items:center;gap:8px}
+    .pill{padding:9px 12px;background:#e7f2ec;border-radius:50px;color:#1b745c;font-size:12px;font-weight:800;white-space:nowrap}.pill.local{background:#e6eaf0;color:#607083}.iconbutton{border:0;background:#fff;border-radius:12px;padding:10px 13px;color:#32445d;box-shadow:0 3px 12px #263d5210}
+    .layout{display:grid;grid-template-columns:1fr;gap:22px}.eyebrow{font-size:11px;letter-spacing:1.8px;font-weight:850;color:#8490a1;text-transform:uppercase;margin:0 0 10px}.page-title{font-size:32px;letter-spacing:-1.2px;margin:0 0 6px}.sub{color:#758195;font-size:14px;margin:0 0 22px}
+    .card{background:#fff;border:1px solid #e9edf3;border-radius:21px;padding:22px;box-shadow:0 8px 34px #1f38500b}.hero{background:linear-gradient(135deg,#14263f,#203f53 68%,#225966);color:#fff;padding:25px;border-radius:24px;box-shadow:0 18px 40px #0e274d25;overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff20;border-radius:50%;right:-140px;top:-110px;box-shadow:0 0 0 45px #ffffff06,0 0 0 90px #ffffff04;pointer-events:none}
+    .hero .eyebrow{color:#b2c9d7}.hero h2{font-weight:750;font-size:43px;letter-spacing:-2px;margin:5px 0}.hero .sm{font-size:13px;color:#c0d2dc}.heroline{display:flex;justify-content:space-between;gap:10px;margin-top:23px;border-top:1px solid #ffffff26;padding-top:16px}.heroitem strong{font-size:20px;display:block;margin-top:3px}.heroitem span{font-size:11px;color:#bad0de}
+    .hero-progress{height:8px;background:#ffffff24;margin-top:20px;border-radius:20px;overflow:hidden}.hero-progress span{height:100%;display:block;border-radius:20px;background:#83e6c0;transition:width .25s}
+    .statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.stat{padding:19px}.stat .label{color:#7f8a9b;font-size:12px;font-weight:650}.stat b{font-size:23px;display:block;letter-spacing:-.6px;margin:6px 0}.stat small{color:#8793a4;font-size:11px}
+    .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 14px}.section-head h2{font-size:20px;letter-spacing:-.5px;margin:0}.linkbtn{background:none;border:0;color:#136d67;font-size:13px;font-weight:800;padding:7px}
+    .categorylist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.category{padding:16px 17px}.cat-head{display:flex;gap:10px;align-items:center;justify-content:space-between}.cat-head b{font-size:13px;line-height:1.3}.cat-head span{font-size:12px;color:#758398}.amountline{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:12px}.amountline b{font-size:19px;letter-spacing:-.5px}.amountline small{font-size:11px;color:#8090a0}.track{height:7px;background:#edf1f5;border-radius:20px;overflow:hidden;margin-top:12px}.track span{display:block;height:100%;background:#24a88e;border-radius:20px;transition:width .2s}.track span.over{background:#e66f58}
+    .weekrow{display:flex;justify-content:space-between;align-items:center;gap:12px}.weekrow .actions{display:flex;gap:5px}.weekrow strong{font-size:14px}.weekrow button{border:1px solid #e9edf2;border-radius:11px;background:white;padding:10px 14px;color:#38506b}
+    .primary{background:#117d70;color:#fff;border:0;border-radius:13px;padding:13px 19px;font-weight:800;box-shadow:0 8px 20px #13847725}.secondary{background:#eef3f7;color:#243d54;border:0;border-radius:13px;padding:12px 15px;font-weight:800}.danger{background:#ffefef;border:0;color:#ad2e3f;padding:10px 13px;border-radius:11px;font-weight:800}
+    .btnrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px}.empty{text-align:center;padding:30px 18px;color:#8995a2;font-size:14px}.empty b{display:block;color:#2b4059;font-size:15px;margin-bottom:5px}.txlist{display:flex;flex-direction:column;gap:9px}.transaction{display:flex;align-items:center;gap:12px;padding:15px;border:1px solid #e9edf4;border-radius:15px;background:#fff}.txicon{width:42px;height:42px;display:grid;place-items:center;background:#eaf4f1;color:#167a67;border-radius:14px;font-size:19px;flex:none}.txbody{flex:1;min-width:0}.txbody b{display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;font-size:14px}.txbody small{color:#85909f;font-size:11px}.txright{text-align:right}.txright strong{display:block;font-size:15px}.txright button{background:none;border:0;color:#67819a;font-size:11px;padding:3px 0}
+    .nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e7ebf1;box-shadow:0 -8px 30px #0d223610;display:flex;justify-content:center;padding:10px max(15px,env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom))}.navinner{display:flex;width:100%;max-width:670px;justify-content:space-between}.navbutton{border:none;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:62px;padding:7px 3px;color:#8b98a9;font-size:10px;font-weight:780}.navbutton span{font-size:21px;line-height:1.1}.navbutton.active{color:#167d6b}.fab{position:fixed;z-index:11;right:max(26px,calc((100vw - 1050px)/2 + 14px));bottom:91px;width:57px;height:57px;border-radius:19px;display:grid;place-items:center;border:4px solid #f4f6fa;background:#168b79;color:white;font-size:29px;box-shadow:0 14px 28px #076b594a}
+    .grid-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}.field label{font-size:12px;font-weight:780;color:#536277}.field input,.field select,.field textarea{width:100%;border:1px solid #dce5ed;border-radius:12px;background:#fbfcfe;color:#1b2e46;padding:12px 13px;outline-color:#258b80}.field input:focus,.field select:focus{border-color:#178b7b}.field .hint{color:#919dad;font-size:11px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.formgrid .full{grid-column:1/-1}
+    .budgetrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #eef0f4}.budgetrow:last-child{border-bottom:0}.budgetrow .name{font-size:14px;font-weight:750}.budgetrow small{font-size:11px;color:#94a0ad}.budgetrow .edit{background:#f2f6fa;border:none;border-radius:11px;padding:10px 12px;font-weight:800;color:#23445d;min-width:100px}
+    .notice{font-size:13px;line-height:1.6;color:#596d83;background:#eef5f8;border-radius:14px;padding:14px 16px}.warn{background:#fff4e5;color:#8d5a20}.success{background:#e7f5ee;color:#16674f}.alert{background:#fff0ed;color:#a44d3c}.small{font-size:12px;color:#8290a2;line-height:1.55}.split{display:flex;align-items:center;justify-content:space-between;gap:12px}.money-big{font-size:32px;letter-spacing:-1.2px;font-weight:790;margin:7px 0}.tag{font-size:10px;letter-spacing:.4px;background:#e5f4ee;color:#14856d;border-radius:7px;padding:5px 7px;display:inline-block;font-weight:800}
+    .chart{display:flex;align-items:flex-end;height:137px;gap:6px;padding:12px 0 0;border-bottom:1px solid #edf1f5}.barcell{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}.bar{width:100%;max-width:38px;min-height:2px;background:#18a68f;border-radius:7px 7px 0 0}.bar.missing{background:#dce3ed;height:4px!important}.bar.over{background:#e8836f}.axis{display:flex;justify-content:space-between;color:#95a2af;font-size:10px;margin-top:6px}
+    .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#1a3145;color:#fff;padding:12px 18px;border-radius:12px;font-size:13px;box-shadow:0 12px 30px #12263f33;z-index:50;max-width:90vw}.toast.error{background:#a83e45}.screen{animation:appear .18s ease-out}@keyframes appear{from{opacity:.8;transform:translateY(4px)}to{opacity:1;transform:none}}
+    dialog{border:0;border-radius:23px;padding:0;width:min(94vw,470px);max-height:88vh;box-shadow:0 23px 80px #14253f55;overflow-y:auto}dialog::backdrop{background:#0b182c80}.modal{padding:24px}.modal h2{margin:0 0 5px;font-size:22px}.modal .close{position:absolute;right:20px;top:18px;background:#edf2f6;border:0;width:32px;height:32px;border-radius:10px;font-size:18px}
+    .divider{height:1px;background:#edf0f5;margin:20px 0}pre{white-space:pre-wrap;word-break:break-word}
+    @media(max-width:700px){.shell{padding:20px 15px 116px}.brandmark{width:42px;height:42px}.page-title{font-size:27px}.top{margin-bottom:23px}.statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.statgrid .stat:last-child{grid-column:span 2}.categorylist{grid-template-columns:1fr}.card{padding:18px}.hero h2{font-size:38px}.hero{padding:23px}.grid-two{grid-template-columns:1fr}.formgrid{gap:12px}.heroitem strong{font-size:16px}.fab{right:17px;bottom:91px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="top">
+      <div class="brand"><div class="brandmark">⌂</div><div><small>HOME · MONEY · FUTURE</small><strong>Our Budget</strong></div></div>
+      <div class="topright"><span class="pill local" id="cloud-pill">On this device</span><button class="iconbutton" aria-label="Settings" data-tab="settings">⚙</button></div>
+    </header>
+    <main id="app" aria-live="polite"></main>
+  </div>
+  <button class="fab" id="quick-add" aria-label="Add a transaction">+</button>
+  <nav class="nav" aria-label="Main navigation"><div class="navinner">
+    <button class="navbutton active" data-tab="home"><span>◫</span>Overview</button>
+    <button class="navbutton" data-tab="activity"><span>⇄</span>Activity</button>
+    <button class="navbutton" data-tab="budget"><span>◉</span>Budget</button>
+    <button class="navbutton" data-tab="mortgage"><span>⌂</span>Mortgage</button>
+    <button class="navbutton" data-tab="settings"><span>⚙</span>Settings</button>
+  </div></nav>
+  <dialog id="dialog"><div class="modal" id="modal-content"></div></dialog>
+  <input type="file" id="import-file" accept=".json,application/json" hidden>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+  (() => {
+    'use strict';
+    const STORAGE='our-budget-v1';
+    const CLOUD_STORAGE='our-budget-cloud-v1';
+    const money=n=>new Intl.NumberFormat('en-NZ',{style:'currency',currency:'NZD',maximumFractionDigits:2}).format(Number(n)||0);
+    const compact=n=>new Intl.NumberFormat('en-NZ',{style:'currency',currency:'NZD',maximumFractionDigits:0}).format(Number(n)||0);
+    const el=id=>document.getElementById(id);
+    const h=s=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+    const id=()=>crypto.randomUUID ? crypto.randomUUID():'id-'+Date.now()+'-'+Math.random().toString(36).slice(2);
+    const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
+    const monday=s=>{let d=new Date(String(s||today())+'T12:00:00');d.setDate(d.getDate()-(d.getDay()+6)%7);return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
+    const plusDays=(date,n)=>{const d=new Date(date+'T12:00:00');d.setDate(d.getDate()+n);return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
+    const shortdate=s=>new Date(s+'T12:00:00').toLocaleDateString('en-NZ',{day:'numeric',month:'short'});
+    const categoriesDefault=['Mortgage','Groceries & household','Electricity & gas','Council rates','House & contents insurance','Internet & phones','Fuel (free through work)','Vehicle insurance, reg & WOF','Vehicle repairs & tyres','Child & school','Clothing & personal care','Medical & pharmacy','Eating out & leisure','Emergency savings','Home maintenance fund','General contingency'].map((name,i)=>({id:'cat-'+(i+13),name,weekly:0,kind: i===0?'Mortgage':i===6?'Benefit':i===13||i===14?'Savings':'Spending'}));
+    const defaults=()=>({version:1,settings:{myWeeklyNet:0,partnerFortnightlyNet:0,existingDebt:0,salePrice:0,purchasePrice:0,costs:0,extraCash:0,interest:5.5,years:30,growth:3},categories:categoriesDefault,transactions:[],changedAt:new Date().toISOString()});
+    const clone=x=>JSON.parse(JSON.stringify(x));
+    const normalise=x=>{const blank=defaults();if(!x||typeof x!=='object')return blank;const settings=Object.assign({},blank.settings,x.settings||{});const categories=Array.isArray(x.categories)?x.categories:blank.categories;const transactions=Array.isArray(x.transactions)?x.transactions:[];return {version:1,settings,categories:categories.filter(c=>c&&typeof c.name==='string').map(c=>({id:String(c.id||id()),name:c.name.slice(0,80),kind:c.kind||'Spending',weekly:Math.max(0,Number(c.weekly)||0)})),transactions:transactions.filter(t=>t&&t.date&&t.categoryId).map(t=>({id:String(t.id||id()),date:String(t.date).slice(0,10),categoryId:String(t.categoryId),description:String(t.description||'').slice(0,160),notes:String(t.notes||'').slice(0,300),amount:Math.max(0,Number(t.amount)||0),updatedAt:t.updatedAt||new Date().toISOString(),deleted:!!t.deleted})),changedAt:x.changedAt||new Date().toISOString()};};
+    let data;try{data=normalise(JSON.parse(localStorage.getItem(STORAGE)))}catch{data=defaults()}
+    let current='home', week=monday(today()), sb=null, session=null, familyId=null, cloudRevision=0, channel=null, cloudCfg=null, busy=false, pendingInvitation=null;
+    try{cloudCfg=JSON.parse(localStorage.getItem(CLOUD_STORAGE)||'null')}catch{}
+    try{pendingInvitation=JSON.parse(sessionStorage.getItem('budget-pending-invite')||'null')}catch{}
+    const net=()=>Number(data.settings.myWeeklyNet||0)+Number(data.settings.partnerFortnightlyNet||0)/2;
+    const loan=()=>Math.max(0,Number(data.settings.purchasePrice||0)-Number(data.settings.salePrice||0)+Number(data.settings.existingDebt||0)+Number(data.settings.costs||0)-Number(data.settings.extraCash||0));
+    const mortgage=()=>{const p=loan(),n=Number(data.settings.years||30)*12,r=Number(data.settings.interest||0)/1200;return n>0?(r>0?p*r/(1-Math.pow(1+r,-n))*12/52:p/n*12/52):0};
+    const allowance=c=>c.name==='Mortgage'?mortgage():Number(c.weekly||0);
+    const planned=()=>data.categories.reduce((s,c)=>s+allowance(c),0);
+    const transactions=()=>data.transactions.filter(x=>!x.deleted);
+    const weekTx=()=>transactions().filter(t=>monday(t.date)===week);
+    const spentFor=c=>weekTx().filter(t=>t.categoryId===c.id).reduce((s,t)=>s+t.amount,0);
+    const spent=()=>weekTx().reduce((s,t)=>s+t.amount,0);
+    const pct=(a,b)=>b>0?Math.min(100,Math.max(0,a/b*100)):0;
+    const isReady=()=>net()>0&&Number(data.settings.purchasePrice||0)>0;
+    const displayWeek=()=>shortdate(week)+' – '+shortdate(plusDays(week,6));
+    const toast=(s,error=false)=>{document.querySelector('.toast')?.remove();const n=document.createElement('div');n.className='toast'+(error?' error':'');n.textContent=s;document.body.append(n);setTimeout(()=>n.remove(),3400)};
+    const setTab=t=>{current=t;window.scrollTo(0,0);render()};
+    const saveLocal=()=>{data.changedAt=new Date().toISOString();localStorage.setItem(STORAGE,JSON.stringify(data));render();if(familyId)pushCloud()};
+    const kindIcon=name=>/mortgage/i.test(name)?'⌂':/grocer/i.test(name)?'▤':/electric/i.test(name)?'ϟ':/saving|fund/i.test(name)?'↗':/vehicle|fuel/i.test(name)?'▰':/school|child/i.test(name)?'✿':'◈';
+    const weekControls=()=>'<div class="weekrow"><div><div class="eyebrow" style="margin-bottom:5px">Selected week</div><strong>'+h(displayWeek())+'</strong></div><div class="actions"><button data-action="prev" aria-label="Previous week">‹</button><button data-action="now">Today</button><button data-action="next" aria-label="Next week">›</button></div></div>';
+    const noData=()=>'<div class="notice warn">This is a blank, private budget. Import your starter budget JSON in <button class="linkbtn" data-tab="settings">Settings</button> to load your figures. No financial data is built into the public website.</div>';
+    function home(){
+      const remain=net()-planned(),recorded=spent(),housing=mortgage(),cats=data.categories.filter(c=>c.name!=='Fuel (free through work)');
+      return '<div class="screen"><div class="eyebrow">Your money at a glance</div><h1 class="page-title">The bigger picture.</h1><p class="sub">Know where your money goes, one week at a time.</p>'+
+      (!isReady()?noData():'')+
+      '<section class="hero"><div class="eyebrow">Household take-home · per week</div><h2>'+money(net())+'</h2><div class="sm">Your planned budget in one place</div><div class="hero-progress"><span style="width:'+pct(planned(),net())+'%"></span></div><div class="hero-line"></div><div class="hero-line"></div><div class="hero-line"></div><div class="hero-line"></div><div class="hero-line"></div><div class="hero-line"></div><div class="hero-line"></div><div class="hero-line"></div><div class="heroline"><div class="heroitem"><span>Planned weekly spending</span><strong>'+money(planned())+'</strong></div><div class="heroitem"><span>'+ (remain<0?'Overallocated':'Unallocated') +'</span><strong>'+money(Math.abs(remain))+'</strong></div></div></section>'+
+      '<div class="statgrid" style="margin-top:14px"><div class="card stat"><span class="label">Mortgage / week</span><b>'+compact(housing)+'</b><small>'+Number(data.settings.interest||0).toFixed(2)+'% rate scenario</small></div><div class="card stat"><span class="label">Logged this week</span><b>'+compact(recorded)+'</b><small>'+weekTx().length+' transactions</small></div><div class="card stat"><span class="label">Budget left this week</span><b style="color:'+(planned()-recorded<0?'#bf544d':'#138575')+'">'+compact(planned()-recorded)+'</b><small>Including unlogged allowances</small></div></div>'+
+      '<div class="section-head"><h2>This week</h2><button class="linkbtn" data-tab="activity">All activity →</button></div><div class="card">'+weekControls()+'</div>'+
+      '<div class="section-head"><h2>Budget by category</h2><button class="linkbtn" data-tab="budget">Edit budget →</button></div><div class="categorylist">'+cats.map(c=>{const sp=spentFor(c),a=allowance(c);return '<div class="card category"><div class="cat-head"><b>'+h(c.name)+'</b><span>'+h(c.kind)+'</span></div><div class="amountline"><b>'+compact(sp)+'</b><small>of '+compact(a)+'</small></div><div class="track"><span class="'+(sp>a&&a>=0?'over':'')+'" style="width:'+pct(sp,a)+'%"></span></div></div>'}).join('')+'</div>'+
+      '<div class="section-head"><h2>Recent transactions</h2><button class="linkbtn" data-tab="activity">View all →</button></div>'+transactionList(weekTx().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4))+
+      '</div>';
+    }
+    function transactionList(items){if(!items.length)return '<div class="card empty"><b>Nothing recorded yet</b>Add expenses, transfers and savings contributions using the green + button.</div>';
+      return '<div class="txlist">'+items.map(t=>{const c=data.categories.find(c=>c.id===t.categoryId);return '<div class="transaction"><div class="txicon">'+kindIcon(c?.name||'')+'</div><div class="txbody"><b>'+h(t.description||c?.name||'Transaction')+'</b><small>'+h(c?.name||'Other')+' · '+h(shortdate(t.date))+'</small></div><div class="txright"><strong>'+money(t.amount)+'</strong><button data-action="edit-tx" data-id="'+h(t.id)+'">Edit</button></div></div>'}).join('')+'</div>';}
+    function activity(){
+      const all=weekTx().slice().sort((a,b)=>b.date.localeCompare(a.date));
+      return '<div class="screen"><div class="eyebrow">Every dollar accounted for</div><h1 class="page-title">Activity</h1><p class="sub">Log payments, bills, and money moved to savings.</p><div class="card">'+weekControls()+'</div><div class="statgrid" style="margin:15px 0"><div class="card stat"><span class="label">Logged</span><b>'+compact(spent())+'</b></div><div class="card stat"><span class="label">Weekly limit</span><b>'+compact(planned())+'</b></div><div class="card stat"><span class="label">Transactions</span><b>'+all.length+'</b></div></div><div class="section-head"><h2>Transactions</h2><button class="primary" data-action="add">+ Add new</button></div>'+transactionList(all)+
+      '<div class="section-head"><h2>52-week overview</h2></div>'+historyChart()+'</div>';
+    }
+    function historyChart(){
+      const weeks=Array.from({length:13},(_,i)=>plusDays(week,-(12-i)*7));
+      const a=weeks.map(k=>{const ts=transactions().filter(t=>monday(t.date)===k);return {k,actual:ts.reduce((s,t)=>s+t.amount,0),count:ts.length}});
+      const max=Math.max(planned(),...a.map(v=>v.actual),1);
+      return '<div class="card"><div class="small">Green = recorded spending · coral = over budget · grey = no transactions logged</div><div class="chart">'+a.map(v=>'<div class="barcell" title="'+h(v.k)+' · '+money(v.actual)+'"><div class="bar '+(!v.count?'missing':v.actual>planned()?'over':'')+'" style="height:'+(v.count?Math.max(4,v.actual/max*100):3)+'%"></div></div>').join('')+'</div><div class="axis"><span>'+h(shortdate(a[0].k))+'</span><span>Last 13 weeks</span><span>'+h(shortdate(a[12].k))+'</span></div></div>';
+    }
+    function budget(){
+      const rem=net()-planned();
+      return '<div class="screen"><div class="eyebrow">Make a plan you can live with</div><h1 class="page-title">Weekly budget</h1><p class="sub">Tap any amount to adjust your spending limit.</p>'+
+      '<div class="hero"><div class="eyebrow">'+(rem>=0?'Available after planned spending':'More allocated than income')+'</div><h2>'+money(Math.abs(rem))+'</h2><div class="sm">Income '+money(net())+' · Planned '+money(planned())+'</div></div>'+
+      '<div class="section-head"><h2>Your categories</h2><button class="linkbtn" data-action="new-cat">+ New category</button></div><div class="card">'+data.categories.map(c=>'<div class="budgetrow"><div><div class="name">'+h(c.name)+'</div><small>'+h(c.kind)+(c.name==='Mortgage'?' · calculated automatically':'')+'</small></div><button class="edit" data-action="edit-cat" data-id="'+h(c.id)+'">'+money(allowance(c))+' ✎</button></div>').join('')+'</div>'+
+      '<div class="notice" style="margin-top:15px">Savings and reserve categories are allocations, not actual money saved. Record a savings transfer in Activity when you move the money. Fuel starts at $0 because it is covered through work.</div></div>';
+    }
+    function projected(y){const s=data.settings,home=Number(s.purchasePrice||0)*Math.pow(1+Number(s.growth||0)/100,y);const p=loan(),r=Number(s.interest||0)/1200,n=Number(s.years||30)*12,months=Math.min(n,y*12);const m=n>0?(r>0?p*r/(1-Math.pow(1+r,-n)):p/n):0;const remaining=Math.max(0,r===0?p-m*months:p*Math.pow(1+r,months)-m*(Math.pow(1+r,months)-1)/r);return {home,remaining,equity:home-remaining};}
+    const mortgageFields=[['myWeeklyNet','Your take-home / week ($)'],['partnerFortnightlyNet','Partner take-home / fortnight ($)'],['existingDebt','Current home loans ($)'],['salePrice','Expected existing-house sale ($)'],['purchasePrice','New house purchase price ($)'],['costs','Legal, agent and moving costs ($)'],['extraCash','Extra cash contributed ($)'],['interest','Interest rate (%)'],['years','Mortgage term (years)'],['growth','House price growth / year (%)']];
+    function mortgagePage(){
+      const l=loan(),m=mortgage(),growth=projected(Number(data.settings.years||30));
+      return '<div class="screen"><div class="eyebrow">Your next home</div><h1 class="page-title">Mortgage planner</h1><p class="sub">Change the assumptions and see the effect instantly.</p>'+
+      '<div class="hero"><div class="eyebrow">Estimated new home loan</div><h2>'+compact(l)+'</h2><div class="heroline"><div class="heroitem"><span>Weekly payment</span><strong>'+compact(m)+'</strong></div><div class="heroitem"><span>Loan to value</span><strong>'+(Number(data.settings.purchasePrice)>0?(l/data.settings.purchasePrice*100).toFixed(1):'0.0')+'%</strong></div></div></div>'+
+      '<div class="section-head"><h2>Purchase assumptions</h2></div><div class="card"><form id="mortgage-form"><div class="formgrid">'+mortgageFields.map(f=>'<div class="field"><label for="f-'+f[0]+'">'+h(f[1])+'</label><input id="f-'+f[0]+'" name="'+f[0]+'" type="number" step="any" min="0" value="'+(Number(data.settings[f[0]])||0)+'" required></div>').join('')+'</div><div class="btnrow" style="margin-top:17px"><button class="primary" type="submit">Update my scenario</button></div></form></div>'+
+      '<div class="section-head"><h2>30-year outlook</h2></div><div class="statgrid"><div class="card stat"><span class="label">Monthly repayment</span><b>'+compact(m*52/12)+'</b></div><div class="card stat"><span class="label">Total loan interest</span><b>'+compact(m*52*Number(data.settings.years||30)-l)+'</b></div><div class="card stat"><span class="label">Projected home equity</span><b>'+compact(growth.equity)+'</b><small>Year '+h(data.settings.years)+'</small></div></div>'+
+      '<div class="card" style="margin-top:14px"><div class="small">Illustrative future values, not a valuation. Assumes one constant rate and steady house-price growth.</div><div class="budgetrow"><div class="name">Years</div><b>Home value / Loan left</b></div>'+[0,5,10,15,20,25,30].map(y=>{let p=projected(y);return '<div class="budgetrow"><div class="name">Year '+y+'</div><div style="text-align:right;font-size:13px"><b>'+compact(p.home)+'</b><br><small>'+compact(p.remaining)+' debt</small></div></div>'}).join('')+'</div></div>';
+    }
+    function settings(){
+      const connected=!!familyId;
+      return '<div class="screen"><div class="eyebrow">Your family, your control</div><h1 class="page-title">Settings</h1><p class="sub">Private backups, device storage and optional secure sharing.</p>'+
+      '<div class="card"><div class="split"><h2 style="margin:0;font-size:19px">Your budget data</h2><span class="tag">'+data.categories.length+' categories</span></div><p class="small">Import the PRIVATE starter JSON to use your existing Excel budget figures. The public site contains no personal financial data.</p><div class="btnrow"><button class="primary" data-action="import">Import starter / backup</button><button class="secondary" data-action="export">Download backup</button><button class="secondary" data-action="csv">Export transactions CSV</button></div><div class="divider"></div><div class="btnrow"><button class="danger" data-action="reset">Clear this device</button></div></div>'+
+      '<div class="section-head"><h2>Share between your phones</h2></div><div class="card">'+
+      (connected?'<div class="notice success">✓ Shared cloud budget connected. Changes synchronize between signed-in household members.</div><div class="btnrow" style="margin-top:14px"><button class="primary" data-action="invite">Copy spouse invitation link</button><button class="secondary" data-action="refresh">Refresh now</button><button class="secondary" data-action="disconnect">Disconnect device</button></div>':
+      '<div class="notice">This app starts in local-only mode. To share the same live budget across phones, connect your own Supabase project once, then each person signs in with their email. GitHub Pages hosts the website but does not store the budget.</div>'+
+      '<div style="margin-top:17px" class="field"><label>Supabase project URL</label><input type="url" id="supa-url" placeholder="https://your-project.supabase.co" value="'+h(cloudCfg?.url||'')+'"></div>'+
+      '<div style="margin-top:13px" class="field"><label>Supabase publishable / anon key</label><input type="text" id="supa-key" placeholder="sb_publishable_… or eyJ…" value="'+h(cloudCfg?.key||'')+'"></div>'+
+      '<div class="btnrow" style="margin-top:14px"><button class="primary" data-action="connect">Connect cloud</button></div>'+
+      (sb?'<div class="divider"></div>'+(session?'<div class="small">Signed in: '+h(session.user.email||'')+'</div><div class="btnrow" style="margin-top:12px"><button class="primary" data-action="create-family">Create family budget</button><button class="secondary" data-action="join-family">Join with invite</button></div>':'<div class="field"><label>Email for secure sign-in</label><input type="email" id="auth-email" placeholder="you@example.com"></div><div class="btnrow" style="margin-top:12px"><button class="primary" data-action="sign-in">Send sign-in link</button></div>'):'')+
+      '<p class="small">Setup: create a Supabase project and run the database policies supplied in the project’s <b>supabase-setup.sql</b> file. Never use a service-role/secret key here.</p>')+
+      '</div><div class="section-head"><h2>About this app</h2></div><div class="card"><p class="small">Our Budget · v1.0 · New Zealand dollars · Weekly planner based on your Excel workbook. Works in your browser and can be added to an iPhone home screen. Income and loan projections are estimates, not financial advice.</p></div></div>';
+    }
+    function render(){
+      el('app').innerHTML=({home,activity,budget,mortgage:mortgagePage,settings})[current]();
+      document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab===current));
+      const p=el('cloud-pill');p.textContent=familyId?'● Shared & synced':sb&&session?'● Signed in':'On this device';p.classList.toggle('local',!familyId);
+    }
+    const modal=(title,body)=>{el('modal-content').innerHTML='<button class="close" data-action="close" aria-label="Close">×</button><h2>'+h(title)+'</h2><div style="height:14px"></div>'+body;el('dialog').showModal()};
+    function txModal(uid){
+      const t=data.transactions.find(t=>t.id===uid);const cur=t||{date:today(),categoryId:data.categories[1]?.id,description:'',amount:'',notes:''};
+      modal(t?'Edit transaction':'Add transaction','<form id="tx-form"><input type="hidden" name="uid" value="'+h(uid||'')+'"><div class="formgrid"><div class="field"><label>Date</label><input type="date" name="date" value="'+h(cur.date)+'" required></div><div class="field"><label>Amount (NZD)</label><input type="number" name="amount" step=".01" min=".01" inputmode="decimal" value="'+h(cur.amount)+'" required></div><div class="field full"><label>Category</label><select name="categoryId">'+data.categories.map(c=>'<option value="'+h(c.id)+'" '+(cur.categoryId===c.id?'selected':'')+'>'+h(c.name)+'</option>').join('')+'</select></div><div class="field full"><label>Description</label><input name="description" value="'+h(cur.description)+'" maxlength="160" placeholder="e.g. Weekly grocery shop"></div><div class="field full"><label>Notes (optional)</label><textarea name="notes" rows="2" maxlength="300">'+h(cur.notes||'')+'</textarea></div></div><div class="btnrow" style="margin-top:18px"><button type="submit" class="primary">Save transaction</button>'+(t?'<button type="button" class="danger" data-action="delete-tx" data-id="'+h(uid)+'">Delete</button>':'')+'</div></form>');
+    }
+    function catModal(uid){
+      const c=data.categories.find(c=>c.id===uid);
+      modal(c?'Edit category':'New category','<form id="cat-form"><input type="hidden" name="uid" value="'+h(uid||'')+'"><div class="formgrid"><div class="field full"><label>Category name</label><input name="name" maxlength="80" required value="'+h(c?.name||'')+'" '+(c?.name==='Mortgage'?'readonly':'')+'></div><div class="field"><label>Weekly allowance ($)</label><input name="weekly" type="number" step=".01" min="0" value="'+h(c?.weekly||0)+'" '+(c?.name==='Mortgage'?'disabled':'')+' required></div><div class="field"><label>Type</label><select name="kind">'+['Spending','Essential','Savings','Reserve','Buffer','Benefit'].map(k=>'<option '+(c?.kind===k?'selected':'')+'>'+k+'</option>').join('')+'</select></div></div>'+(c?.name==='Mortgage'?'<p class="small">Mortgage is calculated from the assumptions in the Mortgage tab.</p>':'')+'<div class="btnrow" style="margin-top:18px"><button class="primary" type="submit">Save category</button>'+(c&&c.name!=='Mortgage'?'<button class="danger" data-action="delete-cat" data-id="'+h(uid)+'" type="button">Delete</button>':'')+'</div></form>');
+    }
+    function close(){el('dialog').close()}
+    function download(name,content,type){const u=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+    function escapeCSV(v){const s=String(v??'');return /[,"\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+    async function startCloud(){
+      if(!cloudCfg?.url||!cloudCfg?.key||!window.supabase?.createClient)return false;
+      try{
+        if(sb)return true;
+        sb=window.supabase.createClient(cloudCfg.url,cloudCfg.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+        const a=await sb.auth.getSession();session=a.data.session;
+        sb.auth.onAuthStateChange((e,s)=>{session=s;render();if(session){setTimeout(()=>recoverFamily(),100)}});
+        if(session)await recoverFamily();
+        render();return true;
+      }catch(e){sb=null;toast('Cloud connection failed: '+e.message,true);return false}
+    }
+    async function recoverFamily(){
+      if(!sb||!session)return;
+      if(pendingInvitation?.token){const token=pendingInvitation.token;pendingInvitation=null;sessionStorage.removeItem('budget-pending-invite');try{await joinFamily(token);return}catch(e){toast('Invitation: '+e.message,true)}}
+      const p=localStorage.getItem('budget-family-id');if(p){familyId=p;try{await readCloud();subscribe();return}catch(e){familyId=null;localStorage.removeItem('budget-family-id')}}
+      const r=await sb.from('family_members').select('family_id').limit(1);if(!r.error&&r.data?.length){familyId=r.data[0].family_id;localStorage.setItem('budget-family-id',familyId);await readCloud();subscribe();}
+      render();
+    }
+    async function createFamily(){
+      if(!session)throw Error('Sign in first');
+      const row={name:'Our Budget',created_by:session.user.id,invite_token:id()};
+      const a=await sb.from('families').insert(row).select('id').single();if(a.error)throw a.error;
+      familyId=a.data.id;localStorage.setItem('budget-family-id',familyId);
+      const b=await sb.from('budget_snapshots').insert({family_id:familyId,revision:1,data:clone(data),updated_by:session.user.id});if(b.error)throw b.error;
+      cloudRevision=1;subscribe();render();toast('Shared budget created');
+    }
+    async function joinFamily(token){
+      if(!sb||!session)throw Error('Sign in first');
+      const r=await sb.rpc('join_family',{invite:token});if(r.error)throw r.error;
+      familyId=r.data;localStorage.setItem('budget-family-id',familyId);
+      await readCloud();subscribe();toast('You joined the shared budget!');
+    }
+    async function readCloud(){
+      if(!familyId)return;
+      const r=await sb.from('budget_snapshots').select('data,revision').eq('family_id',familyId).single();
+      if(r.error)throw r.error;cloudRevision=r.data.revision;data=normalise(r.data.data);localStorage.setItem(STORAGE,JSON.stringify(data));render();
+    }
+    function subscribe(){
+      if(!sb||!familyId)return;if(channel)sb.removeChannel(channel);
+      channel=sb.channel('family-'+familyId).on('postgres_changes',{event:'UPDATE',schema:'public',table:'budget_snapshots',filter:'family_id=eq.'+familyId},()=>{if(!busy)readCloud().catch(e=>toast(e.message,true))}).subscribe();
+    }
+    async function pushCloud(){
+      if(!familyId||!sb||!session||busy)return;
+      busy=true;
+      try{
+        const r=await sb.from('budget_snapshots').update({data:clone(data),revision:cloudRevision+1,updated_by:session.user.id,updated_at:new Date().toISOString()}).eq('family_id',familyId).eq('revision',cloudRevision).select('revision');
+        if(r.error)throw r.error;
+        if(!r.data?.length){toast('Another device changed the budget. Refresh to avoid overwriting their work.',true);return;}
+        cloudRevision=r.data[0].revision;toast('Saved to shared budget');
+      }catch(e){toast('Not synced — saved on this device: '+e.message,true)}finally{busy=false}
+    }
+    async function inviteLink(){
+      const r=await sb.from('families').select('invite_token').eq('id',familyId).single();if(r.error)throw r.error;
+      const info={url:cloudCfg.url,key:cloudCfg.key,token:r.data.invite_token};
+      const encoded=btoa(JSON.stringify(info));
+      const link=location.origin+location.pathname+'#invite='+encodeURIComponent(encoded);
+      try{await navigator.clipboard.writeText(link);toast('Invitation link copied — send it to your partner')}catch{modal('Spouse invitation','<div class="field"><label>Copy this private invitation link</label><textarea rows="5" readonly>'+h(link)+'</textarea></div>')}
+    }
+    const handler=async(e)=>{
+      const t=e.target.closest('[data-tab],[data-action]');if(!t)return;
+      if(t.dataset.tab){setTab(t.dataset.tab);return}
+      const action=t.dataset.action,uid=t.dataset.id;
+      try{
+      if(action==='prev'){week=plusDays(week,-7);render()}
+      if(action==='next'){week=plusDays(week,7);render()}
+      if(action==='now'){week=monday(today());render()}
+      if(action==='add'){txModal()}
+      if(action==='edit-tx'){txModal(uid)}
+      if(action==='new-cat'){catModal()}
+      if(action==='edit-cat'){const c=data.categories.find(x=>x.id===uid);if(c?.name==='Mortgage'){setTab('mortgage')}else catModal(uid)}
+      if(action==='close'){close()}
+      if(action==='delete-tx'){if(confirm('Delete this transaction?')){const x=data.transactions.find(t=>t.id===uid);if(x){x.deleted=true;x.updatedAt=new Date().toISOString();saveLocal()}close()}}
+      if(action==='delete-cat'){if(confirm('Delete this category? Existing transactions in that category remain in history but will need recategorising.')){data.categories=data.categories.filter(c=>c.id!==uid);saveLocal();close()}}
+      if(action==='export'){download('our-budget-backup-'+today()+'.json',JSON.stringify(data,null,2),'application/json')}
+      if(action==='csv'){const tx=transactions();const csv=[['Date','Category','Description','Amount NZD','Notes'],...tx.map(t=>[t.date,data.categories.find(c=>c.id===t.categoryId)?.name||'Deleted category',t.description,t.amount,t.notes])].map(row=>row.map(escapeCSV).join(',')).join('\r\n');download('our-budget-transactions-'+today()+'.csv','\uFEFF'+csv,'text/csv;charset=utf-8')}
+      if(action==='import'){el('import-file').click()}
+      if(action==='reset'){if(confirm('Clear this device’s local budget? Export a backup first. A connected cloud budget will NOT be erased.')){data=defaults();localStorage.setItem(STORAGE,JSON.stringify(data));render();toast('Local copy cleared')}}
+      if(action==='connect'){
+        const url=el('supa-url').value.trim(),key=el('supa-key').value.trim();
+        if(!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(url)){toast('Enter a valid HTTPS Supabase project URL',true);return}
+        if(key.length<20||/service_role|sb_secret_/.test(key)){toast('Use the publishable / anon key, never a secret key',true);return}
+        cloudCfg={url:url.replace(/\/$/,''),key};localStorage.setItem(CLOUD_STORAGE,JSON.stringify(cloudCfg));if(await startCloud())toast('Cloud configured — sign in next');
+      }
+      if(action==='sign-in'){if(!sb)throw Error('Connect cloud first');const email=el('auth-email')?.value.trim();if(!email)throw Error('Enter your email');const r=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});if(r.error)throw r.error;toast('Check your email for a sign-in link')}
+      if(action==='create-family'){await createFamily()}
+      if(action==='join-family'){const token=prompt('Paste the invitation token (UUID)');if(token)await joinFamily(token.trim())}
+      if(action==='invite'){await inviteLink()}
+      if(action==='refresh'){await readCloud();toast('Up to date')}
+      if(action==='disconnect'){if(!confirm('Disconnect this phone from the shared budget? The cloud data will remain.'))return;if(channel)sb.removeChannel(channel);familyId=null;localStorage.removeItem('budget-family-id');await sb.auth.signOut();session=null;sb=null;cloudCfg=null;localStorage.removeItem(CLOUD_STORAGE);render();toast('Device disconnected')}
+      }catch(e){toast(e.message||String(e),true)}
+    };
+    document.addEventListener('click',handler);
+    el('quick-add').addEventListener('click',()=>txModal());
+    document.addEventListener('submit',async e=>{
+      if(!['tx-form','cat-form','mortgage-form'].includes(e.target.id))return;
+      e.preventDefault();const f=new FormData(e.target);
+      if(e.target.id==='tx-form'){
+        const amount=Number(f.get('amount'));if(!(amount>0)){toast('Amount must be greater than zero',true);return}
+        const uid=f.get('uid'),x=data.transactions.find(t=>t.id===uid);
+        const row={id:uid||id(),date:f.get('date'),categoryId:f.get('categoryId'),description:String(f.get('description')||'').trim(),notes:String(f.get('notes')||'').trim(),amount,updatedAt:new Date().toISOString(),deleted:false};
+        if(x)Object.assign(x,row);else data.transactions.push(row);saveLocal();close();toast('Transaction saved');
+      }else if(e.target.id==='cat-form'){
+        const uid=f.get('uid'),c=data.categories.find(c=>c.id===uid),name=String(f.get('name')||'').trim(),weekly=Math.max(0,Number(f.get('weekly'))||0);
+        if(!name){toast('Enter a category name',true);return}
+        if(c){c.name=name;c.weekly=weekly;c.kind=String(f.get('kind')||'Spending')}else data.categories.push({id:id(),name,weekly,kind:String(f.get('kind')||'Spending')});
+        saveLocal();close();toast('Budget category saved');
+      }else if(e.target.id==='mortgage-form'){
+        mortgageFields.forEach(p=>data.settings[p[0]]=Math.max(0,Number(f.get(p[0]))||0));
+        saveLocal();toast('Mortgage scenario updated');
+      }
+    });
+    el('import-file').addEventListener('change',async e=>{
+      const file=e.target.files?.[0];if(!file)return;
+      try{
+        const imported=JSON.parse(await file.text());if(!imported.settings||!Array.isArray(imported.categories))throw Error('Not a supported budget backup');
+        if(familyId&&!confirm('Replace the connected household budget with this file? Everyone will see the changes.'))return;
+        data=normalise(imported);saveLocal();toast('Budget imported successfully');
+      }catch(x){toast('Import failed: '+x.message,true)}finally{e.target.value=''}
+    });
+    (async()=>{
+      if(location.hash.startsWith('#invite=')){
+        try{const info=JSON.parse(atob(decodeURIComponent(location.hash.slice(8))));if(info.url&&info.key&&info.token){cloudCfg={url:info.url,key:info.key};localStorage.setItem(CLOUD_STORAGE,JSON.stringify(cloudCfg));pendingInvitation={token:info.token};sessionStorage.setItem('budget-pending-invite',JSON.stringify(pendingInvitation));history.replaceState(null,'',location.pathname+location.search);current='settings';toast('Invitation opened — sign in to join')}
+        }catch(e){toast('Invalid invitation link',true)}
+      }
+      render();if(cloudCfg){await startCloud()}
+      if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    })();
+  })();
+  </script>
+</body>
+</html>
