@@ -698,8 +698,9 @@
         "draw_at": "2026-10-27T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 3,
+      "result_date": "2026-10-27"
     },
     {
       "id": "15ef88e39baaa39924ed1c49",
@@ -725,8 +726,9 @@
         "draw_at": "2026-10-27T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 3,
+      "result_date": "2026-10-27"
     },
     {
       "id": "27257cc50f673d074ffa076e",
@@ -752,8 +754,9 @@
         "draw_at": "2026-10-27T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 3,
+      "result_date": "2026-10-27"
     },
     {
       "id": "28c7f12fef8e0669170b5c58",
@@ -779,8 +782,9 @@
         "draw_at": "2026-10-27T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 2,
+      "result_date": "2026-10-27"
     },
     {
       "id": "8c6c9b6f9b6372ee77e86c2f",
@@ -806,8 +810,9 @@
         "draw_at": "2026-10-27T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 1,
+      "result_date": "2026-10-27"
     },
     {
       "id": "aa548ab53a8d5a392200ad82",
@@ -833,8 +838,9 @@
         "draw_at": "2026-10-27T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 3,
+      "result_date": "2026-10-27"
     },
     {
       "id": "1ef72b1bd068f258e6444b45",
@@ -1163,72 +1169,73 @@
   ],
   "summary": {
     "recent_200": {
-      "verified_scored": 4,
-      "total_matches": 4,
+      "verified_scored": 5,
+      "total_matches": 7,
       "distribution": {
         "1": 2,
         "2": 1,
-        "0": 1
+        "0": 1,
+        "3": 1
       },
-      "average_matches": 1.0
+      "average_matches": 1.4
     },
     "random": {
-      "verified_scored": 4,
-      "total_matches": 9,
+      "verified_scored": 5,
+      "total_matches": 11,
       "distribution": {
-        "2": 1,
+        "2": 2,
         "3": 2,
         "1": 1
       },
-      "average_matches": 2.25
+      "average_matches": 2.2
     },
     "pair_blend": {
-      "verified_scored": 4,
-      "total_matches": 10,
+      "verified_scored": 5,
+      "total_matches": 13,
       "distribution": {
         "2": 1,
         "4": 1,
-        "3": 1,
+        "3": 2,
         "1": 1
       },
-      "average_matches": 2.5
+      "average_matches": 2.6
     },
     "transition": {
-      "verified_scored": 4,
-      "total_matches": 9,
+      "verified_scored": 5,
+      "total_matches": 12,
       "distribution": {
         "1": 2,
-        "3": 1,
+        "3": 2,
         "4": 1
       },
-      "average_matches": 2.25
+      "average_matches": 2.4
     },
     "slot_momentum": {
-      "verified_scored": 4,
-      "total_matches": 9,
+      "verified_scored": 5,
+      "total_matches": 12,
       "distribution": {
         "1": 2,
         "4": 1,
-        "3": 1
+        "3": 2
       },
-      "average_matches": 2.25
+      "average_matches": 2.4
     },
     "same_slot": {
-      "verified_scored": 4,
-      "total_matches": 9,
+      "verified_scored": 5,
+      "total_matches": 10,
       "distribution": {
-        "1": 1,
+        "1": 2,
         "4": 1,
         "2": 2
       },
-      "average_matches": 2.25
+      "average_matches": 2.0
     }
   },
   "conflicts": [],
   "counts": {
     "locked": 42,
-    "verified_scored": 24,
-    "awaiting": 18,
+    "verified_scored": 30,
+    "awaiting": 12,
     "without_publication_evidence": 0
   },
   "note": "Publication times are supplied by prediction records, not independently authenticated. Retroactive editing is detected after the first ledger snapshot; Git history provides stronger audit evidence. No model is proven to beat chance."
