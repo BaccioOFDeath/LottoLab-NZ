@@ -1177,6 +1177,654 @@
       "status": "scored",
       "matches": 2,
       "result_date": "2026-10-27"
+    },
+    {
+      "id": "26a9c256543bd12ade8b43b4",
+      "sha256": "5e3e5b9482d91996f18097d59ee8cf8e61ce09ab0ab691335a534be142a8b4fe",
+      "prediction": {
+        "target_draw": "27920",
+        "target_date": "2026-10-28",
+        "model": "random",
+        "line": 1,
+        "numbers": [
+          5,
+          11,
+          24,
+          28,
+          32,
+          35,
+          45,
+          46,
+          70,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T10:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "2835a6b5a61d59e23f3e079e",
+      "sha256": "a2efce641c5ee31edffe44d23f41c253020b55affaa8befa6930c51f6217441c",
+      "prediction": {
+        "target_draw": "27920",
+        "target_date": "2026-10-28",
+        "model": "same_slot",
+        "line": 1,
+        "numbers": [
+          4,
+          12,
+          20,
+          25,
+          31,
+          34,
+          44,
+          51,
+          58,
+          75
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T10:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "3a0866cf4ac5ab4ab804fd59",
+      "sha256": "bb7c618a31db828206c386884c8734dc286d581d35b2d5ad92d9652865daf162",
+      "prediction": {
+        "target_draw": "27920",
+        "target_date": "2026-10-28",
+        "model": "slot_momentum",
+        "line": 1,
+        "numbers": [
+          4,
+          7,
+          8,
+          10,
+          19,
+          41,
+          46,
+          49,
+          57,
+          64
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T10:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "b0c5afbeabee0d8f9fc15ca1",
+      "sha256": "6a55b7c741ec98a9af64add8e243b7d041f106951110de49b66b32a87f9b4460",
+      "prediction": {
+        "target_draw": "27920",
+        "target_date": "2026-10-28",
+        "model": "recent_200",
+        "line": 1,
+        "numbers": [
+          5,
+          8,
+          16,
+          19,
+          25,
+          35,
+          46,
+          57,
+          64,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T10:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "c6025a54e014609e944fc3ad",
+      "sha256": "a7f1004011ea59b3ecb5647158b472c166fc1fb643cd6f131b69ddb32d338ab9",
+      "prediction": {
+        "target_draw": "27920",
+        "target_date": "2026-10-28",
+        "model": "transition",
+        "line": 1,
+        "numbers": [
+          4,
+          7,
+          8,
+          10,
+          31,
+          35,
+          49,
+          53,
+          57,
+          78
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T10:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "f045f12ede33967a4681ea09",
+      "sha256": "60f488b65f8847c5799badcb815c9ba0555516b3ddf656502c3fb62443f819db",
+      "prediction": {
+        "target_draw": "27920",
+        "target_date": "2026-10-28",
+        "model": "pair_blend",
+        "line": 1,
+        "numbers": [
+          4,
+          7,
+          8,
+          10,
+          19,
+          41,
+          46,
+          49,
+          53,
+          57
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T10:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "1528d72a8472f4b48ef690df",
+      "sha256": "1cf0a2e67a3881dcb12e3dd0f3642509527303d45bc6323bf8431933b22dd11d",
+      "prediction": {
+        "target_draw": "27921",
+        "target_date": "2026-10-28",
+        "model": "random",
+        "line": 1,
+        "numbers": [
+          3,
+          16,
+          24,
+          32,
+          47,
+          54,
+          59,
+          65,
+          76,
+          77
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T13:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "41dcb1a1a01c649d7e58c5eb",
+      "sha256": "b572cbb65d86372427820ed5f6389c6ad3eea20a44bc52ec94949dd4ac3c53d8",
+      "prediction": {
+        "target_draw": "27921",
+        "target_date": "2026-10-28",
+        "model": "slot_momentum",
+        "line": 1,
+        "numbers": [
+          1,
+          5,
+          8,
+          19,
+          28,
+          33,
+          35,
+          55,
+          57,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T13:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "80d722267b0f742f7cc137f4",
+      "sha256": "62ed9c30966e05d3742f420873c88b5ddab0ba18f51f2a3409c1c8ce92d6f952",
+      "prediction": {
+        "target_draw": "27921",
+        "target_date": "2026-10-28",
+        "model": "recent_200",
+        "line": 1,
+        "numbers": [
+          5,
+          8,
+          16,
+          19,
+          25,
+          35,
+          46,
+          57,
+          64,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T13:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "93418bb9c39e624deaaf309d",
+      "sha256": "4d1f2851a82210281340713105692c9be645056ca807c8d239811e42266ec456",
+      "prediction": {
+        "target_draw": "27921",
+        "target_date": "2026-10-28",
+        "model": "pair_blend",
+        "line": 1,
+        "numbers": [
+          1,
+          5,
+          8,
+          19,
+          28,
+          33,
+          35,
+          55,
+          57,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T13:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "cb9d9b703700f42d3bae406b",
+      "sha256": "e1cbd2201c5b4263c2be289a31a727e124de4dc141d13c27bc40d3c3aab93375",
+      "prediction": {
+        "target_draw": "27921",
+        "target_date": "2026-10-28",
+        "model": "same_slot",
+        "line": 1,
+        "numbers": [
+          8,
+          14,
+          20,
+          30,
+          32,
+          54,
+          57,
+          65,
+          71,
+          72
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T13:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "cf8d95f5668eb1f5696c0ae6",
+      "sha256": "fbcaf5a55a42d6a993e3680ef6c43d84bfdde859cd3099641e68d42692efaf2f",
+      "prediction": {
+        "target_draw": "27921",
+        "target_date": "2026-10-28",
+        "model": "transition",
+        "line": 1,
+        "numbers": [
+          1,
+          6,
+          8,
+          28,
+          30,
+          32,
+          33,
+          55,
+          57,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T13:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "340439ee9bf15322c6229d00",
+      "sha256": "d8846ddb959530681dd1bee167f8fb8431abbdf9b1df2f6fa9567524d6c3ac39",
+      "prediction": {
+        "target_draw": "27922",
+        "target_date": "2026-10-28",
+        "model": "recent_200",
+        "line": 1,
+        "numbers": [
+          5,
+          8,
+          16,
+          19,
+          25,
+          35,
+          46,
+          57,
+          64,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T15:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "40b2e40f7467bc1198542fda",
+      "sha256": "326cb3ba311c3dd681a5b021f47fb8a16c40e090cdc8ff860aea65593bc29aa4",
+      "prediction": {
+        "target_draw": "27922",
+        "target_date": "2026-10-28",
+        "model": "random",
+        "line": 1,
+        "numbers": [
+          11,
+          13,
+          17,
+          20,
+          28,
+          37,
+          56,
+          58,
+          65,
+          77
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T15:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "5278fca399d98690d7adca06",
+      "sha256": "b8d75b3f6df5c2abbdcfb5aadab361bbf4bb2971daaf318386f61f6dfc27278b",
+      "prediction": {
+        "target_draw": "27922",
+        "target_date": "2026-10-28",
+        "model": "pair_blend",
+        "line": 1,
+        "numbers": [
+          1,
+          16,
+          19,
+          25,
+          41,
+          43,
+          52,
+          53,
+          58,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T15:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "9319fa4d25365315d006c86c",
+      "sha256": "b41d4be0799cbab3a62acbbcc8e2fbb064aefa63fafd3460bbe4aeff7dca03d7",
+      "prediction": {
+        "target_draw": "27922",
+        "target_date": "2026-10-28",
+        "model": "slot_momentum",
+        "line": 1,
+        "numbers": [
+          1,
+          16,
+          19,
+          25,
+          41,
+          52,
+          53,
+          57,
+          64,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T15:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "93c0aa95218d6a407709fcee",
+      "sha256": "f5485821f3a1620e475515d1e3b53fa593976f5d3ef8c2749c917305592f83ea",
+      "prediction": {
+        "target_draw": "27922",
+        "target_date": "2026-10-28",
+        "model": "transition",
+        "line": 1,
+        "numbers": [
+          1,
+          3,
+          16,
+          19,
+          52,
+          53,
+          54,
+          58,
+          70,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T15:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "faa17d9fe2b5859f181d13f2",
+      "sha256": "2aeb51f7eef16fac0189a6a8e9ea7030959682a72cccb75cc050f6c24d692963",
+      "prediction": {
+        "target_draw": "27922",
+        "target_date": "2026-10-28",
+        "model": "same_slot",
+        "line": 1,
+        "numbers": [
+          1,
+          14,
+          23,
+          25,
+          41,
+          49,
+          57,
+          58,
+          64,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T15:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "0397902deb2abf0ff254fab2",
+      "sha256": "58f781fc8508971a511cd5ab8440b85707e85e781db33b8cf7d2e11642673d93",
+      "prediction": {
+        "target_draw": "27923",
+        "target_date": "2026-10-28",
+        "model": "pair_blend",
+        "line": 1,
+        "numbers": [
+          19,
+          24,
+          27,
+          39,
+          41,
+          43,
+          46,
+          54,
+          57,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T18:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "2a2872be679af97a3897e049",
+      "sha256": "2891ceb5b90778267ad212072fcef4b9fe645b4ead228f49eec562767a051137",
+      "prediction": {
+        "target_draw": "27923",
+        "target_date": "2026-10-28",
+        "model": "slot_momentum",
+        "line": 1,
+        "numbers": [
+          19,
+          24,
+          27,
+          39,
+          41,
+          45,
+          46,
+          54,
+          57,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T18:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "440445c1bef114508cd57905",
+      "sha256": "8684cdc33e5dffce43e8ec4cd47123e43bd5d0f6cc334b88dc10a13ad733bb81",
+      "prediction": {
+        "target_draw": "27923",
+        "target_date": "2026-10-28",
+        "model": "random",
+        "line": 1,
+        "numbers": [
+          3,
+          12,
+          25,
+          33,
+          34,
+          35,
+          48,
+          56,
+          61,
+          70
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T18:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "942f408c47bb1655c3ab19e8",
+      "sha256": "83e14b03858ca73481ce3c4567bc738e353b460776edf5d0cc798b1178749ead",
+      "prediction": {
+        "target_draw": "27923",
+        "target_date": "2026-10-28",
+        "model": "same_slot",
+        "line": 1,
+        "numbers": [
+          2,
+          19,
+          42,
+          43,
+          50,
+          54,
+          60,
+          62,
+          63,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T18:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "c11899a1857d21614a3e4c67",
+      "sha256": "9d43ee86434b209091b8c558a4691238d6a9758c00716c45f77b024d99f9d26f",
+      "prediction": {
+        "target_draw": "27923",
+        "target_date": "2026-10-28",
+        "model": "recent_200",
+        "line": 1,
+        "numbers": [
+          5,
+          8,
+          16,
+          19,
+          25,
+          35,
+          46,
+          57,
+          64,
+          71
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T18:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
+    },
+    {
+      "id": "c81321f86f9fa36ca4059c9e",
+      "sha256": "0b15a32c05f5c9e5ccc6bdb1518a39503c7e7452c3d71f56c435148c6b12d54d",
+      "prediction": {
+        "target_draw": "27923",
+        "target_date": "2026-10-28",
+        "model": "transition",
+        "line": 1,
+        "numbers": [
+          6,
+          9,
+          24,
+          27,
+          45,
+          46,
+          54,
+          57,
+          71,
+          80
+        ],
+        "published_at": "2026-10-28T09:39:23.714486+13:00",
+        "draw_at": "2026-10-28T18:00:00+13:00"
+      },
+      "pre_draw_time_evidenced": true,
+      "status": "awaiting_result",
+      "matches": null
     }
   ],
   "summary": {
@@ -1249,9 +1897,9 @@
   },
   "conflicts": [],
   "counts": {
-    "locked": 42,
+    "locked": 66,
     "verified_scored": 42,
-    "awaiting": 0,
+    "awaiting": 24,
     "without_publication_evidence": 0
   },
   "note": "Publication times are supplied by prediction records, not independently authenticated. Retroactive editing is detected after the first ledger snapshot; Git history provides stronger audit evidence. No model is proven to beat chance."

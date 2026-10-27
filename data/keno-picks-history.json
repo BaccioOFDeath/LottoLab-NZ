@@ -113,5 +113,119 @@
     "source": "https://www.lottodraw.co.nz/keno/results-october-25-2026",
     "note": "Created after the 10am 26 Oct draw; eligible for the 1pm, 3pm and 6pm draws only. No model can improve the theoretical odds.",
     "first_scored_draw": 27913
+  },
+  {
+    "date": "2026-10-27",
+    "created_at": "2026-10-27T09:45:56.251446+13:00",
+    "timezone": "Pacific/Auckland",
+    "eligible_from": "2026-10-27T10:00:00+13:00",
+    "first_scored_draw": 27916,
+    "training_draws": 11407,
+    "last_training_draw": "27915",
+    "models": [
+      {
+        "id": "historical",
+        "name": "Historical hot",
+        "description": "Most frequently drawn across available verified-format history",
+        "numbers": [
+          4,
+          25,
+          31,
+          32,
+          41,
+          43,
+          53,
+          55,
+          57,
+          68
+        ]
+      },
+      {
+        "id": "recent",
+        "name": "Recent momentum",
+        "description": "Most frequently drawn across the most recent 80 draws",
+        "numbers": [
+          4,
+          8,
+          10,
+          16,
+          35,
+          41,
+          52,
+          57,
+          64,
+          68
+        ]
+      },
+      {
+        "id": "cold",
+        "name": "Recent cold",
+        "description": "Least frequent in the last 80 draws; not due to appear",
+        "numbers": [
+          7,
+          11,
+          18,
+          22,
+          26,
+          33,
+          36,
+          38,
+          47,
+          69
+        ]
+      },
+      {
+        "id": "network",
+        "name": "Pair network",
+        "description": "Historical co-appearance above independent expectation",
+        "numbers": [
+          4,
+          25,
+          34,
+          39,
+          42,
+          50,
+          59,
+          63,
+          65,
+          80
+        ]
+      },
+      {
+        "id": "spread",
+        "name": "Balanced zones",
+        "description": "One high-frequency number from each block of eight",
+        "numbers": [
+          4,
+          9,
+          22,
+          25,
+          39,
+          41,
+          53,
+          57,
+          68,
+          80
+        ]
+      },
+      {
+        "id": "random",
+        "name": "Random control",
+        "description": "Seeded random reference for an honest baseline",
+        "numbers": [
+          4,
+          7,
+          13,
+          17,
+          20,
+          25,
+          30,
+          53,
+          72,
+          77
+        ]
+      }
+    ],
+    "note": "Research only; all valid lines have equal theoretical odds. Draws earlier than publication are excluded."
   }
 ]
