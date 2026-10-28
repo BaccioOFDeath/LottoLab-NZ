@@ -6,12 +6,12 @@
   "candidate_verified": false,
   "promotion_policy": "Manual review required even after passing strict tests; historical champion always stays the random control until independently confirmed.",
   "reason": "No independently established improvement over a random control.",
-  "draws_in_database": 11414,
-  "evaluated_draws": 11214,
-  "discovery_draws": 8410,
+  "draws_in_database": 11415,
+  "evaluated_draws": 11215,
+  "discovery_draws": 8411,
   "holdout_draws": 2804,
-  "discovery_cutoff_draw": "25118",
-  "last_evaluated_draw": "27922",
+  "discovery_cutoff_draw": "25119",
+  "last_evaluated_draw": "27923",
   "last_evaluated_date": "2026-10-28",
   "expected_matches_for_any_10_numbers": 2.5,
   "selection_method": "Select best mean on first 75% of walk-forward evaluation; test exactly that candidate on final 25%. No future data used to create individual tickets.",
@@ -23,8 +23,8 @@
   "models": {
     "long_term_hot": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.48288,
+        "draws": 8411,
+        "average_matches": 2.48282,
         "five_or_more": 541
       },
       "holdout": {
@@ -33,16 +33,16 @@
         "five_or_more": 194
       },
       "comparison": {
-        "delta_vs_random": -0.03067,
-        "paired_z": -0.87,
-        "lower_95_delta": -0.09976,
-        "upper_95_delta": 0.03842
+        "delta_vs_random": -0.03103,
+        "paired_z": -0.88,
+        "lower_95_delta": -0.1001,
+        "upper_95_delta": 0.03805
       }
     },
     "long_term_cold": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.51546,
+        "draws": 8411,
+        "average_matches": 2.51552,
         "five_or_more": 570
       },
       "holdout": {
@@ -51,106 +51,106 @@
         "five_or_more": 185
       },
       "comparison": {
-        "delta_vs_random": -0.05171,
-        "paired_z": -1.528,
-        "lower_95_delta": -0.11806,
-        "upper_95_delta": 0.01463
+        "delta_vs_random": -0.05207,
+        "paired_z": -1.539,
+        "lower_95_delta": -0.11839,
+        "upper_95_delta": 0.01426
       }
     },
     "recent_hot": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.51546,
+        "draws": 8411,
+        "average_matches": 2.51563,
         "five_or_more": 561
       },
       "holdout": {
         "draws": 2804,
-        "average_matches": 2.52853,
+        "average_matches": 2.52746,
         "five_or_more": 179
       },
       "comparison": {
-        "delta_vs_random": 0.00856,
-        "paired_z": 0.252,
-        "lower_95_delta": -0.05812,
-        "upper_95_delta": 0.07524
+        "delta_vs_random": 0.00713,
+        "paired_z": 0.21,
+        "lower_95_delta": -0.05949,
+        "upper_95_delta": 0.07375
       }
     },
     "recent_cold": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.48181,
+        "draws": 8411,
+        "average_matches": 2.48187,
         "five_or_more": 537
       },
       "holdout": {
         "draws": 2804,
-        "average_matches": 2.48787,
+        "average_matches": 2.48752,
         "five_or_more": 183
       },
       "comparison": {
-        "delta_vs_random": -0.0321,
-        "paired_z": -0.93,
-        "lower_95_delta": -0.09971,
-        "upper_95_delta": 0.03552
+        "delta_vs_random": -0.03281,
+        "paired_z": -0.952,
+        "lower_95_delta": -0.10039,
+        "upper_95_delta": 0.03477
       }
     },
     "balanced_zones": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.49156,
+        "draws": 8411,
+        "average_matches": 2.49126,
         "five_or_more": 547
       },
       "holdout": {
         "draws": 2804,
-        "average_matches": 2.51783,
+        "average_matches": 2.5189,
         "five_or_more": 187
       },
       "comparison": {
-        "delta_vs_random": -0.00214,
-        "paired_z": -0.061,
-        "lower_95_delta": -0.07071,
-        "upper_95_delta": 0.06643
+        "delta_vs_random": -0.00143,
+        "paired_z": -0.041,
+        "lower_95_delta": -0.07001,
+        "upper_95_delta": 0.06716
       }
     },
     "blended_hot": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.517,
+        "draws": 8411,
+        "average_matches": 2.51718,
         "five_or_more": 560
       },
       "holdout": {
         "draws": 2804,
-        "average_matches": 2.51034,
+        "average_matches": 2.50927,
         "five_or_more": 190
       },
       "comparison": {
-        "delta_vs_random": -0.00963,
-        "paired_z": -0.285,
-        "lower_95_delta": -0.07589,
-        "upper_95_delta": 0.05663
+        "delta_vs_random": -0.01106,
+        "paired_z": -0.327,
+        "lower_95_delta": -0.07726,
+        "upper_95_delta": 0.05515
       }
     },
     "same_time_repeat_hot": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.50452,
+        "draws": 8411,
+        "average_matches": 2.50446,
         "five_or_more": 548
       },
       "holdout": {
         "draws": 2804,
-        "average_matches": 2.56847,
-        "five_or_more": 213
+        "average_matches": 2.56954,
+        "five_or_more": 214
       },
       "comparison": {
-        "delta_vs_random": 0.0485,
-        "paired_z": 1.419,
-        "lower_95_delta": -0.01848,
-        "upper_95_delta": 0.11548
+        "delta_vs_random": 0.04922,
+        "paired_z": 1.439,
+        "lower_95_delta": -0.01781,
+        "upper_95_delta": 0.11624
       }
     },
     "time_of_day_hot": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.47444,
+        "draws": 8411,
+        "average_matches": 2.47426,
         "five_or_more": 545
       },
       "holdout": {
@@ -159,21 +159,21 @@
         "five_or_more": 187
       },
       "comparison": {
-        "delta_vs_random": 0.02639,
-        "paired_z": 0.772,
-        "lower_95_delta": -0.04057,
-        "upper_95_delta": 0.09335
+        "delta_vs_random": 0.02603,
+        "paired_z": 0.762,
+        "lower_95_delta": -0.04093,
+        "upper_95_delta": 0.09299
       }
     },
     "recent_200_hot": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.50856,
+        "draws": 8411,
+        "average_matches": 2.5085,
         "five_or_more": 549
       },
       "holdout": {
         "draws": 2804,
-        "average_matches": 2.53923,
+        "average_matches": 2.53959,
         "five_or_more": 191
       },
       "comparison": {
@@ -185,13 +185,13 @@
     },
     "random_control": {
       "discovery": {
-        "draws": 8410,
-        "average_matches": 2.47979,
+        "draws": 8411,
+        "average_matches": 2.47949,
         "five_or_more": 495
       },
       "holdout": {
         "draws": 2804,
-        "average_matches": 2.51997,
+        "average_matches": 2.52033,
         "five_or_more": 197
       },
       "comparison": {
