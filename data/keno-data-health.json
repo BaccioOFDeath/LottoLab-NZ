@@ -1,9 +1,9 @@
 {
-  "draw_count": 11417,
+  "draw_count": 11418,
   "first_date": "2019-01-05",
   "last_date": "2026-10-29",
   "earliest_source_date": "2019-01-05",
-  "latest_draw": "27925",
+  "latest_draw": "27926",
   "missing_draw_ids": 1,
   "missing_draw_ids_sample": [
     18285
@@ -17,7 +17,7 @@
   ],
   "partial_days": 1,
   "duplicate_date_time_slots": 0,
-  "records_with_source_url": 11417,
+  "records_with_source_url": 11418,
   "conflicts_this_run": 0,
   "source": "https://www.lottodraw.co.nz/keno/archive",
   "disclaimer": "Independently sourced results, not official verification. Check winnings with Lotto NZ."
