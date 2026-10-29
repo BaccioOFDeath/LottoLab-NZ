@@ -6,12 +6,12 @@
   "candidate_verified": false,
   "promotion_policy": "Manual review required even after passing strict tests; historical champion always stays the random control until independently confirmed.",
   "reason": "No independently established improvement over a random control.",
-  "draws_in_database": 11416,
-  "evaluated_draws": 11216,
+  "draws_in_database": 11417,
+  "evaluated_draws": 11217,
   "discovery_draws": 8412,
-  "holdout_draws": 2804,
+  "holdout_draws": 2805,
   "discovery_cutoff_draw": "25120",
-  "last_evaluated_draw": "27924",
+  "last_evaluated_draw": "27925",
   "last_evaluated_date": "2026-10-29",
   "expected_matches_for_any_10_numbers": 2.5,
   "selection_method": "Select best mean on first 75% of walk-forward evaluation; test exactly that candidate on final 25%. No future data used to create individual tickets.",
@@ -28,15 +28,15 @@
         "five_or_more": 541
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.48966,
+        "draws": 2805,
+        "average_matches": 2.48984,
         "five_or_more": 194
       },
       "comparison": {
-        "delta_vs_random": -0.03067,
-        "paired_z": -0.87,
-        "lower_95_delta": -0.09977,
-        "upper_95_delta": 0.03842
+        "delta_vs_random": -0.0303,
+        "paired_z": -0.86,
+        "lower_95_delta": -0.09938,
+        "upper_95_delta": 0.03877
       }
     },
     "long_term_cold": {
@@ -46,15 +46,15 @@
         "five_or_more": 570
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.46826,
+        "draws": 2805,
+        "average_matches": 2.46774,
         "five_or_more": 185
       },
       "comparison": {
-        "delta_vs_random": -0.05207,
-        "paired_z": -1.539,
-        "lower_95_delta": -0.11839,
-        "upper_95_delta": 0.01426
+        "delta_vs_random": -0.05241,
+        "paired_z": -1.549,
+        "lower_95_delta": -0.11871,
+        "upper_95_delta": 0.0139
       }
     },
     "recent_hot": {
@@ -64,15 +64,15 @@
         "five_or_more": 561
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.52817,
-        "five_or_more": 179
+        "draws": 2805,
+        "average_matches": 2.52906,
+        "five_or_more": 180
       },
       "comparison": {
-        "delta_vs_random": 0.00785,
-        "paired_z": 0.231,
-        "lower_95_delta": -0.0588,
-        "upper_95_delta": 0.07449
+        "delta_vs_random": 0.00891,
+        "paired_z": 0.262,
+        "lower_95_delta": -0.05774,
+        "upper_95_delta": 0.07557
       }
     },
     "recent_cold": {
@@ -82,15 +82,15 @@
         "five_or_more": 537
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.48823,
+        "draws": 2805,
+        "average_matches": 2.4877,
         "five_or_more": 183
       },
       "comparison": {
-        "delta_vs_random": -0.0321,
-        "paired_z": -0.931,
-        "lower_95_delta": -0.0997,
-        "upper_95_delta": 0.0355
+        "delta_vs_random": -0.03244,
+        "paired_z": -0.941,
+        "lower_95_delta": -0.10002,
+        "upper_95_delta": 0.03514
       }
     },
     "balanced_zones": {
@@ -100,15 +100,15 @@
         "five_or_more": 547
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.51926,
+        "draws": 2805,
+        "average_matches": 2.51943,
         "five_or_more": 187
       },
       "comparison": {
-        "delta_vs_random": -0.00107,
-        "paired_z": -0.031,
-        "lower_95_delta": -0.06967,
-        "upper_95_delta": 0.06753
+        "delta_vs_random": -0.00071,
+        "paired_z": -0.02,
+        "lower_95_delta": -0.0693,
+        "upper_95_delta": 0.06787
       }
     },
     "blended_hot": {
@@ -118,15 +118,15 @@
         "five_or_more": 560
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.50999,
-        "five_or_more": 190
+        "draws": 2805,
+        "average_matches": 2.51087,
+        "five_or_more": 191
       },
       "comparison": {
-        "delta_vs_random": -0.01034,
-        "paired_z": -0.306,
-        "lower_95_delta": -0.07657,
-        "upper_95_delta": 0.05589
+        "delta_vs_random": -0.00927,
+        "paired_z": -0.274,
+        "lower_95_delta": -0.07551,
+        "upper_95_delta": 0.05697
       }
     },
     "same_time_repeat_hot": {
@@ -136,15 +136,15 @@
         "five_or_more": 548
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.56883,
+        "draws": 2805,
+        "average_matches": 2.56898,
         "five_or_more": 214
       },
       "comparison": {
-        "delta_vs_random": 0.0485,
-        "paired_z": 1.419,
-        "lower_95_delta": -0.0185,
-        "upper_95_delta": 0.1155
+        "delta_vs_random": 0.04884,
+        "paired_z": 1.429,
+        "lower_95_delta": -0.01814,
+        "upper_95_delta": 0.11582
       }
     },
     "time_of_day_hot": {
@@ -154,15 +154,15 @@
         "five_or_more": 545
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.54708,
+        "draws": 2805,
+        "average_matches": 2.54724,
         "five_or_more": 187
       },
       "comparison": {
-        "delta_vs_random": 0.02675,
-        "paired_z": 0.783,
-        "lower_95_delta": -0.04024,
-        "upper_95_delta": 0.09374
+        "delta_vs_random": 0.02709,
+        "paired_z": 0.793,
+        "lower_95_delta": -0.03987,
+        "upper_95_delta": 0.09406
       }
     },
     "recent_200_hot": {
@@ -172,15 +172,15 @@
         "five_or_more": 549
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.5403,
+        "draws": 2805,
+        "average_matches": 2.54082,
         "five_or_more": 191
       },
       "comparison": {
-        "delta_vs_random": 0.01997,
-        "paired_z": 0.579,
-        "lower_95_delta": -0.04762,
-        "upper_95_delta": 0.08756
+        "delta_vs_random": 0.02068,
+        "paired_z": 0.6,
+        "lower_95_delta": -0.0469,
+        "upper_95_delta": 0.08826
       }
     },
     "random_control": {
@@ -190,8 +190,8 @@
         "five_or_more": 495
       },
       "holdout": {
-        "draws": 2804,
-        "average_matches": 2.52033,
+        "draws": 2805,
+        "average_matches": 2.52014,
         "five_or_more": 197
       },
       "comparison": {
