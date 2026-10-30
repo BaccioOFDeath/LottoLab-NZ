@@ -2714,8 +2714,9 @@
         "draw_at": "2026-10-30T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 4,
+      "result_date": "2026-10-30"
     },
     {
       "id": "1c06dd526630e3536f71f9c1",
@@ -2741,8 +2742,9 @@
         "draw_at": "2026-10-30T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 2,
+      "result_date": "2026-10-30"
     },
     {
       "id": "6b24c32e45ee93d347b1272e",
@@ -2768,8 +2770,9 @@
         "draw_at": "2026-10-30T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 2,
+      "result_date": "2026-10-30"
     },
     {
       "id": "b5a04bf7ee47518acae05f25",
@@ -2795,8 +2798,9 @@
         "draw_at": "2026-10-30T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 2,
+      "result_date": "2026-10-30"
     },
     {
       "id": "c0107d7314fa58d95bb854bc",
@@ -2822,8 +2826,9 @@
         "draw_at": "2026-10-30T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 1,
+      "result_date": "2026-10-30"
     },
     {
       "id": "fe39e527fd3ab779eb04ec40",
@@ -2849,8 +2854,9 @@
         "draw_at": "2026-10-30T13:00:00+13:00"
       },
       "pre_draw_time_evidenced": true,
-      "status": "awaiting_result",
-      "matches": null
+      "status": "scored",
+      "matches": 3,
+      "result_date": "2026-10-30"
     },
     {
       "id": "b3ef7ca6606f7bcd1489d1d6",
@@ -3179,84 +3185,84 @@
   ],
   "summary": {
     "recent_200": {
-      "verified_scored": 16,
-      "total_matches": 36,
+      "verified_scored": 17,
+      "total_matches": 38,
       "distribution": {
         "1": 2,
-        "2": 4,
+        "2": 5,
         "0": 2,
         "3": 6,
         "4": 2
       },
-      "average_matches": 2.25
+      "average_matches": 2.2353
     },
     "random": {
-      "verified_scored": 16,
-      "total_matches": 31,
+      "verified_scored": 17,
+      "total_matches": 33,
       "distribution": {
-        "2": 4,
+        "2": 5,
         "3": 6,
         "1": 5,
         "0": 1
       },
-      "average_matches": 1.9375
+      "average_matches": 1.9412
     },
     "pair_blend": {
-      "verified_scored": 16,
-      "total_matches": 45,
+      "verified_scored": 17,
+      "total_matches": 48,
       "distribution": {
         "2": 6,
         "4": 4,
-        "3": 2,
+        "3": 3,
         "1": 1,
         "5": 2,
         "0": 1
       },
-      "average_matches": 2.8125
+      "average_matches": 2.8235
     },
     "transition": {
-      "verified_scored": 16,
-      "total_matches": 43,
+      "verified_scored": 17,
+      "total_matches": 44,
       "distribution": {
-        "1": 2,
+        "1": 3,
         "3": 6,
         "4": 3,
         "2": 3,
         "0": 1,
         "5": 1
       },
-      "average_matches": 2.6875
+      "average_matches": 2.5882
     },
     "slot_momentum": {
-      "verified_scored": 16,
-      "total_matches": 44,
+      "verified_scored": 17,
+      "total_matches": 48,
       "distribution": {
         "1": 2,
-        "4": 1,
+        "4": 2,
         "3": 5,
         "5": 3,
         "2": 4,
         "0": 1
       },
-      "average_matches": 2.75
+      "average_matches": 2.8235
     },
     "same_slot": {
-      "verified_scored": 16,
-      "total_matches": 42,
+      "verified_scored": 17,
+      "total_matches": 44,
       "distribution": {
         "1": 2,
         "4": 5,
-        "2": 7,
+        "2": 8,
         "3": 2
       },
-      "average_matches": 2.625
+      "average_matches": 2.5882
     }
   },
   "conflicts": [],
   "counts": {
     "locked": 114,
-    "verified_scored": 96,
-    "awaiting": 18,
+    "verified_scored": 102,
+    "awaiting": 12,
     "without_publication_evidence": 0
   },
   "note": "Publication times are supplied by prediction records, not independently authenticated. Retroactive editing is detected after the first ledger snapshot; Git history provides stronger audit evidence. No model is proven to beat chance."
