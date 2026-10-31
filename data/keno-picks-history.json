@@ -569,5 +569,119 @@
       }
     ],
     "note": "Research only; all valid lines have equal theoretical odds. Draws earlier than publication are excluded."
+  },
+  {
+    "date": "2026-10-31",
+    "created_at": "2026-10-31T09:39:22.110899+13:00",
+    "timezone": "Pacific/Auckland",
+    "eligible_from": "2026-10-31T10:00:00+13:00",
+    "first_scored_draw": 27932,
+    "training_draws": 11423,
+    "last_training_draw": "27931",
+    "models": [
+      {
+        "id": "historical",
+        "name": "Historical hot",
+        "description": "Most frequently drawn across available verified-format history",
+        "numbers": [
+          4,
+          25,
+          31,
+          32,
+          41,
+          43,
+          53,
+          55,
+          57,
+          68
+        ]
+      },
+      {
+        "id": "recent",
+        "name": "Recent momentum",
+        "description": "Most frequently drawn across the most recent 80 draws",
+        "numbers": [
+          4,
+          10,
+          12,
+          16,
+          19,
+          30,
+          41,
+          54,
+          57,
+          63
+        ]
+      },
+      {
+        "id": "cold",
+        "name": "Recent cold",
+        "description": "Least frequent in the last 80 draws; not due to appear",
+        "numbers": [
+          5,
+          6,
+          11,
+          17,
+          26,
+          33,
+          36,
+          47,
+          61,
+          69
+        ]
+      },
+      {
+        "id": "network",
+        "name": "Pair network",
+        "description": "Historical co-appearance above independent expectation",
+        "numbers": [
+          4,
+          25,
+          34,
+          39,
+          42,
+          50,
+          59,
+          63,
+          65,
+          80
+        ]
+      },
+      {
+        "id": "spread",
+        "name": "Balanced zones",
+        "description": "One high-frequency number from each block of eight",
+        "numbers": [
+          4,
+          9,
+          22,
+          25,
+          39,
+          41,
+          53,
+          57,
+          68,
+          80
+        ]
+      },
+      {
+        "id": "random",
+        "name": "Random control",
+        "description": "Seeded random reference for an honest baseline",
+        "numbers": [
+          6,
+          10,
+          27,
+          29,
+          31,
+          32,
+          40,
+          49,
+          61,
+          66
+        ]
+      }
+    ],
+    "note": "Research only; all valid lines have equal theoretical odds. Draws earlier than publication are excluded."
   }
 ]

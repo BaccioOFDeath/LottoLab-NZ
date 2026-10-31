@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-31",
-  "created_at": "2026-10-31T09:39:22.110899+13:00",
+  "date": "2026-11-01",
+  "created_at": "2026-11-01T09:39:09.845856+13:00",
   "timezone": "Pacific/Auckland",
-  "eligible_from": "2026-10-31T10:00:00+13:00",
-  "first_scored_draw": 27932,
-  "training_draws": 11423,
-  "last_training_draw": "27931",
+  "eligible_from": "2026-11-01T10:00:00+13:00",
+  "first_scored_draw": 27936,
+  "training_draws": 11427,
+  "last_training_draw": "27935",
   "models": [
     {
       "id": "historical",
@@ -29,15 +29,15 @@
       "name": "Recent momentum",
       "description": "Most frequently drawn across the most recent 80 draws",
       "numbers": [
-        4,
         10,
-        12,
+        13,
         16,
         19,
         30,
         41,
         54,
         57,
+        62,
         63
       ]
     },
@@ -49,13 +49,13 @@
         5,
         6,
         11,
-        17,
         26,
         33,
         36,
         47,
         61,
-        69
+        66,
+        71
       ]
     },
     {
@@ -81,7 +81,7 @@
       "description": "One high-frequency number from each block of eight",
       "numbers": [
         4,
-        9,
+        16,
         22,
         25,
         39,
@@ -98,15 +98,15 @@
       "description": "Seeded random reference for an honest baseline",
       "numbers": [
         6,
-        10,
-        27,
+        7,
+        8,
+        12,
+        15,
+        17,
         29,
-        31,
-        32,
-        40,
-        49,
-        61,
-        66
+        36,
+        43,
+        51
       ]
     }
   ],
