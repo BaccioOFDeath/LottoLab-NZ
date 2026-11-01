@@ -7128,6 +7128,1062 @@
         }
       ],
       "note": "Pre-draw experimental selections. Scores are historical feature strengths, not predictive odds."
+    },
+    {
+      "date": "2026-11-02",
+      "draw": "27940",
+      "time": "10:00 am",
+      "created_at": "2026-11-02T09:39:29.357845+13:00",
+      "eligible_from": "2026-11-02T10:00:00+13:00",
+      "training_draws": 11431,
+      "last_training_draw": "27939",
+      "models": [
+        {
+          "id": "same_slot",
+          "name": "Same-time repeat",
+          "description": "Top-ranked numbers from the previous 10:00 am draw, using earlier frequency scores",
+          "numbers": [
+            8,
+            10,
+            15,
+            29,
+            35,
+            49,
+            57,
+            64,
+            68,
+            78
+          ],
+          "ranked_numbers": [
+            57,
+            10,
+            78,
+            64,
+            68,
+            49,
+            29,
+            8,
+            35,
+            15
+          ],
+          "number_scores": {
+            "57": 0.308714,
+            "10": 0.297143,
+            "78": 0.276857,
+            "64": 0.276714,
+            "68": 0.276143,
+            "49": 0.268,
+            "29": 0.267429,
+            "8": 0.264714,
+            "35": 0.259,
+            "15": 0.258714
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "slot_momentum",
+          "name": "Time-slot momentum",
+          "description": "Blends historical 10:00 am frequency, recent 200 draws and long-run time-slot frequency",
+          "numbers": [
+            7,
+            10,
+            13,
+            16,
+            19,
+            41,
+            46,
+            57,
+            64,
+            78
+          ],
+          "ranked_numbers": [
+            57,
+            41,
+            10,
+            7,
+            64,
+            46,
+            78,
+            16,
+            13,
+            19
+          ],
+          "number_scores": {
+            "57": 0.302755,
+            "41": 0.287097,
+            "10": 0.283406,
+            "7": 0.280492,
+            "64": 0.276286,
+            "46": 0.275285,
+            "78": 0.275099,
+            "16": 0.274313,
+            "13": 0.273093,
+            "19": 0.272722
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "recent_200",
+          "name": "Recent 200",
+          "description": "Top frequency over the last 200 published Keno draws",
+          "numbers": [
+            8,
+            10,
+            16,
+            19,
+            35,
+            41,
+            46,
+            54,
+            57,
+            64
+          ],
+          "ranked_numbers": [
+            57,
+            16,
+            35,
+            41,
+            8,
+            10,
+            64,
+            19,
+            46,
+            54
+          ],
+          "number_scores": {
+            "57": 0.325,
+            "16": 0.30625,
+            "35": 0.28125,
+            "41": 0.28125,
+            "8": 0.278125,
+            "10": 0.278125,
+            "64": 0.278125,
+            "19": 0.275,
+            "46": 0.275,
+            "54": 0.275
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "transition",
+          "name": "Time transition",
+          "description": "Previous same-time draw conditioned on historical following-draw numbers",
+          "numbers": [
+            4,
+            7,
+            8,
+            10,
+            33,
+            41,
+            49,
+            53,
+            57,
+            78
+          ],
+          "ranked_numbers": [
+            57,
+            53,
+            7,
+            10,
+            49,
+            41,
+            8,
+            78,
+            4,
+            33
+          ],
+          "number_scores": {
+            "57": 0.279146,
+            "53": 0.274975,
+            "7": 0.274858,
+            "10": 0.272292,
+            "49": 0.271272,
+            "41": 0.270192,
+            "8": 0.269467,
+            "78": 0.268388,
+            "4": 0.266965,
+            "33": 0.26663
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "pair_blend",
+          "name": "Pair blend",
+          "description": "Recent slot frequencies with historical pair co-occurrence adjustments",
+          "numbers": [
+            7,
+            10,
+            12,
+            13,
+            16,
+            41,
+            46,
+            57,
+            64,
+            78
+          ],
+          "ranked_numbers": [
+            57,
+            41,
+            10,
+            7,
+            46,
+            16,
+            78,
+            64,
+            13,
+            12
+          ],
+          "number_scores": {
+            "57": 0.304041,
+            "41": 0.287697,
+            "10": 0.285206,
+            "7": 0.284563,
+            "46": 0.279014,
+            "16": 0.277185,
+            "78": 0.276085,
+            "64": 0.275214,
+            "13": 0.274765,
+            "12": 0.274467
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "random",
+          "name": "Random control",
+          "description": "Fixed random reference to measure whether patterns outperform chance",
+          "numbers": [
+            1,
+            12,
+            13,
+            25,
+            26,
+            27,
+            30,
+            35,
+            39,
+            43
+          ],
+          "ranked_numbers": [
+            13,
+            12,
+            1,
+            25,
+            26,
+            27,
+            30,
+            39,
+            35,
+            43
+          ],
+          "number_scores": {
+            "13": 0.25,
+            "12": 0.25,
+            "1": 0.25,
+            "25": 0.25,
+            "26": 0.25,
+            "27": 0.25,
+            "30": 0.25,
+            "39": 0.25,
+            "35": 0.25,
+            "43": 0.25
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        }
+      ],
+      "note": "Pre-draw experimental selections. Scores are historical feature strengths, not predictive odds."
+    },
+    {
+      "date": "2026-11-02",
+      "draw": "27941",
+      "time": "1:00 pm",
+      "created_at": "2026-11-02T09:39:29.357845+13:00",
+      "eligible_from": "2026-11-02T13:00:00+13:00",
+      "training_draws": 11431,
+      "last_training_draw": "27939",
+      "models": [
+        {
+          "id": "same_slot",
+          "name": "Same-time repeat",
+          "description": "Top-ranked numbers from the previous 1:00 pm draw, using earlier frequency scores",
+          "numbers": [
+            12,
+            14,
+            22,
+            41,
+            42,
+            46,
+            60,
+            64,
+            73,
+            76
+          ],
+          "ranked_numbers": [
+            41,
+            12,
+            73,
+            14,
+            64,
+            76,
+            46,
+            60,
+            42,
+            22
+          ],
+          "number_scores": {
+            "41": 0.287714,
+            "12": 0.270714,
+            "73": 0.259143,
+            "14": 0.255429,
+            "64": 0.252714,
+            "76": 0.25,
+            "46": 0.249857,
+            "60": 0.247286,
+            "42": 0.247143,
+            "22": 0.247
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "slot_momentum",
+          "name": "Time-slot momentum",
+          "description": "Blends historical 1:00 pm frequency, recent 200 draws and long-run time-slot frequency",
+          "numbers": [
+            5,
+            8,
+            16,
+            19,
+            35,
+            43,
+            54,
+            55,
+            57,
+            71
+          ],
+          "ranked_numbers": [
+            57,
+            54,
+            71,
+            55,
+            16,
+            8,
+            19,
+            35,
+            5,
+            43
+          ],
+          "number_scores": {
+            "57": 0.291251,
+            "54": 0.284287,
+            "71": 0.284047,
+            "55": 0.281919,
+            "16": 0.279832,
+            "8": 0.277062,
+            "19": 0.276027,
+            "35": 0.275655,
+            "5": 0.272995,
+            "43": 0.272514
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "recent_200",
+          "name": "Recent 200",
+          "description": "Top frequency over the last 200 published Keno draws",
+          "numbers": [
+            8,
+            10,
+            16,
+            19,
+            35,
+            41,
+            46,
+            54,
+            57,
+            64
+          ],
+          "ranked_numbers": [
+            57,
+            16,
+            35,
+            41,
+            8,
+            10,
+            64,
+            19,
+            46,
+            54
+          ],
+          "number_scores": {
+            "57": 0.325,
+            "16": 0.30625,
+            "35": 0.28125,
+            "41": 0.28125,
+            "8": 0.278125,
+            "10": 0.278125,
+            "64": 0.278125,
+            "19": 0.275,
+            "46": 0.275,
+            "54": 0.275
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "transition",
+          "name": "Time transition",
+          "description": "Previous same-time draw conditioned on historical following-draw numbers",
+          "numbers": [
+            1,
+            5,
+            6,
+            7,
+            8,
+            30,
+            33,
+            55,
+            57,
+            71
+          ],
+          "ranked_numbers": [
+            55,
+            57,
+            6,
+            8,
+            33,
+            1,
+            5,
+            7,
+            71,
+            30
+          ],
+          "number_scores": {
+            "55": 0.279396,
+            "57": 0.274584,
+            "6": 0.271437,
+            "8": 0.270315,
+            "33": 0.269959,
+            "1": 0.269503,
+            "5": 0.268239,
+            "7": 0.266428,
+            "71": 0.26319,
+            "30": 0.262994
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "pair_blend",
+          "name": "Pair blend",
+          "description": "Recent slot frequencies with historical pair co-occurrence adjustments",
+          "numbers": [
+            1,
+            5,
+            8,
+            16,
+            19,
+            35,
+            54,
+            55,
+            57,
+            71
+          ],
+          "ranked_numbers": [
+            57,
+            54,
+            55,
+            71,
+            8,
+            35,
+            16,
+            19,
+            1,
+            5
+          ],
+          "number_scores": {
+            "57": 0.293908,
+            "54": 0.287116,
+            "55": 0.286162,
+            "71": 0.285332,
+            "8": 0.281305,
+            "35": 0.277841,
+            "16": 0.27756,
+            "19": 0.275984,
+            "1": 0.27502,
+            "5": 0.274152
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "random",
+          "name": "Random control",
+          "description": "Fixed random reference to measure whether patterns outperform chance",
+          "numbers": [
+            11,
+            16,
+            19,
+            42,
+            46,
+            59,
+            60,
+            64,
+            77,
+            79
+          ],
+          "ranked_numbers": [
+            64,
+            19,
+            42,
+            60,
+            11,
+            59,
+            16,
+            79,
+            46,
+            77
+          ],
+          "number_scores": {
+            "64": 0.25,
+            "19": 0.25,
+            "42": 0.25,
+            "60": 0.25,
+            "11": 0.25,
+            "59": 0.25,
+            "16": 0.25,
+            "79": 0.25,
+            "46": 0.25,
+            "77": 0.25
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        }
+      ],
+      "note": "Pre-draw experimental selections. Scores are historical feature strengths, not predictive odds."
+    },
+    {
+      "date": "2026-11-02",
+      "draw": "27942",
+      "time": "3:00 pm",
+      "created_at": "2026-11-02T09:39:29.357845+13:00",
+      "eligible_from": "2026-11-02T15:00:00+13:00",
+      "training_draws": 11431,
+      "last_training_draw": "27939",
+      "models": [
+        {
+          "id": "same_slot",
+          "name": "Same-time repeat",
+          "description": "Top-ranked numbers from the previous 3:00 pm draw, using earlier frequency scores",
+          "numbers": [
+            1,
+            25,
+            29,
+            30,
+            31,
+            38,
+            46,
+            52,
+            55,
+            68
+          ],
+          "ranked_numbers": [
+            29,
+            52,
+            55,
+            31,
+            30,
+            38,
+            25,
+            68,
+            1,
+            46
+          ],
+          "number_scores": {
+            "29": 0.279429,
+            "52": 0.277,
+            "55": 0.270429,
+            "31": 0.267571,
+            "30": 0.264429,
+            "38": 0.264429,
+            "25": 0.262571,
+            "68": 0.261143,
+            "1": 0.259429,
+            "46": 0.255857
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "slot_momentum",
+          "name": "Time-slot momentum",
+          "description": "Blends historical 3:00 pm frequency, recent 200 draws and long-run time-slot frequency",
+          "numbers": [
+            1,
+            16,
+            19,
+            25,
+            29,
+            41,
+            52,
+            53,
+            57,
+            71
+          ],
+          "ranked_numbers": [
+            16,
+            41,
+            52,
+            71,
+            25,
+            57,
+            53,
+            29,
+            19,
+            1
+          ],
+          "number_scores": {
+            "16": 0.289977,
+            "41": 0.28213,
+            "52": 0.2767,
+            "71": 0.274444,
+            "25": 0.273857,
+            "57": 0.273385,
+            "53": 0.272996,
+            "29": 0.271923,
+            "19": 0.267595,
+            "1": 0.266539
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "recent_200",
+          "name": "Recent 200",
+          "description": "Top frequency over the last 200 published Keno draws",
+          "numbers": [
+            8,
+            10,
+            16,
+            19,
+            35,
+            41,
+            46,
+            54,
+            57,
+            64
+          ],
+          "ranked_numbers": [
+            57,
+            16,
+            35,
+            41,
+            8,
+            10,
+            64,
+            19,
+            46,
+            54
+          ],
+          "number_scores": {
+            "57": 0.325,
+            "16": 0.30625,
+            "35": 0.28125,
+            "41": 0.28125,
+            "8": 0.278125,
+            "10": 0.278125,
+            "64": 0.278125,
+            "19": 0.275,
+            "46": 0.275,
+            "54": 0.275
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "transition",
+          "name": "Time transition",
+          "description": "Previous same-time draw conditioned on historical following-draw numbers",
+          "numbers": [
+            1,
+            16,
+            19,
+            41,
+            53,
+            54,
+            58,
+            64,
+            67,
+            71
+          ],
+          "ranked_numbers": [
+            16,
+            53,
+            54,
+            71,
+            1,
+            19,
+            58,
+            41,
+            67,
+            64
+          ],
+          "number_scores": {
+            "16": 0.27315,
+            "53": 0.26933,
+            "54": 0.267617,
+            "71": 0.267115,
+            "1": 0.265751,
+            "19": 0.262582,
+            "58": 0.262134,
+            "41": 0.261297,
+            "67": 0.260995,
+            "64": 0.260732
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "pair_blend",
+          "name": "Pair blend",
+          "description": "Recent slot frequencies with historical pair co-occurrence adjustments",
+          "numbers": [
+            1,
+            16,
+            19,
+            25,
+            29,
+            41,
+            52,
+            53,
+            57,
+            71
+          ],
+          "ranked_numbers": [
+            16,
+            41,
+            71,
+            52,
+            25,
+            53,
+            29,
+            57,
+            19,
+            1
+          ],
+          "number_scores": {
+            "16": 0.291605,
+            "41": 0.28273,
+            "71": 0.278344,
+            "52": 0.277471,
+            "25": 0.276215,
+            "53": 0.274324,
+            "29": 0.271195,
+            "57": 0.271114,
+            "19": 0.270466,
+            "1": 0.269411
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "random",
+          "name": "Random control",
+          "description": "Fixed random reference to measure whether patterns outperform chance",
+          "numbers": [
+            5,
+            8,
+            11,
+            17,
+            23,
+            25,
+            38,
+            44,
+            66,
+            78
+          ],
+          "ranked_numbers": [
+            8,
+            78,
+            66,
+            5,
+            25,
+            38,
+            23,
+            11,
+            17,
+            44
+          ],
+          "number_scores": {
+            "8": 0.25,
+            "78": 0.25,
+            "66": 0.25,
+            "5": 0.25,
+            "25": 0.25,
+            "38": 0.25,
+            "23": 0.25,
+            "11": 0.25,
+            "17": 0.25,
+            "44": 0.25
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        }
+      ],
+      "note": "Pre-draw experimental selections. Scores are historical feature strengths, not predictive odds."
+    },
+    {
+      "date": "2026-11-02",
+      "draw": "27943",
+      "time": "6:00 pm",
+      "created_at": "2026-11-02T09:39:29.357845+13:00",
+      "eligible_from": "2026-11-02T18:00:00+13:00",
+      "training_draws": 11431,
+      "last_training_draw": "27939",
+      "models": [
+        {
+          "id": "same_slot",
+          "name": "Same-time repeat",
+          "description": "Top-ranked numbers from the previous 6:00 pm draw, using earlier frequency scores",
+          "numbers": [
+            3,
+            9,
+            10,
+            15,
+            19,
+            24,
+            27,
+            40,
+            45,
+            67
+          ],
+          "ranked_numbers": [
+            19,
+            27,
+            24,
+            45,
+            15,
+            9,
+            67,
+            3,
+            40,
+            10
+          ],
+          "number_scores": {
+            "19": 0.282571,
+            "27": 0.274,
+            "24": 0.271714,
+            "45": 0.270857,
+            "15": 0.270714,
+            "9": 0.268,
+            "67": 0.267857,
+            "3": 0.264857,
+            "40": 0.264714,
+            "10": 0.258143
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "slot_momentum",
+          "name": "Time-slot momentum",
+          "description": "Blends historical 6:00 pm frequency, recent 200 draws and long-run time-slot frequency",
+          "numbers": [
+            9,
+            16,
+            19,
+            24,
+            27,
+            41,
+            45,
+            46,
+            54,
+            57
+          ],
+          "ranked_numbers": [
+            57,
+            46,
+            24,
+            41,
+            54,
+            19,
+            16,
+            27,
+            9,
+            45
+          ],
+          "number_scores": {
+            "57": 0.308768,
+            "46": 0.302912,
+            "24": 0.283604,
+            "41": 0.282003,
+            "54": 0.279905,
+            "19": 0.277088,
+            "16": 0.27273,
+            "27": 0.269221,
+            "9": 0.267641,
+            "45": 0.266717
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "recent_200",
+          "name": "Recent 200",
+          "description": "Top frequency over the last 200 published Keno draws",
+          "numbers": [
+            8,
+            10,
+            16,
+            19,
+            35,
+            41,
+            46,
+            54,
+            57,
+            64
+          ],
+          "ranked_numbers": [
+            57,
+            16,
+            35,
+            41,
+            8,
+            10,
+            64,
+            19,
+            46,
+            54
+          ],
+          "number_scores": {
+            "57": 0.325,
+            "16": 0.30625,
+            "35": 0.28125,
+            "41": 0.28125,
+            "8": 0.278125,
+            "10": 0.278125,
+            "64": 0.278125,
+            "19": 0.275,
+            "46": 0.275,
+            "54": 0.275
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "transition",
+          "name": "Time transition",
+          "description": "Previous same-time draw conditioned on historical following-draw numbers",
+          "numbers": [
+            9,
+            24,
+            27,
+            35,
+            40,
+            45,
+            46,
+            54,
+            57,
+            71
+          ],
+          "ranked_numbers": [
+            57,
+            46,
+            24,
+            9,
+            40,
+            71,
+            27,
+            35,
+            54,
+            45
+          ],
+          "number_scores": {
+            "57": 0.281411,
+            "46": 0.280484,
+            "24": 0.26759,
+            "9": 0.26748,
+            "40": 0.266702,
+            "71": 0.264798,
+            "27": 0.264752,
+            "35": 0.264237,
+            "54": 0.26223,
+            "45": 0.261539
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "pair_blend",
+          "name": "Pair blend",
+          "description": "Recent slot frequencies with historical pair co-occurrence adjustments",
+          "numbers": [
+            9,
+            15,
+            16,
+            19,
+            24,
+            27,
+            41,
+            46,
+            54,
+            57
+          ],
+          "ranked_numbers": [
+            57,
+            46,
+            41,
+            24,
+            54,
+            19,
+            16,
+            9,
+            27,
+            15
+          ],
+          "number_scores": {
+            "57": 0.310225,
+            "46": 0.302655,
+            "41": 0.284018,
+            "24": 0.283004,
+            "54": 0.281919,
+            "19": 0.278417,
+            "16": 0.27423,
+            "9": 0.271712,
+            "27": 0.269864,
+            "15": 0.26827
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        },
+        {
+          "id": "random",
+          "name": "Random control",
+          "description": "Fixed random reference to measure whether patterns outperform chance",
+          "numbers": [
+            18,
+            28,
+            35,
+            37,
+            40,
+            43,
+            45,
+            46,
+            48,
+            58
+          ],
+          "ranked_numbers": [
+            28,
+            40,
+            18,
+            48,
+            43,
+            46,
+            45,
+            58,
+            35,
+            37
+          ],
+          "number_scores": {
+            "28": 0.25,
+            "40": 0.25,
+            "18": 0.25,
+            "48": 0.25,
+            "43": 0.25,
+            "46": 0.25,
+            "45": 0.25,
+            "58": 0.25,
+            "35": 0.25,
+            "37": 0.25
+          },
+          "score_basis": "historical feature strength; not calibrated winning probability"
+        }
+      ],
+      "note": "Pre-draw experimental selections. Scores are historical feature strengths, not predictive odds."
     }
   ]
 }
